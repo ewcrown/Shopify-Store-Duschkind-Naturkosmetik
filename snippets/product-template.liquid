@@ -436,6 +436,15 @@
                   </gridy-slider>
                 </div>
               {%- endif -%}
+            {%- when 'bundle_picker' -%}
+              {%- render 'product-bundle-picker',
+                product: product,
+                product_form_id: product_form_id,
+                slot_1_label: block.settings.slot_1_label,
+                slot_2_label: block.settings.slot_2_label,
+                slot_3_label: block.settings.slot_3_label,
+                margin_top: block.settings.margin_top,
+                block_attributes: block.shopify_attributes -%}
             {%- when 'quantity_selector' -%}
               {%- if block.settings.next_to_add_to_cart -%}
                 {%- continue -%}

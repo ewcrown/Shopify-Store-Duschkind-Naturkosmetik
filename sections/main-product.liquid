@@ -359,6 +359,50 @@
       ]
     },
     {
+      "type": "bundle_picker",
+      "name": "Bundle product picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Shows 3 dropdowns from product metafields (custom.bundle_slot_1, custom.bundle_slot_2, custom.bundle_slot_3). Add this block only to products that have these metafields."
+        },
+        {
+          "type": "text",
+          "id": "slot_1_label",
+          "label": "Slot 1 label",
+          "default": "Solid shampoo - one variety to choose from"
+        },
+        {
+          "type": "text",
+          "id": "slot_2_label",
+          "label": "Slot 2 label",
+          "default": "Solid shampoo - two varieties to choose from"
+        },
+        {
+          "type": "text",
+          "id": "slot_3_label",
+          "label": "Slot 3 label",
+          "default": "Solid shampoo - three varieties to choose from"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.headers.layout"
+        },
+        {
+          "id": "margin_top",
+          "type": "range",
+          "label": "t:sections.layout.margin_top",
+          "info": "t:sections.blocks.margin_info",
+          "unit": "px",
+          "default": 8,
+          "min": 0,
+          "max": 48,
+          "step": 4
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "t:sections.blocks.text.name",
       "settings": [

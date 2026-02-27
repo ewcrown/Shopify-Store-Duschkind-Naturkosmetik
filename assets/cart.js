@@ -154,46 +154,74 @@ class CartItems extends HTMLElement {
 
   /**
    * Updates the quantity of a line item in the cart. This is called when the user changes the quantity of an item in the cart.
+   * When Slot: 0 (main bundle product) is removed, also removes all items with the same _bundle_id.
    * @param {*} line
    * @param {*} quantity
    * @param {*} name
    */
   async updateQuantity(line, quantity, name) {
     this.enableLoading(line);
-    fetch(`${routes.cart_change_url}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: `application/json`,
-      },
-      body: JSON.stringify({
-        line: line,
-        quantity: quantity,
-        sections: 'main-cart',
-        sections_url: window.location.pathname,
-      }),
-    })
+    const lineItem = document.getElementById(`CartItem-${line}`);
+    const isBundleMain = parseInt(quantity, 10) === 0 && lineItem?.dataset?.slot === '0' && lineItem?.dataset?.bundleId;
+    let fetchPromise;
+
+    if (isBundleMain) {
+      const bundleId = lineItem.dataset.bundleId;
+      const relatedItems = this.querySelectorAll(`.cart-item[data-bundle-id="${bundleId}"]`);
+      const updates = {};
+      relatedItems.forEach((item) => {
+        const key = item.dataset.itemKey;
+        if (key) updates[key] = 0;
+      });
+      fetchPromise = fetch(`${routes.cart_update_url}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          updates: updates,
+          sections: 'main-cart',
+          sections_url: window.location.pathname,
+        }),
+      });
+    } else {
+      fetchPromise = fetch(`${routes.cart_change_url}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          line: line,
+          quantity: quantity,
+          sections: 'main-cart',
+          sections_url: window.location.pathname,
+        }),
+      });
+    }
+
+    fetchPromise
     .then((response) => response.json())
     .then((responseJson) => {
-
       const quantityElement = document.getElementById(`Quantity-${line}`);
-      const items = document.querySelectorAll('.cart-item');
 
       if (responseJson.errors) {
-        quantityElement.value = quantityElement.getAttribute('value');
+        if (quantityElement) quantityElement.value = quantityElement.getAttribute('value');
         this.updateLiveRegions(line, responseJson.errors);
         return;
       }
 
-      const event = new CustomEvent('cart:update', { detail: responseJson,});
+      const event = new CustomEvent('cart:update', { detail: responseJson });
       document.dispatchEvent(event);
 
-      // Render new items according to response
       const html = new DOMParser().parseFromString(responseJson.sections['main-cart'], 'text/html');
       this.updateCartSections(html);
 
-      const lineItem = document.getElementById(`CartItem-${line}`);
-      if (lineItem && lineItem.querySelector(`[name="${name}"]`)) lineItem.querySelector(`[name="${name}"]`).focus();
+      const updatedLineItem = document.getElementById(`CartItem-${line}`);
+      if (updatedLineItem && name && updatedLineItem.querySelector(`[name="${name}"]`)) {
+        updatedLineItem.querySelector(`[name="${name}"]`).focus();
+      }
     })
     .catch((error) => {
       console.error(error);

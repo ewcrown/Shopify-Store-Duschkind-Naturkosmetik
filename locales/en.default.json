@@ -312,6 +312,8 @@
         "input_label": "Quantity for {{ product }}"
       },
       "add_to_cart": "Add to cart",
+      "select_option": "Choose an option",
+      "bundle_select_all": "Please select an option for each slot.",
       "available_in": "Available in",
       "badges": {
         "preorder": "Preorder",

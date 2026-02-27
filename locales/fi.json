@@ -312,6 +312,7 @@
         "input_label": "Määrä {{ product }}"
       },
       "add_to_cart": "Lisää ostoskoriin",
+      "select_option": "Valitse vaihtoehto",
       "available_in": "Saatavilla",
       "badges": {
         "preorder": "Ennakkotilaus",

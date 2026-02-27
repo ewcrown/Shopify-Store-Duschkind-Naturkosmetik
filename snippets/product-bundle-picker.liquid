@@ -1,0 +1,112 @@
+{%- liquid
+  # Renders 3 product selection dropdowns from product metafields.
+  # Metafields expected: custom.bundle_slot_1, custom.bundle_slot_2, custom.bundle_slot_3
+  # Each metafield: list.product_reference
+  #
+  # Parameters:
+  # product         => REQUIRED
+  # product_form_id => REQUIRED
+  # slot_1_label    => Optional, block setting
+  # slot_2_label    => Optional, block setting
+  # slot_3_label    => Optional, block setting
+
+  assign slot_1_products = product.metafields.custom.bundle_slot_1.value
+  assign slot_2_products = product.metafields.custom.bundle_slot_2.value
+  assign slot_3_products = product.metafields.custom.bundle_slot_3.value
+
+  assign has_bundle_picker = false
+  if slot_1_products != blank or slot_2_products != blank or slot_3_products != blank
+    assign has_bundle_picker = true
+  endif
+-%}
+
+{%- if has_bundle_picker -%}
+  <div class="product-bundle-picker product-form__input" {% if margin_top %}style="margin-top: {{ margin_top }}px;"{% endif %} data-bundle-product-id="{{ product.id }}" data-bundle-product-title="{{ product.title | escape }}" data-form-id="{{ product_form_id }}" {{ block_attributes }}>
+    {%- if slot_1_products != blank -%}
+      <div class="product-form__input product-form__input--dropdown product-bundle-picker__slot">
+        <div class="field select" style="max-width: 100%; --font-size: inherit;">
+          <label class="field__label" for="BundleSlot1-{{ product_form_id }}">
+            {{ slot_1_label | default: 'Solid shampoo - one variety to choose from' }}
+          </label>
+          <select
+            id="BundleSlot1-{{ product_form_id }}"
+            class="field__input product-bundle-picker__select"
+            form="{{ product_form_id }}"
+            data-bundle-slot="1"
+          >
+            <option value="">{{ 'products.product.select_option' | t | default: 'Choose an option' }}</option>
+            {%- for bundle_product in slot_1_products -%}
+              {%- assign variant = bundle_product.selected_or_first_available_variant -%}
+              {%- if variant -%}
+                <option value="{{ variant.id }}" {% if variant.available == false %}disabled{% endif %}>
+                  {{ variant.title }}{% unless variant.available %} ({{ 'products.product.sold_out' | t }}){% endunless %}
+                </option>
+              {%- else -%}
+                <option value="">{{ bundle_product.title }}</option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+          {%- render 'icon-caret', direction: 'down' -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if slot_2_products != blank -%}
+      <div class="product-form__input product-form__input--dropdown product-bundle-picker__slot">
+        <div class="field select" style="max-width: 100%; --font-size: inherit;">
+          <label class="field__label" for="BundleSlot2-{{ product_form_id }}">
+            {{ slot_2_label | default: 'Solid shampoo - two varieties to choose from' }}
+          </label>
+          <select
+            id="BundleSlot2-{{ product_form_id }}"
+            class="field__input product-bundle-picker__select"
+            form="{{ product_form_id }}"
+            data-bundle-slot="2"
+          >
+            <option value="">{{ 'products.product.select_option' | t | default: 'Choose an option' }}</option>
+            {%- for bundle_product in slot_2_products -%}
+              {%- assign variant = bundle_product.selected_or_first_available_variant -%}
+              {%- if variant -%}
+                <option value="{{ variant.id }}" {% if variant.available == false %}disabled{% endif %}>
+                  {{ variant.title }}{% unless variant.available %} ({{ 'products.product.sold_out' | t }}){% endunless %}
+                </option>
+              {%- else -%}
+                <option value="">{{ bundle_product.title }}</option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+          {%- render 'icon-caret', direction: 'down' -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if slot_3_products != blank -%}
+      <div class="product-form__input product-form__input--dropdown product-bundle-picker__slot">
+        <div class="field select" style="max-width: 100%; --font-size: inherit;">
+          <label class="field__label" for="BundleSlot3-{{ product_form_id }}">
+            {{ slot_3_label | default: 'Solid shampoo - three varieties to choose from' }}
+          </label>
+          <select
+            id="BundleSlot3-{{ product_form_id }}"
+            class="field__input product-bundle-picker__select"
+            form="{{ product_form_id }}"
+            data-bundle-slot="3"
+          >
+            <option value="">{{ 'products.product.select_option' | t | default: 'Choose an option' }}</option>
+            {%- for bundle_product in slot_3_products -%}
+              {%- assign variant = bundle_product.selected_or_first_available_variant -%}
+              {%- if variant -%}
+                <option value="{{ variant.id }}" {% if variant.available == false %}disabled{% endif %}>
+                  {{ variant.title }}{% unless variant.available %} ({{ 'products.product.sold_out' | t }}){% endunless %}
+                </option>
+              {%- else -%}
+                <option value="">{{ bundle_product.title }}</option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+          {%- render 'icon-caret', direction: 'down' -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

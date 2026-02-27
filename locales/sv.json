@@ -312,6 +312,7 @@
         "input_label": "Kvantitet för {{ product }}"
       },
       "add_to_cart": "Lägg till i kundvagnen",
+      "select_option": "Välj ett alternativ",
       "available_in": "Tillgänglig i",
       "badges": {
         "preorder": "Förbeställning",

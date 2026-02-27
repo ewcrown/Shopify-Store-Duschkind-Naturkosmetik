@@ -22,9 +22,26 @@
         },
         "badges_hkajpr": {
           "type": "badges",
-          "settings": { "badges_position": "over-media", "margin_top": 8 }
+          "settings": {
+            "badges_position": "over-media",
+            "margin_top": 8
+          }
         },
-        "the-title": { "type": "title", "settings": { "margin_top": 8 } },
+        "the-title": {
+          "type": "title",
+          "settings": {
+            "margin_top": 8
+          }
+        },
+        "bundle_picker_Nx8K3y": {
+          "type": "bundle_picker",
+          "settings": {
+            "slot_1_label": "Solid shampoo - one variety to choose from",
+            "slot_2_label": "Solid shampoo - two varieties to choose from",
+            "slot_3_label": "Solid shampoo - three varieties to choose from",
+            "margin_top": 8
+          }
+        },
         "the-price": {
           "type": "price",
           "settings": {
@@ -36,19 +53,27 @@
         },
         "sibling_products_dtbBGm": {
           "type": "sibling_products",
-          "settings": { "variant_option_name": "Color", "margin_top": 24 }
+          "settings": {
+            "variant_option_name": "Color",
+            "margin_top": 24
+          }
         },
         "the-variant-picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
             "cross_out_unavailable": false,
-            "margin_top": 24
+            "margin_top": 24,
+            "dropdown_picker_options": "",
+            "button_picker_options": ""
           }
         },
         "the-quantity-selector": {
           "type": "quantity_selector",
-          "settings": { "next_to_add_to_cart": true, "margin_top": 24 }
+          "settings": {
+            "next_to_add_to_cart": true,
+            "margin_top": 24
+          }
         },
         "the-buy-buttons": {
           "type": "buy_buttons",
@@ -75,11 +100,17 @@
         },
         "the-pickup-availability": {
           "type": "pickup_availability",
-          "settings": { "margin_top": 24 }
+          "settings": {
+            "margin_top": 24
+          }
         },
         "the-description": {
           "type": "description",
-          "settings": { "enable_collapsible": false, "margin_top": 24 }
+          "settings": {
+            "enable_collapsible": false,
+            "collapsible_type": "collapsible",
+            "margin_top": 24
+          }
         },
         "collapsible_tab_nGyj9k": {
           "type": "collapsible_tab",
@@ -129,6 +160,7 @@
           "type": "text",
           "settings": {
             "text": "",
+            "read_more": false,
             "margin_top": 32
           }
         },
@@ -147,6 +179,7 @@
         "the-sticky-buy-bar",
         "badges_hkajpr",
         "the-title",
+        "bundle_picker_Nx8K3y",
         "the-price",
         "sibling_products_dtbBGm",
         "the-variant-picker",
@@ -209,7 +242,9 @@
           }
         }
       },
-      "block_order": ["standard_7kji6Y"],
+      "block_order": [
+        "standard_7kji6Y"
+      ],
       "name": "t:sections.divider.name",
       "settings": {
         "md_padding_top": 0,
@@ -356,7 +391,9 @@
           }
         }
       },
-      "block_order": ["standard_37hJgz"],
+      "block_order": [
+        "standard_37hJgz"
+      ],
       "name": "t:sections.divider.name",
       "settings": {
         "md_padding_top": 0,
@@ -454,7 +491,9 @@
           }
         }
       },
-      "block_order": ["section_header_JiGjrd"],
+      "block_order": [
+        "section_header_JiGjrd"
+      ],
       "settings": {
         "product_limit": 10,
         "color_scheme": "default",

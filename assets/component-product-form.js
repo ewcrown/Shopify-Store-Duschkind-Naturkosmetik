@@ -33,40 +33,95 @@ if (!customElements.get('product-form')) {
         upsell_items = upsell_ids.map((id, index) => ({'id': id,'quantity': upsell_quantities[index]})).filter(item => item.quantity !== 0);
       }
 
+      // Bundle picker: add main product + 3 selected products with unique timestamp for each add
+      const formId = this.form.getAttribute('id');
+      const bundlePicker = formId ? document.querySelector(`.product-bundle-picker[data-form-id="${formId}"]`) : null;
+      let bundle_items = [];
+      if (bundlePicker) {
+        const selects = bundlePicker.querySelectorAll('.product-bundle-picker__select');
+        const bundleProductTitle = bundlePicker.dataset.bundleProductTitle || '';
+        const quantity = parseInt(this.form.querySelector('[name=quantity]')?.value) || 1;
+        const mainProductVariantId = parseInt(this.form.querySelector('[name=id]')?.value);
+        const bundleTimestamp = String(Date.now());
+        let allSelected = true;
+        for (let i = 0; i < selects.length; i++) {
+          const variantId = parseInt(selects[i].value);
+          if (!variantId) {
+            allSelected = false;
+            break;
+          }
+          bundle_items.push({
+            id: variantId,
+            quantity: quantity,
+            properties: {
+              'Bundle': bundleProductTitle,
+              '_bundle_id': bundleTimestamp,
+              'Slot': String(i + 1)
+            }
+          });
+        }
+        if (!allSelected || bundle_items.length === 0) {
+          this.handleErrorMessage(window.variantStrings?.bundleSelectAll || 'Please select an option for each slot.');
+          this.submitButton.classList.remove('loading');
+          this.submitButton.removeAttribute('aria-disabled');
+          this.querySelector('.loading-overlay')?.classList.add('hidden');
+          return;
+        }
+        if (mainProductVariantId) {
+          bundle_items.unshift({
+            id: mainProductVariantId,
+            quantity: quantity,
+            properties: {
+              'Bundle': bundleProductTitle,
+              '_bundle_id': bundleTimestamp,
+              'Slot': '0'
+            }
+          });
+        }
+      }
+
       const config = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/javascript',
+          Accept: 'application/json',
         }
       }
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
       delete config.headers['Content-Type'];
       const formData = new FormData(this.form);
 
-      // If upsell items added refactor FormData
-      if (upsell_items.length > 0) {
+      // Bundle picker: add main product + 3 selected products with timestamp linking
+      if (bundle_items.length > 0) {
+        this.multi_item_request = true;
+        config.headers['Content-Type'] = 'application/json';
+        config.body = JSON.stringify({ items: bundle_items });
+      } else if (upsell_items.length > 0) {
+        // If upsell items added refactor FormData
         this.multi_item_request = true;
         const items = upsell_items;
         const id = parseInt(formData.get('id'));
         const quantity = parseInt(formData.get('quantity')) || 1;
-        const the_product_item = { 'id': id, 'quantity': quantity }
-
+        const the_product_item = { 'id': id, 'quantity': quantity };
         items.push(the_product_item);
-        const itemsData = { 'items': items };
-
         config.headers['Content-Type'] = 'application/json';
-        config.body = JSON.stringify(itemsData);
+        config.body = JSON.stringify({ items: items });
       } else {
         this.multi_item_request = false;
         config.body = formData;
       }
 
       try {
-        const res = await fetch(routes.cart_add_url + '.js', config)
-        const json = await res.json();
+        const res = await fetch(routes.cart_add_url + '.js', config);
+        const text = await res.text();
+        let json = {};
+        try {
+          json = text ? JSON.parse(text) : {};
+        } catch (e) {
+          throw new Error(text || 'Invalid response from server');
+        }
 
-        if (res.status !== 200) throw new Error(json.description);
+        if (res.status !== 200) throw new Error(json.description || json.message || 'Failed to add to cart');
 
         if (this.cartNotification) {
           const notificationTemplate = document.importNode(this.cartNotification.content, true);
@@ -150,7 +205,7 @@ if (!customElements.get('product-form')) {
       notificationItemTemplate.querySelector('.notification-item-image').classList.remove('hide');
       notificationItemTemplate.querySelector('.notification-item-title').textContent = product.product_title;
 
-      product.options_with_values.forEach(item => {
+      (product.options_with_values || []).forEach(item => {
         const row = document.createElement("dl");
         const nameCell = document.createElement("dt");
         const valueCell = document.createElement("dd");
@@ -163,7 +218,7 @@ if (!customElements.get('product-form')) {
         notificationItemTemplate.querySelector('.notification-item-details').appendChild(row);
       })
 
-      const propertyKeyValues = Object.entries(product.properties);
+      const propertyKeyValues = Object.entries(product.properties || {});
       if (propertyKeyValues.length > 0) {
         const properties = document.createElement("dl");
         propertyKeyValues.forEach(([key, value]) => {

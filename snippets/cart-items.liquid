@@ -15,7 +15,9 @@
     <span class="h6 subheading size--tiny text-align-right">{{ 'sections.cart.headings.total' | t }}</span>
   </header>
   {%- for item in cart.items -%}
-    <div class="cart-item" id="CartItem-{{ forloop.index }}">
+    {%- assign bundle_id = item.properties._bundle_id -%}
+    {%- assign slot = item.properties.Slot -%}
+    <div class="cart-item" id="CartItem-{{ forloop.index }}" data-item-key="{{ item.key }}"{% if bundle_id != blank %} data-bundle-id="{{ bundle_id }}" data-slot="{{ slot }}"{% endif %}>
 
       {%- if item.image -%}
         <a class="cart-item__image-container" href="{{ item.url }}" aria-label="{{ 'accessibility.navigate_to_product' | t: product: item.product.title }}" tabindex="-1">

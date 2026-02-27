@@ -312,6 +312,7 @@
         "input_label": "Quantità per {{ product }}"
       },
       "add_to_cart": "Aggiungi al carrello",
+      "select_option": "Scegli un'opzione",
       "available_in": "Disponibile in",
       "badges": {
         "preorder": "Ordine prestabilito",

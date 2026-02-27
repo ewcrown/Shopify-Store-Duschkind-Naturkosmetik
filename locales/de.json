@@ -312,6 +312,8 @@
         "input_label": "Menge für {{ product }}"
       },
       "add_to_cart": "In den Warenkorb legen",
+      "select_option": "Option wählen",
+      "bundle_select_all": "Bitte wählen Sie für jede Auswahl eine Option.",
       "available_in": "Verfügbar in",
       "badges": {
         "preorder": "Vorbestellen",

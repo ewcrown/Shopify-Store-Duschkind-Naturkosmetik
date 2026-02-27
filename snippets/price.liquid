@@ -1,0 +1,84 @@
+{%- liquid
+  # Renders a list of product's price (regular, sale)
+
+  # Accepts:
+  # - product: {Object} Product Liquid object (optional)
+  # - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  # - price_class: {String} Adds a price class to the price element (optional)
+
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+  assign money_price = price | money
+  assign money_compare_at_price = compare_at_price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_compare_at_price = compare_at_price | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+
+{%- unless target == nil -%}
+<div class="price
+  {%- if price_class %} {{ price_class }}{% endif -%}
+  {%- if available == false %} price--sold-out {% endif -%}
+  {%- if compare_at_price > price %} price--on-sale {% endif -%}">
+  <div class="flex">
+    <div class="price__regular">
+      <span class="visually-hidden">
+        {{- 'products.product.price.regular_price' | t -}}
+      </span>
+      <span class="price-item price-item--regular">
+        {{- money_price -}}
+      </span>
+    </div>
+    <div class="price__sale">
+      {% if use_variant %}
+        <span class="visually-hidden">
+          {{- 'products.product.price.regular_price' | t -}}
+        </span>
+        <span>
+          <s class="price-item price-item--regular style--subdued">
+            {{- money_compare_at_price -}}
+          </s>
+        </span>
+      {% else %}
+        {%- unless product.price_varies == false and product.compare_at_price_varies %}
+          <span class="visually-hidden">
+            {{- 'products.product.price.regular_price' | t -}}
+          </span>
+          <span>
+            <s class="price-item price-item--regular style--subdued">
+              {{- money_compare_at_price -}}
+            </s>
+          </span>
+        {%- endunless -%}
+      {% endif %}
+      <span class="visually-hidden">
+        {{- 'products.product.price.sale_price' | t -}}
+      </span>
+      <span class="price-item price-item--sale price-item--last">
+        {{- money_price -}}
+      </span>
+    </div>
+  </div>
+
+  {%- if product.selected_or_first_available_variant.unit_price_measurement -%}
+  <div class="size--small style--subdued unit-price">
+    <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+    <span class="price-item price-item--last">
+      {{ product.selected_or_first_available_variant.unit_price | unit_price_with_measurement: product.selected_or_first_available_variant.unit_price_measurement }}
+    </span>
+  </div>
+  {% endif %}
+</div>
+{% endunless %}

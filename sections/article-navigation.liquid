@@ -1,0 +1,124 @@
+{{ 'component-article-navigation.css' | asset_url | stylesheet_tag }}
+<div
+  id="{{ section.id }}"
+  class="container pt pb sm-pt sm-pb color-{{ section.settings.color_scheme }}"
+  style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+  <nav class="blog-article-nav grid grid-cols-1 {% if section.settings.show_back_to_blog %}sm-grid-cols-3{% else %}sm-grid-cols-2{% endif %}">
+    {%- if blog.previous_article -%}
+      <a class="article-link previous-article flex" href="{{ blog.previous_article.url }}">
+        {%- if section.settings.show_article_images and blog.previous_article.image != blank -%}
+          <div class="article-link-img br-img">
+            {%- render 'img', src: blog.previous_article.image, sizes: '160px', aspect_ratio: 'square' -%}
+          </div>
+        {%- endif -%}
+        <div>
+          <div class="size--tiny style--subdued">{{ 'blogs.article.navigation.previous_article' | t }}</div>
+          <div class="link">{{ blog.previous_article.title }}</div>
+        </div>
+      </a>
+    {% else %}
+      <div class="article-link previous-article"></div>
+    {%- endif -%}
+
+    {%- if blog.next_article -%}
+      <a class="article-link next-article flex sm-horizontal-right" href="{{ blog.next_article.url }}">
+        {%- if section.settings.show_article_images and blog.next_article.image != blank -%}
+          <div class="article-link-img br-img">
+            {%- render 'img', src: blog.next_article.image, sizes: '160px', aspect_ratio: 'square' -%}
+          </div>
+        {%- endif -%}
+        <div>
+          <div class="size--tiny style--subdued">{{ 'blogs.article.navigation.next_article' | t }}</div>
+          <div class="link">{{ blog.next_article.title }}</div>
+        </div>
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.show_back_to_blog -%}
+      <div class="back-to-blog flex vertical-center sm-horizontal-center">
+        <a class="btn size--small" href="{{ blog.url }}">{{ 'blogs.article.back_to_blog' | t }}</a>
+      </div>
+    {%- endif -%}
+  </nav>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.article-navigation.name",
+    "class": "section",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "default",
+        "label": "t:sections.colors.color_scheme.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_back_to_blog",
+        "label": "t:sections.article-navigation.settings.show_back_to_blog",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_article_images",
+        "label": "t:sections.article-navigation.settings.show_article_images",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 80
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 40
+      }
+
+    ]
+  }
+{% endschema %}

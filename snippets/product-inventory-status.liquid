@@ -1,0 +1,90 @@
+{{ 'component-inventory-status.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign show_inventory_status = false
+
+  if current_variant.inventory_management == 'shopify'
+    assign show_inventory_status = true
+  endif
+
+  assign show_incoming = false
+  if current_variant.incoming and show_inventory_status == false and current_variant.inventory_quantity <= block.settings.inventory_threshold
+    assign show_incoming = true
+  endif
+
+  assign status_class = 'inventory-status--in-stock'
+  if current_variant.inventory_quantity < 1 and current_variant.inventory_policy == 'continue'
+    assign status_class = 'inventory-status--sold-out-continue-selling'
+  elsif current_variant.inventory_quantity < 1
+    assign status_class = 'inventory-status--sold-out'
+  elsif current_variant.inventory_quantity <= block.settings.inventory_threshold
+    assign status_class = 'inventory-status--low'
+  endif
+-%}
+
+<ul
+  class="inventory-statuses"
+  id="Inventory-{{ section.id }}"
+  role="status"
+>
+  <li
+    data-threshold="{{ block.settings.inventory_threshold }}"
+    data-show-quantity-in-stock="{{ block.settings.show_available_quantity }}"
+    data-product-inventory
+    class="inventory-status {{ status_class }} {% unless show_inventory_status %} hide{% endunless %}"
+  >
+    <span class="inventory-status__text caption">
+      {%- if show_inventory_status -%}
+        {%- if current_variant.inventory_quantity > block.settings.inventory_threshold -%}
+          {%- unless block.settings.show_available_quantity %}
+            {{ 'products.product.inventory.in_stock' | t }}
+          {%- else -%}
+            {{ 'products.product.inventory.in_stock_with_quantity' | t: quantity: current_variant.inventory_quantity }}
+          {%- endunless -%}
+        {%- elsif current_variant.inventory_quantity <= block.settings.inventory_threshold
+          and current_variant.inventory_quantity > 0
+        -%}
+          {%- unless block.settings.show_available_quantity -%}
+            {{ 'products.product.inventory.few_left' | t }}
+          {%- else -%}
+            {{ 'products.product.inventory.few_left_with_quantity' | t: quantity: current_variant.inventory_quantity }}
+          {%- endunless -%}
+        {%- elsif current_variant.inventory_policy == 'continue' -%}
+          {{ 'products.product.inventory.out_of_stock_continue_selling' | t }}
+        {%- else -%}
+          {{ 'products.product.inventory.out_of_stock' | t }}
+        {%- endif -%}
+      {%- endif -%}
+    </span>
+    {% if block.settings.additional__in_stock %}
+      <span class="stock-additional for-in-stock">{{ block.settings.additional__in_stock }}</span>
+    {% endif %}
+    {% if block.settings.additional__few_on_stock %}
+      <span class="stock-additional for-low">{{ block.settings.additional__few_on_stock }}</span>
+    {% endif %}
+    {% if block.settings.additional__out_of_stock %}
+      <span class="stock-additional for-sold-out">{{ block.settings.additional__out_of_stock }}</span>
+    {% endif %}
+    {% if block.settings.additional__out_of_stock_continue_selling %}
+      <span class="stock-additional for-sold-out-continue-selling">
+        {{- block.settings.additional__out_of_stock_continue_selling -}}
+      </span>
+    {% endif %}
+  </li>
+
+  {%- if block.settings.inventory_transfers_enable -%}
+    <li
+      data-incoming-inventory
+      class="inventory-status {% unless show_incoming %} hide {% endunless %}"
+    >
+      <span class="caption">
+        {%- if current_variant.next_incoming_date -%}
+          {%- assign date = current_variant.next_incoming_date | date: format: 'date' -%}
+          {{ 'products.product.inventory.will_be_in_stock_after' | t: date: date }}
+        {%- else -%}
+          {{ 'products.product.inventory.waiting_for_stock' | t }}
+        {%- endif -%}
+      </span>
+    </li>
+  {%- endif -%}
+</ul>

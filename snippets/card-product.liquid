@@ -1,0 +1,169 @@
+{%- liquid
+
+  #  ** Parameters **
+  #  product       =>  OPTIONAL | product object
+  #  lazyload      =>  OPTIONAL | boolean | default: true | layload images
+  #  aspect_ratio  =>  OPTIONAL | string | default: settings.product_card_aspect_ratio | 'natural','portrait','landscape','square'
+  #  text_align    =>  OPTIONAL | string | default: settings.product_card_text_alignment | product card text align class
+  #  class         =>  OPTIONAL | string | 'sm-item-span-2'
+  #  quick_buy     =>  OPTIONAL | boolean | default: settings.product_card_quick_buy
+  #  sizes         =>  OPTIONAL | string | used to image sizes="" attribute
+
+  # if nil check used that may have false value set. Since the default filter will overwrite on false values.
+  if lazyload == nil
+    assign lazyload = true
+  endif
+  if quick_buy == nil
+    assign quick_buy = settings.product_card_quick_buy
+  endif
+
+  if quick_buy
+    assign quick_buy_mode = settings.product_card_quick_buy_mode
+    assign quick_add_availability = true
+    assign quick_add_variant = ''
+
+    if product.variants.size > 1
+      assign quick_buy_mode = 'quick_view'
+    else
+      assign quick_add_availability = product.available
+      assign quick_add_variant = product.selected_or_first_available_variant.id
+    endif
+  endif
+
+  assign aspect_ratio = aspect_ratio | default: settings.product_card_aspect_ratio
+  assign text_align = text_align | default: settings.product_card_text_alignment
+  assign sizing_rule = sizing_rule | default: settings.product_card_fill_rule
+  assign card_type = card_type | default: settings.product_card_options
+  assign price_class = 'mt-8 ' | append: settings.product_card_price_size_multiplier | append: ' ' | append: settings.product_card_price_sm_size_multiplier | append: ' style--' | append: settings.product_card_price_font_weight
+
+  # Card media
+	capture card_images
+    render 'img', src: product.featured_media, aspect_ratio: aspect_ratio, lazyload: lazyload, sizes: sizes, placeholder: 'product-1', sizing_rule: sizing_rule
+    if product.media.size > 1 and settings.product_card_show_secondary_image == true
+      assign secondary_image = product.media[1]
+      render 'img', src: secondary_image, aspect_ratio: aspect_ratio, lazyload: true, sizes: sizes, placeholder: 'product-2', sizing_rule: sizing_rule
+    endif
+  endcapture
+
+  # Product badges
+  if settings.product_card_badges
+    capture product_badges
+      render 'product-badges', product: product, current_variant: product.selected_or_first_available_variant
+    endcapture
+  endif
+ -%}
+
+{%- if product and product != empty -%}
+  <div class="card card--product card--{{ card_type }} {% if card_layout_class != blank %} {{ card_layout_class }}{% endif %}{% if secondary_image %} on-hover{% endif %} {{ class }}">
+    <a href="{{ product.url }}" class="card-media p-{{ settings.image_padding }}" aria-hidden="true" tabindex="-1">
+      {%- if secondary_image -%}
+        <div class="card-hover-images">{{ card_images }}</div>
+      {%- else -%}
+        {{ card_images }}
+      {%- endif -%}
+
+      <div class="card-media-overlay flex {{ settings.product_card_badges_position }}">
+        {{ product_badges }}
+      </div>
+    </a>
+    <div class="card-body {{ text_align }}">
+      {% if card_layout_class != blank %}
+        {{ product_badges }}
+      {% endif %}
+      {%- if settings.product_card_show_vendor -%}
+        <span class="card-vendor size--tiny">{{ product.vendor }}</span>
+      {%- endif -%}
+      <h3 class="card-title {{ settings.product_card_title_font }} {{ settings.product_card_title_size_multiplier }} {{ settings.product_card_title_sm_size_multiplier }}"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      {%- render 'price', product: product, price_class: price_class -%}
+      {%- if settings.enable_swatches -%}
+        {%- render 'product-card-swatches', product: product -%}
+      {%- endif -%}
+
+      {%- if settings.show_variant_availability -%}
+        {% render 'product-option-availability', product: product %}
+      {%- endif -%}
+
+      {%- if settings.product_card_custom_fields != blank -%}
+        {% assign fields_array = settings.product_card_custom_fields | remove: ' ' | split: ',' %}
+        {%- capture custom_fields -%}
+          {%- for field in fields_array -%}
+            {%- if field contains '|' -%}
+              {%- assign field_title = field | split: '|' | first -%}
+              {%- assign field_namespace = field | split: '|' | last | split: '.' | first -%}
+              {%- assign field_key = field | split: '|' | last | split: '.' | last -%}
+            {%- else -%}
+              {%- assign field_title = false -%}
+              {%- assign field_namespace = field | split: '.' | first -%}
+              {%- assign field_key = field | split: '.' | last -%}
+            {%- endif -%}
+
+            {%- assign the_metafield = product.metafields[field_namespace][field_key] -%}
+
+            {%- if the_metafield != blank -%}
+            <div class="custom-field metafield--{{ field_namespace }}-{{ field_key }} type--{{ the_metafield.type | handleize }} size--tiny mt-8">
+              {%- if field_title -%}
+              <span class="custom-field-title style--subdued">{{ field_title }}: </span>
+              {%- endif -%}
+              {{- the_metafield | metafield_tag -}}
+            </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if custom_fields != blank -%}
+          <div class="card-custom-fields mt-16">
+            {{ custom_fields }}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if settings.product_card_show_rating -%}
+        {% render 'rating', product: product %}
+      {%- endif -%}
+    </div>
+    {%- if quick_buy and number == blank -%}
+      {%- if quick_buy_mode == 'quick_view' -%}
+      <quick-buy data-product="{{ product.id }}" data-url="{{ product.url }}" class="js quick-buy quick-buy-or-add {{ settings.quick_buy_position }}">
+        <a class="btn size--tiny btn--primary btn--full quick-buy_link" data-product-handle="{{ product.handle }}" href="{{ '#modal-' | append: product.id | append: '-product' }}" aria-haspopup="dialog" aria-label="{{ 'accessibility.open_quick_buy_modal' | t: product: product.title }}"><span class="quick-buy_text">{{ 'products.quick_buy_label' | t }}</span><span class="quick-buy_icon">{% render 'icon-plus' %}</span>
+        {% render 'loading' %}
+        </a>
+      </quick-buy>
+      {%- elsif quick_buy_mode == 'add' and quick_add_availability -%}
+        <quick-add data-variant-id="{{ quick_add_variant }}" data-product-id="{{ product.id }}" data-product-image="{{ product.featured_media | image_url: width: 120 }}" class="js quick-add quick-buy-or-add {{ settings.quick_buy_position }}">
+          <button type="button" class="btn size--tiny btn--primary btn--full" aria-label="{{ 'accessibility.quick_add' | t: product: product.title }}"><span class="quick-add_text">{{ 'products.quick_add_label' | t }}</span><span class="quick-add_icon">{% render 'icon-plus' %}</span>
+          {% render 'loading' %}
+          </button>
+        </quick-add>
+      {%- else -%}
+        <div class="quick-add-unavailable quick-buy-or-add {{ settings.quick_buy_position }}">
+          <button class="btn size--tiny btn--primary btn--full" disabled>
+            <span class="quick-add_text">{{- 'products.product.unavailable' | t -}}</span>
+            <span class="quick-add_icon">{% render 'icon-plus' %}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    {%- elsif number != blank -%}
+      <a href="{{ product.url }}" class="btn hotspot btn--primary size--small" aria-label="{{ product.title }}">
+        {{- number -}}
+      </a>
+    {%- endif -%}
+  </div>
+{%- else -%}
+  <div class="card card--product card--{{ card_type }}{% if card_layout_class != blank %} {{ card_layout_class }}{% endif %}">
+    <div class="card-media">
+      <figure class="media media--empty">
+        {%- assign svg_name = svg_name | default: 'product-1' -%}
+        {{ svg_name | placeholder_svg_tag: 'placeholder-svg' }}
+      </figure>
+    </div>
+    <div class="card-body {{ text_align }}">
+      {%- if settings.product_card_show_vendor -%}
+        <span class="card-vendor size--tiny">{{ 'products.product.vendor' | t }}</span>
+      {%- endif -%}
+      <h3 class="card-title {{ settings.product_card_title_font }} {{ settings.product_card_title_size_multiplier }} {{ settings.product_card_title_sm_size_multiplier }}">{{ 'onboarding.product_title' | t }}</h3>
+      {%- render 'price', price_class: price_class -%}
+      {%- if settings.product_card_custom_liquid != blank -%}
+        {{ settings.product_card_custom_liquid }}
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

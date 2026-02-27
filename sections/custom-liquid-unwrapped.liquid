@@ -1,0 +1,31 @@
+<div id="CustomLiquid-{{ section.id }}"
+  class="flex center-center">
+  <div>
+    {{ section.settings.custom_liquid }}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.custom-liquid.name",
+    "enabled_on": {
+      "groups": ["header", "aside"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.custom-liquid.info"
+      },
+      {
+        "type": "liquid",
+        "id": "custom_liquid",
+        "label": "t:sections.custom-liquid.settings.custom_liquid.label",
+        "default": "Custom liquid section can be used to create quick custom solutions"
+      }
+    ],
+    "presets": [{
+      "name": "t:sections.custom-liquid.name",
+      "category": "t:sections.section_categories.utility_and_support"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,567 @@
+<div id="NewsletterSection-{{ section.id }}" class="newsletter-section newsletter-{{ section.id }} container color-{{ section.settings.color_scheme }} pt pb sm-pt sm-pb" style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+  <div class="text-center pl-gutter pr-gutter">
+    {%- render 'content-blocks',
+      section: section,
+      blocks: section.blocks
+    -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.newsletter.name",
+    "max_blocks": 6,
+    "disabled_on": {
+      "groups": ["header", "aside"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.newsletter.info"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.style_and_layout"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "default",
+        "label": "t:sections.colors.color_scheme.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "label": "t:sections.layout.margin_top",
+        "default": 0,
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 0,
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "label": "t:sections.layout.margin_top",
+        "default": 0,
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 0,
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "name": "t:sections.blocks.subtitle.name",
+        "type": "subtitle",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "t:sections.inputs.text.subtitle",
+            "default": "Subheading"
+          },
+          {
+            "type": "select",
+            "id": "heading_tag",
+            "info": "t:sections.typography.heading_tag.info",
+            "label": "t:sections.typography.heading_tag.label",
+            "default": "h3",
+            "options": [
+              {
+                "value": "h1",
+                "label": "t:sections.typography.heading_tag.h1"
+              },
+              {
+                "value": "h2",
+                "label": "t:sections.typography.heading_tag.h2"
+              },
+              {
+                "value": "h3",
+                "label": "t:sections.typography.heading_tag.h3"
+              },
+              {
+                "value": "h4",
+                "label": "t:sections.typography.heading_tag.h4"
+              },
+              {
+                "value": "h5",
+                "label": "t:sections.typography.heading_tag.h5"
+              },
+              {
+                "value": "h6",
+                "label": "t:sections.typography.heading_tag.h6"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+            "type": "select",
+            "id": "sm_size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "sm-size--default",
+            "options": [
+              {
+                "value": "sm-size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "sm-size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "sm-size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "sm-size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "sm-size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "sm-size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "sm-size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "sm_margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_layout"
+          },
+          {
+            "type": "select",
+            "id": "size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "size--default",
+            "options": [
+              {
+                "value": "size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          }
+        ]
+      },
+      {
+        "name": "t:sections.blocks.title.name",
+        "type": "title",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.inputs.text.title",
+            "default": "Subscribe to our emails"
+          },
+          {
+            "type": "select",
+            "id": "heading_tag",
+            "info": "t:sections.typography.heading_tag.info",
+            "label": "t:sections.typography.heading_tag.label",
+            "default": "h2",
+            "options": [
+              {
+                "value": "h1",
+                "label": "t:sections.typography.heading_tag.h1"
+              },
+              {
+                "value": "h2",
+                "label": "t:sections.typography.heading_tag.h2"
+              },
+              {
+                "value": "h3",
+                "label": "t:sections.typography.heading_tag.h3"
+              },
+              {
+                "value": "h4",
+                "label": "t:sections.typography.heading_tag.h4"
+              },
+              {
+                "value": "h5",
+                "label": "t:sections.typography.heading_tag.h5"
+              },
+              {
+                "value": "h6",
+                "label": "t:sections.typography.heading_tag.h6"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+            "type": "select",
+            "id": "sm_size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "sm-size--default",
+            "options": [
+              {
+                "value": "sm-size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "sm-size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "sm-size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "sm-size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "sm-size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "sm-size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "sm-size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "sm_margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_layout"
+          },
+          {
+            "type": "select",
+            "id": "size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "size--default",
+            "options": [
+              {
+                "value": "size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          }
+        ]
+      },
+      {
+        "name": "t:sections.blocks.text.name",
+        "type": "text",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.inputs.text.text",
+            "default": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+            "type": "select",
+            "id": "sm_size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "sm-size--default",
+            "options": [
+              {
+                "value": "sm-size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "sm-size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "sm-size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "sm-size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "sm-size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "sm-size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "sm-size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "sm_margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_layout"
+          },
+          {
+            "type": "select",
+            "id": "size_multiplier",
+            "label": "t:sections.typography.size_options.label",
+            "default": "size--default",
+            "options": [
+              {
+                "value": "size--tiny",
+                "label": "t:sections.typography.size_options.tiny"
+              },
+              {
+                "value": "size--small",
+                "label": "t:sections.typography.size_options.small"
+              },
+              {
+                "value": "size--default",
+                "label": "t:sections.typography.size_options.default"
+              },
+              {
+                "value": "size--large",
+                "label": "t:sections.typography.size_options.large"
+              },
+              {
+                "value": "size--huge",
+                "label": "t:sections.typography.size_options.huge"
+              },
+              {
+                "value": "size--gigantic",
+                "label": "t:sections.typography.size_options.gigantic"
+              },
+              {
+                "value": "size--outrageous",
+                "label": "t:sections.typography.size_options.outrageous"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "id": "margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          }
+        ]
+      },
+      {
+        "type": "email_form",
+        "name": "t:sections.newsletter.email_form_name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+            "type": "range",
+            "id": "sm_margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_layout"
+          },
+          {
+            "type": "range",
+            "id": "margin_top",
+            "label": "t:sections.layout.margin_top",
+            "default": 0,
+            "min": -10,
+            "max": 60,
+            "step": 1,
+            "unit": "px"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.newsletter.name",
+        "category": "t:sections.section_categories.marketing_and_conversion",
+        "settings": {
+          "md_padding_top": 24,
+          "md_padding_bottom": 24,
+          "padding_top": 24,
+          "padding_bottom": 24
+        },
+        "blocks": [
+          {
+            "type": "title",
+            "settings": {
+              "sm_margin_top": 0,
+              "margin_top": 0
+            }
+          },
+          {
+            "type": "text",
+            "settings": {
+              "sm_margin_top": 16,
+              "margin_top": 16
+            }
+          },
+          {
+            "type": "email_form",
+            "settings": {
+              "sm_margin_top": 16,
+              "margin_top": 16
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

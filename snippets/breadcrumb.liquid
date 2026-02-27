@@ -1,0 +1,98 @@
+{%- comment -%}
+  Generates up to 4 level breadcrumb navigation for the current product page.
+
+  Levels:
+    - Level 1 (Home)
+    - Level 2 (Category)
+    - Level 3 (Subcategory)
+    - Level 4 (Product / Current page)
+
+  Used in:
+  - snippets/product-template.liquid: The main product section
+  - sections/main-collection-banner.liquid: The main collection banner section
+{%- endcomment -%}
+
+{%- liquid
+  case template.name
+    when 'product'
+      # Product can have all 4 leves
+      # Levels 2 and 3 are optional and needs to be collection reference metafields
+      assign template_object = product
+      assign category_collection = collections[template_object.metafields.breadcrumb.category]
+      assign subcategory_collection = collections[template_object.metafields.breadcrumb.subcategory]
+      assign category_link = template_object.metafields.breadcrumb.category | metafield_tag
+      assign subcategory_link = template_object.metafields.breadcrumb.subcategory | metafield_tag
+    when 'collection'
+      # Collection can have all 3 levels
+      # Levels 2 is optional and needs to be a collection reference metafield
+      assign template_object = collection
+      assign category_collection = collections[template_object.metafields.breadcrumb.category]
+      assign category_link = template_object.metafields.breadcrumb.category | metafield_tag
+    when 'article'
+      assign template_object = article
+      assign category_link = '<a href="[url]">[title]</a>' | replace: '[url]', blog.url | replace: '[title]', blog.title
+    when 'blog'
+      assign template_object = blog
+    when 'page'
+      assign template_object = page
+  endcase
+
+  assign item_position = 2
+-%}
+
+{% if template_object %}
+  <nav aria-label="breadcrumb" class="nav--breadcrumb size--tiny" style="--divider-symbol: '{{ 'breadcrumb.divider' | t }}';">
+    <ol class="breadcrumb scrollbar--hide">
+      <li class="breadcrumb-item">
+        <a href="{{ routes.root_url }}">{{ 'breadcrumb.home' | t }}</a>
+      </li>
+      {% if category_link != blank %}
+        <li class="breadcrumb-item">{{ category_link }}</li>
+      {% endif %}
+      {% if subcategory_link != blank %}
+        <li class="breadcrumb-item">{{ subcategory_link }}</li>
+      {% endif %}
+      <li class="breadcrumb-item active style--subdued" aria-current="page">{{ template_object.title }}</li>
+    </ol>
+  </nav>
+{% endif %}
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "{{ 'breadcrumb.home' | t }}",
+      "item": "{{ shop.url }}"
+    },
+    {% if category_collection != blank -%}
+    {
+      "@type": "ListItem",
+      "position": {{ item_position }},
+      "name": "{{ category_collection.title }}",
+      "item": "{{ shop.url }}{{ category_collection.url }}"
+    },
+    {%- assign item_position = item_position | plus: 1 -%}
+    {%- endif %}
+    {% if subcategory_collection != blank -%}
+    {
+      "@type": "ListItem",
+      "position": {{ item_position }},
+      "name": "{{ subcategory_collection.title }}",
+      "item": "{{ shop.url }}{{ subcategory_collection.url }}"
+    },
+    {%- assign item_position = item_position | plus: 1 -%}
+    {%- endif %}
+    {
+      "@type": "ListItem",
+      "position": {{ item_position }},
+      "name": "{{ template_object.title }}",
+      "item": "{{ shop.url }}{{ template_object.url }}"
+    }
+  ]
+}
+</script>

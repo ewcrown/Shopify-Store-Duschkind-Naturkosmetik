@@ -1,0 +1,37 @@
+{%- liquid
+  #Banner that is set to position 0
+  assign section_blocks = section.blocks | map: 'settings'
+  assign first_banner = section_blocks | where: 'nth_item', 0 | first
+  unless first_banner == blank
+    assign show_first_banner = true
+    if first_banner.only_on_first_page and paginate.current_page > 1
+      assign show_first_banner = false
+    endif
+
+    if show_first_banner == true
+      render 'card-banner', current_block: first_banner, lazyload: false, section: section, ipr_array: ipr_array
+    endif
+  endunless
+
+  for article in blog.articles
+    assign blocks = section_blocks | where: 'nth_item', forloop.index
+    assign current_block = blocks[0]
+    assign only_on_first_page = current_block.only_on_first_page
+    assign show_banner = true
+
+    if only_on_first_page and paginate.current_page > 1
+      assign show_banner = false
+    endif
+
+    assign lazy_load = false
+    if forloop.index > 2
+      assign lazy_load = true
+    endif
+
+    render 'card-article', article: article, ipr_desktop: section.settings.articles_per_row_desktop, ipr_mobile: section.settings.articles_per_row_mobile, lazyload: lazy_load,
+
+    if show_banner == true and current_block != blank
+      render 'card-banner', current_block: current_block, lazyload: lazy_load, section: section, ipr_array: ipr_array
+    endif
+  endfor
+-%}

@@ -1,0 +1,9 @@
+{% liquid
+  # Snippet for Gridy Slider
+  # - contains the Arrows HTML
+  # - Arrow style controlled in settings shcema
+ %}
+<div class="gridy-arrows flex space-between arrows-style--{{ settings.arrows_style }} {{ class -}}">
+  <button class="btn btn--primary btn--with-icon btn--round gridy-arrow flex" type="button" data-gridy-arrow data-direction="prev" aria-hidden="true" tabindex="-1">{% render 'icon-chevron-left' %}</button>
+  <button class="btn btn--primary btn--with-icon btn--round gridy-arrow flex" type="button" data-gridy-arrow data-direction="next" aria-hidden="true" tabindex="-1">{% render 'icon-chevron-right' %}</button>
+</div>

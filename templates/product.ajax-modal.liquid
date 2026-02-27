@@ -1,0 +1,177 @@
+{%- layout none -%}
+{%- liquid
+  assign is_preorder = false
+  assign product_tags = product.tags | join: ','
+
+  if product_tags contains 'Preorder' or product_tags contains 'preorder' or product.metafields.woolman.preorder.value == true
+    assign is_preorder = true
+
+    if product.metafields.woolman.preorder_info.value != blank
+      assign preorder_info = product.metafields.woolman.preorder_info.value
+    else
+      assign preorder_info = 'products.product.preorder.info_html' | t
+    endif
+  endif
+
+  assign product_form_id = 'product-form-' | append: product.id
+
+  # Product badges
+  if settings.product_card_badges and product.media.size > 0
+    capture product_badges
+      render 'product-badges', product: product, current_variant: product.selected_or_first_available_variant
+    endcapture
+  endif
+-%}
+<div
+  id="{{ 'modal-' | append: product.id | append: '-product' }}"
+  class="modal product-modal color-{{ settings.color_scheme_modals }}"
+  data-quick-buy-modal
+  data-is-preorder="{{ is_preorder }}"
+  data-modal
+  data-parent
+>
+  <div
+    class="modal-dialog"
+    role="dialog"
+    aria-modal="true"
+    data-contents
+    data-modal-dialog
+    aria-labelledby="{{ product.id | append: '-dialog-title' }}"
+    tabindex="-1"
+  >
+    <header class="modal-header">
+      <a href="#" class="modal-close btn btn--round btn--primary" data-modal-close data-close aria-label="{{ 'accessibility.close_something' | t: something: 'modal' }}">
+        {% render 'icon-close' %}
+      </a>
+    </header>
+    <div class="modal-body" data-modal-body>
+      {% if product.media.size > 0 %}
+        <div class="product-modal__media">
+          {% if product_badges != blank %}
+            <div class="product-modal__badges">
+              {{ product_badges }}
+            </div>
+          {% endif %}
+          {%- render 'product-media-slider',
+            product: product,
+            aspect_ratio: 'square',
+            background_color: 'var(--color-card-background)',
+            sizing_rule: 'contain',
+            slider_mobile: true,
+            slider_desktop: true,
+            slide_peek: false,
+            show_zoom_mobile: false,
+            show_zoom_desktop: false,
+            sizes: '480px',
+            context: 'quick-buy-modal'
+          -%}
+        </div>
+      {% endif %}
+      <div class="product-modal__content p-gutter" style="--spacing: 0">
+        <h3 class="h5 product-modal__title" id="{{ product.id | append: '-dialog-title' }}">
+          {{ product.title }}
+        </h3>
+        <div class="product-modal__price mb-8 sm-mb-8 mt-8">
+          <div class="js" id="price-{{ product.id }}" role="status">
+            {%- render 'price', product: product, use_variant: true -%}
+          </div>
+
+          {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+            <div class="product__tax caption">
+              {%- if cart.taxes_included -%}
+                {{ 'products.product.include_taxes' | t }}
+              {%- endif -%}
+              {%- if shop.shipping_policy.body != blank -%}
+                {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- unless product == null -%}
+            {%- assign product_form_installment_id = 'product-form-installment-' | append: product.id -%}
+            {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              {{ form | payment_terms }}
+            {%- endform -%}
+          {%- endunless -%}
+        </div>
+
+        <div class="rte mb-16 sm-mb-24">
+          {{ product.description | strip_html | truncatewords: 30, '...' }}
+          <a href="{{ product.url }}" target="_blank" class="product-modal__read-more link">
+            {{ 'accessibility.read_more' | t }}
+          </a>
+        </div>
+
+        <div class="js product-modal__radios">
+          {%- comment -%} Variant buttons {%- endcomment -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- render 'product-variant-picker',
+              product: product,
+              product_form_id: product_form_id,
+              cross_out_unavailable: true,
+              is_preorder: is_preorder,
+              picker_type: 'modal'
+            -%}
+          {%- endunless -%}
+        </div>
+
+        <product-form class="product-form">
+          <div class="product-form__error-message-wrapper" role="alert" hidden>
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+              <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+              <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+              <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+              <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+            </svg>
+            <span class="product-form__error-message"></span>
+          </div>
+
+          {%- form 'product',
+            product,
+            id: product_form_id,
+            class: 'form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+            {%- if is_preorder -%}
+              <input type="hidden" name="attributes[_preorder]" value="true">
+            {%- endif -%}
+            <div class="product-form__buttons">
+              <button
+                type="submit"
+                name="add"
+                class="product-form__submit btn btn--full btn--primary"
+                {% if product.selected_or_first_available_variant.available == false %}
+                  disabled
+                {% endif %}
+              >
+                <span>
+                  {%- if product.selected_or_first_available_variant.available -%}
+                    {%- if is_preorder -%}
+                      {{ 'products.product.preorder.preorder' | t }}
+                    {%- else -%}
+                      {{ 'products.product.add_to_cart' | t }}
+                    {%- endif -%}
+                  {%- else -%}
+                    {{ 'products.product.sold_out' | t }}
+                  {%- endif -%}
+                </span>
+                {% render 'loading' %}
+              </button>
+
+              {%- if is_preorder -%}
+                <p class="mt-8 text-center size--tiny preorder--info">{{ preorder_info }}</p>
+              {%- endif -%}
+            </div>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-modal-overlay data-overlay aria-hidden="true"></a>
+</div>

@@ -1,0 +1,85 @@
+{%- liquid
+
+  # ** Purpose **
+  # This code generates the main media container that can be shown as slider or as a grid.
+
+  assign first_item_class = ''
+  if md_two_columns and first_item_full
+    assign first_item_class = 'md-item-span-2'
+  endif
+
+  # If the section object is not found, the snippet is being used in the quick view
+  if section
+    assign section_id = section.id
+  else
+    assign section_id = 'quick-view'
+  endif
+-%}
+
+<gridy-slider
+  id="slider-{{ section_id }}"
+  class="gridy-slider product-media-slider"
+  data-mobile-enabled="{{ slider_mobile }}"
+  data-tablet-enabled="{{ slider_mobile }}"
+  data-desktop-enabled="{{ slider_desktop }}"
+  data-arrows="true"
+  {%- if product.selected_or_first_available_variant.featured_media.id -%}
+  data-init-scroll-to="item-{{ product.selected_or_first_available_variant.featured_media.id }}"
+  {%- endif -%}>
+
+  <div
+    class="gridy-track scrollbar--hide grid sm-gap grid-cols-1{% if md_two_columns %} md-grid-cols-2{% endif %}{% if slide_peek %} slide-peek{% endif %}"
+    style="
+      --gap: {{ media_gap | default: '24px' }};
+      --sm-gap: {{ sm_media_gap | default: '3px' }};
+      --sm-br: {{ sm_border_radius | append: 'px' }};">
+    {%- if product == nil -%}
+      {%- assign item_id = 'item-' | append: section.id | append: '-' | append: forloop.index -%}
+      <figure id="{{ item_id }}" class="media {{ aspect_ratio }}">
+        {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+      </figure>
+    {%- else -%}
+      {%- for media in product.media -%}
+        {%- liquid
+          if forloop.index == 1
+            assign custom_classes = first_item_class
+          else
+            assign custom_classes = ''
+          endif
+
+         assign lazyload = false
+         if forloop.index > 2
+           assign lazyload = true
+         endif
+        -%}
+      <div id="item-{{ media.id }}" class="product-media sm-br {{ custom_classes }}">
+        {% if media.media_type != 'model' and show_zoom_mobile or show_zoom_desktop %}
+          <a href="#modal--zoom-gallery-{{ section.id }}?scroll=modal-item-{{ media.id }}" class="product-media-zoom-link{% unless show_zoom_mobile %} sm-down-hide{% endunless %}{% unless show_zoom_desktop %} sm-hide{% endunless %}" aria-hidden="true"></a>
+        {% endif %}
+        <span class="visually-hidden">
+          {% if context == 'product-template' %}
+            {% if show_zoom_mobile or show_zoom_desktop %}
+              {{ 'accessibility.media_index_and_modal_info' | t: index: forloop.index }}
+            {% else %}
+              {{ 'accessibility.media_index_in_product_template' | t: index: forloop.index }}
+            {% endif %}
+          {% else %}
+            {{ 'accessibility.media_index_in_quick_buy_modal' | t: index: forloop.index }}
+          {% endif %}
+        </span>
+        {%- render 'product-media',
+          media: media,
+          aspect_ratio: aspect_ratio,
+          lazyload: lazyload,
+          sizing_rule: sizing_rule,
+          background_color: background_color,
+          sizes: sizes
+        -%}
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+  </div>
+  {% if product.media.size > 1 %}
+    {% render 'gridy-arrows' %}
+  {% endif %}
+</gridy-slider>

@@ -1,0 +1,111 @@
+<div data-accordion-item class="drawer-menu__item --drilldown">
+  {%- assign panel_id = 'panel-localization-drawer-menu__item-js' -%}
+  <input role="button" data-href="#localization" aria-label="{{ 'accessibility.view_something_menu' | t: something: 'Localization' }}" class="drawer-menu__item__input" id="{{ panel_id }}" type="checkbox">
+  <label data-href="{{ menu_item.url }}" class="drawer-menu__item-label" for="{{ panel_id }}" aria-label="{{ 'accessibility.view_something_menu' | t: something: 'Localization' }}">
+    {%- if localization.available_countries.size > 1 -%}
+      <span class="flex" style="gap:12px;">{{ localization.country | image_url: width: 32 | image_tag | replace: '<img', '<img class="country-flag" loading="lazy" alt=""' }} {{ localization.country.name }} · {{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}</span>
+    {%- elsif localization.available_languages.size > 1 -%}
+      <span>{{ 'localization.language_label' | t }}</span>
+    {%- endif -%}
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+  </label>
+
+  <div id="{{ panel_id | append: '-container' }}" data-accordion-panel class="drawer-submenu__panel-container js">
+    <div class="drawer-submenu__panel">
+
+      <header class="drawer-header">
+          {%- comment -%} Submenu Panel - Go back to main level {%- endcomment -%}
+          <button class="close--submenu medium-up--hide" title="{{ 'accessibility.hide_something_menu' | t: something: 'Localization' }}" aria-label="{{ 'accessibility.hide_something_menu' | t: something: 'Localization' }}" type="button" data-drawer-submenu-close="{{ panel_id }}">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+
+          {%- comment -%} Submenu Panel - Close navigation {%- endcomment -%}
+          <a class="medium-up--hide" role="button" href="#" aria-label="{{ 'accessibility.close_navigation' | t }}" data-drawer-close data-close>{%- render 'icon-close' -%}</a>
+      </header>
+
+      <div class="drawer-content scrollbar--hide">
+                {%- if localization.available_languages.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'DrawerMenuLanguageForm', class: 'localization-form' -%}
+              <span class="drawer-submenu__item localization-link --emphasize no-js-hidden">{{ 'localization.language_label' | t }}</span>
+              {%- for language in localization.available_languages -%}
+                <a
+                  class="drawer-submenu__item localization-link no-js-hidden{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
+                  href="#"
+                  {% if language.iso_code == localization.language.iso_code %}
+                    aria-current="true"
+                  {% endif %}
+                  data-value="{{ language.iso_code }}"
+                > {{ language.endonym_name | capitalize }}
+                </a>
+              {%- endfor -%}
+              <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+            {%- endform -%}
+          </localization-form>
+          <noscript>
+            <div class="drawer-submenu__item">
+              {%- form 'localization', id: 'DrawerMenuLanguageForm', class: 'localization-form' -%}
+                <h2 class="visually-hidden" id="DrawerMenuLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                <select class="btn btn--full" name="locale_code" aria-labelledby="DrawerMenuLanguageLabelNoScript">
+                  {%- for language in localization.available_countries -%}
+                    <option value="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                      {{ language.name }} ({{ language.currency.iso_code }} {{ language.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                <button class="btn btn--primary btn--full mt-8">{{ 'localization.update_language' | t }}</button>
+              {%- endform -%}
+            </div>
+          </noscript>
+        {%- endif -%}
+
+        {% if localization.available_languages.size > 1 and localization.available_countries.size > 1 %}
+        <hr class="drawer-menu__divider">
+        {% endif %}
+
+        {%- if localization.available_countries.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'DrawerMenuCountryForm', class: 'localization-form' -%}
+              <span class="drawer-submenu__item localization-link --emphasize js">{{ 'localization.country_label' | t }}</span>
+              {%- for country in localization.available_countries -%}
+                <a
+                  class="drawer-submenu__item localization-link js{% if country.iso_code == localization.country.iso_code %} active{% endif %}"
+                  href="#"
+                  {% if country.iso_code == localization.country.iso_code %}
+                    aria-current="true"
+                  {% endif %}
+                  data-value="{{ country.iso_code }}"
+                >{{ country | image_url: width: 32 | image_tag | replace: '<img', '<img class="country-flag" loading="lazy" alt=""' }} {{ country.name }} · {{ country.currency.iso_code }} {{ country.currency.symbol }}
+                </a>
+              {%- endfor -%}
+              <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+            {%- endform -%}
+          </localization-form>
+          <noscript>
+            <div class="drawer-submenu__item">
+              {%- form 'localization', id: 'DrawerMenuCountryForm', class: 'localization-form' -%}
+                <h2 class="visually-hidden" id="DrawerMenuCountryLabelNoScript">{{ 'localization.country_label' | t  | t }}</h2>
+                <select class="btn btn--full" name="country_code" aria-labelledby="DrawerMenuCountryLabelNoScript">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                <button class="btn btn--primary btn--full mt-8">{{ 'localization.update_country' | t }}</button>
+              {%- endform -%}
+            </div>
+          </noscript>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+  {% style %}
+  @media only screen and (min-width: 1024px) {
+    {{ '#' | append: panel_id | append: '-container' }} {
+      clip-path: url("#drawer-clip")
+    }
+  }
+  {% endstyle %}
+</div>

@@ -1,0 +1,86 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+{%- if pick_up_availabilities.size > 0 -%}
+<pickup-availability-preview class="pickup-availability-preview">
+  {%- liquid
+    assign closest_location = pick_up_availabilities.first
+
+    if closest_location.available
+      render 'icon-tick'
+    endif
+  -%}
+
+  <div class="pickup-availability-info">
+    {%- if closest_location.available -%}
+      <p>{{ 'products.product.pickup_availability.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</p>
+      <p class="caption">{{ closest_location.pick_up_time }}</p>
+      <a href="#drawer-pickup-availability" id="ShowPickupAvailabilityDrawer" class="pickup-availability-button link" aria-haspopup="dialog">
+        {%- if pick_up_availabilities.size == 1 -%}
+          {{ 'products.product.pickup_availability.view_store_info' | t }}
+        {%- else -%}
+          {{ 'products.product.pickup_availability.check_other_stores' | t }}
+        {%- endif -%}
+      </a>
+    {%- else -%}
+      {%- if closest_location and closest_location.location and closest_location.location.name -%}
+        <p>{{ 'products.product.pickup_availability.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</p>
+      {%- else -%}
+        <p>{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+      {%- endif -%}
+      {%- if pick_up_availabilities.size > 1 -%}
+        <a href="#drawer-pickup-availability" id="ShowPickupAvailabilityDrawer" class="pickup-availability-button link" aria-haspopup="dialog">{{ 'products.product.pickup_availability.check_other_stores' | t }}</a>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</pickup-availability-preview>
+
+<pickup-availability-drawer id="drawer-pickup-availability" class="drawer" data-drawer data-parent style="opacity: 0;">
+  <div class="drawer-panel slide-from-right" data-contents>
+    <header class="drawer-header user-select-none">
+      <h3 class="size--small">{{ 'products.product.pickup_availability.store_info' | t }}</h3>
+      <a role="button" href="#" class="close" data-close aria-label="{{ 'accessibility.close_navigation' | t }}">{%- render 'icon-close' -%}</a>
+    </header>
+
+    <div class="drawer-content drawer-cart__content">
+      <ul class="pickup-availability-list grid grid-cols-1" role="list" data-store-availability-drawer-content>
+        {%- for availability in pick_up_availabilities -%}
+          <li class="pickup-availability-list__item">
+            <p class="pickup-availability-preview">
+              {%- if availability.available -%}
+                <span class="ping green"></span>
+              {%- else -%}
+                <span class="ping red"></span>
+              {%- endif -%}
+              {{ availability.location.name | escape }}
+            </p>
+            <p class="pickup-availability-preview caption">
+              {%- if availability.available -%}
+                {{ 'products.product.pickup_availability.pick_up_available' | t }}, {{ availability.pick_up_time | downcase }}
+              {%- else -%}
+                {%- if availability and availability.location and availability.location.name -%}
+                  <p>{{ 'products.product.pickup_availability.pick_up_unavailable_at_html' | t: location_name: availability.location.name }}</p>
+                {%- else -%}
+                  <p>{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                {%- endif -%}
+              {%- endif -%}
+            </p>
+
+            {%- assign address = availability.location.address -%}
+            <address class="pickup-availability-address">
+              {{ address | format_address }}
+
+              {%- if address.phone.size > 0 -%}
+                <p>{{ address.phone }}</p>
+              {%- endif -%}
+            </address>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+  </div>
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-overlay aria-hidden="true"></a>
+</pickup-availability-drawer>
+{%- endif -%}

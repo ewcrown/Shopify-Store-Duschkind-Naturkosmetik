@@ -1,0 +1,92 @@
+{% comment %}
+  This snippet is used to render the content of the mega menu. It loops through the blocks in the section and renders the content based on the block type.
+
+  accepts:
+    - current_menu_parent: {String} the menu parent that is currently being hovered over
+    - context: {String} Header || Drawer: the context in which the snippet is being rendered
+
+  todo:
+    - sizes attribute based on banner width
+{% endcomment %}
+{% for block in section.blocks %}
+  {% unless block.settings.menu_parent == current_menu_parent %}
+    {% continue %}
+  {% endunless %}
+  {% case block.type %}
+    {% when 'menu-divider' %}
+      <div class="menu-content-divider mt mb text-align-{{ block.settings.text_alignment }}" style="--mt: {{ block.settings.padding_top | append: 'px' }}; --mb: {{ block.settings.padding_bottom | append: 'px' }};" {{ block.shopify_attributes }}>
+        {%- if block.settings.show_border -%}
+          <hr>
+        {%- endif -%}
+        {%- if block.settings.title  != blank -%}
+          <h3>{{ block.settings.title }}</h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <div class="rte">
+            {{ block.settings.text }}
+          </div>
+        {%- endif -%}
+      </div>
+    {% when 'menu-banner' %}
+      {%- liquid
+        assign card_text_align = 'text-align-center'
+        if block.settings.text_position contains 'horizontal-left'
+          assign card_text_align = 'text-align-left'
+        elsif block.settings.text_position contains 'horizontal-right'
+          assign card_text_align = 'text-align-right'
+        endif
+      -%}
+
+      <div
+        class="card card--banner menu-banner br-img {{ block.settings.order |  prepend: '--' }}"
+        style="--card-body-padding: 1.2rem;"
+        {{ block.shopify_attributes }}>
+        {% capture banner_content %}
+            {%- render 'img',
+              src: block.settings.image,
+              aspect_ratio: block.settings.image_aspect_ratio,
+              lazyload: true
+            -%}
+            <div class="card-media-overlay flex {{ block.settings.text_position }} {{ card_text_align }}">
+              <span class="{{ block.settings.title_style }}{% if block.settings.title_style contains 'btn' and block.settings.link == blank %} disabled{% endif %}">{{ block.settings.title | replace: '[br]', '<br>' }}</span>
+            </div>
+          {% endcapture %}
+        {%- if block.settings.link != blank -%}
+          <a class="card-media" href="{{ block.settings.link }}">
+            {{ banner_content }}
+          </a>
+        {%- else -%}
+          <div class="card-media">
+            {{ banner_content }}
+          </div>
+        {%- endif -%}
+      </div>
+    {% when 'menu-collection' %}
+      {% liquid
+        if block.settings.collection != empty
+          assign menu_products = block.settings.collection.products
+        elsif block.settings.product_list != empty
+          assign menu_products = block.settings.product_list
+        endif
+      %}
+
+      {% for product in menu_products %}
+        <div class="card card--product card--{{ settings.product_card_options }} layout--thumbnail">
+          <a href="{{ product.url }}" tabindex="-1">
+            {% render 'img',
+              src: product.featured_media,
+              aspect_ratio: settings.product_card_aspect_ratio,
+              sizes: '120px',
+              sizing_rule: settings.product_card_fill_rule
+            %}
+          </a>
+          <div class="card-body {{ settings.product_card_text_alignment }}">
+            <a href="{{ product.url }}" class="card-title {{ settings.product_card_title_font }} size--small">
+              {{- product.title -}}
+            </a>
+            {%- render 'price', product: product, price_class: 'size--tiny mt-4' -%}
+          </div>
+        </div>
+      {% endfor %}
+  {% endcase %}
+{% endfor %}

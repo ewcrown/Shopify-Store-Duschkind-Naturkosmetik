@@ -1,0 +1,89 @@
+<div id="drawer-search" class="drawer drawer--wide" data-drawer data-parent style="opacity: 0; display: none;">
+  <div class="drawer-panel user-select-none slide-from-right color-{{ settings.color_scheme_drawers }}" data-contents>
+    <header class="drawer-header">
+      <h3 class="size--small">{{ 'general.search.search' | t }}</h3>
+      <a role="button" href="#" class="close" data-close aria-label="{{ 'accessibility.close_navigation' | t }}">{%- render 'icon-close' -%}</a>
+    </header>
+
+    <div class="drawer-content drawer-search__content scrollbar--hide">
+      <predictive-search data-loading-text="{{ 'templates.search.loading' | t }}">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="header-search__form">
+          <div class="field">
+            <input class="search__input field__input"
+              id="drawerSearchInput"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ 'general.search.search' | t }}"
+              role="combobox"
+              aria-expanded="false"
+              aria-owns="predictive-search-results"
+              aria-controls="predictive-search-results"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            >
+            <label class="field__label" for="drawerSearchInput">{{ 'general.search.search' | t }}</label>
+            <input type="hidden" name="options[prefix]" value="last">
+
+            <button type="reset" class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}" aria-label="{{ 'templates.search.reset' | t }}">
+              {%- render 'icon-close' -%}
+            </button>
+
+            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+              <svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+
+          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            <div class="predictive-search__loading-state">
+              <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </div>
+
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+        </form>
+
+        {%- if settings.search_recommendations != blank -%}
+          <div class="search-recommendations">
+            <h2 class="predictive-search__heading h6">
+              {{- 'templates.search.commonly_searched' | t -}}
+            </h2>
+
+            <ul id="search-recommendation-list" class="search-recommendation-list" role="group" aria-labelledby="search-recommendation-list">
+              {%- for recommendation in settings.search_recommendations.links -%}
+                <li id="search-recommendation-list-item-{{ forloop.index }}" class="search-recommendation__list-item" role="option" aria-selected="false">
+                  {%- if recommendation.type == 'product_link' -%}
+                    {%- assign product = recommendation.object -%}
+
+                    <a href="{{ recommendation.url }}" class="predictive-search__item predictive-search__item--link-with-thumbnail" tabindex="-1">
+                      {%- if product.featured_media != blank -%}
+                        <img class="predictive-search__image" src="{{ product.featured_media | image_url: width: 150 }}" alt="{{ product.featured_media.alt }}" width="50" height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio }}">
+                      {%- endif -%}
+
+                      <div class="predictive-search__item-content">
+                        <p>{{ product.title }}</p>
+                      </div>
+                    </a>
+                  {%- else -%}
+                    <a href="{{ recommendation.url }}" class="predictive-search__item" tabindex="-1">
+                      {{ recommendation.title }}
+                    </a>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </predictive-search>
+    </div>
+  </div>
+
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-overlay aria-hidden="true"></a>
+</div>

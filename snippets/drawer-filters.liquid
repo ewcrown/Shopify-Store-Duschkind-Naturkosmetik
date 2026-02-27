@@ -1,0 +1,35 @@
+{%- liquid
+  if context == 'search'
+    assign results_count = 'templates.search.results_with_count' | t: count: search.results_count
+  else
+    assign results_count = 'products.facets.product_count_simple' | t: count: collection.products_count
+  endif
+%}
+
+<div id="drawer-filter" class="drawer" data-drawer data-parent style="opacity: 0; display: none;">
+  <div class="drawer-panel user-select-none slide-from-left color-{{ settings.color_scheme_drawers }}" data-contents>
+  <header class="drawer-header">
+    <h3 class="size--small">{{ 'products.facets.filter_button' | t }}</h3>
+    <a role="button" href="#" class="close" data-drawer-close data-close aria-label="{{ 'accessibility.close_navigation' | t }}">{%- render 'icon-close' -%}</a>
+  </header>
+    <facets-form>
+      <form>
+        <div id="facets" class="drawer-content scrollbar--hide --with-padding" style="padding-top: 0;">
+          {%- render 'facets', context: context, show_swatches: show_swatches -%}
+        </div>
+      </form>
+    </facets-form>
+    <footer class="drawer-footer button-group">
+      <p class="size--tiny style--subdued text-center mb-16 hide" id="facets-no-results-message">{{ 'products.facets.filters_zero_results' | t }}</p>
+      <a href="#" class="btn btn--primary btn--full with-button-count mb-12" data-drawer-close data-close>{{ 'products.facets.apply' | t }} <span class="button-count font-body size--nano" id="apply-count">{{ results_count }}</span></a>
+      {%- if context == 'search' -%}
+        <a href="{{ request.path }}?q={{ search.terms | escape }}&sort_by={{ search.sort_by }}" class="btn btn--secondary btn--full">{{ 'products.facets.clear_all' | t }}</a>
+      {%- else -%}
+        <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="btn btn--secondary btn--full">{{ 'products.facets.clear_all' | t }}</a>
+      {%- endif -%}
+    </footer>
+  </div>
+
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-overlay aria-hidden="true"></a>
+</div>

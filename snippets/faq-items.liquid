@@ -1,0 +1,14 @@
+{%- for article in blog.articles -%}
+  <details class="faq-item">
+    <summary>
+      <div class="faq-item__header">
+        <span>{{ article.title }}</span>
+        {% render 'icon-caret' %}
+      </div>
+    </summary>
+
+    <div class="content faq-item__body rte">
+      {{ article.content }}
+    </div>
+  </details>
+{%- endfor -%}

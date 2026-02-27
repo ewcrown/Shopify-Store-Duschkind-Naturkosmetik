@@ -1,0 +1,188 @@
+.gallery-zoom-link {
+  cursor: var(--css-icon-zoom-in) 22 22, auto;
+  /* cursor: zoom-in; */
+}
+.zoom-gallery .gridy-track.grid {
+  --gap: 0;
+}
+
+
+/* Gallery modal - SLIDER */
+@media only screen and (max-width:767px) {
+  .type-slider {
+    --text-space: 8rem;
+  }
+  .type-slider .modal-body {
+    max-width: 100dvw;
+    max-height: 100dvh;
+  }
+  .type-slider .zoom-item {
+    display: grid;
+    grid-template-rows: var(--text-space) auto var(--text-space);
+    text-align: center;
+  }
+  .type-slider .zoom-item .zoom-media {
+    height: calc(100dvh - var(--text-space) * 2);
+  }
+  .type-slider .zoom-item .zoom-media .media {
+    height: 100%;
+  }
+  .type-slider .zoom-item .zoom-media img {
+    object-fit: contain;
+    height: 100%;
+    width: auto;
+    border-radius: var(--br-img);
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width:768px) {
+  .sm-type-slider {
+    --text-space: 8rem;
+  }
+  .sm-type-slider .modal-body {
+    max-width: 100dvw;
+    max-height: 100dvh;
+  }
+  .sm-type-slider .zoom-item {
+    display: grid;
+    grid-template-rows: var(--text-space) auto var(--text-space);
+    text-align: center;
+  }
+  .sm-type-slider .zoom-item .zoom-media {
+    height: calc(100dvh - var(--text-space) * 2);
+  }
+  .sm-type-slider .zoom-item .zoom-media .media {
+    height: 100%;
+  }
+  .sm-type-slider .zoom-item .zoom-media img {
+    object-fit: contain;
+    height: 100%;
+    width: auto;
+    border-radius: var(--br-img);
+    margin: 0 auto;
+  }
+}
+
+/* Gallery modal - COLUMN */
+@media only screen and (max-width:767px) {
+  .type-column .gridy-track {
+    max-height: 100dvh;
+    overflow-y: scroll;
+  }
+  .type-column .modal-dialog {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0 !important;
+  }
+  .type-column .modal-body {
+    padding: 0;
+  }
+  .type-column .modal-close {
+    position: fixed;
+    top: 4rem;
+    right: 4rem;
+    padding: 1.2rem;
+    z-index: 100000 !important;
+  }
+  .type-column .modal-body {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    display: grid;
+  }
+
+  .type-column .zoom-item {
+    position: relative;
+    border-top: 1px solid var(--color-borders);
+  }
+  .type-column .zoom-item:first-child {
+    border: none;
+  }
+  .type-column .item-number,
+  .type-column .media-alt {
+    position: absolute;
+    z-index: 1;
+    padding: 0.8rem 1.2rem;
+    border-radius: min(12px, var(--card-border-radius));
+    background-color: var(--color-background);
+    max-width: calc(100vw - 2.4rem);
+  }
+  .type-column .item-number {
+    top: 1.2rem;
+    left: 1.2rem;
+  }
+  .type-column .media-alt {
+    bottom: 1.2rem;
+    left: 1.2rem;
+  }
+}
+
+@media only screen and (min-width:768px) {
+  .sm-type-column .gridy-track {
+    max-height: 100dvh;
+    overflow-y: scroll;
+  }
+  .sm-type-column .modal-dialog {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0 !important;
+  }
+  .sm-type-column .modal-body {
+    padding: 0;
+  }
+  .sm-type-column .modal-close {
+    position: fixed;
+    top: 4rem;
+    right: 4rem;
+    padding: 1.2rem;
+    z-index: 100000 !important;
+  }
+  .sm-type-column .modal-body {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    display: grid;
+  }
+
+  .sm-type-column .zoom-item {
+    position: relative;
+    border-top: 1px solid var(--color-borders);
+  }
+  .sm-type-column .zoom-item:first-child {
+    border: none;
+  }
+  .sm-type-column .item-number,
+  .sm-type-column .media-alt {
+    position: absolute;
+    z-index: 1;
+    padding: 0.8rem 1.2rem;
+    border-radius: min(12px, var(--card-border-radius));
+    background-color: var(--color-background);
+    max-width: calc(100vw - 2.4rem);
+  }
+  .sm-type-column .item-number {
+    top: 1.2rem;
+    left: 1.2rem;
+  }
+  .sm-type-column .media-alt {
+    bottom: 1.2rem;
+    left: 1.2rem;
+  }
+  .sm-type-column .item-number,
+  .sm-type-column .media-alt {
+    max-width: calc(100vw - 8rem);
+  }
+  .sm-type-column .item-number {
+    top: 4rem;
+    left: 4rem;
+  }
+  .sm-type-column .media-alt {
+    bottom: 4rem;
+    left: 4rem;
+  }
+}

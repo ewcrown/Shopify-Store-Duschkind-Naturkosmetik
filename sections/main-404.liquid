@@ -1,0 +1,37 @@
+<div class="container text-align-center">
+  <header class="section__header">
+    <p>
+      {{ 'templates.404.subtext' | t }}
+    </p>
+    <h1 class="heading mb-16">
+      {{ 'templates.404.title' | t }}
+    </h1>
+    <p class="404-body mb-24">
+      {{ 'templates.404.body' | t }}
+    </p>
+  </header>
+
+  <div class="mt-gutter vertical sm-horizontal flex justify-center" style="gap: 1rem;">
+    <button class="btn btn--secondary" onclick="history.back();">
+      {{ 'general.go_back' | t }}
+    </button>
+    <a role="button" href="#drawer-search" class="btn btn--secondary">
+      {{ 'general.search.search' | t }}
+    </a>
+    <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  </div>
+</div>
+<style>
+  .h-screen {
+    min-height: 66vh;
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "t:sections.main-404.name",
+    "class": "section mb-gutter sm-mb-48 h-screen flex vertical center-center"
+  }
+{% endschema %}

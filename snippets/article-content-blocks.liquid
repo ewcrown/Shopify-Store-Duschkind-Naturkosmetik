@@ -1,0 +1,60 @@
+{%- assign text_blocks = '' %}
+{%- assign use_text_container = use_text_container | default: false %}
+
+{%- for block in blocks -%}
+  {%- capture the_block -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        {%- render block -%}
+      {%- when 'details' -%}
+          {%- assign show_date = block.settings.show_date %}
+          {%- assign show_author = block.settings.show_author %}
+          {%- if show_date or show_author or blog.comments_enabled? -%}
+            <div class="article-details style--subdued size--tiny mt sm-mt" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}">
+              {%- if show_date and show_author -%}
+                {{ article.published_at | time_tag: format: 'date' | append: ' • ' | append: article.author }}
+              {%- elsif show_date -%}
+                {{ article.published_at | time_tag: format: 'date' }}
+              {%- elsif show_author -%}
+                {{ article.author }}
+              {%- endif -%}
+
+              {%- if blog.comments_enabled? -%}
+                {%- assign anchor_id = article.url | append: '#Comments-' | append: article.id -%}
+                <span> / </span>
+                <a href="{{ anchor_id }}" class="link">
+                  {{ 'blogs.article.comments' | t: count: article.comments_count }}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+      {%- when 'article_title' -%}
+        {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+        <{{ heading_tag }} class="hero__title mt sm-mt {{ block.settings.size_multiplier }} {{ block.settings.sm_size_multiplier }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>
+          {{ article.title | newline_to_br | default: 'Showcase your articles in a beautiful way' }}
+        </{{ heading_tag }}>
+      {%- when 'article_body' -%}
+        <div class="rte mt sm-mt {{ block.settings.size_multiplier }} {{ block.settings.sm_size_multiplier }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>
+          {{ article.excerpt_or_content | default: 'Use this text to share information about your brand with your customers.' }}
+        </div>
+      {%- when 'button' -%}
+        {%- assign classes = block.settings.size_multiplier | append: ' ' | append: block.settings.sm_size_multiplier | append: ' ' | append: single_button_classes | strip %}
+        <div class="mt sm-mt" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}">
+          {% render 'button',
+            label: block.settings.button_label,
+            link: article.url,
+            style: block.settings.button_style,
+            color_scheme: color_scheme,
+            classes: classes,
+            block_attributes: block.shopify_attributes %}
+        </div>
+    {%- endcase -%}
+  {%- endcapture -%}
+  {%- assign text_blocks = text_blocks | append: the_block -%}
+{%- endfor -%}
+
+{%- if use_text_container -%}
+  <div class="blocks-text {{ blocks_text_classes }}">{{ text_blocks }}</div>
+{%- else -%}
+  {{ text_blocks }}
+{%- endif -%}

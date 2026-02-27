@@ -1,0 +1,27 @@
+{%- liquid
+
+  # Snippet used for as sections header
+  # Can be used within the grid or as direct child of the container
+
+  # ** PARAMETERS **
+  # text_align          =>  OPTIONAL | string: 'text-align-left', 'text-align-center', 'text-align-right'
+  # subtitle_tag        =>  OPTIONAL | string: 'h1', 'h2', ... 'h6' | default: 'h3'
+  # title_tag           =>  OPTIONAL | string: 'h1', 'h2', ... 'h6' | default: 'h2'
+  # subtitle            =>  OPTIONAL | string
+  # title               =>  OPTIONAL | string
+  # text                =>  OPTIONAL | richtext
+  # size_multiplier     =>  OPTIONAL | string: 'size--tiny', 'size--small',...
+  # sm_size_multiplier  =>  OPTIONAL | string: 'sm-size--tiny', 'sm-size--small',...
+
+-%}
+<div class="section-header mb-gutter col-sm-max-6 {{ text_align }}" style="{% if text_align == 'text-align-left' %}margin-right: auto;{% elsif text_align == 'text-align-right' %}margin-left: auto;{% else %}margin-right: auto; margin-left: auto;{% endif %}">
+  {%- unless subtitle == blank -%}
+    <{{ subtitle_tag | default: 'h3' }} class="subheading mb-4 {{ size_multiplier }} {{ sm_size_multiplier }}">{{ subtitle | replace: '[br]', '<br>' }}</{{ subtitle_tag | default: 'h3' }}>
+  {%- endunless -%}
+  {%- unless title == blank -%}
+    <{{ title_tag | default: 'h2' }} class="mb-4 {{ size_multiplier }} {{ sm_size_multiplier }}">{{ title | replace: '[br]', '<br>' }}</{{ title_tag | default: 'h2' }}>
+  {%- endunless -%}
+  {%- unless text == blank -%}
+    <div class="rte rte--no-max {{ size_multiplier }} {{ sm_size_multiplier }}">{{ text }}</div>
+  {%- endunless -%}
+</div>

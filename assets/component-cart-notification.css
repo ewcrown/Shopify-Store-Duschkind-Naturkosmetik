@@ -1,0 +1,35 @@
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  padding: 40px;
+  width: min(400px, calc(100vw - 40px));
+  transition: all ease-out 0.5s;
+  transform: translateY(calc(-100% - 20px));
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  opacity: 0;
+}
+.cart-notification.anim-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.notification-close {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 10px;
+}
+.notification-item {
+  display: flex;
+  margin: 24px 0;
+  gap: 12px;
+  align-items: center;
+}
+.notification-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}

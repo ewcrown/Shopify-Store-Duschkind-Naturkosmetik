@@ -1,0 +1,111 @@
+{%- liquid
+  # ** PURPOSE **
+  # Renders product variant-picker
+
+  # ** PARAMETERS **
+  # product                 =>  REQUIRED | image object
+  # section_id              =>  (REQUIRED) | string | picker_type == 'modal' uses product.id as section_id
+  # product_form_id         =>  REQUIRED | string | unique ID that is used to match options and inputs to a certain form
+  # cross_out_unavailable   =>  OPTIONAL | boolean
+  # picker_type             =>  OPTIONAL | string: 'modal', 'button', 'dropdown' | default: 'dropdown'
+  # shopify_attributes      =>  OPTIONAL | block.shopify_attributes
+
+  # ** SNIPPETS **
+  # - product-variant-options
+  # - icon-caret
+
+  assign picker_type_setting = picker_type | default: 'dropdown'
+  if picker_type_setting == 'modal'
+    assign is_modal = true
+    assign section_id = product.id
+    assign picker_type_setting = 'button'
+  else
+    assign is_modal = false
+  endif
+
+  if dropdown_picker_options != blank
+    assign dropdown_picker_options = dropdown_picker_options | newline_to_br | strip_newlines | split: '<br />'
+  endif
+  if button_picker_options != blank
+    assign button_picker_options = button_picker_options | newline_to_br | strip_newlines | split: '<br />'
+  endif
+-%}
+
+{%- unless product.has_only_default_variant -%}
+  <variant-selects
+    id="variant-selects-{{ section_id }}"
+    class="js"
+    data-cross-unavailable="{{ cross_out_unavailable | default: false }}"
+    data-section="{{ section_id }}"
+    data-product-id="{{ product.id }}"
+    data-url="{{ product.url }}"
+    data-modal="{{ is_modal }}"
+    data-is-preorder="{{ is_preorder | default: false }}"
+    {% if shopify_attributes != blank -%}
+      {{ shopify_attributes }}
+    {%- endif -%}
+  >
+    {%- for option in product.options_with_values -%}
+      {% if button_picker_options contains option.name %}
+        {% assign picker_type = 'button' %}
+      {%  elsif dropdown_picker_options contains option.name %}
+        {% assign picker_type = 'dropdown' %}
+      {% else %}
+        {% assign picker_type = picker_type_setting %}
+      {% endif %}
+        {%- if picker_type == 'dropdown' -%}
+          <div class="product-form__input product-form__input--dropdown picker-for--{{ option.name | handleize }}">
+            <div class="field select" style="max-width: 250px; --font-size: inherit;">
+              <label class="field__label" for="Option-{{ product_form_id }}-{{ forloop.index0 }}">
+                {{ option.name }}
+              </label>
+              <select
+                style="max-width: 250px;"
+                id="Option-{{ product_form_id }}-{{ forloop.index0 }}"
+                class="field__input"
+                name="options[{{ option.name | escape }}]"
+                form="{{ product_form_id }}"
+              >
+                {%- render 'product-variant-options',
+                  product: product,
+                  product_form_id: product_form_id,
+                  option: option,
+                  picker_type: picker_type
+                -%}
+              </select>
+              {%- render 'icon-caret', direction: 'down' -%}
+            </div>
+            {% if size_guide_trigger == option.name %}
+              {{ size_guide_button }}
+            {% endif %}
+          </div>
+      {%- else -%}
+        <fieldset class="js product-form__input picker-for--{{ option.name | handleize }}">
+          <legend
+            class="form__label js"
+            data-legend="{{ option.name }}"
+          >
+            <div>
+              <span>{{ option.name | append: ':' }}</span>
+              <strong data-variant-legend>
+                {{- option.selected_value -}}
+              </strong>
+            </div>
+            {% if size_guide_trigger == option.name %}
+              {{ size_guide_button }}
+            {% endif %}
+          </legend>
+          {%- render 'product-variant-options',
+            product: product,
+            product_form_id: product_form_id,
+            option: option,
+            picker_type: picker_type
+          -%}
+        </fieldset>
+      {%- endif -%}
+    {%- endfor -%}
+    <script type="application/json" data-selected-variant>
+      {{ product.selected_or_first_available_variant | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}

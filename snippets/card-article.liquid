@@ -1,0 +1,68 @@
+{% liquid
+
+  assign aspect_ratio = aspect_ratio | default: settings.article_card_aspect_ratio
+  assign show_author = show_author | default: settings.article_card_show_author
+  assign show_date = show_date | default: settings.article_card_show_date
+  assign show_content = show_content | default: settings.article_card_show_content
+
+
+  assign article_card_layout = article_card_layout | default: 'traditional'
+  assign text_align = text_align | default: settings.article_card_text_alignment
+
+  assign ipr_desktop = ipr_desktop | default: 3
+  assign ipr_tablet = ipr_tablet | default: ipr_desktop
+  assign ipr_mobile = ipr_mobile | default: 1
+  assign sizing_rule = sizing_rule | default: settings.article_card_fill_rule
+
+  assign card_type = card_type | default: settings.article_card_options
+
+
+  # SIZES calculation
+  assign desktop_sizes = 'calc(100vw / ' | append: ipr_desktop | append: ')'
+  assign mobile_sizes = '(max-width: 767px) calc(100vw / ' | append: ipr_mobile | append: ')'
+  assign sizes = mobile_sizes | append: ', ' | append: desktop_sizes
+
+
+  # CARD MEDIA
+  capture card_images
+    render 'img', src: article.image, aspect_ratio: aspect_ratio, lazyload: lazyload, sizes: sizes, sizing_rule: sizing_rule
+  endcapture
+%}
+{% comment %} CARD BODY {% endcomment %}
+{% capture card_body %}
+  <div class="details mb-12">
+    {%- if show_date == true or show_author == true -%}
+      <div class="style--subdued size--tiny">
+        {%- if show_date == true and show_author == false -%}
+          {{ article.published_at | time_tag: format: 'date' }}
+        {%- elsif show_date == true and show_author == true -%}
+          {{ article.published_at | time_tag: format: 'date' | append: ' • ' | append: article.author }}
+        {%- elsif show_author == true and show_date == false -%}
+          {{ article.author }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <h2 class="h4 card-title">{{ article.title }}</h2>
+
+  {% if show_content == true %}
+    <p class="card-excerpt size--small mt-8">
+      {%- unless article.excerpt == blank -%}
+        {{ article.excerpt }}
+      {%- else -%}
+        {{ article.content | strip_html | truncatewords: 30 }}
+      {%- endunless -%}
+    </p>
+  {% endif %}
+{% endcapture %}
+
+<a class="card card--article card--{{ card_type }}" href="{{ article.url }}" aria-label="{{ 'accessibility.read_article' | t: title: article.title }}">
+  <div class="card-media">
+    {{ card_images }}
+  </div>
+
+  <div class="card-body {{ text_align }}">
+    {{ card_body }}
+  </div>
+</a>

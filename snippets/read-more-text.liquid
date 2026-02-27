@@ -1,0 +1,53 @@
+{%- liquid
+  # Reusable snippet for "Read more" collapsible text functionality
+  #
+  # Parameters:
+  # content (required) - The text content to wrap
+  # block_id (required) - Unique ID for the block (for data attributes) - should always be provided
+  # classes (optional) - Additional CSS classes for the wrapper
+  # attributes (optional) - Shopify block attributes
+  # context_label (optional) - Context label for screen readers (e.g., "product description", "collection description")
+
+  assign classes = classes | default: 'rte'
+
+  # Ensure block_id is always provided, use fallback only if absolutely necessary
+  if block_id == blank
+    assign unique_id = 'read-more-' | append: 'now' | date: '%s'
+  else
+    assign unique_id = block_id
+  endif
+
+  assign read_more_label = 'sections.rich_text.read_more' | t
+  assign read_less_label = 'sections.rich_text.read_less' | t
+
+  # Build aria-label with context if provided (for initial state)
+  if context_label != blank
+    assign read_more_aria_label = read_more_label | append: ' about ' | append: context_label
+  else
+    assign read_more_aria_label = read_more_label
+  endif
+-%}
+
+  <read-more class="component--read-more" {{ attributes }} {% if sm_mt != blank %}style="--sm-mt: {{ sm_mt | append: 'px' }}"{% endif %} {% if mt != blank %}style="--mt: {{ mt | append: 'px' }}"{% endif %}>
+    <div class="read-more-content {{ classes }}" data-read-more-content id="{{ unique_id }}-content">
+      {{ content }}
+    </div>
+    <div class="read-more-toggle-wrapper">
+      <button
+        type="button"
+        class=" btn btn--with-icon btn--link size--small link read-more-toggle"
+        data-read-more-toggle
+        data-read-more-label="{{ read_more_label }}"
+        data-read-less-label="{{ read_less_label }}"
+        {% if context_label != blank %}data-context-label="{{ context_label }}"{% endif %}
+        aria-expanded="false"
+        aria-controls="{{ unique_id }}-content"
+        aria-label="{{ read_more_aria_label }}"
+        aria-live="polite"
+      >
+        <span data-read-more-text>{{ read_more_label }}</span>
+        {% render 'icon-plus--small' %}
+      </button>
+    </div>
+  </read-more>
+

@@ -1,0 +1,128 @@
+.before-after-container {
+  position: relative;
+}
+
+.before-after-container .media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.before-after-container .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.before-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  clip-path: inset(0 calc(100% - var(--position)) 0 0);
+}
+
+.after-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.label-text {
+  position: absolute;
+  color: var(--color-foreground);
+  background-color: transparent;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.label-position-top .label-text {
+  top: 20px;
+}
+.label-position-center .label-text {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.label-position-bottom .label-text {
+  bottom: 20px;
+}
+
+.label-text--before {
+  left: 20px;
+}
+
+.label-text--after {
+  right: 20px;
+}
+
+.before-after-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.before-after-slider input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: grab;
+  z-index: 12;
+}
+
+.before-after-slider input[type="range"]:active {
+  cursor: grabbing;
+}
+
+.before-after-slider {
+  touch-action: pan-x; /* Prevent vertical scrolling conflicts */
+}
+
+.slider-line {
+  position: absolute;
+  top: 0;
+  left: var(--position);
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-background);
+  transform: translateX(-50%);
+  z-index: 11;
+  pointer-events: none;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  left: var(--position);
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider-button svg {
+  width: 16px;
+  height: 16px;
+}

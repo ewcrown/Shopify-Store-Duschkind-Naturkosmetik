@@ -1,0 +1,75 @@
+{%- liquid
+  assign drawer_menu = linklists[section.settings.drawer_menu.handle]
+  assign drawer_secondary_menu = linklists[section.settings.drawer_secondary_menu.handle]
+-%}
+
+<drawer-menu id="drawer-menu" class="drawer drawer-menu" data-drawer data-parent style="opacity: 0; display: none;">
+  <div class="drawer-panel drawer-menu__contents user-select-none color-{{ settings.color_scheme_drawers }}" data-contents>
+    <header class="drawer-header">
+      <a role="button" href="#" class="close" data-close aria-label="{{ 'accessibility.close_navigation' | t }}">{%- render 'icon-close' -%}</a>
+    </header>
+    <nav class="drawer-menu-nav drawer-content scrollbar--hide">
+      {% for menu_item in drawer_menu.links %}
+        {% render 'drawer-menu-items',
+          menu_item: menu_item,
+          current_level: 1,
+          context: 'js',
+          section: section,
+          content_menu_titles: content_menu_titles
+        -%}
+      {% endfor %}
+
+      {% for menu_item in drawer_secondary_menu.links %}
+        {% render 'drawer-menu-items',
+          menu_item: menu_item,
+          current_level: 1,
+          context: 'js',
+          section: section,
+          content_menu_titles: content_menu_titles
+        -%}
+      {% endfor %}
+
+      {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+        <hr class="drawer-menu__divider"/>
+        {% render 'drawer-menu-localization' %}
+      {%- endif -%}
+
+      <noscript>
+        {% for menu_item in drawer_menu.links %}
+          {% render 'drawer-menu-items',
+            menu_item: menu_item,
+            current_level: 1,
+            context: 'no-js',
+            section: section,
+            content_menu_titles: content_menu_titles
+          -%}
+        {% endfor %}
+
+        {% for menu_item in drawer_secondary_menu.links %}
+          {% render 'drawer-menu-items',
+            menu_item: menu_item,
+            current_level: 1,
+            context: 'no-js',
+            section: section,
+            content_menu_titles: content_menu_titles
+          -%}
+        {% endfor %}
+      </noscript>
+    </nav>
+    <footer class="drawer-footer">
+    </footer>
+  </div>
+
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-overlay aria-hidden="true"></a>
+
+  {%- comment -%} Clipping mask for drawer animations {%- endcomment -%}
+  <svg class="drawer-clip" width="100%" preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" aria-hidden="true" xmlns="https://www.w3.org/2000/svg" version="1.1">
+    <defs>
+      <clipPath id="drawer-clip">
+        <rect x="0" y="0" width="2000" height="2000" style="height: 100dvh;"></rect>
+      </clipPath>
+    </defs>
+  </svg>
+</drawer-menu>
+<script src="{{ 'component-drawer-menu.js' | asset_url }}" defer></script>

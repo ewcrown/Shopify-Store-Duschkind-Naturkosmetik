@@ -1,0 +1,90 @@
+.upsell-products {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+upsell-card {
+  padding-right: 16px;
+}
+
+upsell-card .upsell-body .card-actions quick-buy {
+  margin: 0;
+}
+
+upsell-card .product-form__submit {
+  padding: 1.2rem !important;
+  min-height: 0 !important;
+}
+upsell-card .product-form__submit .feather-shopping-bag,
+upsell-card quick-buy .feather-shopping-bag {
+  width: 2rem;
+  height: 2rem;
+}
+upsell-card .product-form__submit .feather-plus,
+upsell-card quick-buy .feather-plus {
+  --size: 12px;
+
+  position: absolute;
+  background-color: var(--color-button-foreground);
+  color: var(--color-button-background);
+  fill: var(--color-button-background);
+  border-radius: var(--button-border-radius);
+
+  width: var(--size);
+  height: var(--size);
+
+  bottom: 1rem;
+  right: 1rem;
+}
+.upsell-products .br-img {
+  border-radius: min(12px, var(--br-img));
+}
+.no-js .upsell-products quantity-input {
+  display: none;
+}
+.upsell-products quantity-input.quantity {
+  font-size: 14px;
+}
+.upsell-products .select {
+  position: relative;
+  color: var(--input-foreground);
+}
+
+.upsell-products .select select {
+  width: 100%;
+  padding: 6px 30px 6px 12px;
+  cursor: pointer;
+
+  border: solid var(--input-border-width) var(--input-border-color);
+  background-color: var(--input-background);
+  border-radius: var(--input-border-radius);
+  box-shadow: var(--input-box-shadow);
+  color: var(--input-foreground);
+  letter-spacing: var(--input-letter-spacing);
+}
+
+.upsell-products .select svg {
+  position: absolute;
+  right: 6px;
+  border-radius: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.upsell-products .card--product {
+  --thumbnail-width: 72px;
+  grid-template-columns: var(--thumbnail-width) 1fr;
+}
+
+.upsell-products .upsell-body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .upsell-products quantity-input.quantity {
+    font-size: 16px;
+  }
+}

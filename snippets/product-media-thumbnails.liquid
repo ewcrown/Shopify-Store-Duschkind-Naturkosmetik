@@ -1,0 +1,66 @@
+{%- liquid
+
+  # ** PUROPOSE **
+  # This code generates media thumbnails.
+  # data-thumbnails-for value needs to mach the main media slider ID
+
+  if desktop_thumbnails_position == 'next-to'
+    assign grid_classes = 'grid-cols-5 md-grid-cols-1 column'
+  else
+    assign grid_classes = 'grid-cols-5'
+  endif
+
+  if show_in_desktop == false
+    assign visibility_class = 'md-hide'
+  elsif show_in_mobile == false
+    assign visibility_class = 'md-down-hide'
+  endif
+
+  if product.media.size < 6
+    assign slider_mobile = false
+  else
+    assign slider_mobile = true
+  endif
+
+  assign featured_media_id = product.selected_or_first_available_variant.featured_media.id
+-%}
+
+<gridy-slider
+  id="thumbnail-slider-{{ section.id }}"
+  class="gridy-slider product-thumbnails-slider {{ visibility_class }}"
+  data-thumbnails-for="slider-{{ section.id }}"
+  data-mobile-enabled="{{ slider_mobile }}"
+  data-tablet-enabled="{{ slider_mobile }}"
+  data-desktop-enabled="{{ slider_desktop }}"
+  data-arrows="false">
+  <div
+    class="gridy-track scrollbar--hide grid sm-gap {{ grid_classes }}"
+    style="
+      --gap: {{ media_gap | default: '24px' }};
+      --sm-gap: {{ sm_media_gap | default: '3px' }};
+      --sm-br: {{ sm_border_radius | append: 'px' }};">
+    {%- if product != nil -%}
+      {%- for media in product.media -%}
+        {%- liquid
+          assign is_active = false
+          if featured_media_id and media.id == featured_media_id
+            assign is_active = true
+          elsif featured_media_id == blank and forloop.index == 1
+            assign is_active = true
+          endif -%}
+        <button
+          id="thumbnail-item-{{ media.id }}"
+          type="button"
+          data-item-id="item-{{ media.id }}"
+          data-thumbnail-btn
+          class="thumbnail-btn sm-br{% if is_active %} active{% endif %}"
+          style="
+            background-color: {{ background_color }};">
+          <figure class="media {{ sizing_rule }} {{ section.settings.product_image_aspect_ratio }}">
+            {{ media.preview_image | image_url: width: 240 | image_tag }}
+          </figure>
+        </button>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</gridy-slider>

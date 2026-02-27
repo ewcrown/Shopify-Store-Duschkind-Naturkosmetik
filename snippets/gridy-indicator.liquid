@@ -1,0 +1,32 @@
+{% liquid
+  # Initial support only for single item slides (like in Slideshow section)
+
+  # Todo:
+  # - Support for multiple slides per view (like Testimonials and Featured collection)
+  # - Support for scroll to on click
+
+  assign ipr_mobile_floor = ipr_mobile | times: 1.0
+  assign ipr_tablet_floor = ipr_tablet | times: 1.0
+  assign ipr_desktop_floor = ipr_desktop | times: 1.0
+
+  assign slides_in_mobile = items_count | divided_by: ipr_mobile_floor | ceil
+  assign slides_in_tablet = items_count | divided_by: ipr_tablet_floor | ceil
+  assign slides_in_desktop = items_count | divided_by: ipr_desktop_floor | ceil
+%}
+
+<div class="gridy-indicator p-12 position-overlay-track flex vertical center center"
+  data-slides-in-mobile="{{ slides_in_mobile }}"
+  data-slides-in-tablet="{{ slides_in_tablet }}"
+  data-slides-in-desktop="{{ slides_in_desktop }}">
+
+  <div class="indicator indicator--numeric current-slide flex horizontal-center hide">
+    <p><span data-indicator-current>1</span> {{ 'general.slider.of' | t }} <span data-max>{{ slides_in_desktop }}</span></p>
+  </div>
+
+  <div class="indicator indicator--dots flex horizontal-center" style="gap:12px">
+    {% for i in (1..items_count) %}
+      <button type="button" role="presentation" tabindex="-1" aria-hidden="true" data-indicator-dot data-slide-to="{{ forloop.index }}" class="dot {% if forloop.index == 1 %}active{% endif %}"></button>
+    {% endfor %}
+  </div>
+
+</div>

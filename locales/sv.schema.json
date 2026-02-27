@@ -1,0 +1,2391 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "general_layout": {
+      "name": "Allmän layout",
+      "settings": {
+        "paragraph__1": {
+          "content": "Allmänna layoutinställningar för att hantera avstånd mellan innehåll och skärmens kanter. Gutter-inställningar hanterar avstånd mellan element inuti sektioner. Produktgittergap kontrollerar gap mellan produktkort i produktlistor. [Läs mer](https://themes.woolman.co/blogs/taiga/general-layout)"
+        },
+        "card_grid_gap": {
+          "label": "Gittergap",
+          "info": "Används i gitter och sliders."
+        },
+        "content_ideal_width": {
+          "label": "Innehållsbredd",
+          "info": "Maximal bredd av innehållna sektioner"
+        },
+        "content_padding": {
+          "label": "Innehållspadding"
+        },
+        "gutter": {
+          "label": "Gutter"
+        },
+        "product_grid_gap": {
+          "label": "Produktgittergap"
+        },
+        "header__1": {
+          "content": "Fast maximal bredd"
+        },
+        "body_contained": {
+          "label": "Aktivera fast maximal bredd"
+        },
+        "paragraph__2": {
+          "content": "När aktiverat kommer huvudbehållaren inte att överskrida innehållsbredden. Vitt utrymme läggs till på vänster och höger sida av huvudinnehållsområdet när fönsterstorleken är större än innehållsbredden."
+        },
+        "html_bg_color": {
+          "label": "Vitt utrymmes färg"
+        },
+        "body_shadow_opacity": {
+          "label": "Huvudinnehållsskugga"
+        }
+      }
+    },
+    "colors": {
+      "name": "Färger",
+      "settings": {
+        "paragraph__1": {
+          "content": "Hantera färgscheman och ställ in statiska färginställningar. Badgefärger hanteras i \"Produktbadge\" rullgardinsmeny. [Läs mer](https://themes.woolman.co/blogs/taiga/colors)"
+        },
+        "static_colors": {
+          "content": "Statiska färger",
+          "info": "Statiska färger påverkas inte av färgscheman."
+        },
+        "cart_dot": {
+          "label": "Vagnspricksbakgrund"
+        },
+        "review_stars": {
+          "label": "Recensionsstjärnor",
+          "info": "Påverkar endast temats inbyggda recensionsstjärnor-block och produktkortsstjärnor när standardmetafält används för recensioner."
+        }
+      }
+    },
+    "typography": {
+      "name": "Typografi",
+      "headers": {
+        "general": "Allmänt",
+        "headings": "Rubriker",
+        "subheadings": "Underrubriker",
+        "body_text": "Brödtext",
+        "buttons": "Knappar",
+        "announcements_bar": "Annonstapel",
+        "drawers": "Lådor",
+        "header": "Huvud"
+      },
+      "settings": {
+        "info_paragraph": "Välj rubrik- och brödtexttypsnitt. Ställ in grundtypsnittsstorleken och finjustera vid behov bokstavsavstånd, radhöjd och andra inställningar efter typografityp.",
+        "select_heading_font": "Rubriktypsnitt",
+        "select_base_font": "Brödtexttypsnitt",
+        "info_font_picker": "Valt typsnitt kan påverka hastigheten på din butik. [Läs om systemtypsnitt](https://help.shopify.com/manual/online-store/os/store-speed/improving-speed#fonts)",
+        "font_scaling_property": {
+          "label": "Mobil grundtypsnittsstorlek",
+          "info": "16 px rekommenderas"
+        },
+        "font_scaling_desktop_property": {
+          "label": "Desktop grundtypsnittsstorlek",
+          "info": "18 px rekommenderas"
+        }
+      }
+    },
+    "buttons": {
+      "name": "Knappar"
+    },
+    "drawers": {
+      "name": "Lådor",
+      "info": "Vanliga lådinställningar som används på alla lådor. Lådor används för Huvudnavigation, Sök, Vagn, Samlingsfiltrering och produktsidor."
+    },
+    "modals": {
+      "name": "Modaler",
+      "info": "Modaler visas ovanpå huvudinnehållet och kräver vanligtvis användarinteraktion innan de tillåter återgång. Används i följande sektioner: Reklampopup, Information på begäran, Bild med hotspots."
+    },
+    "aesthetics": {
+      "name": "Estetik",
+      "info": "Använd estetiska inställningar för att få din butik att kännas mer anpassad till ditt varumärke. Estetiskt tilltalande butiksdesign uppfattas ofta som design som är mer användbar.",
+      "settings": {
+        "border_radius": {
+          "label": "Kantradie"
+        },
+        "button_border_radius": {
+          "label": "Kantradie"
+        },
+        "button_padding": {
+          "label": "Knapppadding",
+          "option__1": {
+            "label": "Liten"
+          },
+          "option__2": {
+            "label": "Medium"
+          },
+          "option__3": {
+            "label": "Stor"
+          },
+          "option__4": {
+            "label": "Extra stor"
+          }
+        },
+        "cards_header": {
+          "content": "Kort"
+        },
+        "card_border_radius": {
+          "label": "Kantradie"
+        },
+        "enable_on_images": {
+          "label": "Använd kantradie på bilder",
+          "info": "Denna inställning påverkar inte helskärmsbilder."
+        },
+        "header__modals": {
+          "content": "Modaler"
+        },
+        "icons_header": {
+          "content": "Ikoner"
+        },
+        "icon_stroke": {
+          "label": "Ikonstreckstorlek",
+          "info": "Justera streckstorleken på ikoner. Mindre värde betyder tunnare ikoner medan större värde betyder tjockare ikoner."
+        },
+        "animations_header": {
+          "content": "Animationer"
+        },
+        "css_animations": {
+          "label": "Använd sektionsanimationer"
+        },
+        "arrows_header": {
+          "content": "Sliderpilar"
+        },
+        "arrows_animations": {
+          "label": "Visa pilar vid hovring",
+          "info": "Som standard visas pilarna. När denna funktion är aktiverad kommer sliderpilar att visas när användaren hovrar över slidern."
+        },
+        "arrows_style": {
+          "label": "Pilstil",
+          "options": {
+            "default": "Standard",
+            "minimal": "Minimal",
+            "no-bg": "Ingen bakgrund"
+          }
+        }
+      }
+    },
+    "product_card": {
+      "name": "Produktkort",
+      "settings": {
+        "product_card_show_vendor": {
+          "label": "Visa leverantör"
+        },
+        "product_card_show_secondary_image": {
+          "label": "Visa andra bilden vid hovring"
+        },
+        "image_padding": {
+          "label": "Bildpadding"
+        },
+        "product_card_show_rating": {
+          "label": "Visa betygsstjärnor",
+          "info": "Stöder endast betyg via standardmetafältdefinitioner. Se till att din produktbetygs-/recensionsappleverantör följer Shopify-riktlinjerna."
+        },
+        "header__quick_buy": {
+          "content": "Snabbvy"
+        },
+        "product_card_quick_buy": {
+          "label": "Aktivera snabbvyknapp"
+        },
+        "product_card_quick_buy_mode": {
+          "label": "Snabbvyknappens modus",
+          "info": "I 'Lägg till i kundvagn' läge öppnas 'Snabbvy' modal för att visa variantalternativ.",
+          "options": {
+            "add": "Lägg till i kundvagn",
+            "quick_view": "Snabbvy"
+          }
+        },
+        "product_card_quick_buy_position": {
+          "label": "Snabbvyknappens position",
+          "option_groups": {
+            "full_width": "Hover full bredd",
+            "auto_width": "Hover automatisk bredd",
+            "below_static": "Nedanför"
+          },
+          "below_options": {
+            "full_width": "Full bredd",
+            "auto_width": "Automatisk bredd"
+          }
+        },
+        "header__swatches": {
+          "content": "Färgprover"
+        },
+        "enable_swatches": {
+          "label": "Visa färgprover",
+          "info": "Gäller produktsidor och kort. Konfigurera [kategorimetafält](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields) eller lägg till anpassade provbilder till filerna i Shopify Admin. [Få hjälp](https://themes.woolman.co/blogs/taiga/product-card#color-swatches)"
+        },
+        "header__variant_availability": {
+          "content": "Varianttillgänglighet"
+        },
+        "show_variant_availability": {
+          "label": "Visa varianttillgänglighet",
+          "info": "Visar tillgänglighet genom en enda variantoption. Som standard visas \"Storlek\" tillgänglighet, som kan ändras genom temats översättningar (\"card_availability_option_trigger\")."
+        },
+        "header__advanced": {
+          "content": "Avancerat"
+        },
+        "custom_fields": {
+          "label": "Metafält att visa",
+          "info": "Visa information från produktmetafält. Kommaseparerad lista av \"namespace.key\" värden."
+        }
+      }
+    },
+    "collection_card": {
+      "name": "Samlingskort"
+    },
+    "article_card": {
+      "name": "Artikelskort",
+      "settings": {
+        "article_card_show_author": {
+          "label": "Visa författare"
+        },
+        "article_card_show_date": {
+          "label": "Visa datum"
+        },
+        "article_card_show_content": {
+          "label": "Visa innehåll"
+        }
+      }
+    },
+    "badges": {
+      "name": "Produktbadges",
+      "settings": {
+        "info_paragraph": "Du kan använda badges på produktkort och på produktsidor. Standardbadges är: Rea, Ny, Förbeställning och Slut. [Läs mer om badges](https://themes.woolman.co/blogs/taiga/product-card#product-card-badges).",
+        "badge_border_radius": {
+          "label": "Kantradie"
+        },
+        "product_card_badges": {
+          "label": "Visa på produktkort"
+        },
+        "position_on_cards": {
+          "label": "Position på produktkort"
+        },
+        "badge_sale_foreground": {
+          "label": "Rea text"
+        },
+        "badge_sale_background": {
+          "label": "Rea bakgrund"
+        },
+        "badge_new_foreground": {
+          "label": "Ny text"
+        },
+        "badge_new_background": {
+          "label": "Ny bakgrund"
+        },
+        "badge_preorder_foreground": {
+          "label": "Förbeställning text"
+        },
+        "badge_preorder_background": {
+          "label": "Förbeställning bakgrund"
+        },
+        "badge_sold_out_foreground": {
+          "label": "Slut text"
+        },
+        "badge_sold_out_background": {
+          "label": "Slut bakgrund"
+        },
+        "custom_badges": {
+          "label": "Anpassade badge-definitioner",
+          "info": "\"[Produkttagg]:[Badgefärg]:[Textfärg]\". Värden separerade med kolon, varje badge-definition med semikolon (;)."
+        },
+        "sale_badge_text": {
+          "label": "Rea badge-text",
+          "options": {
+            "default": "\"Rea\"",
+            "savings": "Besparingar",
+            "percentage": "% Rabatt"
+          }
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Valutaformat",
+      "settings": {
+        "content": "Valutakoder",
+        "paragraph": "Vagns- och kassapriser visar alltid valutakoder. Exempel: $1,00 USD.",
+        "currency_code_enabled": {
+          "label": "Visa valutakoder"
+        }
+      }
+    },
+    "cart": {
+      "name": "Vagn",
+      "settings": {
+        "cart_icon": {
+          "label": "Vagnsikon",
+          "options": {
+            "basket": "Korg",
+            "bag": "Väska",
+            "cart": "Vagn"
+          }
+        },
+        "cart_type": {
+          "label": "Vagnstyp",
+          "options": {
+            "drawer": "Låda",
+            "page": "Sida",
+            "notification": "Notifikation"
+          }
+        },
+        "show_accelerated_checkout": {
+          "label": "Visa accelererade kassaknappar",
+          "info": "Med hjälp av betalningsmetoderna som finns tillgängliga i din butik ser kunderna sitt föredragna alternativ, som PayPal eller Apple Pay. [Läs mer](https://help.shopify.com/manual/payments/accelerated-checkouts)"
+        },
+        "show_cart_recommendations": {
+          "label": "Visa vagnsrekommendationer",
+          "info": "Visar produktrekommendationer på vagnen"
+        },
+        "show_cart_note": {
+          "label": "Visa vagnsanteckning",
+          "info": "Tillåter kunder att lämna ytterligare detaljer till beställningen"
+        },
+        "show_cart_link": {
+          "label": "Visa vagnslänk i lådan",
+          "info": "Visar 'Visa vagn' länk längst ner i vagnslådan."
+        },
+        "plus_minus_on_mobile": {
+          "label": "Visa + och - kontroller på mobil",
+          "info": "Kvantitets plus- och minusikoner visas alltid med större skärmar. Med denna inställning kan du också göra dem synliga på mobila enheter."
+        },
+        "show_empty_cart_haiku": {
+          "label": "Visa tom vagn haiku"
+        },
+        "header__1": {
+          "content": "Gratis fraktnotifikation"
+        },
+        "paragraph__1": {
+          "content": "Gratis fraktnotifikation visas på vagnen när ordervärdet är större än tröskelvärdet. Du behöver också ställa in matchande fraktkonfiguration i dina butiksinställningar. [Få support](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/free-shipping-rates)"
+        },
+        "paragraph__2": {
+          "content": "Ange minimibeställningsvärde för gratis frakt utan valutasymbol, t.ex. 100. Använd butikens primära valuta. Konverteringskursen beräknas automatiskt för eventuella ytterligare valutor."
+        },
+        "free_shipping_threshold": {
+          "label": "Gratis fraktgräns",
+          "info": "Lämna tomt för att inaktivera gratis fraktnotifikation på vagnen."
+        }
+      }
+    },
+    "social_media": {
+      "name": "Sociala medier",
+      "settings": {
+        "header__1": {
+          "content": "Sociala konton"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_linkedin_link": {
+          "label": "LinkedIn",
+          "info": "https://ca.linkedin.com/company/shopify"
+        },
+        "social_pinterest_link": {
+          "label": "Pinterest",
+          "info": "https://pinterest.com/shopify"
+        },
+        "social_snapchat_link": {
+          "label": "Snapchat",
+          "info": "https://www.snapchat.com/add/shopify"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok",
+          "info": "https://tiktok.com/@shopify"
+        },
+        "social_tumblr_link": {
+          "label": "Tumblr",
+          "info": "https://shopify.tumblr.com"
+        },
+        "social_twitter_link": {
+          "label": "X (Twitter)",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_untappd_link": {
+          "label": "Untappd",
+          "info": "https://untappd.com/shopify"
+        },
+        "social_vimeo_link": {
+          "label": "Vimeo",
+          "info": "https://vimeo.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon",
+          "info": "Favicon kommer att skalas ner till 32 x 32px"
+        }
+      }
+    },
+    "search": {
+      "name": "Sök",
+      "settings": {
+        "paragraph__1": {
+          "content": "Sökrelaterade inställningar. [Läs mer](https://themes.woolman.co/blogs/taiga/header-and-navigation#search)"
+        },
+        "enable_search": {
+          "label": "Aktivera sök"
+        },
+        "search_recommendations": {
+          "label": "Sökrekommendationer",
+          "info": "Om inställt, visa rekommenderade termer i sökningen. En rekommendation per rad."
+        }
+      }
+    },
+    "advanced": {
+      "name": "Avancerat",
+      "info": "Inställningar för avancerade användare och utvecklare som är bekanta med HTML-dokumentstruktur.",
+      "settings": {
+        "head_custom_liquid": {
+          "label": "Anpassad liquid <head>",
+          "info": "Placeras precis före </head> stängningstagg."
+        },
+        "body_custom_liquid": {
+          "label": "Anpassad liquid <body>",
+          "info": "Placeras precis före </body> stängningstagg."
+        },
+        "disable_product_structured_data": {
+          "label": "Inaktivera produktstrukturerad data",
+          "info": "Inaktiverar produktstrukturerad data på produktsidor. Använd denna inställning om du har en tredjepartsapp som hanterar strukturerad data."
+        }
+      }
+    }
+  },
+  "sections": {
+    "section_categories": {
+      "product_and_collection_promotion": "2 - Produkter och samlingar",
+      "visual_and_storytelling": "1 - Bild och berättelse",
+      "marketing_and_conversion": "3 - Marknadsföring och konvertering",
+      "utility_and_support": "4 - Verktyg och support"
+    },
+    "before_after": {
+      "name": "Bildspel före/efter",
+      "info": "Hantera sektionsinnehållet genom sektionsblock. Använd alternativen nedan för att ändra det övergripande utseendet och layouten för denna sektion. [Få support](https://themes.woolman.co/blogs/taiga/before-after-image-slider)",
+      "settings": {
+        "header_position": {
+          "label": "Rubrikposition (och knapp)",
+            "options": {
+              "top": "Topp",
+              "left": "Vänster",
+              "right": "Höger",
+              "bottom": "Botten",
+          }
+        }
+      },
+    },
+    "blogs_and_articles": {
+      "articles_per_row": "Artiklar per rad",
+      "article_card_layout": {
+        "label": "Layout",
+        "traditional": "Text under bild",
+        "image": "Text över bild"
+      }
+    },
+    "cards": {
+      "style": {
+        "label": "Stil",
+        "options": {
+          "card": "Kort",
+          "traditional": "Traditionell"
+        }
+      },
+      "text_position": {
+        "label": "Textposition",
+        "groups": {
+          "below_media": "Under media",
+          "overlay": "Överlagring"
+        },
+        "options": {
+          "without_background": "Utanför kortet",
+          "with_card_background": "Inuti kortet"
+        }
+      },
+      "card_background": {
+        "label": "Kortsbakgrund",
+        "info": "Ställ in färger från Temainställningar på fliken Färger.",
+        "options": {
+          "default": "Solid",
+          "gradient": "Gradient",
+          "transparent": "Transparent"
+        }
+      },
+      "custom_image": {
+        "label": "Anpassad bild",
+        "info": "Valfritt. Skriver över standardbilden."
+      }
+    },
+    "colors": {
+      "foreground": "Text",
+      "foreground_gradient": "Textgradient",
+      "foreground_gradient_info": "Att använda Textgradient kommer att skriva över standardtextfärgen. Ta bort gradienten för att använda standardfärgen.",
+      "background": "Bakgrund",
+      "background_gradient": "Bakgrundsgradient",
+      "borders": "Kanter",
+      "button_text": "Knapptext",
+      "button_background": "Knappbakgrund",
+      "button_outline": "Konturknapp / Länkar",
+      "card_foreground": "Korttext",
+      "card_background": "Kortsbakgrund",
+      "card_background_gradient": "Kortsbakgrundsgradient",
+      "heading_color": "Rubriksfärg",
+      "text_color": "Textfärg",
+      "overlay_text": "Överlagringstext",
+      "overlay_color": "Överlagringsfärg",
+      "overlay_opacity": "Överlagringsopacitet",
+      "overlay_blur": "Överlagringssuddighet",
+      "color_scheme": {
+        "label": "Färgschema",
+        "overwrite_info": "När inställt skriver över färgschemas standardvärde"
+      },
+      "media_bg": {
+        "label": "Mediabakgrund"
+      },
+      "light": "Ljus",
+      "dark": "Mörk"
+    },
+    "typography": {
+      "select_font": "Välj typsnitt",
+      "use_base_font": "Använd brödtexttypsnitt",
+      "use_base_font_bold": "Brödtext (fet)",
+      "use_heading_font": "Använd rubriktypsnitt",
+      "font_size": "Typsnittsstorlek",
+      "heading_size": "Rubrikstorlek",
+      "font_size_multiplier": "Typsnittsstorlek",
+      "line_height": "Radhöjd",
+      "letter_spacing": "Bokstavsavstånd",
+      "uppercase": "Aktivera versaler",
+      "text_align": "Textjustering",
+      "style_options": {
+        "heading_style_label": "Rubrikstil",
+        "question_style_label": "Frågestil",
+        "text_group": "Textstilar",
+        "heading": "Rubrik",
+        "subheading": "Underrubrik",
+        "body_text": "Brödtext",
+        "body_text_bold": "Brödtext (fet)",
+        "button_group": "Knappstilar",
+        "primary_button": "Primär knapp",
+        "secondary_button": "Sekundär knapp",
+        "link": "Länk"
+      },
+      "weight_options": {
+        "label": "Typsnittsvikt",
+        "normal": "Normal",
+        "bold": "Fet"
+      },
+      "size_options": {
+        "label": "Storleksmodifierare",
+        "label_mobile": "Mobil storleksmodifierare",
+        "label_desktop": "Desktop storleksmodifierare",
+        "label_heading_size": "Rubrikstorleksmodifierare",
+        "label_text": "Textstorleksmodifierare",
+        "label_button": "Knappstorleksmodifierare",
+        "tiny": "Pytteliten",
+        "small": "Liten",
+        "regular": "Regelbunden",
+        "default": "Standard",
+        "normal": "Normal",
+        "medium": "Medium",
+        "large": "Stor",
+        "huge": "Enorm",
+        "gigantic": "Gigantisk",
+        "outrageous": "Otrolig"
+      },
+      "heading_tag": {
+        "label": "HTML-tagg",
+        "info": "Välj önskad HTML-tagg som ska användas i rubriken. Valet påverkar rubrikens grundstorlek.",
+        "h1": "H1",
+        "h2": "H2",
+        "h3": "H3",
+        "h4": "H4",
+        "h5": "H5",
+        "h6": "H6"
+      },
+      "text_transform": {
+        "label": "Textstil",
+        "none": "Normal",
+        "uppercase": "Versaler"
+      },
+      "link_icon": {
+        "show_label": "Visa länkpil"
+      }
+    },
+    "buttons": {
+      "color_scheme": "Knappfärgschema",
+      "invert_colors": {
+        "label": "Inverterade knappfärger",
+        "info": "Påverkar inte länkstiliserad knapp"
+      },
+      "style": {
+        "label": "Knappstil",
+        "primary": "Primär",
+        "secondary": "Sekundär",
+        "link": "Länk"
+      },
+      "width": {
+        "label": "Knappbredd",
+        "full": "Full",
+        "inline": "Normal"
+      },
+      "button_group": {
+        "full_width_buttons": {
+          "label": "Fullbreddsknappar"
+        }
+      }
+    },
+    "images": {
+      "featured_image": "Utvald bild",
+      "bg_image": "Bakgrundsbild",
+      "bg_image__info": "Om video är inställd används bilden som förhandsvisningsbild för videon.",
+      "bg_video": "Bakgrundsvideo",
+      "cover_image": "Omslagsbild",
+      "aspect_ratio": {
+        "label": "Bildförhållande",
+        "info": "Lämna bildförhållandet som 'Naturligt' för att inaktivera bildförhållandestyrning",
+        "natural": "Naturligt",
+        "portrait_2_3": "Porträtt (2:3)",
+        "portrait_3_4": "Porträtt (3:4)",
+        "square": "Kvadrat (1:1)",
+        "landscape_4_3": "Landskap (4:3)",
+        "landscape_16_9": "Landskap (16:9)"
+      },
+      "fill_rule": {
+        "label": "Mediaanpassning",
+        "contain": "Original",
+        "cover": "Fyll"
+      },
+      "focal_point": {
+        "label": "Fokuspunkt",
+        "image_label": "Bildfokuspunkt",
+        "video_label": "Videofokuspunkt",
+        "info": "Justera fokuspunkt för att hålla bildens ämne i sikte."
+      },
+      "media_toggle": {
+        "label": "Mediabrytare",
+        "show_image": "Visa bild",
+        "show_video": "Visa video",
+        "info": "Används både på mobil och desktop.",
+        "autoplay": "Automatisk uppspelning",
+        "controls": "Visa videokontroller",
+        "video_toggle_info": "Videoinställningar som påverkar uppspelning och kontroller."
+      },
+      "media_type": {
+        "label": "Mediatyp",
+        "image": "Bild",
+        "video": "Video",
+        "external_video": "Extern video",
+        "external_video_info_aspect_ratio": "Bildförhållandet är inställt på 'naturligt' för externa videor."
+      },
+      "image_height": "Bildhöjd",
+      "image_link": "Bildlänk",
+      "recommendations": {
+        "landscape": "Landskapsbildförhållande rekommenderas",
+        "portrait": "Porträttbildförhållande rekommenderas"
+      },
+      "svg": {
+        "label": "SVG-bild",
+        "info": "Valfri SVG-bild. [Få support](https://themes.woolman.co/blogs/taiga/videos-and-images-in-sections#using-svgs)"
+      }
+    },
+    "layout": {
+      "grid_gap": "Gittergap",
+      "image_gap": "Bildgap",
+      "item_gap": "Elementgap",
+      "columns": "Kolumner",
+      "direction": {
+        "label": "Riktning",
+        "ltr": "Vänster till höger",
+        "rtl": "Höger till vänster"
+      },
+      "position": {
+        "content_label": "Innehållsposition",
+        "heading_label": "Rubrikposition",
+        "text_label": "Textposition",
+        "groups": {
+          "overlay": "Överlagring",
+          "by_side": "Bredvid"
+        },
+        "options": {
+          "top": "Topp",
+          "middle": "Mitten",
+          "bottom": "Botten",
+          "left": "Vänster",
+          "center": "Centrum",
+          "right": "Höger",
+          "top_left": "Övre vänster",
+          "top_center": "Övre centrum",
+          "top_right": "Övre höger",
+          "middle_left": "Mitt vänster",
+          "middle_center": "Mitt centrum",
+          "middle_right": "Mitt höger",
+          "bottom_left": "Nedre vänster",
+          "bottom_center": "Nedre centrum",
+          "bottom_right": "Nedre höger",
+          "below_left": "Nedanför vänster",
+          "below_center": "Nedanför centrum",
+          "below_right": "Nedanför höger",
+          "below_justified": "Nedanför justerad",
+          "justify": "Justera",
+          "justify_with_buttons": "Justera (med knappar)",
+          "above_video": "Ovanför video",
+          "below_video": "Nedanför video"
+        }
+      },
+      "x_y_position": {
+        "vertical_label": "Vertikal position",
+        "horizontal_label": "Horisontell position",
+        "vertical_info": "0% topp, 100% botten",
+        "horizontal_info": "0% vänster, 100% höger"
+      },
+      "fractions": {
+        "one_half": "En halv (1/2)",
+        "one_third": "En tredjedel (1/3)",
+        "two_thirds": "Två tredjedelar (2/3)",
+        "one_fourth": "En fjärdedel (1/4)",
+        "two_fourths": "Två fjärdedelar (2/4)",
+        "three_fourth": "Tre fjärdedelar (3/4)"
+      },
+      "sizes": {
+        "natural": "Naturlig",
+        "adapt": "Anpassa",
+        "small": "Liten",
+        "medium": "Medium",
+        "large": "Stor"
+      },
+      "margin_top": "Marginal topp",
+      "margin_bottom": "Marginal botten",
+      "padding": "Padding",
+      "section_width": {
+        "label": "Sektionsbredd",
+        "full_width": "Full bredd",
+        "contained": "Innehållen",
+        "wide": "Bred",
+        "narrow": "Smal",
+        "edge_to_edge": "Kant till kant"
+      },
+      "content_width": {
+        "label": "Textinnehållsbredd",
+        "label_max_width": "Textinnehålls maxbredd",
+        "wide": "Bred",
+        "default": "Standard",
+        "narrow": "Smal",
+        "12_columns": "12/12 kolumner",
+        "10_columns": "10/12 kolumner",
+        "8_columns": "8/12 kolumner",
+        "6_columns": "6/12 kolumner",
+        "4_columns": "4/12 kolumner",
+        "3_columns": "3/12 kolumner",
+        "2_columns": "2/12 kolumner"
+      },
+      "section_height": {
+        "label": "Sektionshöjd",
+        "pixel_height_label": "Sektionspixelhöjd",
+        "group": {
+          "by_pixels": "Efter pixlar",
+          "static": "Statisk",
+          "relative": "Relativ",
+          "fixed_ratio": "Fast förhållande"
+        },
+        "auto": "Naturlig",
+        "100vh": "Helskärm",
+        "aspect_ratio_4_1": "Landskap (4:1)",
+        "aspect_ratio_3_1": "Landskap (3:1)",
+        "aspect_ratio_16_9": "Landskap (16:9)",
+        "aspect_ratio_4_3": "Landskap (4:3)",
+        "aspect_ratio_1_1": "Kvadrat (1:1)",
+        "aspect_ratio_3_4": "Porträtt (3:4)",
+        "aspect_ratio_2_3": "Porträtt (2:3)"
+      },
+      "collections_per_row": "Samlingar per rad",
+      "items_per_row": "Element per rad",
+      "columns_per_row": "Kolumner per rad",
+      "products_per_row": "Produkter per rad",
+      "display_type": {
+        "label": "Visningstyp",
+        "grid": "Gitter",
+        "slider": "Bildspel",
+        "slider_peek": "Bildspel (Kikande element)",
+        "tablet_paragraph": "Tablet-layout använder desktop-visningstyp och marginalinställningar."
+      },
+      "media_position": {
+        "label": "Mediaposition",
+        "media_first": "Media först",
+        "media_last": "Media sist"
+      },
+      "media_width": {
+        "label": "Mediabredd",
+        "full": "Full",
+        "wide": "Bred",
+        "narrow": "Smal",
+        "small": "Liten",
+        "medium": "Medium",
+        "large": "Stor",
+        "extra_large": "Extra stor"
+      }
+    },
+    "banners": {
+      "label": "Banner",
+      "banner_width": {
+        "label": "Bannerbredd"
+      },
+      "column_span": {
+        "label": "Bannerkolumnbredd",
+        "info": "Kan inte överskrida antalet element per rad."
+      },
+      "banner_height": {
+        "label": "Bannerhöjd",
+        "full_screen": "Helskärm"
+      },
+      "media_content": {
+        "header": "Mediainnehåll"
+      },
+      "visibility": {
+        "header": "Synlighet",
+        "nth_item": "Visa banner efter n:te elementet på sidan",
+        "nth_item__info": "Om gittret inte har tillräckligt med element på sidan för att banner ska placeras på önskad position kommer bannern att döljas.",
+        "only_on_first_page": "Visa endast på första sidan",
+        "only_on_first_page__info": "Om inaktiverat, visa banner på alla sidor i definierad position."
+      }
+    },
+    "headers": {
+      "content": "Innehåll",
+      "overlay_content": "Överlagringsinnehåll",
+      "layout": "Layout",
+      "text_content": "Textinnehåll",
+      "button": "Knapp",
+      "products": "Produkter",
+      "section_header": "Sektionsrubrik",
+      "color": "Färginställningar",
+      "style": "Stilinställningar",
+      "style_and_layout": "Stil och layout",
+      "hotspot": "Hotspot",
+      "advanced": "Avancerat",
+      "motion": "Rörelseinställningar",
+      "mobile_layout": "Mobil layout",
+      "tablet_layout": "Tablet-layout",
+      "desktop_layout": "Desktop-layout",
+      "mobile_settings": "Mobilinställningar",
+      "tablet_settings": "Tablet-inställningar",
+      "desktop_settings": "Desktop-inställningar",
+      "custom_settings": "Anpassade inställningar",
+      "custom_settings_info": "Obligatoriska anpassade inställningar för att skriva över standardutseendet.",
+      "slideshow_settings": "Bildspelsinställningar",
+      "banner_text": "Bannertext"
+    },
+    "paragraphs": {
+      "tablet_layout_info": "Tablet-layout använder samma marginalvärden som desktop-layouten."
+    },
+    "sliders": {
+      "slideshow_toggle_info": "Följande inställningar används när \"Visningstyp\" är inställd på \"Bildspel\".",
+      "enable_autoplay": {
+        "label": "Aktivera autoplay"
+      },
+      "autoplay_speed": {
+        "label": "Autoplay-intervall",
+        "info": "Bildspelet roterar i givet intervall"
+      },
+      "sliding_behavior": {
+        "label": "Glidande beteende",
+        "info": "Välj hur många bilder en enda glidande rörelse täcker. Används med autoplay och pilar.",
+        "options": {
+          "single": "En i taget",
+          "all": "Alla synliga"
+        }
+      },
+      "slider_overflow": {
+        "label": "Överflödessynlighet",
+        "info": "Välj hur element utanför slidern ska visas. Effekt synlig på stora skärmar.",
+        "options": {
+          "hidden": "Dold",
+          "visible": "Synlig"
+        }
+      }
+    },
+    "on_demand_content": {
+      "header": "Innehåll på begäran",
+      "info": "Innehåll på begäran kommer att öppnas i en popup-dialog."
+    },
+    "inputs": {
+      "required": {
+        "label": "Obligatorisk",
+        "info": "Om aktiverat är inmatningsfältet obligatoriskt."
+      },
+      "width": {
+        "label": "Bredd",
+        "info": "Ställ in bredden på inmatningsfältet.",
+        "half_width": "Halv bredd (50%)",
+        "full_width": "Full bredd (100%)"
+      },
+      "text": {
+        "title": "Rubrik",
+        "subtitle": "Underrubrik",
+        "text": "Text",
+        "content": "Innehåll",
+        "html": "HTML",
+        "button_label": "Knappetikett",
+        "author": "Författare",
+        "label": "Etikett",
+        "label_info": "Används som etikett för inmatningsfältet.",
+        "read_more": "Visa 'Läs mer' -knapp för lång text",
+        "read_more_info": "Om det finns mer än 250 tecken i texten visas endast en liten del av texten. Resten av texten kan visas/döljas genom att klicka på 'Läs mer' -knappen."
+      },
+      "types": {
+        "type": "Välj fälttyp",
+        "text": "Kort text",
+        "textarea": "Lång text",
+        "email": "E-post",
+        "number": "Nummer",
+        "tel": "Telefonnummer",
+        "date": "Datum",
+        "url": "URL",
+        "time": "Tid",
+        "week": "Vecka",
+        "text_group": "Generiska inmatningar",
+        "date_group": "Datuminmatningar"
+      },
+      "image_picker": {
+        "image": "Bild",
+        "image_mobile": "Bild (mobil)"
+      },
+      "checkbox": {
+        "view_all": "Visa 'Visa alla' länk",
+        "show_author": "Visa artikelns författare",
+        "show_date": "Visa publiceringsdatum",
+        "show_read_time": "Visa läsningstid",
+        "show_excerpt": "Visa utdrag",
+        "show_article_tags": "Visa artikeltaggar",
+        "show_as_thumbnail_cards": "Använd miniatyrlayout",
+        "show_arrows": "Visa pilar",
+        "show_breadcrumb": "Visa brödsmulor",
+        "show_breadcrumb_info": "Använd metafält för att lägga till fler nivåer. [Läs mer](https://themes.woolman.co/blogs/taiga/breadcrumb)",
+        "rounded_corners": "Rundade hörn"
+      },
+      "url": {
+        "label": "URL",
+        "link": "Länk",
+        "button_link": "Knapplänk",
+        "media_link": "Medialänk",
+        "banner_link": "Bannerlänk",
+        "banner_link_info": "Valfritt. Används för hela bannern när knappar inte används.",
+        "video_url": "Videourl",
+        "video_url_mobile": "Videourl (mobil)",
+        "video_url__info": "Stöder Youtube, Vimeo och MP4-filer. [Få support](https://themes.woolman.co/blogs/taiga/videos-and-images-in-sections)"
+      },
+      "product": {
+        "label": "Produkt"
+      },
+      "collection_list": {
+        "label": "Samlingar"
+      },
+      "collection": {
+        "label": "Samling"
+      },
+      "article": {
+        "label": "Artikel"
+      },
+      "page": {
+        "label": "Sida"
+      },
+      "blog": {
+        "label": "Blogg"
+      },
+      "range": {
+        "image_width": "Bildbredd",
+        "title_size": "Titelstorlek",
+        "image_height": "Bildhöjd",
+        "grid_gap": "Gittergap",
+        "grid_gap_info": "Gap mellan element. Ställ in på -1 för att använda Temainställningarnas Gutter-värde som gap."
+      }
+    },
+    "blocks": {
+      "margin_info": "Justera utrymme mellan detta och elementet ovanför.",
+      "button": {
+        "name": "Knapp"
+      },
+      "article": {
+        "author": "Författare",
+        "date": "Publiceringsdatum",
+        "excerpt": "Utdrag",
+        "read_time": "Läsningstid"
+      },
+      "before_after":{
+        "name": "Bilder före/efter",
+        "info": "Lägg till bilder för att jämföra före och efter. Det rekommenderas att använda bilder med samma bildförhållande.",
+        "settings": {
+          "before_image": {
+            "label": "Bild före",
+            "info": "Bild att jämföra med efterbilden."
+          },
+          "after_image": {
+            "label": "Bild efter",
+            "info": "Bild att jämföra med förbilden."
+          },
+          "header_labels": {
+            "heading": "Etikettalternativ",
+            "info": "Bildetiketter är valfria. Om du inte vill använda dem, lämna etiketterna tomma."
+          },
+          "before_label": {
+            "label": "Etikett före"
+          },
+          "after_label": {
+            "label": "Etikett efter"
+          },
+          "label_position": {
+            "label": "Etikettposition",
+            "options": {
+              "top": "Topp",
+              "center": "Center",
+              "bottom": "Botten"
+            }
+          },
+          "label_colors": {
+            "label": "Etikettfärger"
+          }
+        }
+      },
+      "buttons": {
+        "name": "Knappar",
+        "paragraph": "Använd upp till tre dedikerade knappar. Observera att bildens Bannerlänk kommer att inaktiveras när du använder knappar.",
+        "header_1": "Första knappen",
+        "header_2": "Andra knappen",
+        "header_3": "Tredje knappen"
+      },
+      "image": {
+        "name": "Bild"
+      },
+      "image_or_video": {
+        "name": "Bild (eller video)",
+        "info_desktop_settings": "Obligatoriska inställningar. Desktop-media kommer att användas som standard enligt den visade mediatypsvalet.",
+        "info_mobile_settings": "Valfria inställningar. Mobilinställningar ger dig möjlighet att använda olika innehåll med mobila enheter. Desktop-inställningar används när de lämnas tomma."
+      },
+      "timer_date": {
+        "name": "Timer datumtid",
+        "the_date": {
+          "label": "Måldatumtid",
+          "info": "Timern kommer att nå noll vid måldatumtiden. Som standard används onlinebutikens tidszon. Format: ÅÅÅÅ-MM-DD HH:MM"
+        },
+        "time_units": {
+          "label": "Tidsenheter",
+          "options": {
+            "hide": "Dölj",
+            "show_above": "Visa ovanför",
+            "show_below": "Visa nedanför"
+          }
+        },
+        "units_spacing": {
+          "label": "Enhetsavstånd",
+          "options": {
+            "narrow": "Smalt",
+            "medium": "Medium",
+            "wide": "Brett"
+          }
+        }
+      },
+      "post_timer_message": {
+        "name": "Post-timer-meddelande",
+        "info": "Detta meddelande kommer att visas när timern når noll. Du kan förhandsgranska detta genom att tillfälligt inaktivera \"Timer datumtid\"-blocket."
+      },
+      "text": {
+        "name": "Text"
+      },
+      "text_and_image": {
+        "name": "Text och bild"
+      },
+      "title": {
+        "name": "Rubrik"
+      },
+      "subtitle": {
+        "name": "Underrubrik"
+      },
+      "video": {
+        "name": "Video"
+      },
+      "product": {
+        "name": "Produkt"
+      },
+      "price": {
+        "name": "Pris"
+      },
+      "quantity_selector": {
+        "name": "Kvantitetsväljare",
+        "next_to_add_to_cart": {
+          "label": "Visa bredvid \"Lägg till i vagn\""
+        }
+      },
+      "variant_picker": {
+        "name": "Variantväljare",
+        "picker_type": {
+          "label": "Väljare stil",
+          "options": {
+            "dropdown": "Rullgardinsmeny",
+            "buttons": "Knappar"
+          }
+        },
+        "cross_out_unavailable": {
+          "label": "Stryk över otillgängliga varianter",
+          "info": "Fungerar endast med knappar variantväljare stil. Om aktiverat kommer otillgängliga variantknappar att vara visuellt överstrukna."
+        },
+        "advanced": {
+          "label": "Avancerade inställningar",
+          "info": "Avancerade inställningar för variantväljaren. Använd dessa för att anpassa variantväljaren för specifika alternativ."
+        },
+        "dropdown_picker_options": {
+          "label": "Alternativ som använder rullgardinsmenyn",
+          "info": "Ange alternativnamnen som använder rullgardinsmenyn (exempel: 'Storlek'). Separera med radbrytning."
+        },
+        "button_picker_options": {
+          "label": "Alternativ som använder knapparna",
+          "info": "Ange alternativnamnen som använder knapparna (exempel: 'Färg'). Separera med radbrytning."
+        }
+      },
+      "size_guide": {
+        "name": "Storleksguide",
+        "info": "Storleksguide-blocket lägger till en knapp för storleksguide-popup/låda bredvid variantväljarens etikett.",
+        "enabled": "Visa storleksguide-knapp",
+        "button_label": "Knappetikett",
+        "show_ruler": "Visa knapp med linjalikon",
+        "image": "Bild för storleksguide",
+        "content": "Innehåll för storleksguide",
+        "page_handle": "Sidhandtag för storleksguide",
+        "page_handle_info": "Valfritt. Om det används kommer storleksguide-innehållet att hämtas från sidan med det angivna handtaget. Skiftlägeskänsligt.",
+        "trigger": {
+          "label": "Alternativnamn",
+          "info": "Obligatoriskt. Bestämmer alternativnamnet där storleksguide-knappen kommer att visas. Skiftlägeskänsligt."
+        }
+      },
+      "inventory_status": {
+        "name": "Lagerstatus",
+        "show_available_quantity": {
+          "label": "Visa tillgänglig kvantitet"
+        },
+        "inventory_threshold": {
+          "label": "Låg lagerstödsgräns"
+        },
+        "inventory_transfers_enable": {
+          "label": "Visa lageröverföringsmeddelande",
+          "info": "Lär dig hur du skapar lageröverföringar [här](https://help.shopify.com/en/manual/products/inventory/transfers/create-transfer)"
+        },
+        "additional_descriptions": {
+          "header": "Ytterligare beskrivningar",
+          "info_paragraph": "Du kan ge ytterligare information relaterad till vilken lagerstatus som helst.",
+          "text_inputs": {
+            "additional__in_stock": "I lager",
+            "additional__few_on_stock": "Lågt lager",
+            "additional__out_of_stock": "Slut i lager",
+            "additional__out_of_stock_continue_selling": "Slut i lager (fortsätt sälja)"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Köpknappar",
+        "show_dynamic_checkout": {
+          "label": "Visa dynamiska kassaknappar",
+          "info": "Med hjälp av betalningsmetoderna som finns tillgängliga i din butik ser kunderna sitt föredragna alternativ, som PayPal eller Apple Pay. [Läs mer](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+        },
+        "add_multipliers": {
+          "label": "Lägg till multiplikatorer",
+          "info": "Heltalsvärden separerade med komma. Visar dedikerade knappar för att lägga till flera artiklar i vagnen med ett enda klick."
+        },
+        "add_multipliers_layout": {
+          "label": "Layout för att lägga till multiplikatorer",
+          "options": {
+            "single_line": "En rad",
+            "stacked": "Staplade"
+          }
+        },
+        "show_gift_card_recipient": {
+          "label": "Visa mottagarinformationsformulär för presentkort",
+          "info": "Tillåter köpare att skicka presentkort på ett schemalagt datum tillsammans med ett personligt meddelande. [Läs mer](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
+        }
+      },
+      "product_description": {
+        "name": "Produktbeskrivning",
+        "enable_collapsible": "Visa som ett hopfällbart element",
+        "info": "Den hopfällbara rubriken kan ändras genom standardtemaets innehåll",
+        "collapsible_type": {
+          "label": "Typ av collapsible element",
+          "options": {
+            "collapsible": "Collapsible element",
+            "read_more": "Läs mer"
+          }
+        }
+      },
+      "badges": {
+        "name": "Badges",
+        "info": "Visa produktbadges på produktsidan.",
+        "position": {
+          "label": "Position",
+          "options": {
+            "over_media": "Över media",
+            "text_column": "Textkolumn"
+          }
+        }
+      },
+      "share": {
+        "name": "Delningsknappar",
+        "hide_on_desktop": {
+          "label": "Dölj på desktop"
+        }
+      },
+      "similar_collections": {
+        "name": "Liknande samlingar",
+        "to_exclude": {
+          "label": "Samlingar att exkludera",
+          "info": "Lägg till en kommaseparerad lista av samlingshandtag att exkludera från listan"
+        }
+      },
+      "custom_liquid": {
+        "name": "Anpassad Liquid",
+        "custom_liquid": {
+          "label": "Anpassad liquid"
+        }
+      },
+      "pickup_availability": {
+        "name": "Tillgänglighet för upphämtning",
+        "info": "Visas inte tillgänglighet för upphämtning? [Få support](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickupy)"
+      },
+      "collapsible_tab": {
+        "name": "Hopfällbart element",
+        "open_as_drawer": {
+          "label": "Öppna som låda istället för hopfällbart"
+        },
+        "icon": {
+          "label": "Ikon",
+          "options": {
+            "none": "Ingen ikon",
+            "icon-caret__right": "Caret",
+            "icon-truck": "Lastbil",
+            "icon-package": "Paket",
+            "icon-feather": "Fjäder",
+            "icon-gift": "Present",
+            "icon-map-pin": "Kartnål",
+            "icon-zap": "Blixt",
+            "icon-ruler": "Linjal"
+          }
+        }
+      },
+      "sku": {
+        "name": "SKU"
+      },
+      "rating": {
+        "name": "Stjärnbetyg"
+      },
+      "sibling_products": {
+        "name": "Syskonprodukter",
+        "info": "För att använda denna sektion behöver du lägga till den nödvändiga metafältdefinitionen till din onlinebutik samt fylla i nödvändig produktdata. [Få support](https://themes.woolman.co/blogs/taiga/product-pages#sibling-products)"
+      },
+      "icons": {
+        "name": "Bildgitter",
+        "info": "Idealt block för att visa olika certifikat och andra stämplar relaterade till produkter. Eller för att visa logotyper för leverantörer av frakt eller betalning, etc. Stöder upp till 8 bilder.",
+        "icons_per_row": "Bilder per rad",
+        "header_for_grid_images": "Gitterbilder"
+      },
+      "section_header": {
+        "name": "Sektionsrubrik",
+        "info": "Använd Sektionsrubrik-block för titlar och beskrivningar före det faktiska innehållet.",
+        "subtitle_tag": "Underrubrik HTML-tagg",
+        "title_tag": "Rubrik HTML-tagg"
+      },
+      "sticky_buy_bar": {
+        "name": "Klibbig köpbar",
+        "info": "Klibbig köpbar kommer att visas från botten av skärmen i vy när Köpknappar-blocket inte är synligt. Klibbig köpbars Lägg till i vagn-knapp kommer att lägga till den för närvarande valda varianten i vagnen."
+      },
+      "upsell_products": {
+        "name": "Upsell- och komplementära produkter",
+        "info": "Visa önskade produkter så att de kan läggas till i vagnen med sidans huvudprodukt eller separat.",
+        "info__2": "För att välja komplementära produkter, lägg till Search & Discovery-appen. [Läs mer](https://help.shopify.com/manual/online-store/search-and-discovery/product-recommendations)",
+        "products_label": "Produkter",
+        "behavior_label": "Beteende",
+        "behavior_options": {
+          "default": "Lägg till produkter med huvudprodukten",
+          "separate": "Lägg till produkter separat"
+        },
+        "variant_selection_method": {
+          "label": "Variantvalmetod",
+          "options": {
+            "dropdown": "Rullgardinsmeny",
+            "quick_buy": "Snabbvisning modal"
+          }
+        },
+        "info__3": "När du använder det första beteendealternativet måste \"Köpknappar\"-blocket vara aktivt. Med det andra alternativet har produkterna sina egna lägg till i vagn-knappar.",
+        "info__4": "Rullgardinsväljaren fungerar endast med produkter som har upp till 250 varianter. För produkter med fler varianter tvingas alltid snabbvisningsmodalen fram."
+      }
+    },
+    "announcements-bar": {
+      "name": "Annonstapel",
+      "blocks": {
+        "announcement": {
+          "name": "Annonce"
+        }
+      }
+    },
+    "gallery": {
+      "name": "Galleri",
+      "info": "Använd denna sektion för att visa bilder och videor i en murarstil layout."
+    },
+    "banner-grid": {
+      "name": "Bannergitter",
+      "info": "Använd denna sektion för att framhäva olika innehåll i en gitterlayout. Innehållet kan hanteras genom sektionsblocken. [Få support](https://themes.woolman.co/blogs/taiga/banner-grid)",
+      "settings": {
+        "block_aspect_ratio": {
+          "label": "Bannerbildförhållande",
+          "info": "Minsta bildförhållande för alla banners. Text- och produktbanners kan sträcka radens bannerhöjd bortom denna inställning."
+        },
+        "block_width": {
+          "label": "Blockbredd",
+          "info": "Kommer inte att överskrida kolumnvärdet."
+        }
+      },
+      "blocks": {
+        "media_link__info": "Hela bannerområdet kommer att fungera som en länk oavsett överlagringsinnehållet.",
+        "title_style__info": "Knappar kommer att visas som inaktiverade om bannerlänken inte är inställd.",
+        "product__paragraph": "Använd alternativen nedan för att ändra utseendet på produktbannern. Standardalternativet hänvisar till temainställningarnas värden.",
+        "product_card_content": {
+          "label": "Korttextinnehåll",
+          "options": {
+            "default": "Standard",
+            "group__theme_settings": "Temainställningar",
+            "group__overwrite": "Skriv över",
+            "name_and_price": "Visa namn och pris",
+            "name_only": "Visa endast namn",
+            "hide_all": "Dölj allt"
+          }
+        }
+      }
+    },
+    "collection-list": {
+      "name": "Samlingslista",
+      "info": "Använd denna sektion för att visa produktsamlingar i din butik. [Få support](https://themes.woolman.co/blogs/taiga/collection-list)"
+    },
+    "contact-form": {
+      "name": "Kontaktformulär",
+      "info": "Använd denna sektion för att tillhandahålla ett kontaktformulär för dina kunder. [Få support](https://themes.woolman.co/blogs/taiga/contact-form)",
+      "email": {
+        "input": "E-postfält",
+        "label": "E-post",
+        "info": "E-postadress dit formulärinlämningarna kommer att skickas. Detta är ett obligatoriskt block."
+      },
+      "input": {
+        "label": "Anpassat fält",
+        "info": "Lägg till ett nytt anpassat inmatningsfält till formuläret."
+      }
+    },
+    "custom-liquid": {
+      "name": "Anpassad liquid",
+      "info": "Använd denna sektion för att lägga till anpassade lösningar som kräver Liquid-logik, såsom snabba temaförändringar eller app-inserts.",
+      "settings": {
+        "custom_liquid": {
+          "label": "Anpassad liquid"
+        }
+      }
+    },
+    "faq": {
+      "name": "Hopfällbar / FAQ",
+      "info": "Använd denna sektion för att visa svar på ofta ställda frågor. [Få support](https://themes.woolman.co/blogs/taiga/collapsible-faq)",
+      "settings": {
+        "hide_image": {
+          "label": "Dölj bild på mobil"
+        }
+      },
+      "blocks": {
+        "question": {
+          "name": "Fråga"
+        },
+        "header_position": {
+          "label": "Rubrikposition",
+          "options": {
+            "top": "Topp",
+            "column_media": "Mediakolumn",
+            "column_questions": "Frågekolumn"
+          }
+        }
+      }
+    },
+    "featured-article": {
+      "name": "Utvald artikel",
+      "info": "Sektionsstilalternativ finns nedan. Använd inte artiklar som inte har utvald bild. [Få support](https://themes.woolman.co/blogs/taiga/featured-article)"
+    },
+    "featured-blog": {
+      "name": "Utvalda blogginlägg",
+      "info": "Använd denna sektion för att framhäva dina blogginlägg. Du kan välja att visa dem som en slider eller ett gitter. [Få support](https://themes.woolman.co/blogs/taiga/featured-blog-posts)",
+      "settings": {
+        "article_limit": {
+          "label": "Antal artiklar att visa"
+        },
+        "header_for_article_card_settings": {
+          "content": "Inställningar för artikelkort"
+        }
+      }
+    },
+    "featured-collection-or-products": {
+      "name": "Utvald samling",
+      "info": "Du kan välja mellan en samling eller en manuellt inställd produktlista. [Få support](https://themes.woolman.co/blogs/taiga/featured-collection)",
+      "settings": {
+        "collection": {
+          "label": "Efter samling",
+          "info": "Lämna tomt för att använda den manuella produktlistan nedan."
+        },
+        "product_list": {
+          "label": "Efter manuell lista",
+          "info": "Välj och arrangera manuellt de visade produkterna."
+        },
+        "product_limit": {
+          "label": "Maximalt antal produkter att visa"
+        },
+        "view_all": {
+          "info": "Tillgängligt med samlingsval."
+        }
+      }
+    },
+    "featured-look": {
+      "name": "Utvald look",
+      "info": "Visa en utvald look med en produktbild och en produktlista. [Få support](https://themes.woolman.co/blogs/taiga/featured-look)",
+      "settings": {
+        "image": {
+          "label": "Look-bilden"
+        }
+      }
+    },
+    "featured-product": {
+      "name": "Utvald produkt",
+      "info": "Visa en utvald produkt.",
+      "settings": {
+        "product": {
+          "label": "Produkt"
+        }
+      }
+    },
+    "footer": {
+      "name": "Sidfot",
+      "settings": {
+        "payment_enable": {
+          "label": "Visa betalningsikoner"
+        },
+        "show_copyright": {
+          "label": "Visa upphovsrätt"
+        },
+        "copyright_text": {
+          "label": "Upphovsrättstext"
+        },
+        "header_for_social_media": {
+          "content": "Sociala medier-ikoner",
+          "info": "För att visa dina sociala medier-konton, länka dem i dina temainställningar."
+        },
+        "show_social": {
+          "label": "Visa sociala medier-ikoner"
+        },
+        "header_for_language_selector": {
+          "content": "Språkväljare",
+          "info": "För att lägga till ett språk, gå till dina [språkinställningar.](/admin/settings/languages)"
+        },
+        "enable_language_selector": {
+          "label": "Visa språkväljare"
+        },
+        "header_for_country_selector": {
+          "content": "Land/region-väljare",
+          "info": "För att lägga till ett land/region, gå till dina [marknadsinställningar.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Visa land/region-väljare"
+        },
+        "enable_follow_on_shop_header": {
+          "content": "Följ på Shop",
+          "info": "För att låta kunder följa din butik på Shop-appen från din butiksfasad måste Shop Pay vara aktiverat. [Läs mer](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+        },
+        "show_top_border": {
+          "label": "Visa övre kant",
+          "info": "Visas ovanför Sidfotsblock-elementen."
+        },
+        "show_bottom_border": {
+          "label": "Visa nedre kant",
+          "info": "Visas under Sidfotsblock-elementen."
+        },
+        "show_back_to_top": {
+          "label": "Visa \"Tillbaka till toppen\" länk"
+        },
+        "enable_follow_on_shop": {
+          "label": "Aktivera Följ på Shop"
+        }
+      },
+      "blocks": {
+        "block_width": {
+          "label": "Desktop kolumnbredd",
+          "label_tablet": "Tablet kolumnbredd",
+          "options": {
+            "one_fourth": "1/4 webbplatsbredd",
+            "one_third": "1/3 webbplatsbredd",
+            "one_half": "1/2 webbplatsbredd",
+            "two_thirds": "2/3 webbplatsbredd",
+            "full_width": "Full bredd"
+          }
+        },
+        "link_list": {
+          "name": "Navigation",
+          "menu": {
+            "label": "Snabblänkar"
+          },
+          "collapsed_on_mobile": {
+            "label": "Kollapsad på mobil"
+          }
+        },
+        "newsletter": {
+          "name": "Newsletter"
+        },
+        "image": {
+          "name": "Bild",
+          "paragraph": "Lägg till anpassad bild eller SVG till webbplatsens sidfot.",
+          "image": {
+            "label": "Bild"
+          },
+          "image_width": {
+            "label": "Bildbredd"
+          }
+        },
+        "custom_payment_icon": {
+          "name": "Anpassad betalningsikon",
+          "paragraph": "Visas endast när alternativet Visa betalningsikoner är aktivt. Lägg till en bild eller SVG-kod.",
+          "image": {
+            "label": "Bild",
+            "info": "Rekommenderad storlek 76x48 pixlar. Bild visas vid halva pixelstorleken."
+          },
+          "svg": {
+            "label": "SVG",
+            "info": "Rekommenderad storlek 38x24 pixlar."
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "Huvud",
+      "info": "Hantera huvudfunktioner, layout och stil. Konfigurera vanliga navigeringselement. Lägg till och hantera in-menyn innehåll genom sektionsblocken.",
+      "settings": {
+        "header_for_navigation": {
+          "content": "Navigation",
+          "info": "Navigation inkluderar robusta funktioner som låter dig bygga visuellt tilltalande menyer. [Lär dig funktioner.](https://themes.woolman.co/blogs/taiga/header-and-navigation)"
+        },
+        "drawer_menu": {
+          "label": "Primär meny",
+          "info": "Primär meny visar första nivå element på desktop som genvägar"
+        },
+        "drawer_secondary_menu": {
+          "label": "Sekundär meny",
+          "info": "Sekundära menyelement visas endast i lådan under de primära elementen."
+        },
+        "color_schemes": {
+          "header": "Huvudfärgschema",
+          "menu_drawer": "Lådmeny färgschema"
+        },
+        "region_menu": {
+          "label": "Land/region-knapp",
+          "info": "För att lägga till ett land/region, gå till dina [marknadsinställningar.](/admin/settings/markets)",
+          "options": {
+            "hide": "Dölj",
+            "globe": "Glob",
+            "neutral_flag": "Neutral flagga",
+            "country_flag": "Landsflagga",
+            "text": "Text"
+          }
+        },
+        "header_for_header": {
+          "content": "Huvud"
+        },
+        "header_layout": {
+          "label": "Layout",
+          "options": {
+            "logo_left_menu_center": "Logo vänster, meny centrum",
+            "logo_left_menu_left": "Logo vänster, meny vänster",
+            "logo_center_menu_left": "Logo centrum, meny vänster",
+            "logo_center_menu_center": "Logo centrum, meny centrum"
+          }
+        },
+        "desktop_submenu_type": {
+          "label": "Desktop undermeny typ",
+          "options": {
+            "dropdown": "Rullgardinsmeny",
+            "drawer": "Låda"
+          }
+        },
+        "header_sticky_behavior": {
+          "label": "Klibbigt huvud",
+          "options": {
+            "none": "Ingen",
+            "fixed": "Alltid",
+            "scroll": "Vid scrollning uppåt"
+          }
+        },
+        "shortcut_limit": {
+          "label": "Antal genvägslänkar som visas på desktop",
+          "info": "Ställ in på 0 för att dölja genvägslänkar på desktop"
+        },
+        "header_shadow": {
+          "label": "Använd skugga"
+        },
+        "header_uses_icons": {
+          "label": "Visa som ikoner",
+          "info": "När aktiverat visas Vagn-, Konto- och Sök-knappar som ikoner istället för text"
+        },
+        "header_for_overlay_settings": {
+          "content": "Överlagringsinställningar",
+          "info": "När du använder överlagringsalternativet kommer huvudet att visas ovanpå den första sektionen med en transparent bakgrund."
+        },
+        "overlay_index": {
+          "label": "Överlagra huvud över hemsidan"
+        },
+        "overlay_collection": {
+          "label": "Överlagra huvud över samlingssidor"
+        },
+        "overlay_handles": {
+          "label": "Överlagring på sidor",
+          "info": "Lista över sidhandtag. Separerade av radbyte."
+        },
+        "overlay_text_color": {
+          "label": "Överlagringstextfärg",
+          "info": "Du kan välja textfärgen för att vara antingen schemats bakgrunds- eller förgrundsfärg för att bäst passa innehållet under huvudet.",
+          "options": {
+            "light": "Ljus",
+            "dark": "Mörk",
+            "use_background": "Bakgrund",
+            "use_foreground": "Förgrund"
+          }
+        },
+        "header_for_logo": {
+          "content": "Logo"
+        },
+        "paragraph_for_logo": {
+          "content": "Webbplatsens logorelaterade inställningar."
+        },
+        "logo_default": {
+          "label": "Logobild",
+          "info": ".png eller .svg med transparent bakgrund rekommenderas."
+        },
+        "logo_with_background_color": {
+          "label": "Överlagringsalternativ logo",
+          "info": "Valfritt. Används om överlagring är aktiv och \"Bakgrund\"-värde används som \"Överlagringstextfärg\". Använd samma bilddimensioner och filformat som i \"Logobild\"."
+        },
+        "logo_dark": {
+          "label": "Mörk bildlogo",
+          "info": ".png med transparent bakgrund rekommenderas. Används på ljus bakgrund."
+        },
+        "logo_light": {
+          "label": "Ljus bildlogo",
+          "info": ".png med transparent bakgrund rekommenderas. Används på mörk bakgrund."
+        },
+        "logo_max_width_desktop": {
+          "label": "Desktop logobredd"
+        },
+        "logo_padding_desktop": {
+          "label": "Desktop padding"
+        },
+        "logo_max_width": {
+          "label": "Mobil logobredd"
+        },
+        "logo_padding": {
+          "label": "Mobil padding"
+        },
+        "dropdown_menu_cols": {
+          "label": "Kolumner i rullgardinsmenyer",
+          "info": "Antal kolumner i rullgardinsmeny. Ställ in på 0 för att inaktivera."
+        }
+      },
+      "blocks": {
+        "menu-banner": {
+          "name": "Menubanner",
+          "settings": {
+            "info_paragraph": {
+              "content": "Använd menubanners för att förbättra navigeringsupplevelsen. [Få support](https://themes.woolman.co/blogs/taiga/header-and-navigation#mega-menu)"
+            },
+            "menu_parent": {
+              "label": "Föräldermenyelement titel",
+              "info": "Obligatoriskt. Menubanner visas under föräldermenyelementet. Skiftlägeskänsligt."
+            },
+            "header_for_image": {
+              "content": "Bild"
+            },
+            "header_for_drawer_widths": {
+              "content": "Bannerbredd i lådan",
+              "info": "Följande inställningar gäller när menubannern visas i menylådan. Lådan används alltid på mobil. På desktop kontrolleras visningstypen av inställningen Desktop undermeny typ i Huvudsektionen."
+            },
+            "image_aspect_ratio": {
+              "info": "Notera: Att använda olika bildförhållanden i banners kan orsaka oregelbunden layout."
+            },
+            "banner_width": {
+              "label": "Desktop bredd"
+            },
+            "banner_width_mobile": {
+              "label": "Mobil bredd"
+            },
+            "title_style": {
+              "info": "Knappar kommer att visas som inaktiverade om bannerlänken inte är inställd."
+            },
+            "order": {
+              "label": "Ordning",
+              "options": {
+                "before": "Före menylänkar",
+                "after": "Efter menylänkar"
+              }
+            }
+          }
+        },
+        "menu-collection": {
+          "name": "Menysamling",
+          "settings": {
+            "menu_parent": {
+              "label": "Föräldermenyelement titel",
+              "info": "Obligatoriskt. Menysamling visas under föräldermenyelementet. Skiftlägeskänsligt."
+            },
+            "collection": {
+              "label": "Välj samling",
+              "info": "Välj en samling från vilken produkterna kommer att visas."
+            },
+            "product_list": {
+              "label": "Välj produkter",
+              "info": "Välj och arrangera manuellt de visade produkterna."
+            },
+            "product_limit": {
+              "label": "Antal produkter att visa"
+            },
+            "products_per_drawer_row": {
+              "info": "Notera: Denna inställning gäller endast när menytypen är låda."
+            }
+          }
+        },
+        "menu-divider": {
+          "name": "Menudelare",
+          "settings": {
+            "info_paragraph": {
+              "content": "Notera: Menudelare visas när menytypen är låda."
+            },
+            "menu_parent": {
+              "label": "Föräldermenyelement titel",
+              "info": "Obligatoriskt. Menudelare visas under föräldermenyelementet. Skiftlägeskänsligt."
+            },
+            "show_border": {
+              "label": "Visa kant"
+            }
+          }
+        }
+      }
+    },
+    "hero-countdown": {
+      "name": "Nedräkningstimer",
+      "info": "Använd sektionen Nedräkningstimer för att framhäva aktuella händelser som produkt- och samlingslanseringar, rea-kampanjer, etc. Att använda en bild med timern är valfritt. [Få support](https://themes.woolman.co/blogs/taiga/countdown-timer)",
+      "settings": {
+        "end_date": {
+          "label": "Datum att nå",
+          "info": "Format: ÅÅÅÅ-MM-DD HH:MM (GTM). Om tomt kommer innehåll efter datum att renderas."
+        },
+        "header_for_pre_date_content": {
+          "content": "Innehåll före datum"
+        },
+        "header_for_post_date_content": {
+          "content": "Innehåll efter datum"
+        }
+      }
+    },
+    "hero-slideshow": {
+      "name": "Bildspel",
+      "info": "Visa ett bildspel av bilder med valfri text och knappar. [Få support](https://themes.woolman.co/blogs/taiga/slideshow)",
+      "blocks": {
+        "hero_slide": {
+          "name": "Bild",
+          "header_for_first_button": {
+            "content": "Första knappen"
+          },
+          "header_for_second_button": {
+            "content": "Andra knappen"
+          }
+        }
+      }
+    },
+    "hero-with-overlay-links": {
+      "name": "Hero med överlagringslänkar",
+      "info": "Hantera innehållet genom sektionsblocken. Använd alternativen nedan för att ändra sektionens stil och layout. [Få support](https://themes.woolman.co/blogs/taiga/hero-with-overlay-links)",
+      "blocks": {
+        "text": {
+          "name": "Överlagringslänk"
+        }
+      }
+    },
+    "hero": {
+      "name": "Hero banner",
+      "info": "Hantera innehållet genom sektionsblocken. Använd alternativen nedan för att ändra sektionens stil och layout. [Få support](https://themes.woolman.co/blogs/taiga/hero-banner)"
+    },
+    "image-duo-with-text": {
+      "name": "Bildduo med text",
+      "info": "Hantera innehållet genom sektionsblocken. Använd alternativen nedan för att ändra den övergripande stilen och layouten. [Få support](https://themes.woolman.co/blogs/taiga/image-duo-with-text)",
+      "blocks": {
+        "image": {
+          "info": "Använd bild eller video sida vid sida med ditt textinnehåll. Ordningen på bildblocken påverkar bildens storlek."
+        }
+      }
+    },
+    "image-text-overlay": {
+      "name": "Bildtextöverlagring",
+      "info": "Hantera innehållet genom sektionsblocken. Använd alternativen nedan för att ändra sektionens stil och layout. [Få support](https://themes.woolman.co/blogs/taiga/image-with-text-overlay)",
+      "settings": {
+        "color_scheme_bg": {
+          "label": "Färgschema (bakgrund)"
+        },
+        "color_scheme_fg": {
+          "label": "Färgschema (innehåll)"
+        }
+      }
+    },
+    "image-with-text": {
+      "name": "Bild med text",
+      "info": "Hantera sektionens innehåll genom sektionsblocken. Och använd alternativen nedan för att ändra den övergripande stilen och layouten för denna sektion. [Få support](https://themes.woolman.co/blogs/taiga/image-with-text)"
+    },
+    "image-with-hotspots": {
+      "name": "Bild med hotspots",
+      "info": "Hantera sektionens innehåll genom sektionsblocken. Och använd alternativen nedan för att ändra den övergripande stilen och layouten för denna sektion.",
+      "numbered_hotspots": "Numrerade hotspots",
+      "blocks": {
+        "hotspot": {
+          "name": "Hotspot",
+          "info": "Hotspoten läggs till ovanpå bilden. Klicka på hotspoten kommer att visa informationen på begäran."
+        },
+        "image": {
+          "info": "Valt media kommer att visas i sitt naturliga bildförhållande."
+        }
+      }
+    },
+    "on-demand-info": {
+      "name": "Information på begäran",
+      "info": "Hantera sektionens innehåll genom sektionsblocken. Och använd alternativen nedan för att ändra den övergripande stilen och layouten för denna sektion.",
+      "blocks": {
+        "info-block": {
+          "name": "Informationsblock",
+          "info": ""
+        }
+      }
+    },
+    "main-404": {
+      "name": "404-sidor"
+    },
+    "main-addresses": {
+      "name": "Adresser"
+    },
+    "main-article": {
+      "name": "Artikel",
+      "info": "Hantera sektionens innehåll genom sektionsblocken.",
+      "content_width_label": "Artikelinnehållets bredd",
+      "blocks": {
+        "featured_image": {
+          "name": "Utvald bild",
+          "full_screen_info": "Att aktivera Helskärm kommer att tvinga den utvalda bilden till toppen."
+        },
+        "content": {
+          "name": "Innehåll"
+        },
+        "title": {
+          "name": "Titel"
+        },
+        "details": {
+          "name": "Detaljer"
+        },
+        "tags": {
+          "name": "Taggar"
+        },
+        "blog_nav": {
+          "name": "Bloggnavigation"
+        },
+        "hr": {
+          "name": "Horisontell linje"
+        }
+      }
+    },
+    "main-blog-faq": {
+      "name": "FAQ"
+    },
+    "main-blog": {
+      "name": "Blogg",
+      "settings": {
+        "posts_per_page": {
+          "label": "Artiklar per sida"
+        },
+        "articles_per_row": {
+          "label": "Artiklar per rad"
+        },
+        "show_blog_title": {
+          "label": "Visa bloggtitel"
+        },
+        "enable_filtering": {
+          "label": "Visa taggfilter",
+          "info": "Om bloggen inte har några taggar inställda kommer filtren att döljas."
+        },
+        "center_text": {
+          "label": "Centrera titel"
+        },
+        "grid_gap": {
+          "label": "Gap mellan artiklar"
+        }
+      }
+    },
+    "article-navigation": {
+      "name": "Artikelnavigation",
+      "settings": {
+        "show_back_to_blog": "Visa \"Tillbaka till blogg\" länk",
+        "show_article_images": "Visa artikelbilder"
+      }
+    },
+    "main-cart": {
+      "name": "Vagn"
+    },
+    "main-collection-banner": {
+      "name": "Samlingsrubrik",
+      "info": "Lägg till en beskrivning eller bild genom att redigera din samling. [Läs mer](https://help.shopify.com/manual/products/collections/collection-layout)",
+      "settings": {
+        "show_image": {
+          "label": "Visa samlingsbild"
+        },
+        "image_layout": {
+          "label": "Bildlayout",
+          "options": {
+            "hide": "Dölj samlingsbild",
+            "show_next_to": "Visa bredvid text",
+            "show_as_background": "Visa som bakgrund"
+          }
+        },
+        "center_text": {
+          "label": "Centrera titel och beskrivning"
+        }
+      }
+    },
+    "main-collection-product-grid": {
+      "name": "Produktgitter",
+      "info": "Hantera produktgitterinställningar och lägg till gitterbanners med hjälp av sektionsblock. [Få support](https://themes.woolman.co/blogs/taiga/collection-pages)",
+      "settings": {
+        "products_per_page": {
+          "label": "Produkter per sida"
+        },
+        "show_count": {
+          "label": "Visa produktantal"
+        },
+        "enable_sorting": {
+          "label": "Visa sorteringsalternativ"
+        },
+        "enable_filtering": {
+          "label": "Visa filteralternativ"
+        },
+        "enable_swatches": {
+          "label": "Visa färgprover i filteralternativ",
+          "info": "Lägg till anpassade provbilder till filerna i Shopify Admin enligt provvärdet. [Få hjälp](https://themes.woolman.co/blogs/taiga/product-card#color-swatches)"
+        },
+        "pagination": {
+          "label": "Paginering",
+          "options": {
+            "default": "Sidor",
+            "load_more": "Knapp",
+            "infinite": "Oändlig scrollning"
+          }
+        }
+      }
+    },
+    "main-list-collections": {
+      "name": "Lista alla samlingar",
+      "settings": {
+        "aspect_ratio": {
+          "label": "Samlingskorts bildförhållande"
+        },
+        "sort": {
+          "label": "Sortera efter",
+          "options": {
+            "alphabetical": "Alfabetiskt (A-Z)",
+            "alphabetical_reversed": "Alfabetiskt (Z-A)",
+            "date_reversed": "Datum, nyaste först",
+            "date": "Datum, äldste först",
+            "products_high": "Produktantal, högsta först",
+            "products_low": "Produktantal, lägsta först"
+          }
+        },
+        "collections_per_row_desktop": {
+          "label": "Samlingar per rad (desktop)"
+        },
+        "collections_per_row_mobile": {
+          "label": "Samlingar per rad (mobil)"
+        }
+      }
+    },
+    "main-login": {
+      "name": "Inloggningsformulär"
+    },
+    "main-page": {
+      "name": "Sidinnehåll",
+      "settings": {
+        "content_width_label": "Sidinnehållets bredd",
+        "heading_text_align": {
+          "label": "Rubriktextjustering"
+        },
+        "heading_size_multiplier": {
+          "label": "Rubrikstorlek"
+        }
+      }
+    },
+    "main-product": {
+      "name": "Produkt",
+      "info": "Hantera innehåll från block och allmänna inställningar från dessa inställningar. [Få support](https://themes.woolman.co/blogs/taiga/product-pages)",
+      "settings": {
+        "product_image_aspect_ratio": {
+          "label": "Produktbilds bildförhållande"
+        },
+        "image_grid_gap": {
+          "label": "Mediaelement gap"
+        },
+        "style_header": {
+          "content": "Stilinställningar"
+        },
+        "style_paragraph": {
+          "content": "Färgschemas val används för att definiera grundfärgerna. Dessutom kan du använda anpassade bakgrundsfärger för olika delar av sektionen."
+        },
+        "container_border_radius": {
+          "label": "Kantradie"
+        },
+        "media_border_radius": {
+          "label": "Mediakantradie"
+        },
+        "section_bg": {
+          "label": "Sektionsbakgrund",
+          "info": "Skriver över schemats färg"
+        },
+        "media_col_bg": {
+          "label": "Mediakolumnsbakgrund",
+          "info": "Skriver över schemats färg"
+        },
+        "content_col_bg": {
+          "label": "Innehållskolumnsbakgrund"
+        },
+        "media_col_width": {
+          "label": "Mediakolumnsbredd",
+          "options": {
+            "narrow": "Smal",
+            "medium": "Medium",
+            "wide": "Bred",
+            "extra_wide": "Extra bred"
+          }
+        },
+        "desktop_info": {
+          "content": "Experimentera med desktop-layoutalternativ för att hitta den bästa passformen för dina produkter."
+        },
+        "media_zoom": {
+          "label": "Mediazoom",
+          "options": {
+            "disabled": "Inaktiverad",
+            "column": "Kolumn",
+            "slider": "Slider"
+          },
+          "info": "Välj önskat zoombeteende."
+        },
+        "media_layout": {
+          "label": "Medialayout",
+          "options": {
+            "one-column": "En kolumn",
+            "two-columns": "Två kolumner",
+            "two-columns-stacked": "Två kolumner (fullständigt första element)",
+            "traditional-below-as-grid": "Miniatyrgitter under media",
+            "traditional-below": "Miniatyrslider under media",
+            "traditional-next-to": "Miniatyrslider bredvid media",
+            "traditional-no-thumbnails": "Inga miniatyrer"
+          },
+          "groups": {
+            "grid": "Gitter",
+            "traditional": "Slider"
+          }
+        },
+        "media_gap": {
+          "label": "Produktmediagap",
+          "info": "Gap mellan produktmedia"
+        },
+        "show_thumbnails": {
+          "label": "Visa miniatyrer"
+        },
+        "mobile_info": {
+          "content": "Produktmedia kommer att presenteras i en slider på mobil."
+        },
+        "slider_peek": {
+          "label": "Använd kikande mediaelement"
+        }
+      }
+    },
+    "main-register": {
+      "name": "Registreringsformulär"
+    },
+    "main-search": {
+      "name": "Söksida",
+      "settings": {
+        "results_per_page": {
+          "label": "Resultat per sida"
+        },
+        "results_per_row_desktop": {
+          "label": "Resultat per rad (desktop)"
+        },
+        "results_per_row_mobile": {
+          "label": "Resultat per rad (mobil)"
+        },
+        "show_count": {
+          "label": "Visa resultatantal"
+        },
+        "enable_sorting": {
+          "label": "Visa sorteringsalternativ"
+        },
+        "enable_filtering": {
+          "label": "Visa filteralternativ"
+        }
+      }
+    },
+    "modal-newsletter": {
+      "name": "Reklampopup",
+      "settings": {
+        "test_mode": {
+          "label": "Aktivera testläge",
+          "info": "Om aktiverat kommer visningsalternativen att ignoreras och popupen kommer att visas vid varje sidladdning. VARNING! Använd detta endast för testning och aldrig på en live webbplats."
+        },
+        "header_for_display_options": {
+          "content": "Visningsalternativ",
+          "info": "Om butiken har cookiebanner aktiverad börjar fördröjningen att räkna efter att cookie-samtycke har getts. Tema känner endast igen cookiebanner som använder Shopify's Customer Privacy API. [Läs mer.](https://shopify.dev/api/consent-tracking)"
+        },
+        "delay": {
+          "label": "Fördröjning",
+          "info": "Om butiken har cookiebanner aktiverad börjar fördröjningen att räkna efter att cookie-samtycke har getts. Tema känner endast igen cookiebanner som använder Shopify's Customer Privacy API. [Läs mer.](https://shopify.dev/api/consent-tracking)"
+        },
+        "frequency": {
+          "label": "Frekvens",
+          "info": "Fördröjning innan popupen visas",
+          "options": {
+            "once": "En gång per besök",
+            "1_day": "En gång per dag",
+            "3_days": "En gång per 3 dagar",
+            "7_days": "En gång per 7 dagar",
+            "14_days": "En gång per 14 dagar",
+            "30_days": "En gång per 30 dagar",
+            "60_days": "En gång per 60 dagar",
+            "90_days": "En gång per 90 dagar"
+          }
+        }
+      },
+      "blocks": {
+        "btn_link_info": "Om lämnat tomt kommer knappen att stänga popupen.",
+        "newsletter_name": "Newsletter"
+      }
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "info": "Kunder som prenumererar kommer att ha sin e-postadress tillagd till 'accepterar marknadsföring' [kundlista](/admin/customers?query=&accepts_marketing=1). [Få support](https://themes.woolman.co/blogs/taiga/newsletter)",
+      "email_form_name": "Formulär"
+    },
+    "password-footer": {
+      "name": "Sidfot"
+    },
+    "password-header": {
+      "name": "Huvud",
+      "settings": {
+        "header_for_logo": {
+          "content": "Logo",
+          "info": "Lägg till din logo som bild eller SVG-kod."
+        },
+        "logo": {
+          "label": "Logobild",
+          "info": ".png med transparent bakgrund rekommenderas."
+        },
+        "logo_max_width": {
+          "label": "Logobredd"
+        }
+      }
+    },
+    "product-recommendations": {
+      "name": "Produktrekommendationer",
+      "info": "Dynamiska rekommendationer använder order- och produktinformation för att förändra och förbättra över tid. [Läs mer](https://help.shopify.com/themes/development/recommended-products)",
+      "settings": {
+        "product_limit": {
+          "label": "Antal produkter att visa"
+        }
+      }
+    },
+    "recently-viewed": {
+      "name": "Nyligen visade produkter",
+      "info": "Denna sektion visar en lista över nyligen visade produkter. Upp till totalt 10 produkter kan ses samtidigt. Om användaren inte har några nyligen visade produkter kommer denna sektion inte att visas."
+    },
+    "rich-text": {
+      "name": "Rik text",
+      "info": "Enkel sektion endast text. Lägg till och modifiera innehåll i sektionsblock. [Få support](https://themes.woolman.co/blogs/taiga/rich-text)",
+      "settings": {
+        "content_width": {
+          "label": "Innehållsbredd"
+        },
+        "desktop_content_alignment": {
+          "label": "Justera innehåll"
+        }
+      }
+    },
+    "sliding-text": {
+      "name": "Glidande text och bild",
+      "info": "Hantera innehåll och inställningar genom fälten nedan. [Få support](https://themes.woolman.co/blogs/taiga/sliding-text)",
+      "settings": {
+        "speed": {
+          "label": "Hastighet"
+        },
+        "pause_on_hover": {
+          "label": "Pausa animation vid hovring"
+        }
+      }
+    },
+    "testimonials": {
+      "name": "Omdömen",
+      "info": "Omdömen kan hanteras genom sektionsblocken. [Få support](https://themes.woolman.co/blogs/taiga/testimonials)",
+      "testimonials_per_row": "Omdömen per rad",
+      "settings": {
+        "icon": {
+          "label": "Ikon",
+          "options": {
+            "none": "Ingen",
+            "stars": "Stjärnbetyg",
+            "quotation_mark": "Citat"
+          }
+        },
+        "stars": {
+          "label": "Stjärnbetygsantal",
+          "info": "Antal stjärnor att visa i betyget. Endast synligt om ikonen är inställd på Stjärnbetyg."
+        },
+        "autoplay": {
+          "label": "Aktivera autoplay"
+        },
+        "autoplay_speed": {
+          "label": "Autoplay-intervall",
+          "info": "Omdömen roterar i givet intervall"
+        }
+      },
+      "blocks": {
+        "testimonial": {
+          "name": "Omdöme"
+        }
+      }
+    },
+    "video": {
+      "name": "Video",
+      "info": "Videospelare låter dig lägga till en video till en sida. [Få support](https://themes.woolman.co/blogs/taiga/video)"
+    },
+    "divider": {
+      "name": "Avdelare",
+      "info": "Avdelare för extra nivå av visuell fantastiskhet. Välj från färdiga avdelare eller använd en anpassad SVG i din avdelare.",
+      "settings": {
+        "divider_graphics": {
+          "label": "Avdelargrafik",
+          "custom_label": "Anpassad grafik SVG",
+          "custom_info": "Avancerad funktion. Använd anpassad SVG-kod för att infoga önskad grafik inuti avdelarsektionen.",
+          "options": {
+            "bubly": "Bubly",
+            "curve": "Kurva",
+            "elliptic": "Elliptisk",
+            "jagged": "Tandad",
+            "tiles": "Plattor",
+            "tilted": "Lutande",
+            "triangular": "Triangulär",
+            "wave": "Våg",
+            "waves": "Vågor (osymmetriska)"
+          }
+        },
+        "graphics_size": {
+          "header": "Storleksalternativ",
+          "graphics_width": "Bredd",
+          "graphics_height": "Höjd",
+          "graphics_height_info": "När höjden är inställd på 0 används grafikens standardbildförhållande."
+        },
+        "graphics_colors": {
+          "header": "Färgalternativ",
+          "info": "Standardavdelarna är uppdelade i tre delar: Övre, mitten och nedre. Använd olika färger i olika delar för att uppnå en flytande visuell flöde från sektion till sektion.",
+          "top_part_color": "Övre del",
+          "middle_part_color": "Mittdel",
+          "bottom_part_color": "Nedre del"
+        },
+        "graphics_position": {
+          "header": "Positionsalternativ",
+          "label": "Avdelarposition",
+          "options": {
+            "top_previous": "Ovanpå föregående sektion",
+            "in_between": "Mellan sektioner",
+            "top_next": "Ovanpå nästa sektion"
+          }
+        },
+        "flip_horizontal": "Vänd horisontellt",
+        "flip_vertical": "Vänd vertikalt"
+      },
+      "blocks": {
+        "standard": {
+          "name": "Standard"
+        },
+        "custom": {
+          "name": "Anpassad"
+        }
+      }
+    },
+    "ai-section": {
+      "name": "AI-sektion",
+      "info": "Skapa din anpassade sektion med AI. Välj \"Lägg till block\" och välj \"Generera\" för att börja."
+    },
+       "multicolumn": {
+      "name": "Multicolumn",
+      "info": "Använd detta för att lägga till en multicolumn i din header.",
+      "presets": {
+        "title": "Title",
+        "text": "Text"
+      },
+      "headers": {
+        "media": "Media",
+        "text": "Text",
+        "button_1": "Button 1",
+        "button_2": "Button 2"
+      },
+      "blocks": {
+        "column": {
+          "name": "Kolumn",
+          "info": "Använd detta för att lägga till en kolumn i multicolumn."
+        }
+      }
+    },
+    "multirow": {
+      "name": "Multirad",
+      "info": "Använd detta för att lägga till en multirad i din header.",
+      "presets": {
+        "title": "Title",
+        "text": "Text"
+      },
+      "headers": {
+        "media": "Media",
+        "text": "Text",
+        "button_1": "Button 1",
+        "button_2": "Button 2"
+      },
+      "blocks": {
+        "row": {
+          "name": "Rad",
+          "info": "Använd detta för att lägga till en rad i multirad."
+        }
+      }
+    },
+    "apps": {
+      "name": "Appar"
+    }
+  },
+  "section_groups": {
+    "header": "Huvudgrupp",
+    "aside": "Sidogrupp",
+    "footer": "Sidfotsgrupp"
+  }
+}

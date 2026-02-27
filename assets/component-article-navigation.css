@@ -1,0 +1,24 @@
+.article-link {
+  flex-wrap: nowrap;
+  gap: 24px;
+}
+.article-link-img {
+  width: 80px;
+  min-width: 80px;
+}
+
+@media only screen and (min-width:768px) {
+  .previous-article {
+    order: 1;
+  }
+  .back-to-blog {
+    order: 2;
+  }
+  .next-article {
+    order: 3;
+    text-align: right;
+  }
+  .next-article .article-link-img {
+    order: 2;
+  }
+}

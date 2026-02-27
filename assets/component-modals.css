@@ -1,0 +1,213 @@
+/* Modal properties */
+
+.modal {
+  --modal-level: 9999;
+  --modal-max-size: 500px;
+  --modal-size: calc(100% - calc(var(--gutter) * 2));
+
+  background: transparent;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s ease;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--modal-level)
+}
+
+.modal-dialog {
+  position: relative;
+  z-index: var(--modal-level);
+  width: var(--modal-size);
+  max-width: var(--modal-max-size);
+  border-radius: var(--modal-border-radius);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  opacity: 0;
+  transition: all .3s ease;
+  transition-delay: .2s;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+.modal-dialog::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.modal-dialog--large {
+  height: min(80vh, 760px);
+}
+
+.modal:target,
+.modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal .modal-header {
+  padding: var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 0 var(--gutter) var(--gutter) var(--gutter);
+}
+
+.modal-body > * + * {
+  --spacing: var(--gutter);
+  margin-top: var(--spacing);
+}
+
+.modal:target .modal-dialog,
+.modal.is-open .modal-dialog {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-close {
+  display: grid;
+  place-content: center;
+  min-width: 4.8rem;
+  min-height: 4.8rem;
+}
+.modal-close.pos--absolute {
+  position: absolute;
+  top: var(--gutter);
+  right: var(--gutter);
+  z-index: 2 !important;
+}
+
+/* Set opacity for backdrop when modal is open */
+.modal:target > .page-overlay,
+.modal.is-open > .page-overlay {
+  opacity: 1;
+}
+
+/* Full screen modal */
+.modal--fullscreen .modal-dialog {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  border-radius: 0;
+  position: relative;
+  z-index: 0;
+}
+.modal--fullscreen .modal-body {
+  padding: 0;
+}
+.modal--fullscreen .page-overlay {
+  display: none;
+}
+
+/* Modal with slider */
+.modal--slider .gridy-slider {
+  z-index: var(--modal-level);
+  width: 100%;
+}
+.modal--slider .gridy-track {
+  --slide-items-width: 100%;
+  --track-padding: var(--container-margin);
+  align-items: center;
+  padding-left: max(var(--track-padding), var(--container-margin));
+  padding-right: max(var(--track-padding), var(--container-margin));
+  scroll-padding-inline: calc(var(--track-padding));
+}
+.modal--slider .gridy-slider .modal-dialog {
+  z-index: auto;
+  width: auto;
+  max-width: initial;
+  scroll-snap-align: center;
+}
+
+.modal-grid {
+  height: inherit;
+}
+.modal--slider .modal-close {
+  border-radius: 50%;
+  z-index: 1;
+}
+.modal-grid-media-column {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  .modal--slider .gridy-slider:hover .gridy-arrows {
+    width: 96%;
+    left: 2%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .modal--slider .gridy-track {
+    --track-padding: calc((100% - (var(--max-col-width) * 10 + var(--gutter) * 9))/2);
+    grid-gap: calc((100% - var(--gutter) * 9)/10);
+  }
+  .modal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: inherit;
+  }
+  .modal-grid-media-column {
+    grid-column: span 3;
+  }
+  .modal-grid-text-column {
+    grid-column: span 5;
+    max-width: none;
+  }
+  .modal-grid--with-media .modal-grid-text-column {
+    grid-column: span 2;
+  }
+  .modal-grid-media-column .media,
+  .modal-grid-media-column .video-container,
+  .modal-grid-media-column img,
+  .modal-grid-media-column video {
+    height: 100% !important;
+    object-fit: cover !important;
+    aspect-ratio: auto !important;
+  }
+  .modal-grid-text-column {
+    padding: 64px;
+    overflow-y: scroll;
+  }
+}
+
+.modal img {
+  display: none;
+}
+.modal.is-open img {
+  display: block;
+}
+/* Product modal styles */
+.product-modal .modal-header {
+  padding: 0;
+  position: sticky;
+  top: var(--gutter);
+  z-index: 2;
+  justify-content: flex-end;
+}
+.product-modal .modal-close {
+  margin-right: var(--gutter);
+}
+.product-modal .modal-body {
+  padding: 0;
+}
+.product-modal__media {
+  position: relative;
+  margin-top: -50px;
+}
+.product-modal__badges {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1;
+}

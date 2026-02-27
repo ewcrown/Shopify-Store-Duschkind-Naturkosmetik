@@ -1,0 +1,157 @@
+{{ 'component-video.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  # ** Purpose **
+  # 'video' snippet generates HTML Video element that supports different sources for mobile and desktop as well as lazyloading.
+
+  # ** Parameters **
+  # src           =>  {string} video file URL - REQUIRED
+  # src_mobile    =>  {string} video file URL - OPTIONAL
+  # aspect_ratio  =>  {string} video aspect ratio | 'natural','portrait','landscape','square' - OPTIONAL (default: nill)
+  # lazyload      =>  {boolean} determine if video should be lazy loaded or not - OPTIONAL (default: false)
+  # alt           =>  {string} describes the content of video - OPTIONAL
+  # autoplay      =>  {boolean} Autoplay the video - OPTIONAL (default: false)
+  # muted         =>  {boolean} Mute the video - OPTIONAL (default: false)
+  # loop          =>  {boolean} Loop the video - OPTIONAL (default: false)
+  # poster        =>  {string} URL of the poster image - OPTIONAL (default: none)
+
+  # ** How to use **
+  # render 'video', src: <url>, src_mobile: <url>, lazyload: <boolean>, alt: <string>
+
+  # Videos should be wrapped inside .media class so the aspect ratio is contained. To disable automatic wrapping set wrapped as false.
+
+  assign video_type = 'mp4'
+  assign video_type_mobile = 'mp4'
+
+  if src == blank or src == nil
+    assign src = 'placeholder_video.mp4' | asset_url
+  endif
+  
+  if src contains 'youtube' or src contains 'youtu.be'
+    assign video_type = 'youtube'
+  elsif src contains 'vimeo'
+    assign video_type = 'vimeo'
+  endif
+
+  if src_mobile == blank or src_mobile == nil
+    assign src_mobile = src
+    assign video_type_mobile = video_type
+  endif
+
+  if src_mobile contains 'youtube'
+    assign video_type_mobile = 'youtube'
+  elsif src_mobile contains 'vimeo'
+    assign video_type_mobile = 'vimeo'
+  endif
+
+  assign attributes = ''
+
+  if poster != blank
+    assign attributes = attributes | append: 'preload="none"' | append: ' '
+  else
+    assign attributes = attributes | append: 'preload="auto"' | append: ' '
+  endif
+
+
+  # Force video muting if autoplay is enabled, otherwise use whatever was provided to the snippet
+  if poster != blank
+    assign autoplay = false
+  endif
+
+  if autoplay == true
+    assign muted = true
+    assign attributes = attributes | append: 'autoplay' | append: ' '
+    assign attributes = attributes | append: 'playsinline' | append: ' '
+  endif
+
+  if muted == true
+    assign attributes = attributes | append: 'muted' | append: ' '
+  endif
+
+  if loop == true
+    assign attributes = attributes | append: 'loop' | append: ' '
+  endif
+
+  if poster != blank
+    assign poster_url = poster | image_url: width: 1920, height: 1080
+    assign attributes = attributes | append: 'poster="' | append: poster_url | append: '"' | append: ' '
+  elsif poster == blank and src contains 'placeholder_video'
+    assign poster_url = 'placeholder_video.png' | asset_img_url: 'original'
+    assign attributes = attributes | append: 'poster="' | append: poster_url | append: '"' | append: ' '
+  endif
+
+  # convert https://woolman.co/video.mp4?xyz --> mp4
+  assign src_file_type = src | split: '.' | last | split: '?' | first
+  assign mobile_src_file_type = src_mobile | split: '.' | last | split: '?' | first
+
+  if src != src_mobile
+    assign responsive_videos = true
+  endif
+-%}
+
+{%- capture video_html -%}
+  <superpowered-video data-aspect-ratio="{{ aspect_ratio }}" data-context="{{ context | default: 'default' }}" data-autoplay="{{ autoplay }}" data-device="{% if responsive_videos %}mobile{% else %}both{% endif %}">
+    {%- if video_type_mobile == 'mp4' -%}
+      <video class="video {{ custom_classes }}" {{ attributes | join: ' ' }} controlslist="nodownload">
+        <source src="{{ src_mobile }}" type="video/{{ mobile_src_file_type }}">
+        {{- 'accessibility.no_video_support' | t -}}
+      </video>
+    {%- else -%}
+      {%- render 'video-child-embed',
+        video_type: video_type_mobile,
+        src: src_mobile,
+        autoplay: autoplay,
+        loop: loop
+      -%}
+    {%- endif -%}
+  </superpowered-video>
+
+  {% if responsive_videos %}
+    <superpowered-video data-aspect-ratio="{{ aspect_ratio }}" data-context="{{ context | default: 'default' }}" data-autoplay="{{ autoplay }}" data-device="desktop">
+      {%- if video_type == 'mp4' -%}
+        <video class="video" {{ attributes | join: ' ' }} controlslist="nodownload">
+          <source src="{{ src }}" type="video/{{ src_file_type }}">
+          {{- 'accessibility.no_video_support' | t -}}
+        </video>
+      {%- else -%}
+        {%- render 'video-child-embed',
+          video_type: video_type,
+          src: src,
+          autoplay: autoplay,
+          loop: loop
+        -%}
+      {%- endif -%}
+    </superpowered-video>
+  {% endif %}
+
+  {%- unless autoplay -%}
+    <div class="button-container">
+      <button class="btn video-play">
+        {%- render 'icon-play' -%}
+        <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
+      </button>
+    </div>
+  {%- endunless -%}
+{%- endcapture -%}
+
+{%- if aspect_ratio and aspect_ratio != 'natural' -%}
+<figure class="media {{ aspect_ratio }}{% if src == blank %} media--empty{% endif %}">
+{%- endif -%}
+
+{%- if autoplay -%}
+  {{ video_html }}
+{%- else -%}
+  <div class="video-container"
+    data-mobile-video-type="{% if video_type_mobile != 'mp4' %}external{% else %}cdn{% endif %}"
+    data-desktop-video-type="{% if video_type != 'mp4' %}external{% else %}cdn{% endif %}">
+    {{ video_html }}
+  </div>
+{%- endif -%}
+
+{%- unless alt == blank -%}
+  <figcaption class="visually-hidden">{{ alt }}</figcaption>
+{%- endunless -%}
+
+{%- if aspect_ratio and aspect_ratio != 'natural' -%}
+</figure>
+{%- endif -%}

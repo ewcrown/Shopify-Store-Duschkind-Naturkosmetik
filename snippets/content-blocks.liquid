@@ -1,0 +1,137 @@
+{%- liquid
+  # ** Purpose **
+  # Snippet for handling content blocks in various sections. Buttons and other text elements are assigned in different varaibles
+
+  # ** Supported block types **
+  # - subtitle
+  # - title
+  # - text
+  # - button
+
+  # ** Parameters **
+  # blocks                =>  object array, the content blocks to be rendered - REQUIRED
+  # use_text_container    =>  boolean, wraps text blocks in a wrapper <div> excluding the buttons from the wrapper  - OPTIONAL (default: false)
+  # blocks_text_classes   =>  string, additional blocks-text <div> classes  - OPTIONAL
+  # blocks_button_classes =>  string, additional blocks-button <div> classes  - OPTIONAL
+  # single_button_classes =>  string, additional blocks-button <div> classes  - OPTIONAL
+
+  assign buttons = ''
+  assign text_blocks = ''
+  assign use_text_container = use_text_container | default: false
+  assign btn_group_width_classes = 'sm-down-width-auto sm-width-auto'
+-%}
+
+{%- for block in blocks -%}
+  {%- capture the_block -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        {%- render block -%}
+      {%- when 'subtitle' -%}
+        {%- assign heading_tag = block.settings.heading_tag | default: 'h3' -%}
+        <{{ heading_tag }} class="subheading mt sm-mt {{ block.settings.size_multiplier }} {{ block.settings.sm_size_multiplier }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>{{ block.settings.subtitle }}</{{ heading_tag }}>
+      {%- when 'title' -%}
+        {%- assign heading_tag = block.settings.heading_tag | default: 'h2' -%}
+        <{{ heading_tag }} class="hero__title mt sm-mt {{ block.settings.size_multiplier }} {{ block.settings.sm_size_multiplier }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>{{ block.settings.title | replace: '[br]', '<br>' }}</{{ heading_tag }}>
+      {%- when 'text' -%}
+        {% assign rte_length = block.settings.text | strip_html | size %}
+        {% if block.settings.read_more and rte_length > 250 %}
+          {% assign classes = "rte rte--no-max mt sm-mt " | append: block.settings.size_multiplier | append: ' ' | append: block.settings.sm_size_multiplier %}
+          {% assign block_id = 'read-more-' | append: block.id | append: '-' | append: section.id %}
+          {% assign context_label = block.settings.title | default: 'text' %}
+          {%- render 'read-more-text',
+            content: block.settings.text,
+            block_id: block_id,
+            classes: classes,
+            attributes: block.shopify_attributes,
+            context_label: context_label,
+            sm_mt: block.settings.sm_margin_top,
+            mt: block.settings.margin_top
+          -%}
+        {% else %}
+          <div class="rte rte--no-max mt sm-mt {{ block.settings.size_multiplier }} {{ block.settings.sm_size_multiplier }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>{{ block.settings.text | newline_to_br }}</div>
+        {% endif %}
+      {%- when 'button' -%}
+        {%- assign classes = block.settings.size_multiplier | append: ' ' | append: block.settings.sm_size_multiplier | append: ' ' | append: single_button_classes | strip -%}
+        <div class="mt sm-mt" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}">
+          {% render 'button',
+            label: block.settings.button_label,
+            link: block.settings.button_link,
+            style: block.settings.button_style,
+            color_scheme: color_scheme,
+            classes: classes,
+            block_attributes: block.shopify_attributes %}
+        </div>
+      {%- when 'buttons' -%}
+        {%- liquid
+          if block.settings.sm_full_width_buttons
+            assign btn_group_width_classes = btn_group_width_classes | remove: 'sm-width-auto' | strip
+          endif
+
+          if block.settings.full_width_buttons
+            assign btn_group_width_classes = btn_group_width_classes | remove: 'sm-down-width-auto' | strip
+          endif
+
+          assign classes = block.settings.size_multiplier | append: ' ' | append: block.settings.sm_size_multiplier
+          assign labels = block.settings.button_label_1 | append: '||' | append: block.settings.button_label_2 | append: '||' | append: block.settings.button_label_3 | split: '||'
+          assign links = block.settings.button_link_1 | append: '||' | append: block.settings.button_link_2 | append: '||' | append: block.settings.button_link_3 | split: '||'
+          assign styles = block.settings.button_style_1 | append: '||' | append: block.settings.button_style_2 | append: '||' | append: block.settings.button_style_3 | split: '||'
+        -%}
+
+        <div class="btn-group mt sm-mt {{ btn_group_width_classes }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>
+        {% for label in labels %}
+          {% if label != empty %}
+            {% render 'button',
+              label: label,
+              link: links[forloop.index0],
+              style: styles[forloop.index0],
+              block_attributes: block.shopify_attributes,
+              color_scheme: color_scheme,
+              classes: classes %}
+          {% endif %}
+        {% endfor %}
+        </div>
+      {%- when 'timer' -%}
+        {% assign the_date = block.settings.the_date | date: '%Y-%m-%dT%H:%M%z' %}
+        <count-down data-timer-for="{{ section.id }}" class="count-down mt sm-mt {{ block.settings.time_units }}" end-date="{{ the_date }}" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}" {{ block.shopify_attributes }}>
+          <time datetime="{{ the_date }}" class="{{ block.settings.units_spacing }}">
+            <div class="count-down__item">
+              <span class="count-down__unit subheading size--tiny">{{ 'sections.countdown.days' | t }}</span>
+              <span class="count-down__number h1 days {{ block.settings.sm_size_multiplier }} {{ block.settings.size_multiplier }}">--</span>
+            </div>
+            <div class="count-down__item">
+              <span class="count-down__unit subheading size--tiny">{{ 'sections.countdown.hours' | t }}</span>
+              <span class="count-down__number h1 hours {{ block.settings.sm_size_multiplier }} {{ block.settings.size_multiplier }}">--</span>
+            </div>
+            <div class="count-down__item">
+              <span class="count-down__unit subheading size--tiny">{{ 'sections.countdown.minutes' | t }}</span>
+              <span class="count-down__number h1 minutes {{ block.settings.sm_size_multiplier }} {{ block.settings.size_multiplier }}">--</span>
+            </div>
+            <div class="count-down__item">
+              <span class="count-down__unit subheading size--tiny">{{ 'sections.countdown.seconds' | t }}</span>
+              <span class="count-down__number h1 seconds {{ block.settings.sm_size_multiplier }} {{ block.settings.size_multiplier }}">--</span>
+            </div>
+          </time>
+        </count-down>
+      {%- when 'email_form' -%}
+        <div {{ block.shopify_attributes }} class="mt mb sm-mt sm-mb" style="--mt: {{ block.settings.margin_top | append: 'px' }}; --sm-mt: {{ block.settings.sm_margin_top | append: 'px' }}">
+          {%- render 'newsletter-form', section_id: section.id -%}
+        </div>
+    {%- endcase -%}
+  {%- endcapture -%}
+
+  {%- if block.type == 'buttons' -%}
+    {%- assign buttons = buttons | append: the_block -%}
+  {%- else -%}
+    {%- assign text_blocks = text_blocks | append: the_block -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if use_text_container -%}
+  <div class="blocks-text {{ blocks_text_classes }}">{{ text_blocks }}</div>
+{%- else -%}
+  {{ text_blocks }}
+{%- endif -%}
+
+{%- if buttons != empty -%}
+  <div class="blocks-button {{ blocks_button_classes }}">{{ buttons }}</div>
+{%- endif -%}

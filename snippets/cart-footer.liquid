@@ -1,0 +1,52 @@
+{%- liquid
+  # Snippet for Cart Footer used in both drawer and cart template
+  # Note: #cart-footer.inner_html is replaced in AJAX calls
+-%}
+
+<div id="cart-footer">
+  <div class="cart-footer{% if cart.item_count == 0 %} hide{% endif %}">
+    <div id="cart-subtotal" class="cart__subtotals">
+      <div class="cart__subtotal">
+        <span>{{ 'sections.cart.subtotal' | t }}</span>
+        <span>{{ cart.original_total_price | money_with_currency }}</span>
+      </div>
+      {%- render 'cart-discounts', cart: cart -%}
+    </div>
+
+    <div class="cart-buttons">
+      <button class="btn btn--full {% if additional_checkout_buttons and settings.show_accelerated_checkout %}btn--secondary{% else %}btn--primary{% endif %} btn--full" type="submit" name="checkout">
+        {{ 'sections.cart.checkout' | t }}
+      </button>
+
+      {%- if additional_checkout_buttons and settings.show_accelerated_checkout -%}
+        <div class="cart__dynamic-checkout-buttons additional-checkout-buttons" style="--spacing: 4px;">
+          {{ content_for_additional_checkout_buttons }}
+        </div>
+      {%- endif -%}
+
+      {%- if settings.show_cart_link -%}
+        <a href="{{ routes.cart_url }}" class="btn btn--link btn--full view-cart">
+          {{ 'general.cart.view_cart_link' | t }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- capture cart_footer_text %}
+      {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+        {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+      {%- elsif cart.taxes_included -%}
+        {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+      {%- elsif shop.shipping_policy.body != blank -%}
+        {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+      {%- else -%}
+        {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if cart_footer_text != blank -%}
+      <p class="cart__tax size--tiny style--subdued text-align-center">
+        {{ cart_footer_text }}
+      </p>
+    {%- endif -%}
+  </div>
+</div>

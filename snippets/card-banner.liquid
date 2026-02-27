@@ -1,0 +1,77 @@
+{%- liquid
+  # Sizing
+  assign ipr_mobile = ipr_array[0] | times: 1
+  assign ipr_tablet = ipr_array[1] | times: 1
+  assign ipr_desktop = ipr_array[2] | times: 1
+  assign column_span = current_block.column_span | at_most: ipr_mobile | default: 1
+  assign sm_column_span = current_block.sm_column_span | at_most: ipr_tablet | default: 1
+  assign md_column_span = current_block.md_column_span | at_most: ipr_desktop | default: 1
+
+  # content
+  assign card_url = current_block.url
+  assign card_image = current_block.image
+  assign card_title = current_block.title
+
+  # Style
+  assign overlay_alpha = current_block.overlay_opacity | divided_by: 100.00
+
+  unless sizes
+    assign desktop_sizes = 'calc(100vw / ' | append: ipr_desktop | divided_by: md_column_span  | append: ')'
+    assign tablet_sizes = '(max-width: 1023px) calc(100vw / ' | append: ipr_tablet | divided_by: sm_column_span | append: ')'
+    assign mobile_sizes = '(max-width: 767px) calc(100vw / ' | append: ipr_mobile | divided_by: column_span | append: ')'
+    assign sizes = mobile_sizes | append: ', ' | append: tablet_sizes | append: ', ' | append: desktop_sizes
+  endunless
+-%}
+
+<div
+  class="card card--banner col-span"
+  style="
+    --col-span: {{ column_span }};
+    --sm-col-span: {{ sm_column_span }};
+    --md-col-span: {{ md_column_span }};
+    --color: {{ current_block.text_color }};">
+  {%- if card_url != blank -%}
+  <a class="card-media" href="{{ card_url }}">
+  {%- else -%}
+  <div class="card-media">
+  {%- endif -%}
+    {%- if current_block.video_file_name == blank and card_image != blank -%}
+      {% render 'img',
+        src: card_image,
+        aspect_ratio: 'natural',
+        sizing_rule: cover,
+        lazyload: lazyload,
+        sizes: sizes %}
+    {%- else -%}
+      {%- render 'video',
+        src: current_block.video_file_name,
+        aspect_ratio: 'natural',
+        context: 'card',
+        autoplay: true,
+        loop: true -%}
+    {%- endif -%}
+
+    {% assign card_text_align = 'text-align-center' %}
+    {% if current_block.content_alignment contains 'horizontal-left' %}
+      {% assign card_text_align = 'text-align-left' %}
+    {% elsif current_block.content_alignment contains 'horizontal-right' %}
+      {% assign card_text_align = 'text-align-right' %}
+    {% endif %}
+
+    <div
+      class="card-media-overlay flex {{ current_block.content_alignment }} {{ card_text_align }}"
+      style="
+        background-color: {{ current_block.overlay_color | color_modify: 'alpha', overlay_alpha }};
+        {% unless current_block.title_style contains 'btn' %}
+        --color-foreground: {{ current_block.text_color }};
+        color: var(--color-foreground);
+        {% endunless %}
+      ">
+      <span class="{{ current_block.title_style }}{% if current_block.title_style contains 'btn' and card_url == blank %} disabled{% endif %}">{{ card_title | replace: '[br]', '<br>' }}</span>
+    </div>
+  {%- if card_url != blank -%}
+  </a>
+  {%- else -%}
+  </div>
+  {%- endif -%}
+</div>

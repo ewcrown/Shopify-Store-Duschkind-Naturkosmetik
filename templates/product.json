@@ -1,0 +1,490 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "the-sticky-buy-bar": {
+          "type": "sticky_buy_bar",
+          "settings": {
+            "color_scheme": "",
+            "overlay_str": 35,
+            "border_radius": 16
+          }
+        },
+        "badges_hkajpr": {
+          "type": "badges",
+          "settings": { "badges_position": "over-media", "margin_top": 8 }
+        },
+        "the-title": { "type": "title", "settings": { "margin_top": 8 } },
+        "the-price": {
+          "type": "price",
+          "settings": {
+            "margin_top": 8,
+            "font_weight": "normal",
+            "sm_size_multiplier": "sm-size--large",
+            "size_multiplier": "size--default"
+          }
+        },
+        "sibling_products_dtbBGm": {
+          "type": "sibling_products",
+          "settings": { "variant_option_name": "Color", "margin_top": 24 }
+        },
+        "the-variant-picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "cross_out_unavailable": false,
+            "margin_top": 24
+          }
+        },
+        "the-quantity-selector": {
+          "type": "quantity_selector",
+          "settings": { "next_to_add_to_cart": true, "margin_top": 24 }
+        },
+        "the-buy-buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "add_multipliers": "",
+            "add_multipliers_layout": "single-line",
+            "margin_top": 28
+          }
+        },
+        "the-inventory-status": {
+          "type": "inventory_status",
+          "settings": {
+            "inventory_threshold": 10,
+            "show_available_quantity": false,
+            "inventory_transfers_enable": true,
+            "additional__in_stock": "– 2 day express delivery!",
+            "additional__few_on_stock": "",
+            "additional__out_of_stock": "",
+            "additional__out_of_stock_continue_selling": "",
+            "margin_top": 20
+          }
+        },
+        "the-pickup-availability": {
+          "type": "pickup_availability",
+          "settings": { "margin_top": 24 }
+        },
+        "the-description": {
+          "type": "description",
+          "settings": { "enable_collapsible": false, "margin_top": 24 }
+        },
+        "collapsible_tab_nGyj9k": {
+          "type": "collapsible_tab",
+          "settings": {
+            "title": "How to use",
+            "content": "<p>Take a small amount of the product on your hand and blend the make-up by gently massaging it onto your dry face.</p>",
+            "page": "",
+            "open_as_drawer": false,
+            "icon": "icon-caret__right",
+            "margin_top": 32
+          }
+        },
+        "collapsible_tab_7UEcPg": {
+          "type": "collapsible_tab",
+          "settings": {
+            "title": "Key ingredients",
+            "content": "<p>Watermelon extract, Hyaloronic acid, Ceramides</p>",
+            "page": "",
+            "open_as_drawer": false,
+            "icon": "icon-caret__right",
+            "margin_top": 0
+          }
+        },
+        "collapsible_tab_XwMcHP": {
+          "type": "collapsible_tab",
+          "settings": {
+            "title": "Product ingredients",
+            "content": "<p>Ethylhexyl Palmitate Skin, Sorbeth-30 Tetraoleate, Isopropyl Palmitate, Cetyl Ethylhexanoate, Propylene Glycol, Dicaprylate/Dicaprate, Triethylhexanoin, Synthetic Wax, Zea Mays (Corn) Germ Oil</p>",
+            "page": "",
+            "open_as_drawer": false,
+            "icon": "icon-caret__right",
+            "margin_top": 0
+          }
+        },
+        "collapsible_tab_bDkCcD": {
+          "type": "collapsible_tab",
+          "settings": {
+            "title": "Shipping & Returns",
+            "content": "<p><strong>Shipping</strong><br/><br/>Orders are processed and shipped within 1–3 business days. Delivery times and costs depend on your location and are shown at checkout. Please note there may be delays during holidays or promotional periods.</p><p>Remember to collect your order. If an order is returned due to non-collection, a processing fee may be charged.</p><p><strong>Returns</strong><br/><br/>You may return unopened products within 14 days of delivery. Refunds are issued using the original payment method within 14 days after we receive the returned items or proof of return.</p>",
+            "page": "",
+            "open_as_drawer": false,
+            "icon": "icon-caret__right",
+            "margin_top": 0
+          }
+        },
+        "text_4xYAed": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "margin_top": 32
+          }
+        },
+        "upsell_products_mFhind": {
+          "type": "upsell_products",
+          "settings": {
+            "title": "",
+            "upsell_products": [],
+            "variant_selection_method": "dropdown",
+            "upsell_behavior": "separate",
+            "margin_top": 8
+          }
+        }
+      },
+      "block_order": [
+        "the-sticky-buy-bar",
+        "badges_hkajpr",
+        "the-title",
+        "the-price",
+        "sibling_products_dtbBGm",
+        "the-variant-picker",
+        "the-quantity-selector",
+        "the-buy-buttons",
+        "the-inventory-status",
+        "the-pickup-availability",
+        "the-description",
+        "collapsible_tab_nGyj9k",
+        "collapsible_tab_7UEcPg",
+        "collapsible_tab_XwMcHP",
+        "collapsible_tab_bDkCcD",
+        "text_4xYAed",
+        "upsell_products_mFhind"
+      ],
+      "settings": {
+        "product_image_aspect_ratio": "square",
+        "media_fill_rule": "cover",
+        "color_scheme": "default",
+        "show_breadcrumb": true,
+        "section_bg": "",
+        "media_col_bg": "",
+        "content_col_bg": "",
+        "border_radius": 0,
+        "product_media_bg": "rgba(0,0,0,0)",
+        "media_border_radius": 12,
+        "enable_full_width": false,
+        "sm-p": 0,
+        "media_layout": "two-columns-stacked",
+        "media_col_width": "wide",
+        "sm_media_zoom": "slider",
+        "sm_media_gap": 24,
+        "md_padding_top": 0,
+        "md_padding_bottom": 120,
+        "enable_slider_peek": false,
+        "show_thumbnails_sm_down": true,
+        "media_zoom": "column",
+        "media_gap": 3,
+        "padding_top": 0,
+        "padding_bottom": 64
+      }
+    },
+    "divider_rxMr94": {
+      "type": "divider",
+      "blocks": {
+        "standard_7kji6Y": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#fce6ea",
+            "position": "top-previous",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": ["standard_7kji6Y"],
+      "name": "t:sections.divider.name",
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_w6ETjC": {
+      "type": "rich-text",
+      "blocks": {
+        "title_DgAjGg": {
+          "type": "title",
+          "settings": {
+            "title": "Fresh skincare in action",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        }
+      },
+      "block_order": [
+        "title_DgAjGg"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "color_scheme": "alternative-2",
+        "text_gradient_color": "",
+        "content_width": 60,
+        "desktop_content_alignment": "left",
+        "desktop_alignment": "sm-text-align-left",
+        "md_padding_top": 40,
+        "md_padding_bottom": 8,
+        "mobile_alignment": "text-align-left",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "banner_grid_chgGY3": {
+      "type": "banner-grid",
+      "blocks": {
+        "video_P3fGx7": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "media_link": "",
+            "title": "",
+            "title_style": "h3",
+            "content_alignment": "vertical-bottom horizontal-left",
+            "padding": 40,
+            "color_scheme": "",
+            "overlay_opacity": 0
+          }
+        },
+        "video_iiQyKN": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "media_link": "",
+            "title": "",
+            "title_style": "h3",
+            "content_alignment": "vertical-bottom horizontal-left",
+            "padding": 40,
+            "color_scheme": "",
+            "overlay_opacity": 0
+          }
+        },
+        "video_fnpkbV": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "media_link": "",
+            "title": "",
+            "title_style": "h3",
+            "content_alignment": "vertical-bottom horizontal-left",
+            "padding": 40,
+            "color_scheme": "",
+            "overlay_opacity": 0
+          }
+        },
+        "video_jjkFKq": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "media_link": "",
+            "title": "",
+            "title_style": "h3",
+            "content_alignment": "vertical-bottom horizontal-left",
+            "padding": 40,
+            "color_scheme": "",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "video_P3fGx7",
+        "video_iiQyKN",
+        "video_fnpkbV",
+        "video_jjkFKq"
+      ],
+      "name": "t:sections.banner-grid.name",
+      "settings": {
+        "block_aspect_ratio": "portrait",
+        "color_scheme": "alternative-2",
+        "section_columns_desktop": 4,
+        "enable_full_width": false,
+        "sm_rounded_corners": true,
+        "layout_desktop": "slide",
+        "sm_grid_gap": 24,
+        "md_padding_top": 24,
+        "md_padding_bottom": 40,
+        "section_columns_tablet": 2,
+        "section_columns_mobile": 1,
+        "layout_mobile": "slide",
+        "sm_down_edge_to_edge": false,
+        "rounded_corners": true,
+        "grid_gap": 0,
+        "padding_top": 8,
+        "padding_bottom": 24,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "sliding_behavior": "single"
+      }
+    },
+    "divider_VA46EY": {
+      "type": "divider",
+      "blocks": {
+        "standard_37hJgz": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#fce6ea",
+            "position": "top-next",
+            "flip_horizontal": true,
+            "flip_vertical": true,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": ["standard_37hJgz"],
+      "name": "t:sections.divider.name",
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "testimonials_MHLU94": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_h9G3CD": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Noticeably softer skin",
+            "testimonial": "<p>My skin feels so much softer and more hydrated after just a week. The texture is light, absorbs quickly, and leaves a natural glow.</p>",
+            "author": "Jeanne"
+          }
+        },
+        "testimonial_hiwA6r": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Gentle but effective",
+            "testimonial": "<p>I love how gentle these products are on my sensitive skin. They keep my barrier strong without any irritation.</p>",
+            "author": "Kim"
+          }
+        },
+        "testimonial_Hkp7Kp": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Fresh glow every morning",
+            "testimonial": "<p>The fruity scent is fresh but not overpowering, and the results speak for themselves. My skin looks brighter and healthier every morning.</p>",
+            "author": "Jake"
+          }
+        },
+        "testimonial_JQrJFV": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Skincare that feels different",
+            "testimonial": "<p>I’ve tried so many skincare brands, but Smuuti feels different. It’s simple, effective, and actually fun to use.</p>",
+            "author": "Pauline"
+          }
+        },
+        "testimonial_C4Pgm6": {
+          "type": "testimonial",
+          "settings": {
+            "stars": 5,
+            "title": "Compliments on my glow",
+            "testimonial": "<p>My breakouts have calmed down and my skin tone looks more even. I get compliments on my glow all the time now!</p>",
+            "author": "Susan"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_h9G3CD",
+        "testimonial_hiwA6r",
+        "testimonial_Hkp7Kp",
+        "testimonial_JQrJFV",
+        "testimonial_C4Pgm6"
+      ],
+      "name": "t:sections.testimonials.name",
+      "settings": {
+        "color_scheme": "default",
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "alignment": "left",
+        "icon": "stars",
+        "enable_full_width": false,
+        "items_per_row_desktop": 3,
+        "md_padding_top": 80,
+        "md_padding_bottom": 40,
+        "items_per_row_tablet": 2,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "the-product-recommendations": {
+      "type": "product-recommendations",
+      "blocks": {
+        "section_header_JiGjrd": {
+          "type": "section_header",
+          "settings": {
+            "subtitle": "",
+            "subtitle_tag": "h3",
+            "title": "You might also like",
+            "title_tag": "h2",
+            "text": "<p>These products might also interest you.</p>",
+            "text_alignment": "text-align-left",
+            "sm_size_multiplier": "sm-size--default",
+            "size_multiplier": "size--default"
+          }
+        }
+      },
+      "block_order": ["section_header_JiGjrd"],
+      "settings": {
+        "product_limit": 10,
+        "color_scheme": "default",
+        "enable_full_width": false,
+        "sm_enable_card_thumbnail": false,
+        "layout_desktop": "slide",
+        "products_per_row_desktop": 4,
+        "sm_custom_gap": -1,
+        "md_padding_top": 40,
+        "md_padding_bottom": 40,
+        "products_per_row_tablet": 3,
+        "sm_down_enable_card_thumbnail": false,
+        "layout_mobile": "slide",
+        "products_per_row_mobile": 1,
+        "custom_gap": -1,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "sliding_behavior": "single"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "divider_rxMr94",
+    "rich_text_w6ETjC",
+    "banner_grid_chgGY3",
+    "divider_VA46EY",
+    "testimonials_MHLU94",
+    "the-product-recommendations"
+  ]
+}

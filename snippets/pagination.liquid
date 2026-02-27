@@ -1,0 +1,64 @@
+{{ 'component-pagination.css' | asset_url | stylesheet_tag }}
+{% comment %}
+  # ** PURPOSE **
+  # Used to render pagination. Must be used within paginate tags.
+
+  # ** PARAMETERS **
+  # paginate          =>  REQUIRED | object
+  # pagination_style  =>  OPTIONAL | string: 'button', 'infinite'
+  # anchor            =>  OPTIONAL | string | This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+{% endcomment %}
+
+{%- if paginate.parts.size > 0 -%}
+    {% if pagination_type == 'button' or pagination_type == 'infinite' %}
+      {% if paginate.next %}
+        <div class="pagination mt-48 mb-48">
+          <infinite-scroll data-trigger-type="{{ pagination_type }}" data-next-url="{{ paginate.next.url }}">
+            <button type="button" class="btn btn--secondary size--small">
+              <span>{{ 'general.pagination.load_more' | t }}</span>
+              {% render 'loading' %}
+            </button>
+          </infinite-scroll>
+        </div>
+      {% else %}
+        <div class="pagination mt-48 mb-48">
+          <p class="end-of-items style--subdued size--tiny">{{ 'general.pagination.all_loaded' | t }}</p>
+        </div>
+      {% endif %}
+    {% else %}
+      <nav class="pagination mt-48 mb-48 {% if paginate.parts.size > 5 %}wide-parts{% endif %} size--tiny" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+
+        {%- if paginate.previous -%}
+          <a href="{{ paginate.previous.url }}{{ anchor }}" class="pagination-item arrow-link arrow-link--prev" aria-label="{{ 'general.pagination.previous' | t }}">{% render 'icon-chevron-left--small' %}</a>
+          {% else %}
+          <span class="pagination-item arrow-link arrow-link--prev disabled">{% render 'icon-chevron-left--small' %}</span>
+        {%- endif -%}
+
+        <div class="pagination-parts">
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}{{ anchor }}" class="pagination-item page-link" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+              <span>{{ part.title }}</span>
+            </a>
+          {%- else -%}
+            {%- if part.title == paginate.current_page -%}
+              <span class="pagination-item current-page" aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">
+                <span>{{ part.title }}</span>
+              </span>
+            {%- else -%}
+              <span class="pagination-item dot-notation">
+                <span>{{ part.title }}</span>
+              </span>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        </div>
+
+        {%- if paginate.next -%}
+          <a href="{{ paginate.next.url }}{{ anchor }}" class="pagination-item arrow-link arrow-link--next" aria-label="{{ 'general.pagination.next' | t }}" >{% render 'icon-chevron-right--small' %}</a>
+        {% else %}
+          <span class="pagination-item arrow-link arrow-link--next disabled">{% render 'icon-chevron-right--small' %}</span>
+        {%- endif -%}
+      </nav>
+    {% endif %}
+{%- endif -%}

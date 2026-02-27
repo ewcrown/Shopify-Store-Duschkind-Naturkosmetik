@@ -1,0 +1,23 @@
+.blog-filters {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.blog-filters > *:not(:last-child) {
+  margin-right: var(--gutter);
+}
+
+.blog-filters .filter-select {
+  padding-right: 4rem;
+}
+
+.blog-filters .link-icon.dropmenu-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}

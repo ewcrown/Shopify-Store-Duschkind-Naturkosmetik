@@ -1,0 +1,18 @@
+.featured-look {
+  position: relative;
+}
+
+.featured-look__image {
+  position: relative;
+}
+
+.featured-look__image .media {
+  width: 100%;
+}
+
+.featured-look__image .media--empty svg {
+  display: block;
+  width: 1200px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+}

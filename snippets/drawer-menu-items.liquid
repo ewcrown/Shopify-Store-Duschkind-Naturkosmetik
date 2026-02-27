@@ -1,0 +1,224 @@
+{%- liquid
+  assign menu_item_title = menu_item.title
+  assign menu_item_type = 'link'
+
+  if menu_item_title contains '---'
+    assign menu_item_type = 'divider'
+  elsif menu_item_title contains '***'
+    assign menu_item_type = 'emphasize'
+    assign menu_item_title = menu_item.title | remove: '***' | strip
+  elsif content_menu_titles contains menu_item_title
+    assign menu_item_type = 'content'
+    assign menu_item_title = menu_item.title
+  endif
+
+  assign panel_class_name = ''
+  case current_level
+    when 1
+      assign link_class_name = 'drawer-menu__item'
+      assign panel_class_name = 'drawer-submenu__panel'
+    when 2
+      assign link_class_name = 'drawer-submenu__item'
+      assign panel_class_name = 'drawer-subsubmenu__panel'
+    when 3
+      assign link_class_name = 'drawer-subsubmenu__item'
+  endcase
+-%}
+
+{% if menu_item_type == 'divider' %}
+  <hr class="drawer-menu__divider"/>
+{% else %}
+  {% if menu_item.levels == 0 and menu_item_type != 'content' %}
+
+    {%- comment -%} Direct Link, menu item has no children {%- endcomment -%}
+    <a href="{{ menu_item.url }}" class="{{ link_class_name }}{% if menu_item_type == 'emphasize' %} --emphasize{% endif %}" aria-label="{{ 'accessibility.navigate_to_something' | t: something: menu_item_title }}" title="{{ 'accessibility.navigate_to_something' | t: something: menu_item_title }}">
+      {{ menu_item_title }}
+    </a>
+
+  {% else %}
+
+    {%- liquid
+      assign first_link_class = link_class_name
+
+      assign new_current_level = current_level | plus: 1
+      capture drawer_content
+        for sublink in menu_item.links
+          render 'drawer-menu-items', menu_item: sublink, current_level: new_current_level, context: context, section: section
+        endfor
+      endcapture
+    -%}
+
+    {%- if current_level == 1 -%}
+      {%- comment -%} Accordion Link, menu item has children {%- endcomment -%}
+      <div data-accordion-item class="{{ link_class_name }} --drilldown">
+
+        {%- assign panel_id = 'panel-' | append: menu_item.handle | append: '-' | append: link_class_name | append: '-' | append: context | handleize -%}
+        <input role="button" data-href="{{ menu_item.url }}" aria-label="{{ 'accessibility.view_something_menu' | t: something: menu_item_title }}" class="{{ link_class_name | append: '__input' }}" id="{{ panel_id }}" type="checkbox">
+        <label data-href="{{ menu_item.url }}" class="{{ link_class_name | append: '-label' }}" for="{{ panel_id }}" aria-label="{{ 'accessibility.view_something_menu' | t: something: menu_item_title }}">
+          <span>{{ menu_item_title | strip }}</span>
+          {%- if current_level == 1 -%}
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+          {%- else -%}
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          {%- endif -%}
+        </label>
+
+        <div id="{{ panel_id | append: '-container' }}" data-accordion-panel class="{{ panel_class_name | append: '-container' }} {{ context }} {% if menu_item_type == 'content' %} --content{% endif %}">
+          <div class="{{ panel_class_name }}">
+
+            {% if current_level == 1 and context == 'js' %}
+              <header class="drawer-header{% if menu_item_type == 'content' %} medium-up--hide{% endif %}">
+                  {%- comment -%} Submenu Panel - Go back to main level {%- endcomment -%}
+                  <button class="close--submenu medium-up--hide" title="{{ 'accessibility.hide_something_menu' | t: something: menu_item_title }}" aria-label="{{ 'accessibility.hide_something_menu' | t: something: menu_item_title }}" type="button" data-drawer-submenu-close="{{ panel_id }}">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+
+                  <span class="medium-up--hide">{{ menu_item_title }}</span>
+
+                  {%- comment -%} Submenu Panel - Close navigation {%- endcomment -%}
+                  <a class="medium-up--hide" role="button" href="#" aria-label="{{ 'accessibility.close_navigation' | t }}" class="close" data-drawer-close data-close>{%- render 'icon-close' -%}</a>
+              </header>
+            {% endif %}
+
+            <div class="drawer-content scrollbar--hide">
+              {%- comment -%} Generate submenu panel child items
+              {%- if found_image and context != 'no-js' and current_level == 1 -%}
+              <div class="drawer-submenu__media medium-up--hide">
+                {% render 'img', src: found_image, wrapped: true, aspect_ratio: 'landscape', decoding: 'async', lazyload: true %}
+              </div>
+              {%- endif -%}
+              {%- endcomment -%}
+
+              {%- if menu_item_type == 'content' -%}
+                <div class="drawer-banner-panel grid">
+                  {% for block in section.blocks %}
+                    {% if block.settings.menu_parent == menu_item_title %}
+                      {%- case block.type -%}
+                        {%- when 'menu-banner' -%}
+                          {%- liquid
+                            if block.settings.banner_width_mobile contains '12'
+                              assign mobile_sizes = '(max-width: 1023px) 300px'
+                            elsif block.settings.banner_width_mobile contains '6'
+                              assign mobile_sizes = '(max-width: 1023px) 150px'
+                            endif
+
+                            if block.settings.banner_width contains '12'
+                              assign desktop_sizes = 'calc(100vw - 375px)'
+                            elsif block.settings.banner_width contains '6'
+                              assign desktop_sizes = 'calc((100vw - 375px) / 2)'
+                            elsif block.settings.banner_width contains '4'
+                              assign desktop_sizes = 'calc((100vw - 375px) / 3)'
+                            elsif block.settings.banner_width contains '3'
+                              assign desktop_sizes = 'calc((100vw - 375px) / 4)'
+                            endif
+
+                            assign sizes = mobile_sizes | append: ', ' | append: desktop_sizes
+                          -%}
+
+                          {%- liquid
+                            assign card_text_align = 'text-align-center'
+                            if block.settings.text_position contains 'horizontal-left'
+                              assign card_text_align = 'text-align-left'
+                            elsif block.settings.text_position contains 'horizontal-right'
+                              assign card_text_align = 'text-align-right'
+                            endif
+                          -%}
+
+                          <div
+                            class="card card--banner menu-banner br-img {{ block.settings.order | prepend: '--' }} {{ block.settings.text_position }} {{ block.settings.banner_width }} {{ block.settings.banner_width_mobile }}"
+                            style="--card-body-padding: 1.2rem;"
+                            {{ block.shopify_attributes }}>
+                            {% capture banner_content %}
+                                {%- render 'img',
+                                  src: block.settings.image,
+                                  aspect_ratio: block.settings.image_aspect_ratio,
+                                  sizes: sizes,
+                                  lazyload: true
+                                -%}
+                                <div class="card-media-overlay flex {{ block.settings.text_position }} {{ card_text_align }}">
+                                  <span class="{{ block.settings.title_style }}{% if block.settings.title_style contains 'btn' and block.settings.link == blank %} disabled{% endif %}">{{ block.settings.title | replace: '[br]', '<br>' }}</span>
+                                </div>
+                              {% endcapture %}
+                            {%- if block.settings.link != blank -%}
+                              <a class="card-media" href="{{ block.settings.link }}">
+                                {{ banner_content }}
+                              </a>
+                            {%- else -%}
+                              <div class="card-media">
+                                {{ banner_content }}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                        {%- when 'menu-collection' -%}
+                          {%- liquid
+                            if block.settings.collection != empty
+                              assign menu_collection_products = block.settings.collection.products
+                            elsif block.settings.product_list != empty
+                              assign menu_collection_products = block.settings.product_list
+                            endif
+                          -%}
+                          <div class="menu-collection col-12" {{ block.shopify_attributes }}>
+                            <div class="menu-collection-container grid grid-cols-1 md-grid-cols-{{ block.settings.products_per_row_desktop }}">
+                              {%- for product in menu_collection_products limit: block.settings.product_limit -%}
+                                <div class="card card--product card--{{ settings.product_card_options }}">
+                                  <a href="{{ product.url }}" tabindex="-1">
+                                    {% render 'img',
+                                      src: product.featured_media,
+                                      aspect_ratio: settings.product_card_aspect_ratio,
+                                      sizing_rule: settings.product_card_fill_rule,
+                                      lazyload: true
+                                    %}
+                                  </a>
+                                  <div class="card-body {{ settings.product_card_text_alignment }}">
+                                    <a href="{{ product.url }}" class="card-title {{ settings.product_card_title_font }} size--small">
+                                      {{- product.title -}}
+                                    </a>
+                                    {%- render 'price', product: product, price_class: 'size--tiny mt-4' -%}
+                                  </div>
+                                </div>
+                              {%- endfor -%}
+                            </div>
+                          </div>
+                        {%- when 'menu-divider' -%}
+                          <div class="menu-divider col-12 mt mb text-align-{{ block.settings.text_alignment }}" style="--mt: {{ block.settings.padding_top | append: 'px' }}; --mb: {{ block.settings.padding_bottom | append: 'px' }};" {{ block.shopify_attributes }}>
+                            {%- if block.settings.show_border -%}
+                              <hr>
+                            {%- endif -%}
+                            {%- if block.settings.title  != blank -%}
+                              <h3>{{ block.settings.title }}</h3>
+                            {%- endif -%}
+                            {%- if block.settings.text != blank -%}
+                              <div class="rte">
+                                {{ block.settings.text }}
+                              </div>
+                            {%- endif -%}
+                          </div>
+                      {%- endcase -%}
+                    {% endif %}
+                  {% endfor %}
+                  <div class="horizontal-links col-12">{{ drawer_content }}</div>
+                </div>
+              {%- else -%}
+                {{ drawer_content }}
+              {%- endif -%}
+            </div>
+
+          </div>
+        </div>
+        {% style %}
+        @media only screen and (min-width: 1024px) {
+          {{ '#' | append: panel_id | append: '-container' }} {
+            clip-path: url("#drawer-clip")
+          }
+        }
+        {% endstyle %}
+      </div>
+    {%- else -%}
+      <a href="{{ menu_item.url }}" class="{{ first_link_class }}{% if menu_item_type == 'emphasize' %} --emphasize{% endif %}" aria-label="{{ 'accessibility.navigate_to_something' | t: something: menu_item_title }}" title="{{ 'accessibility.navigate_to_something' | t: something: menu_item_title }}">
+        {{ menu_item_title }}
+      </a>
+      {{ drawer_content }}
+    {%- endif -%}
+  {% endif %}
+
+{% endif %}

@@ -1,0 +1,444 @@
+/* --------------------------------
+  CARD BASE STRUCTURE
+
+  - card
+    - card media
+    - card body
+    - quickbuy / hotspot
+-------------------------------- */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--card-border-radius);
+  color: var(--color-card-foreground);
+  background: var(--color-card-background);
+}
+.card-media {
+  position: relative;
+  overflow: hidden;
+}
+.card-media figure {
+  border-radius: calc(var(--card-border-radius) / 1.5);
+  overflow: hidden;
+}
+.card-body {
+  padding: var(--card-body-padding);
+}
+
+.card-media-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: var(--card-body-padding);
+}
+
+/* Second image on hover */
+.card-hover-images {
+  position: relative;
+  overflow: hidden;
+}
+.card-hover-images > *:last-child {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (hover: hover) {
+  .card .media > * {
+    transition: transform 0.4s ease-in-out;
+  }
+  .card:hover .media > * {
+    transform: scale(1.1);
+  }
+  .card.on-hover:hover .card-hover-images > *:first-child > * {
+    opacity: 0;
+  }
+  .card.on-hover:hover .card-hover-images > *:last-child {
+    opacity: 1;
+  }
+}
+
+/* Color utilities */
+.card.bg-gradient {
+  --color-card-background: var(--gradient-card-background)
+}
+.card.bg-transparent {
+  --color-card-background: transparent;
+}
+
+
+/* --------------------------------
+  CARD TYPES
+-------------------------------- */
+
+/* Traditional */
+.card--traditional {
+  background: transparent;
+  color: inherit;
+}
+.card--traditional .card-media {
+  border-radius: var(--card-border-radius);
+  background: var(--color-card-background);
+}
+.card--traditional .card-body {
+  padding: var(--card-body-padding) 0;
+}
+
+/* Banner */
+.card--banner .card-media {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.card--banner .media,
+.card--banner .media img {
+  height: 100%;
+}
+.card--banner .video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Testimonial */
+.card--testimonial .quotation-mark {
+  height: 35%;
+}
+
+/* Collection */
+.card--collection .badges {
+  position: absolute;
+  top: var(--card-body-padding);
+}
+.card--collection .vertical-top .badges {
+  top: auto;
+  bottom: var(--card-body-padding);
+}
+
+/* Product */
+.card--product.content--none .card-body,
+.card--product.content--name-only .card-body > *:not(.card-title),
+.card--product.content--name-and-price .card-body > *:not(.card-title, .price) {
+  display: none;
+}
+.card--product .card-title {
+  text-transform: var(--card--product-title-transform);
+}
+
+/* Hotspot */
+.card--default:not(.layout--thumbnail) .hotspot {
+  position: absolute !important;
+  top: 20px;
+  right: 20px;
+}
+
+
+/* --------------------------------
+  CARD THUMBNAIL LAYOUT
+-------------------------------- */
+.layout--thumbnail {
+  --thumbnail-width: 90px;
+  display: grid;
+  grid-template-columns: var(--thumbnail-width) auto auto;
+  align-items: center;
+}
+
+.layout--thumbnail .card-body {
+  text-align: left;
+  padding: min(16px, var(--card-body-padding));
+}
+.layout--thumbnail .flex {
+  justify-content: flex-start !important;
+}
+.layout--thumbnail .card-media-overlay,
+.layout--thumbnail .card-vendor,
+.layout--thumbnail .swatches {
+  display: none;
+}
+.layout--thumbnail .hotspot {
+  margin-left: auto;
+  margin-right: 16px;
+  width: 30px;
+  height: 30px;
+}
+
+.card-body .badges {
+  margin-bottom: 8px;
+  display: none;
+}
+.layout--thumbnail .card-body .badges {
+  display: flex;
+}
+.card-body ul {
+  list-style: inside disc;
+}
+.card-body ul li::marker {
+  margin-right: 4px;
+}
+
+/* Thumbnail responsive classes – SM DOWN */
+@media only screen and (max-width: 767px) {
+  .sm-down-layout--thumbnail {
+    --thumbnail-width: 90px;
+    display: grid;
+    grid-template-columns: var(--thumbnail-width) auto auto;
+    align-items: center;
+  }
+
+  .sm-down-layout--thumbnail .card-body {
+    text-align: left;
+    padding: min(16px, var(--card-body-padding));
+  }
+  .sm-down-layout--thumbnail .flex {
+    justify-content: flex-start !important;
+  }
+  .sm-down-layout--thumbnail .card-media-overlay,
+  .sm-down-layout--thumbnail .card-vendor,
+  .sm-down-layout--thumbnail .swatches {
+    display: none;
+  }
+  .sm-down-layout--thumbnail .card-body .badges {
+    display: flex;
+  }
+}
+/* Thumbnail responsive classes – SM */
+@media only screen and (min-width: 768px) {
+  .sm-layout--thumbnail {
+    --thumbnail-width: 90px;
+    display: grid;
+    grid-template-columns: var(--thumbnail-width) auto auto;
+    align-items: center;
+  }
+
+  .sm-layout--thumbnail .card-body {
+    text-align: left;
+    padding: min(16px, var(--card-body-padding));
+  }
+  .sm-layout--thumbnail .flex {
+    justify-content: flex-start !important;
+  }
+  .sm-layout--thumbnail .card-media-overlay,
+  .sm-layout--thumbnail .card-vendor,
+  .sm-layout--thumbnail .swatches {
+    display: none;
+  }
+  .sm-layout--thumbnail .card-body .badges {
+    display: flex;
+  }
+}
+
+
+/* --------------------------------
+  VARIANT BUTTONS
+-------------------------------- */
+.options-availability {
+  gap: 8px;
+}
+.variant-option-title {
+  position: relative;
+  padding: 2px 6px;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  text-align: center;
+  min-width: 30px;
+  border-radius: var(--button-border-radius);
+}
+.variant-option-title.unavailable {
+  opacity: 0.45;
+}
+.variant-option-title.unavailable::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: rotate(-45deg);
+  border-left: solid 1px var(--color-foreground);
+ }
+
+
+/* --------------------------------
+  QUICK BUY
+-------------------------------- */
+.card quick-buy, .card quick-add, .card .quick-add-unavailable {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in;
+  --quick-buy-offset: var(--card-body-padding);
+}
+.card--traditional .quick-buy-or-add.position--below-static-auto-width, .card--traditional .quick-buy-or-add.position--below-static-full-width {
+  --quick-buy-offset: 0;
+}
+
+.quick-buy-or-add.full-width {
+  left: var(--quick-buy-offset);
+  right: var(--quick-buy-offset);
+}
+.quick-buy-or-add.position--top { top: var(--quick-buy-offset); }
+.quick-buy-or-add.position--middle { top: 50%; transform: translateY(-50%); }
+.quick-buy-or-add.position--bottom { bottom: var(--quick-buy-offset); }
+
+.quick-buy-or-add.position--top-left { top: var(--quick-buy-offset); left: var(--quick-buy-offset); }
+.quick-buy-or-add.position--top-center { top: var(--quick-buy-offset); left: 50%; transform:translateX(-50%); }
+.quick-buy-or-add.position--top-right { top: var(--quick-buy-offset); right: var(--quick-buy-offset); }
+
+.quick-buy-or-add.position--middle-left { top: 50%; left: var(--quick-buy-offset); transform: translateY(-50%); }
+.quick-buy-or-add.position--middle-center { top: 50%; left: 50%; transform:translateX(-50%) translateY(-50%); }
+.quick-buy-or-add.position--middle-right { top: 50%; right: var(--quick-buy-offset); transform: translateY(-50%); }
+
+.quick-buy-or-add.position--bottom-left { bottom: var(--quick-buy-offset); left: var(--quick-buy-offset); }
+.quick-buy-or-add.position--bottom-center { bottom: var(--quick-buy-offset); left: 50%; transform:translateX(-50%); }
+.quick-buy-or-add.position--bottom-right { bottom: var(--quick-buy-offset); right: var(--quick-buy-offset); }
+
+.quick-buy-or-add.position--below-static-auto-width {
+  opacity: 1;
+  position: static;
+  margin-top: auto;
+  margin-bottom: var(--quick-buy-offset);
+  margin-left: var(--quick-buy-offset);
+  margin-right: var(--quick-buy-offset);
+  pointer-events: auto;
+}
+
+.quick-buy-or-add.position--below-static-full-width {
+  opacity: 1;
+  position: static;
+  margin-top: auto;
+  margin-bottom: var(--quick-buy-offset);
+  margin-left: var(--quick-buy-offset);
+  margin-right: var(--quick-buy-offset);
+  pointer-events: auto;
+}
+
+.card .text-align-left + .quick-buy-or-add.position--below-static-auto-width {
+  align-self: start;
+}
+.card .text-align-center + .quick-buy-or-add.position--below-static-auto-width {
+  align-self: center;
+}
+.card .text-align-right + .quick-buy-or-add.position--below-static-auto-width {
+  align-self: end;
+}
+
+.card--traditional .quick-buy-or-add.position--below-static-auto-width, .card--traditional .quick-buy-or-add.position--below-static-full-width {
+  margin: auto 8px 8px;
+}
+
+.card .quick-buy-or-add .btn {
+  display: block !important;
+}
+@media (hover:hover) {
+  .card:hover quick-buy, .card:hover quick-add, .card:hover .quick-add-unavailable {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.card quick-buy:focus-within, .card quick-add:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+.quick-buy_icon, .quick-add_icon {
+  display: none;
+  pointer-events: none;
+}
+
+.layout--thumbnail quick-buy, .layout--thumbnail quick-add {
+  position: relative;
+  align-self: center;
+  opacity: 1;
+  width: auto;
+  margin-left: auto;
+  margin-right: 16px;
+  pointer-events: auto;
+
+  left: auto !important;
+  bottom: auto !important;
+  top: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+.layout--thumbnail quick-buy .btn, .layout--thumbnail quick-add .btn, .layout--thumbnail .quick-add-unavailable .btn {
+  padding: 10px !important;
+  width: 44px;
+  height: 44px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.layout--thumbnail .quick-buy_text, .layout--thumbnail .quick-add_text {
+  display: none;
+}
+.layout--thumbnail .quick-buy_icon, .layout--thumbnail .quick-add_icon {
+  display: flex;
+}
+@media only screen and (max-width: 767px) {
+  .sm-down-layout--thumbnail quick-buy, .sm-down-layout--thumbnail quick-add {
+    position: relative;
+    align-self: center;
+    opacity: 1;
+    width: auto;
+    margin-left: auto;
+    margin-right: 16px;
+
+    left: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  .sm-down-layout--thumbnail quick-buy .btn, .sm-down-layout--thumbnail quick-add .btn, .sm-down-layout--thumbnail .quick-add-unavailable .btn {
+    padding: 10px !important;
+    width: 44px;
+    height: 44px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+  .sm-down-layout--thumbnail .quick-buy_text, .sm-down-layout--thumbnail .quick-add_text {
+    display: none;
+  }
+  .sm-down-layout--thumbnail .quick-buy_icon, .sm-down-layout--thumbnail .quick-add_icon {
+    display: flex;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .sm-layout--thumbnail quick-buy, .sm-layout--thumbnail quick-add {
+    position: relative;
+    align-self: center;
+    opacity: 1;
+    width: auto;
+    margin-left: auto;
+    margin-right: 16px;
+
+    left: auto !important;
+    bottom: auto !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  .sm-layout--thumbnail quick-buy .btn, .sm-layout--thumbnail quick-add .btn, .sm-layout--thumbnail .quick-add-unavailable .btn {
+    padding: 10px !important;
+    width: 44px;
+    height: 44px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+  .sm-layout--thumbnail .quick-buy_text, .sm-layout--thumbnail .quick-add_text {
+    display: none;
+  }
+  .sm-layout--thumbnail .quick-buy_icon, .sm-layout--thumbnail .quick-add_icon {
+    display: flex;
+  }
+}

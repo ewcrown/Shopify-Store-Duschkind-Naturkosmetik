@@ -1,0 +1,408 @@
+{%- liquid
+  assign body_font_bold = settings.base_font | font_modify: 'weight', 'bold'
+  assign body_font_italic = settings.base_font | font_modify: 'style', 'italic'
+  assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+
+  # Letter spacing values are given between -20 and 100 where 0 is default
+  # We use em-units for letter spacing to keep the distance consistent
+  assign letter_spacing_multiplier = 0.01
+-%}
+
+{% style %}
+  {{ settings.base_font | font_face: font_display: 'swap' }}
+  {{ body_font_bold | font_face: font_display: 'swap' }}
+  {{ body_font_italic | font_face: font_display: 'swap' }}
+  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+  {{ settings.header_font | font_face: font_display: 'swap' }}
+
+  /* Colors - Schemes */
+  {% for scheme in settings.color_schemes -%}
+    {%- assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id -%}
+    {%- assign background_lightness = scheme.settings.background | color_extract: 'lightness' -%}
+    {% if forloop.index == 1 -%}
+    :root,
+    {%- endif %}
+    .color-{{ scheme.id }} {
+      --color-foreground: {{ scheme.settings.foreground }};
+      --color-background: {{ scheme.settings.background }};
+      --color-button-foreground: {{ scheme.settings.button_foreground }};
+      --color-button-background: {{ scheme.settings.button_background }};
+      --color-outlines: {{ scheme.settings.outlines }};
+      --color-borders: {{ scheme.settings.borders }};
+      --color-overlay: {{ scheme.settings.overlay }};
+      --color-overlay-rgb: {{ scheme.settings.overlay.red }} {{ scheme.settings.overlay.green }} {{ scheme.settings.overlay.blue }};
+
+      --color-card-foreground: {{ scheme.settings.card_foreground }};
+      --color-card-background: {{ scheme.settings.card_background }};
+      {% if scheme.settings.card_background_gradient != empty -%}
+        --gradient-card-background: {{ scheme.settings.card_background_gradient }};
+      {% else -%}
+        --gradient-card-background: {{ scheme.settings.card_background }};
+      {% endif -%}
+
+      {% if background_lightness > 60 -%}
+        --color-background-alt: {{ scheme.settings.background | color_darken: 6 }};
+      {% else -%}
+        --color-background-alt: {{ scheme.settings.background | color_lighten: 6 }};
+      {% endif -%}
+  }
+  {% endfor %}
+
+  {{ scheme_classes | prepend: 'body' }} {
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+
+  :root {
+    --ideal-width: {{ settings.content_ideal_width | append: 'px' }};
+    --container-inner-width: min(100vw - var(--container-margin)*2  , var(--ideal-width));
+
+     /* Colors - Status indicator */
+    --success: #31862D;
+    --success-foreground: #FFFFFF;
+    --error: #DD4242;
+    --error-foreground: #FFFFFF;
+
+    /* Colors - Special colors */
+    {%- assign cart_dot_contrast = settings.cart_dot | color_contrast: '#fff' -%}
+    {%- if cart_dot_contrast >= 4 -%}
+      --cart-dot-foreground: #fff;
+    {%- else -%}
+      --cart-dot-foreground: #000;
+    {%- endif -%}
+    --cart-dot-background: {{ settings.cart_dot }};
+    --placeholder-bg: rgba(233, 233, 233);
+    --review-stars: {{ settings.review_stars }};
+
+
+    /* Typography - Base/Body */
+    --font-body-family: {{ settings.base_font.family }}, {{ settings.base_font.fallback_families }};
+    --font-body-style: {{ settings.base_font.style }};
+    --font-body-weight: {{ settings.base_font.weight }};
+    --font-body-line-height: {{ settings.base_line_height }};
+    --font-body-letter-spacing: {{ settings.base_letter_spacing | times: letter_spacing_multiplier | append: 'em' }};
+    --font-body-text-transform: none;
+
+    /* Typography - Heading/Titles */
+    --font-heading-family: {{ settings.header_font.family }}, {{ settings.header_font.fallback_families }};
+    --font-heading-style: {{ settings.header_font.style }};
+    --font-heading-weight: {{ settings.header_font.weight }};
+    --font-heading-line-height: {{ settings.header_line_height }};
+    --font-heading-letter-spacing: {{ settings.header_letter_spacing | times: letter_spacing_multiplier | append: 'em' }};
+    --font-heading-text-transform: {% if settings.header_uppercase %}uppercase{% else %}none{% endif %};
+
+    /* Typography - Subheading/Subtitle */
+    {%- if settings.subheader_font == 'base' -%}
+    --font-subheader-family: var(--font-body-family);
+    --font-subheader-style: var(--font-body-style);
+    --font-subheader-weight: var(--font-body-weight);
+    {%- else -%}
+    --font-subheader-family: var(--font-heading-family);
+    --font-subheader-style: var(--font-heading-style);
+    --font-subheader-weight: var(--font-heading-weight);
+    {%- endif -%}
+    --font-subheader-text-transform: {% if settings.subheader_uppercase %}uppercase{% else %}none{% endif %};
+    --font-subheader-letter-spacing: {{ settings.subheader_letter_spacing | times: letter_spacing_multiplier | append: 'em' }};
+
+    /* Typography - Buttons */
+    {%- if settings.button_font == 'base' -%}
+    --font-button-family: var(--font-body-family);
+    --font-button-style: var(--font-body-style);
+    --font-button-weight: var(--font-body-weight);
+    {%- else -%}
+    --font-button-family: var(--font-heading-family);
+    --font-button-style: var(--font-heading-style);
+    --font-button-weight: var(--font-heading-weight);
+    {%- endif -%}
+    --font-button-text-transform: {% if settings.button_uppercase %}uppercase{% else %}none{% endif %};
+    --font-button-size: {{ settings.button_font_scaling_property | append: 'px' }};
+    --font-button-letter-spacing: {{ settings.button_letter_spacing | times: letter_spacing_multiplier | append: 'em'}};
+
+    /* Typography - Site header */
+    {%- if settings.site_header_font == 'base' -%}
+    --font-site-header-family: var(--font-body-family);
+    --font-site-header-style: var(--font-body-style);
+    --font-site-header-weight: var(--font-body-weight);
+    {%- else -%}
+    --font-site-header-family: var(--font-heading-family);
+    --font-site-header-style: var(--font-heading-style);
+    --font-site-header-weight: var(--font-heading-weight);
+    {%- endif -%}
+    --font-site-header-text-transform: {% if settings.site_header_uppercase %}uppercase{% else %}none{% endif %};
+    --font-site-header-size: {{ settings.site_header_font_scaling_property | append: 'px' }};
+    --font-site-header-letter-spacing: {{ settings.site_header_letter_spacing | times: letter_spacing_multiplier | append: 'em'}};
+
+    /* Typography - Navigation */
+    {%- if settings.navigation_font == 'base' -%}
+    --font-navigation-family: var(--font-body-family);
+    --font-navigation-style: var(--font-body-style);
+    --font-navigation-weight: var(--font-body-weight);
+    {%- else -%}
+    --font-navigation-family: var(--font-heading-family);
+    --font-navigation-style: var(--font-heading-style);
+    --font-navigation-weight: var(--font-heading-weight);
+    {%- endif -%}
+    --font-navigation-text-transform: {% if settings.navigation_uppercase %}uppercase{% else %}none{% endif %};
+
+    --font-navigation-size: {{ settings.navigation_font_scaling_property | append: 'px' }};
+    --font-navigation-line-height: {{ settings.navigation_line_height }};
+    --font-navigation-letter-spacing: {{ settings.navigation_letter_spacing | times: letter_spacing_multiplier | append: 'em' }};
+
+    /* Badges */
+    {%- if settings.badge_font == 'base' -%}
+    --font-badge-family: var(--font-body-family);
+    --font-badge-style: var(--font-body-style);
+    --font-badge-weight: var(--font-body-weight);
+    {%- else -%}
+    --font-badge-family: var(--font-heading-family);
+    --font-badge-style: var(--font-heading-style);
+    --font-badge-weight: var(--font-heading-weight);
+    {%- endif -%}
+    --font-badge-text-transform: {% if settings.badge_uppercase %}uppercase{% else %}none{% endif %};
+
+    --font-badge-size: {{ settings.badge_font_scaling_property | append: 'px' }};
+    --font-badge-letter-spacing: {{ settings.badge_letter_spacing | times: letter_spacing_multiplier | append: 'em' }};
+    --badge-border-radius: {{ settings.badge_border_radius | append: 'px' }};
+
+    --badge-color-foreground--sale: {{ settings.badge_sale_foreground }};
+    --badge-color-background--sale: {{ settings.badge_sale_background }};
+
+    --badge-color-foreground--preorder: {{ settings.badge_preorder_foreground }};
+    --badge-color-background--preorder: {{ settings.badge_preorder_background }};
+
+    --badge-color-foreground--new: {{ settings.badge_new_foreground }};
+    --badge-color-background--new: {{ settings.badge_new_background }};
+
+    --badge-color-foreground--soldout: {{ settings.badge_sold_out_foreground }};
+    --badge-color-background--soldout: {{ settings.badge_sold_out_background }};
+
+    {% if settings.custom_badges != empty -%}
+    {%- assign custom_badges_array = settings.custom_badges | split: ';' -%}
+    {%- for custom_badge in custom_badges_array -%}
+    {%- assign custom_badge_array = custom_badge | split: ':' -%}
+    {%- assign custom_badge_class = custom_badge_array[0] | handleize -%}
+    --badge-color-foreground--custom-{{ custom_badge_class }}: {{ custom_badge_array[2] }};
+    --badge-color-background--custom-{{ custom_badge_class }}: {{ custom_badge_array[1] }};
+    {%- endfor %}
+    {%- endif %}
+
+    /* Drawers */
+    --drawers-overlay-alpha: {{ settings.drawers_overlay_str | divided_by: 100.00 }};
+    --drawers-overlay-blur: {{ settings.drawers_blur | append: 'px' }};
+
+    /* Modals */
+    --modals-overlay-alpha: {{ settings.modals_overlay_str | divided_by: 100.00 }};
+    --modals-overlay-blur: {{ settings.modals_blur | append: 'px' }};
+
+    /* Cards */
+    --card-border-radius: {{ settings.card_border_radius | append: 'px' }};
+    --card-body-padding: 24px;
+    --card-media-padding: 24px;
+    --card--product-title-transform: {% if settings.product_card_title_uppercase %}uppercase{% else %}none{% endif %};
+
+    /* Aesthetics */
+    --button-border-radius: {{ settings.button_border_radius | append: 'px' }};
+    --button-padding: {{ settings.button_padding }};
+    --button-round-padding: {{ settings.button_padding | split: ' ' | first }};
+    --modal-border-radius: {{ settings.modal_border_radius | append: 'px' }};
+    --icon-stroke: {{ settings.icon_stroke }};
+    --icon-stroke-px: {{ settings.icon_stroke | append: 'px' }};
+    {%- if settings.enable_br_on_images -%}
+      --br-img: {{ settings.card_border_radius | append: 'px' }};
+    {%- else -%}
+      --br-img: 0;
+    {%- endif -%}
+
+    /* Forms and inputs */
+    --input-background: #FFFFFF;
+    --input-foreground: #111111;
+    --input-border-width: 0px;
+    --input-border-color: #DDDDDD;
+    --input-border-radius: 6px;
+    --input-box-shadow: inset 2px 2px 8px rgba(0,0,0,.25);
+    --input-letter-spacing: 0;
+
+    /* Other */
+    {%- assign modal_scheme_id = settings.color_scheme_modals | strip -%}
+    {%- assign modal_scheme = settings.color_schemes | where: 'id', modal_scheme_id | first -%}
+    --css-icon-close: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='44px' height='44px' viewBox='0 0 44 44' %3E%3Cstyle type='text/css'%3E .line%7Bfill:none;stroke:%23{{ modal_scheme.settings.foreground | remove: '#' }};stroke-linecap:round;stroke-width:{{ settings.icon_stroke }};stroke-linejoin:round;%7D%0A%3C/style%3E%3Ccircle cx='22' cy='22' r='18' fill='%23{{ modal_scheme.settings.background | remove: '#' }}' /%3E%3Cline class='line' x1='27' y1='17' x2='17' y2='27'/%3E%3Cline class='line' x1='17' y1='17' x2='27' y2='27'/%3E%3C/svg%3E");
+    --css-icon-full-screen: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='44px' height='44px' viewBox='0 0 44 44' %3E%3Cstyle type='text/css'%3E .line%7Bfill:none;stroke:%23{{ modal_scheme.settings.foreground | remove: '#' }};stroke-linecap:round;stroke-width:{{ settings.icon_stroke }};stroke-linejoin:round;%7D%0A%3C/style%3E%3Ccircle cx='22' cy='22' r='18' fill='%23{{ modal_scheme.settings.background | remove: '#' }}' /%3E%3Cpolyline class='line' points='15 20 15 15 20 15'/%3E %3Cpolyline class='line' points='24 15 29 15 29 20'/%3E %3Cpolyline class='line' points='29 24 29 29 24 29'/%3E %3Cpolyline class='line' points='20 29 15 29 15 24'/%3E %3Cline class='line' x1='15' y1='15' x2='19' y2='19'/%3E %3Cline class='line' x1='29' y1='15' x2='25' y2='19'/%3E %3Cline class='line' x1='29' y1='29' x2='25' y2='25'/%3E %3Cline class='line' x1='15' y1='29' x2='19' y2='25'/%3E%3C/svg%3E");
+    --css-icon-zoom-in: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' width='44px' height='44px' viewBox='0 0 44 44' %3E%3Cstyle type='text/css'%3E .line%7Bfill:none;stroke:%23{{ modal_scheme.settings.foreground | remove: '#' }};stroke-linecap:round;stroke-width:{{ settings.icon_stroke }};stroke-linejoin:round;%7D%0A%3C/style%3E%3Ccircle cx='22' cy='22' r='18' fill='%23{{ modal_scheme.settings.background | remove: '#' }}' /%3E%3Ccircle class='line' cx='21' cy='21' r='6'/%3E%3Cline class='line' x1='21' y1='19' x2='21' y2='23'/%3E%3Cline class='line' x1='19' y1='21' x2='23' y2='21'/%3E%3Cline class='line' x1='29.6' y1='29.6' x2='25.2' y2='25.2'/%3E%3C/svg%3E");
+    --sticky-header-margin-top: 0;
+  }
+
+  html {
+    {%- comment -%}
+      Default font size in browsers is usually 16px. By setting font size to be 62.5% we are setting base size as 10px.
+      This means that 1rem will equal 10px, 1.6rem equals 16px etc.
+
+      Since some users might have set different font size in their browser settings due to accessibility reasons we use percentages
+      instead of pixel size. This way users preferences are respected.
+    {%- endcomment -%}
+    {%- assign font_scale_property = settings.font_scaling_property | divided_by: 16.00 -%}
+    font-size: {{ 62.5 | times: font_scale_property | append: '%' }};
+
+    --gutter: {{ settings.gutter | append: 'px' }};
+    --container-margin: {{ settings.container_margin | append: 'px' }};
+    --grid-gap: {{ settings.gutter | append: 'px' }};
+    {%- assign total_gutters = settings.gutter_sm | times: 11 -%}
+    --max-col-width: {{ settings.content_ideal_width | minus: total_gutters | divided_by: 12 | append: 'px' }}
+  }
+
+  @media only screen and (min-width: 768px) {
+    html {
+      {%- assign font_desktop_scale_property = settings.font_scaling_desktop_property | divided_by: 18.00 -%}
+      font-size: {{ 62.5 | times: font_desktop_scale_property | append: '%' }};
+      --gutter: {{ settings.gutter_sm | append: 'px' }};
+      --container-margin: {{ settings.container_margin_sm | append: 'px' }};
+    }
+  }
+
+  {%- if settings.body_contained -%}
+  html { background-color: {{ settings.html_bg_color }} }
+
+  body {
+    margin: 0 auto;
+    max-width: var(--ideal-width) !important;
+    box-shadow: 0 0 80px rgba(0,0,0,{{ settings.body_shadow_opacity | divided_by: 100.00 }});
+  }
+  {%- endif -%}
+
+  /* ---------- */
+  /* TYPOGRAPHY */
+  body, *.font-body { --font-size: 1.6rem }
+  h1,.h1   { --font-size: 3.2rem }
+  h2,.h2   { --font-size: 2.6rem }
+  h3,.h3   { --font-size: 2.2rem }
+  h4,.h4   { --font-size: 2.0rem }
+  h5,.h5   { --font-size: 1.8rem }
+  h6,.h6   { --font-size: 1.6rem }
+  .caption { --font-size: 1.2rem }
+
+  body, .font-body {
+    font-size: var(--font-size);
+    font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight);
+    line-height: var(--font-body-line-height);
+    letter-spacing: var(--font-body-letter-spacing);
+  }
+
+  h1,h2,h3,h4,h5,h6,
+  .h1,.h2,.h3,.h4,.h5,.h6 {
+    font-size: var(--font-size);
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    line-height: var(--font-heading-line-height);
+    letter-spacing: var(--font-heading-letter-spacing);
+    text-transform: var(--font-heading-text-transform);
+    word-break: break-word;
+  }
+
+  @media only screen and (min-width: 768px) {
+    body, *.font-body { --font-size: 1.8rem }
+    h1,.h1   { --font-size: 4.0rem }
+    h2,.h2   { --font-size: 3.2rem }
+    h3,.h3   { --font-size: 2.6rem }
+    h4,.h4   { --font-size: 2.2rem }
+    h5,.h5   { --font-size: 2.0rem }
+    h6,.h6   { --font-size: 1.8rem }
+    .caption { --font-size: 1.4rem }
+  }
+
+  /* Size modifiers */
+  .size--nano, .rte.size--nano *              { font-size: calc(var(--font-size)*0.65) }
+  .size--tiny, .rte.size--tiny *              { font-size: calc(var(--font-size)*0.75) }
+  .size--small, .rte.size--small *            { font-size: calc(var(--font-size)*0.85) }
+  .size--default, .rte.size--default *        { font-size: var(--font-size) }
+  .size--large, .rte.size--large *            { font-size: calc(var(--font-size)*1.25) }
+  .size--huge, .rte.size--huge *              { font-size: calc(var(--font-size)*1.50) }
+  .size--gigantic, .rte.size--gigantic *      { font-size: calc(var(--font-size)*2.00) }
+  .size--outrageous, .rte.size--outrageous *  { font-size: calc(var(--font-size)*3.00) }
+
+  .btn.size--nano       { font-size: calc(var(--font-button-size)*0.65) !important }
+  .btn.size--tiny       { font-size: calc(var(--font-button-size)*0.75) !important }
+  .btn.size--small      { font-size: calc(var(--font-button-size)*0.85) !important }
+  .btn.size--default    { font-size: var(--font-button-size) !important }
+  .btn.size--large      { font-size: calc(var(--font-button-size)*1.25) !important }
+  .btn.size--huge       { font-size: calc(var(--font-button-size)*1.50) !important }
+  .btn.size--gigantic   { font-size: calc(var(--font-button-size)*2.00) !important }
+  .btn.size--outrageous { font-size: calc(var(--font-button-size)*3.00) !important }
+
+  @media only screen and (min-width: 768px) {
+    .sm-size--nano, .rte.sm-size--nano *              { font-size: calc(var(--font-size)*0.65) }
+    .sm-size--tiny, .rte.sm-size--tiny *              { font-size: calc(var(--font-size)*0.75) }
+    .sm-size--small, .rte.sm-size--small *            { font-size: calc(var(--font-size)*0.85) }
+    .sm-size--default, .rte.sm-size--default *        { font-size: var(--font-size) }
+    .sm-size--large, .rte.sm-size--large *            { font-size: calc(var(--font-size)*1.25) }
+    .sm-size--huge, .rte.sm-size--huge *              { font-size: calc(var(--font-size)*1.50) }
+    .sm-size--gigantic, .rte.sm-size--gigantic *      { font-size: calc(var(--font-size)*2.00) }
+    .sm-size--outrageous, .rte.sm-size--outrageous *  { font-size: calc(var(--font-size)*3.00) }
+
+    .btn.sm-size--nano       { font-size: calc(var(--font-button-size)*0.65) !important }
+    .btn.sm-size--tiny       { font-size: calc(var(--font-button-size)*0.75) !important }
+    .btn.sm-size--small      { font-size: calc(var(--font-button-size)*0.85) !important }
+    .btn.sm-size--default    { font-size: var(--font-button-size) !important }
+    .btn.sm-size--large      { font-size: calc(var(--font-button-size)*1.25) !important }
+    .btn.sm-size--huge       { font-size: calc(var(--font-button-size)*1.50) !important }
+    .btn.sm-size--gigantic   { font-size: calc(var(--font-button-size)*2.00) !important }
+    .btn.sm-size--outrageous { font-size: calc(var(--font-button-size)*3.00) !important }
+  }
+
+  /* Style modifiers */
+  .style--subdued   { opacity: 0.65 }
+  em, .style--italic { font-family: serif }
+  .style--bold { font-weight: bold !important }
+
+  .subheading {
+    font-family: var(--font-subheader-family);
+    font-weight: var(--font-subheader-weight);
+    font-style: var(--font-subheader-style);
+    letter-spacing: var(--font-subheader-letter-spacing);
+    text-transform: var(--font-subheader-text-transform);
+  }
+
+  {%- if settings.slider_arrows_animations -%}
+  @media only screen and (min-width: 768px) {
+    .gridy-arrows {
+      opacity: 0 !important;
+      transform: scale(0.95) !important;
+      transition: all 0.3s ease-in-out !important;
+    }
+    .gridy-slider:hover .gridy-arrows {
+      opacity: 1 !important;
+      transform: scale(1.0) !important;
+    }
+  }
+  {%- endif -%}
+
+  /* Badge style classes */
+  .badge.sale, .style--badge-sale {
+    color: var(--badge-color-foreground--sale);
+    background-color: var(--badge-color-background--sale);
+  }
+  .badge.preorder, .style--badge-preorder {
+    color: var(--badge-color-foreground--preorder);
+    background: var(--badge-color-background--preorder);
+  }
+  .badge.new, .style--badge-new {
+    color: var(--badge-color-foreground--new);
+    background: var(--badge-color-background--new);
+  }
+  .badge.soldout, .style--badge-soldout {
+    color: var(--badge-color-foreground--soldout);
+    background: var(--badge-color-background--soldout);
+  }
+
+  {% if settings.custom_badges != empty -%}
+    {%- assign custom_badges_array = settings.custom_badges | split: ';' -%}
+    {%- for custom_badge in custom_badges_array -%}
+    {%- assign custom_badge_class = custom_badge | split: ':' | first | handleize -%}
+    .badge.custom-{{ custom_badge_class }}, .style--badge-custom-{{ custom_badge_class }} {
+      color: var(--badge-color-foreground--custom-{{ custom_badge_class }});
+      background: var(--badge-color-background--custom-{{ custom_badge_class }});
+    }
+    {%- endfor %}
+  {%- endif %}
+{% endstyle %}

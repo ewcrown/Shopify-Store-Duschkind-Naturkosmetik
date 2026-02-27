@@ -1,0 +1,151 @@
+{%- liquid
+  assign placeholder_prefix = 'product-'
+  case context
+    when 'recently_viewed'
+      assign product_limit = section.settings.product_limit
+      assign view_all = false
+    when 'featured_collection'
+      assign product_limit = section.settings.product_limit
+      assign view_all = section.settings.view_all
+    else
+      assign product_limit = products.count
+  endcase
+
+  assign ipr_desktop = section.settings.products_per_row_desktop
+  assign ipr_tablet = section.settings.products_per_row_tablet
+  assign ipr_mobile = section.settings.products_per_row_mobile
+  assign sizes_ipr_mobile = ipr_mobile
+  assign slider_mobile = false
+  assign slider_desktop = false
+  assign slide_peek = false
+  assign full_width = section.settings.enable_full_width
+
+  if product_limit < products.count
+    assign slider_items_count = product_limit
+  else
+    assign slider_items_count = products.count
+  endif
+
+  # Slider booleans
+  if section.settings.layout_mobile contains 'slide'
+    assign slider_mobile = true
+  endif
+  if section.settings.layout_desktop == 'slide'
+    assign slider_desktop = true
+  endif
+  if section.settings.layout_mobile contains 'peek'
+    assign slide_peek = true
+    assign sizes_ipr_mobile = ipr_mobile | plus: 0.5
+  endif
+
+  capture sizes
+    render 'img_sizes', full_width: full_width, ipr_mobile: sizes_ipr_mobile, ipr_tablet: ipr_tablet, ipr_desktop: ipr_desktop
+  endcapture
+
+  # Card thumbnail class
+  if section.settings.sm_enable_card_thumbnail and section.settings.sm_down_enable_card_thumbnail
+    assign card_layout_class = "layout--thumbnail"
+  elsif section.settings.enable_card_thumbnail
+    assign card_layout_class = "layout--thumbnail"
+  elsif section.settings.sm_enable_card_thumbnail
+    assign card_layout_class = "sm-layout--thumbnail"
+  elsif section.settings.sm_down_enable_card_thumbnail
+    assign card_layout_class = "sm-down-layout--thumbnail"
+  endif
+
+  # Section Header
+  assign header_block = section.blocks | where: 'type', 'section_header' | first
+-%}
+
+<div
+  id="{{ section.id }}" {% if context != empty %}data-context="{{ context }}"{% endif %}
+  class="pt pb sm-pt sm-pb container color-{{ section.settings.color_scheme }}{% if full_width %} sm-edge-to-edge sm-p-page{% endif %}{% if slider_mobile %} sm-down-edge-to-edge{% endif %}"
+  style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+
+  {%- if header_block != blank -%}
+    {% render 'section-header',
+      size_multiplier: header_block.settings.size_multiplier,
+      sm_size_multiplier: header_block.settings.sm_size_multiplier,
+      text_align: header_block.settings.text_alignment,
+      subtitle: header_block.settings.subtitle,
+      subtitle_tag: header_block.settings.subtitle_tag,
+      title: header_block.settings.title,
+      title_tag: header_block.settings.title_tag,
+      text: header_block.settings.text %}
+  {%- endif -%}
+
+  <gridy-slider
+    id="slider-{{ section.id }}"
+    class="gridy-slider"
+    data-mobile-enabled="{{ slider_mobile }}"
+    data-tablet-enabled="{{ slider_desktop }}"
+    data-desktop-enabled="{{ slider_desktop }}"
+    data-ipr-mobile="{{ ipr_mobile }}"
+    data-ipr-tablet="{{ ipr_tablet }}"
+    data-ipr-desktop="{{ ipr_desktop }}"
+    data-arrows="true"
+    data-sliding-behavior="{{ section.settings.sliding_behavior }}"
+    data-autoplay="{{ section.settings.autoplay | default: false }}"
+    data-autoplay-delay="{{ section.settings.autoplay_speed | times: 1000 }}">
+    <div
+      class="grid sm-gap gridy-track scrollbar--hide grid-cols-{{ ipr_mobile }} sm-grid-cols-{{ ipr_tablet }} md-grid-cols-{{ ipr_desktop }}{% if slider_mobile %} track-inner-padding{% endif %}{% if slide_peek %} slide-peek{% endif %}"
+      style="
+        --gap: {% if section.settings.custom_gap >= 0 %}{{ section.settings.custom_gap | append: 'px' }}{% else %}{{ settings.gutter | append: 'px' }}{% endif %};
+        --sm-gap: {% if section.settings.sm_custom_gap >= 0 %}{{ section.settings.sm_custom_gap | append: 'px' }}{% else %}{{ settings.gutter_sm | append: 'px' }}{% endif %};
+    ">
+      {% if products and products != empty %}
+        {% for product in products limit:product_limit %}
+          {%- render 'card-product',
+            product: product,
+            card_layout_class: card_layout_class,
+            sizes: sizes,
+            lazyload: true -%}
+        {% endfor %}
+      {% else %}
+        {% for i in (1..10) limit:product_limit %}
+          {% if i > 6 %}
+            {% assign placeholder_index = i | minus: 6 %}
+            {%- assign svg_name = placeholder_prefix | append: placeholder_index -%}
+          {% else %}
+            {%- assign svg_name = placeholder_prefix | append: i -%}
+          {% endif %}
+          {%- render 'card-product',
+            svg_name: svg_name,
+            card_layout_class: card_layout_class -%}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {%- liquid
+      # Class for positioning
+      assign arrows_class = 'sm-on-edge'
+
+      # Class to hide if all in view
+      if slider_items_count <= ipr_desktop
+        assign arrows_class = arrows_class | append: ' md-hide'
+      endif
+      if slider_items_count <= ipr_tablet
+        assign arrows_class = arrows_class | append: ' sm-to-md-hide'
+      endif
+      if slider_items_count <= ipr_mobile
+        assign arrows_class = arrows_class | append: ' sm-down-hide'
+      endif
+    -%}
+
+    {% render 'gridy-arrows',
+      class: arrows_class %}
+
+  </gridy-slider>
+  {% if view_all and products.size > product_limit %}
+    <div class="mt-12 p-page sm-p-0 {% if header_block.settings.text_alignment %}{{ header_block.settings.text_alignment }} {% else %}text-align-center{% endif %}">
+      <a class="btn btn--link size--small" href="{{ current_block.settings.collection.url | default: section.settings.collection.url }}">
+        {{ 'sections.featured_collection.view_all' | t }}
+      </a>
+    </div>
+  {% endif %}
+</div>

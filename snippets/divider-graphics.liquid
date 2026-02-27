@@ -1,0 +1,69 @@
+{%- if middle_part_color contains 'linear-gradient' -%}
+  {% assign gradient_params = middle_part_color | remove_first: 'linear-gradient(' | remove_last: ')'  | split: ', rgba' %}
+  {% assign angle = gradient_params[0] %}
+
+  {% capture gradient_definition %}
+    <linearGradient id="{{ id }}-gradient" x1="0%" y1="0%" x2="100%" y2="0%" gradientTransform="rotate({{ angle | remove: 'deg' | minus: 90 }} 0.5 0.5)">
+      {% for stop in gradient_params %}
+        {% if forloop.index == 1 %}{% continue %}{% endif %}
+        {% assign stop_values = stop | remove: '(' | split: ') ' %}
+        <stop offset="{{ stop_values[1] | default: 0 }}" stop-color="rgba({{ stop_values[0] | remove: ')'}})" />
+      {% endfor %}
+    </linearGradient>
+  {% endcapture %}
+{%- elsif middle_part_color contains 'radial-gradient' -%}
+  {% assign gradient_params = middle_part_color | remove_first: 'radial-gradient(rgba' | remove_last: ')'  | split: ', rgba' %}
+  {% capture gradient_definition %}
+    <radialGradient id="{{ id }}-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    {% for stop in gradient_params %}
+      {% assign stop_values = stop | remove: '(' | split: ') ' %}
+        <stop offset="{{ stop_values[1] | default: 0 }}" stop-color="rgba({{ stop_values[0] | remove: ')'}})" />
+    {% endfor %}
+  </radialGradient>
+  {% endcapture %}
+{%- endif -%}
+
+{% style %}
+  #{{ id }}-svg {
+    width: {{ width }}%;
+    height: {% if height > 0 %}{{ height }}px{% else %}auto{% endif %};
+  }
+  @media only screen and (min-width: 768px) {
+    #{{ id }}-svg {
+      width: {{ sm_width }}%;
+      height: {% if sm_height > 0 %}{{ sm_height }}px{% else %}auto{% endif %};
+    }
+  }
+{% endstyle %}
+
+<svg id="{{ id }}-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+  {% if gradient_definition %}
+  <defs>{{ gradient_definition }}</defs>
+  {% endif %}
+{%- case graphics -%}
+  {%- when 'curve' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M1440 35V0H0v35c145.16-14.9 413.26-25 720-25s574.84 10.1 720 25"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="M720 90C413.26 90 145.16 79.76 0 65v21c145.16 14.76 413.26 25 720 25s574.84-10.24 720-25V65c-145.16 14.76-413.26 25-720 25"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M0 85v35h1440V85c-145.16 14.9-413.26 25-720 25S145.16 99.9 0 85"/>
+  {%- when 'elliptic' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M0 0v20c145.16 18.45 413.26 30 720 30s574.84-11.55 720-30V0z"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="M720 51C413.26 51 145.16 62.55 0 81v20c145.16-18.45 413.26-30 720-30s574.84 11.55 720 30V81c-145.16-18.45-413.26-30-720-30"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M1440 120v-20c-145.16-18.45-413.26-31-720-31S145.16 81.55 0 100v20h1440Z"/>
+  {%- when 'jagged' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M0 0v78.7L30 50l21.1 8.5L70 50l24.2 6.9L130 20l30 30h40l61 34.9 21.5-2.7L350 40l60 10 50-30 32.9 23.5L500 40l39.2 24.5L580 40l61.9 27.5L690 50l29.1 9 20.9-9 87.5 35L850 70l6.2 6.2L910 30l118.2 45.5 13.7 3.2L1080 52l30 7 30-49 48.9 30.6L1210 30l42.3 12.1L1310 10l52 52 18-12 14 6.8 46-25.4V0z"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="M0 78.7 30 50l51 20.6L130 20l30 30h40l70 40 80-50 60 10 50-30 70 50 50-30 90 40 70-30 100 40 70-60 130 50 40-28 30 7 30-49 80 50 90-50 60 60 70-38.6V120H0z" style="transform: scaleY(0.98); transform-origin: center center;"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M0 81.5 70 50l70 20 50-10 30 30 80-10 20 20 30-30 70 10 80-40 80 50 110-40 130 40 30-20 30 30 40-50 170 40 120-60 140 40 30-20 60 28.9V120H0z"/>
+  {%- when 'tilted' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M1440 0v90L0 10V0z"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="m0 31 1440 80V90L0 9z"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M0 120V30l1440 80V120z"/>
+  {%- when 'wave' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M0 0v50c0 0 150 40 400 40s650-120 1040-70V0H0z"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="M0 49s150 40 400 40S1050-31 1440 19v72c-473-102-739.17 25.42-1140 10C40 91 0 81 0 81v-32Z"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M300 100C40 90 0 80 0 80v40h1440V90C967-12 700 115 300 100z"/>
+  {%- when 'waves' -%}
+    <path class="top-part" fill="{{ top_part_color }}" d="M0 0v90.2c107.7-32.1 183.1-60.1 366.3-3.6 201.3 62.2 314 13.5 444.5-54.4s122.3 68.5 282 61.9 179.7-58.3 306.6-41.8c15.8 2 29.2 4 40.5 5.8V0H0z"/>
+    {% if gradient_definition %}<path class="middle-part" fill="url(#{{ id }}-gradient)" d="M1094.6 67.8c-220.1 62.2-249-14-412.9-29.1s-158.2 62.1-333 55.5S159.2 29 20.5 45.5c-7.3.9-14.1 1.7-20.5 2.6V120h1440V61.6c-94.5-23.1-199.4-35.1-345.4 6.2z" style="transform: scaleY(0.98); transform-origin: center center;"/>{% endif %}
+    <path class="bottom-part" fill="{{ bottom_part_color }}" d="M1399.5 52.3c-126.8-16.5-146.8 35.2-306.6 41.8s-151.5-129.8-282-61.9-243.3 116.6-444.6 54.5C183.1 30.1 107.7 58.1 0 90.2V120h1440V58.1c-11.4-1.8-24.8-3.8-40.5-5.8z"/>
+{% endcase %}
+</svg>

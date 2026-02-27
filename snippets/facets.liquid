@@ -1,0 +1,151 @@
+<div class="filter-form">
+  {%- liquid
+	  unless context == 'search'
+      assign object = collection
+    else
+      assign object = search
+    endunless
+
+    assign color_str = 'products.product.color_swatch_identifiers' | t | downcase
+    assign button_str = 'products.facets.filters_as_buttons_identifiers' | t | downcase
+  -%}
+
+  {%- for filter in object.filters -%}
+    {%- liquid
+      assign filter_label = filter.label | downcase
+      assign use_btn_style = false
+      assign color_filter = false
+      assign filter_type = 'default'
+
+      if filter.presentation == 'swatch'
+        assign color_filter = true
+        assign filter_type = 'color'
+      elsif color_str contains filter_label and show_swatches
+        assign color_filter = true
+        assign filter_type = 'color'
+      elsif button_str contains filter_label
+        assign use_btn_style = true
+        assign filter_type = 'as-button'
+      endif
+
+      assign open = true
+      if filter.label contains '[closed]' and filter.active_values.size == 0
+        assign open = false
+      endif
+
+    -%}
+    <details class="filter-group" {% if open %}open{% endif %}>
+      <summary >
+        <span>{{ filter.label | remove: '[closed]' | strip }}</span>
+        {% render 'icon-caret' %}
+      </summary>
+
+      <div class="content pt-12 pb-24">
+          {%- if filter.type == 'boolean' or filter.type == 'list' -%}
+            <fieldset>
+              <legend class="visually-hidden">{{ filter.label | remove: '[closed]' | strip }}</legend>
+              <ul class="filter-options-list {{ filter_type }}{% if use_btn_style %} grid grid-cols-4{% endif %}" style="gap:8px;">
+                {%- for filter_value in filter.values -%}
+                  <li class="filter-option">
+                    <label class="filter-type-{{ filter_type }}">
+                      <input type="checkbox"
+                      class="
+                        {%- if filter_type == 'default' -%}
+                          checkbox
+                        {%- elsif filter_type == 'color' -%}
+                          for-swatch
+                        {%- elsif filter_type == 'as-button' -%}
+                          as-button
+                      {%- endif -%}"
+                      name="{{ filter_value.param_name }}"
+                      value="{{ filter_value.value }}"
+                      data-key-value="{{- filter_value.param_name -}}:{{- filter_value.value -}}"
+                      {% if filter_value.active -%}checked{%- endif %}/>
+                      {%- if color_filter -%}
+                        <span class="swatch">
+                          {% render 'color-swatches', label: filter_value.label, swatch: filter_value.swatch, width: 28, height: 28 %}
+                        </span>
+                      {%- endif -%}
+                      <span>{{ filter_value.label }}</span>
+                  </label>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </fieldset>
+
+            <noscript>
+              <input style="cursor: pointer;" class="mt-8" type="submit" value="{{ 'products.facets.apply' | t }}">
+            </noscript>
+          {%- elsif filter.type == 'price_range' -%}
+            {{ 'component-price-range.css' | asset_url | stylesheet_tag }}
+            {% liquid
+              assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+              assign uses_comma_decimals = false
+
+              if currencies_using_comma_decimals contains cart.currency.iso_code
+                assign uses_comma_decimals = true
+              endif
+
+              assign filter_min_value = filter.min_value.value | money_without_currency | replace: ',', ''
+              assign filter_max_value = filter.max_value.value | money_without_currency | replace: ',', ''
+              assign filter_range_max = filter.range_max | money_without_currency | replace: ',', ''
+
+              if uses_comma_decimals
+                if filter.min_value.value
+                  assign filter_min_value = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                endif
+
+                if filter.max_value.value
+                  assign filter_max_value = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+                endif
+
+                assign filter_range_max = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+              endif
+            %}
+            <fieldset>
+              <legend class="visually-hidden">{{ filter.label | remove: '[closed]' | strip }}</legend>
+              <price-range-slider
+                class="price-range-slider"
+                data-min-value="{{ filter_min_value | floor }}"
+                data-min-name="{{ filter.min_value.param_name }}"
+                data-min="0"
+                data-max-value="{{ filter_max_value | ceil }}"
+                data-max-name="{{ filter.max_value.param_name }}"
+                data-max="{{ filter_range_max | ceil }}">
+                <div class="slider-container">
+                  <div class="range"></div>
+                  <div class="thumb min-value" data-thumb-min tabindex="0" role="slider"></div>
+                  <div class="thumb max-value" data-thumb-max tabindex="0" role="slider"></div>
+                </div>
+                <div class="inputs">
+                  <div class="price-range-input-wrapper">
+                    <label for="{{ id_prefix }}-price-range--from" class="currency">{{ 'products.facets.from' | t }} {{ cart.currency.symbol }}</label>
+                    <input id="{{ id_prefix }}-price-range--from" class="price-range-input" type="number" data-min min="{{ filter_range_min | floor | default: 0 }}" max="{{ filter_range_max | ceil | default: 999999999 }}" name="{{ filter.min_value.param_name }}" value="{{ filter_min_value | floor }}" />
+                  </div>
+                  <div class="price-range__horizontal-divider" aria-hidden="true">
+                    -
+                  </div>
+                  <div class="price-range-input-wrapper">
+                    <label for="{{ id_prefix }}-price-range--to" class="currency">{{ 'products.facets.to' | t }} {{ cart.currency.symbol }}</label>
+                    <input id="{{ id_prefix }}-price-range--to" class="price-range-input" type="number" data-max min="{{ filter_range_min | floor | default: 0 }}" max="{{ filter_range_max | ceil | default: 999999999 }}" name="{{ filter.max_value.param_name }}" value="{{ filter_max_value | ceil }}" />
+                  </div>
+                </div>
+              </price-range-slider>
+            </fieldset>
+
+            {% comment %} <link rel="stylesheet" href="{{ 'component-price-range.css' | asset_url }}" media="print" onload="this.media='all'">
+            <script type="text/javascript" src="{{ 'component-price-range.js' | asset_url }}" defer></script>
+            <noscript>
+              {{ 'component-price-range.css' | asset_url | stylesheet_tag }}
+              <input style="cursor: pointer;" class="mt-8" type="submit" value="{{ 'products.facets.apply' | t }}">
+            </noscript> {% endcomment %}
+          {%- endif -%}
+      </div>
+    </details>
+  {%- endfor -%}
+</div>
+
+<link rel="stylesheet" href="{{ 'component-facets.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>
+  {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+</noscript>

@@ -1,0 +1,77 @@
+{%- liquid
+
+  # ** PURPOSE **
+  # 'media' snippet generates HTML Video element, image or a 3D / AR model viewer.
+
+  # ** PARAMETERS **
+  # media         =>  REQUIRED | image object
+  # aspect_ratio  =>  REQUIRED | string: 'portrait', 'landscape', 'square', 'natural'
+  # lazyload      =>  OPTIONAL | true / false
+
+  # ** NOTES **
+  # - Lazyload only works with images
+
+  assign load_xr_stuff = false
+-%}
+
+{%- if media.media_type == 'image' -%}
+  {%- render 'img',
+    src: media,
+    aspect_ratio: aspect_ratio,
+    lazyload: lazyload,
+    sizing_rule: sizing_rule,
+    background_color: background_color,
+    custom_classes: custom_classes,
+    sizes: sizes
+ -%}
+{%- else -%}
+  {%- case media.media_type -%}
+    {%- when 'external_video' -%}
+      <figure class="media {{ aspect_ratio }} media--{{ media.media_type }} {{ custom_classes }}">
+        {%- if media.host == 'youtube' -%}
+          {{ media | external_video_url: mute: 1, autoplay: 1, loop: 1, playlist: media.external_id, disablekb: 1, modestbranding: 1, rel: 0, controls: 0 | external_video_tag: loading: "lazy" }}
+        {%- else -%}
+          {{ media | external_video_url: autoplay: 1, loop: 1, controls: 0, keyboard: 0, muted: 1, title: 0 | external_video_tag: loading: "lazy" }}
+        {%- endif -%}
+      </figure>
+    {%- when 'video' -%}
+      <figure class="media {{ aspect_ratio }} media--{{ media.media_type }} {{ custom_classes }}">
+        <video autoplay muted loop playsinline controlslist="nodownload" preload="metadata">
+          {%- for source in media.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+          {%- if request.design_mode -%}
+            Video not showing? You might be using unsupported browser.
+            Please make sure you're using the latest version of Chrome, Safari or Firefox.
+          {%- endif -%}
+        </video>
+      </figure>
+    {%- when 'model' -%}
+      <div class="model-container {{ custom_classes }}">
+        {%- assign load_xr_stuff = true -%}
+        <product-model class="media {{ aspect_ratio }} media--{{ media.media_type }}" data-media-id="{{ media.id }}" data-loaded="false">
+          {{ media | model_viewer_tag: background-color: background_color, toggleable: true }}
+        </product-model>
+        <button
+          class="btn btn--primary btn--full product__xr-button"
+          type="button"
+          aria-label="{{ 'products.product.xr_button_label' | t }}"
+          data-shopify-xr
+          data-shopify-model3d-id="{{ media.id }}"
+          data-shopify-title="{{ product.title }}"
+          data-shopify-xr-hidden
+          style="display: none;"
+          >
+          {% render 'icon-3d-model' %}
+          {{ 'products.product.xr_button' | t }}
+        </button>
+      </div>
+  {%- endcase -%}
+{%- endif -%}
+
+{%- if load_xr_stuff -%}
+  <script type="application/json" id="ProductJSON-{{ product.id }}">{{ product.media | where: 'media_type', 'model' | json }}</script>
+  <script type="text/javascript" src="{{ 'component-product-model.js' | asset_url }}" defer></script>
+  <link rel="stylesheet" href="{{ 'component-product-model.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript>{{ 'component-product-model.css' | asset_url | stylesheet_tag }}</noscript>
+{%- endif -%}

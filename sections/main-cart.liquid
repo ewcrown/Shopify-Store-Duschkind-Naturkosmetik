@@ -1,0 +1,34 @@
+{{ 'component-cart.css' | asset_url | stylesheet_tag }}
+
+<section class="main-cart container pt-24 pb-24 sm-pb-56 sm-pt-56 color-{{ section.settings.color_scheme }}" data-id="{{ section.id }}">
+  <div class="col-sm-max-8 m-auto cart-column">
+    <header class="flex space-between vertical-bottom" style="gap: 24px;">
+      <h1>{{ 'templates.cart.shopping_cart' | t }}</h1>
+      <a class="link size--small" href="{{ routes.root_url }}">{{ 'general.continue_shopping' | t }}</a>
+    </header>
+
+    <form id="cart" action="{{ routes.cart_url }}" method="post">
+      {%- render 'cart-items' -%}
+      {%- render 'cart-shipping-notification' -%}
+      <div class="flex space-between mt-40">
+        {%- render 'cart-note' -%}
+        {%- render 'cart-footer' -%}
+      </div>
+      {%- render 'cart-recommendations' -%}
+    </form>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart.name",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "default",
+      "label": "t:sections.colors.color_scheme.label"
+    }
+  ]
+}
+{% endschema %}

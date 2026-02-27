@@ -1,0 +1,59 @@
+.count-down {
+  --countdown-gap: var(--gutter);
+  --countdown-color: var(--color-foreground);
+  display: block;
+}
+
+.count-down time {
+  display: flex;
+  gap: var(--countdown-gap);
+  justify-content: center;
+}
+
+.count-down__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.units-spacing-wide .count-down__unit {
+  min-width: min(204px, 15vw);
+}
+.units-spacing-medium .count-down__unit {
+  min-width: min(160px, 12vw);
+}
+.units-spacing-narrow .count-down__unit {
+  min-width: min(100px, 8vw);
+}
+
+.units-hide .count-down__unit {
+  display: none;
+}
+.units-below .count-down__unit {
+  order: 2;
+}
+
+@media only screen and (min-width:768px) {
+
+  .sm-timer-justify {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--gutter);
+  }
+  .sm-timer-justify > *:not(count-down) {
+    text-align: left;
+  }
+
+  .sm-timer-justify count-down {
+    grid-column-start: 2;
+    text-align: center;
+  }
+  .sm-timer-justify time {
+    justify-content: flex-end;
+  }
+  .sm-timer-justify .count-down__item {
+    min-width: auto;
+  }
+}

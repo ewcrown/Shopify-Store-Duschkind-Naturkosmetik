@@ -1,0 +1,91 @@
+{%- assign menu_items_looped = 0 -%}
+{% liquid
+  if section.settings.dropdown_menu_cols != blank
+    assign dropdown_cols = section.settings.dropdown_menu_cols | split: ','
+  endif
+%}
+
+<nav class="header-shortlinks">
+  {%- for menu_item in shortcut_menu.links -%}
+    {%- unless menu_item.title contains '---' -%}
+      {%- if menu_items_looped == section.settings.shortcut_limit -%}
+        {%- break -%}
+      {%- endif -%}
+
+      {%- liquid
+        assign menu_items_looped = menu_items_looped | plus: 1
+        assign menu_item_title = menu_item.title
+        assign menu_item_style = 'style--link'
+
+      if menu_item.links != blank or content_menu_titles contains menu_item_title
+        assign has_subitems = true
+      else
+        assign has_subitems = false
+      endif
+      -%}
+      {%- if desktop_submenu_type == 'dropdown' and has_subitems -%}
+        {% liquid
+          assign menu_item_col_count = 1
+
+          if dropdown_cols[forloop.index0] != blank
+            assign menu_item_col_count = dropdown_cols[forloop.index0] | times: 1
+          endif
+        %}
+        <header-dropdown>
+          <details class="header-dropdown {% if menu_item_col_count == 1 %}--single{% endif %}" data-no-accordion-logic>
+            <summary class="header-main-menu-link --with-submenu {{ menu_item_style }}" aria-expanded="false">
+              {{ menu_item_title }} {% render 'icon-chevron-down--small' %}
+            </summary>
+            <div class="sub-menu-content {% if menu_item_col_count == 1 %}--single{% else %}--full container{% endif %}">
+
+              {% if menu_item_col_count != 1 %}
+              <div class="grid grid-cols-{{ menu_item_col_count }}">
+              {% endif %}
+                {%- for sub_menu_item in menu_item.links -%}
+                  {%- liquid
+                    if sub_menu_item.title contains '---'
+                      echo '<hr class="menu-divider"/>'
+                      continue
+                    else
+                      assign sub_menu_item_title = sub_menu_item.title
+                      assign sub_menu_item_style = 'style--link'
+                    endif
+                  -%}
+                  <div class="sub-menu {%- if sub_menu_item.links.size > 0 %} mb-12{% endif %}">
+                    <a class="sub-menu-link {{ sub_menu_item_style }}" href="{{ sub_menu_item.url }}"><span>{{ sub_menu_item_title }}</span></a>
+                    {% if sub_menu_item.links %}
+                      <div class="sub-sub-menu mt-4">
+                        {%- for sub_sub_menu_item in sub_menu_item.links -%}
+                          <a class="sub-sub-menu-link size--small" style="padding: 2px 0;" href="{{ sub_sub_menu_item.url }}"><span>{{ sub_sub_menu_item.title }}</span></a>
+                        {%- endfor -%}
+                      </div>
+                    {% endif %}
+                  </div>
+                {%- endfor -%}
+
+                {% render 'megamenu-content', current_menu_parent: menu_item_title %}
+
+              {% if menu_item_col_count != 1 %}
+              </div>
+              {% endif %}
+            </div>
+          </details>
+        </header-dropdown>
+      {%- elsif has_subitems -%}
+        <button class="header-main-menu-link {{ menu_item_style }} --with-submenu js" role="link" aria-label="{{ 'accessibility.navigate_to_something' | t: something: menu_item.title }}"  data-drawer-submenu-open="{{ menu_item.url }}">{{ menu_item_title }} {% render 'icon-chevron-down--small' %}</button>
+        <noscript>
+          <a role="button" class="header-main-menu-link --with-submenu no-js" href="{{ menu_item.url }}">{{ menu_item_title }}</a>
+        </noscript>
+      {%- else -%}
+        {%- if menu_item.links.size > 0 or content_menu_titles contains menu_item.title -%}
+          <button class="header-main-menu-link header-shortlink js flex center-center" role="link" aria-label="{{ 'accessibility.navigate_to_something' | t: something: menu_item.title }}" style="gap:4px" data-drawer-submenu-open="{{ menu_item.url }}">{{ menu_item.title }} {% render 'icon-chevron-down--small' %}</button>
+          <noscript>
+            <a role="button" class="header-shortlink flex center-center no-js" href="{{ menu_item.url }}">{{ menu_item.title }}</a>
+          </noscript>
+        {%- else -%}
+          <a class="header-main-menu-link header-shortlink flex center-center" href="{{ menu_item.url }}" aria-label="{{ 'accessibility.navigate_to_something' | t: something: menu_item.title }}">{{ menu_item.title }}</a>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+</nav>

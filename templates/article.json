@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "enable_full_width": true,
+            "media_aspect_ratio": "landscape_alt",
+            "margin_top": 0
+          }
+        },
+        "details": {
+          "type": "details",
+          "settings": {
+            "show_author": false,
+            "show_date": true,
+            "margin_top": 36
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "margin_top": 8
+          }
+        },
+        "hr_1": {
+          "type": "hr",
+          "settings": {
+            "margin_top": 24
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "margin_top": 24
+          }
+        },
+        "hr_2": {
+          "type": "hr",
+          "settings": {
+            "margin_top": 24
+          }
+        },
+        "tags": {
+          "type": "tags",
+          "settings": {
+            "margin_top": 24
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "details",
+        "title",
+        "hr_1",
+        "content",
+        "hr_2",
+        "tags"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "article-navigation": {
+      "type": "article-navigation",
+      "settings": {
+        "color_scheme": "",
+        "show_back_to_blog": true,
+        "show_article_images": true,
+        "md_padding_top": 80,
+        "md_padding_bottom": 80,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "article-navigation"
+  ]
+}

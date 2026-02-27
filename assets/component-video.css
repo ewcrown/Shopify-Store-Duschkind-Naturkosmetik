@@ -1,0 +1,139 @@
+.video-container {
+  position: relative;
+}
+
+.video-container .button-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.video-container video {
+  width: 100%;
+}
+
+.video-container .button-container button {
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  height: 6.2rem;
+  width: 6.2rem;
+  position: absolute !important;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 1;
+  background-color: var(--color-background) !important;
+  padding: 16px !important;
+  border: unset;
+  box-shadow: 0 2px 4px rgba(0,0,0, 0.15);
+  cursor: pointer;
+}
+
+.video-container .button-container button svg {
+  stroke: var(--color-foreground);
+  pointer-events: none;
+}
+
+superpowered-video {
+  display: block;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+superpowered-video[data-context="default"][data-aspect-ratio="natural"] iframe {
+  height: 100%;
+  width: 100%;
+}
+
+superpowered-video[data-context="default"][data-aspect-ratio="natural"] iframe {
+  height: 100%;
+  width: 100%;
+}
+superpowered-video[data-context="default"][data-aspect-ratio="natural"] {
+  aspect-ratio: 16 / 9;
+}
+
+@supports not (aspect-ratio: 16 / 9) {
+  superpowered-video[data-context="default"][data-aspect-ratio="natural"] iframe {
+    position: absolute;
+  }
+  superpowered-video[data-context="default"][data-aspect-ratio="natural"] {
+    height: 0;
+    padding-bottom: calc(100% / (16 / 9));
+  }
+}
+
+superpowered-video[data-context="default"]:not([data-aspect-ratio="natural"]) iframe,
+superpowered-video[data-context="card"] iframe {
+  width: 300%;
+  height: 200%;
+  left: -100%;
+  max-width: none;
+  position: absolute;
+  top: -50%;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+  superpowered-video[data-context="default"]:not([data-aspect-ratio="natural"]) iframe,
+  superpowered-video[data-context="card"] iframe  {
+    width: 160%;
+    height: 300%;
+    left: -30%;
+    top: -100%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  superpowered-video[data-context="default"]:not([data-aspect-ratio="natural"]) iframe,
+  superpowered-video[data-context="card"] iframe  {
+    width: 140%;
+    height: 300%;
+    left: -20%;
+    top: -100%;
+  }
+}
+
+.video-container superpowered-video > * {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
+@supports not (aspect-ratio: 16 / 9) {
+  .video-container superpowered-video > * {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+}
+
+/* Zoom .button-container button if browser supports hovering */
+@media (hover:hover) {
+  .video-container .button-container button {
+    transition: transform 0.3s ease-in-out;
+  }
+  .video-container .button-container button:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* Remove play button for external videos */
+@media only screen and (max-width: 767px) {
+  superpowered-video[data-device="desktop"] {
+    display: none;
+  }
+  .video-container[data-desktop-video-type="external"] .button-container {
+    display: none;
+  }
+}
+@media only screen and (min-width: 768px) {
+  superpowered-video[data-device="mobile"] {
+    display: none;
+  }
+  .video-container[data-mobile-video-type="external"] .button-container {
+    display: none;
+  }
+}

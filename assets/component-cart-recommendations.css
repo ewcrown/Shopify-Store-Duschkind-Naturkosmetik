@@ -1,0 +1,35 @@
+cart-recommendations {
+  display: block;
+}
+cart-recommendations .card-body {
+  padding: 12px;
+}
+cart-recommendations .grid {
+  --gap: var(--grid-gap);
+}
+.drawer .cart-recommendations__title {
+  font-size: 1.4rem;
+}
+.drawer cart-recommendations .grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+.drawer cart-recommendations .card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.template-cart cart-recommendations {
+  margin-top: 40px;
+}
+.template-cart cart-recommendations .grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+}
+.template-cart .cart-recommendations__title {
+  text-align: center;
+}
+@media only screen and (min-width: 1024px) {
+  .template-cart cart-recommendations .grid {
+    grid-template-columns: repeat(6,minmax(0,1fr));
+  }
+}

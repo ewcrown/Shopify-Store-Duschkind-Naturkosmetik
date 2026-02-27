@@ -1,0 +1,225 @@
+{%- liquid
+  #  Renders a product card for upsell products.
+  #  Used in product template Upsell products block.
+  #
+  #  ** Parameters **
+  #  product       =>  OPTIONAL | product object
+  #  lazyload      =>  OPTIONAL | boolean | default: true | layload images
+  #  aspect_ratio  =>  OPTIONAL | string | default: settings.product_card_aspect_ratio | 'natural','portrait','landscape','square'
+  #  text_align    =>  OPTIONAL | string | default: settings.product_card_text_alignment | product card text align class
+  #  class         =>  OPTIONAL | string | 'sm-item-span-2'
+  #
+  #  ** Block Settings **
+  #  variant_selection_method  =>  Controls how variants are selected:
+  #                               'dropdown' (default): Shows dropdown selector for variants
+  #                               'quick_buy': Shows "Quick view" button that opens quick-buy modal
+
+  if lazyload == null
+    assign lazyload = true
+  endif
+  assign aspect_ratio = aspect_ratio | default: settings.product_card_aspect_ratio
+  assign sizing_rule = sizing_rule | default: settings.product_card_fill_rule
+
+  unless sizes
+    assign sizes = '72px'
+  endunless
+
+  assign upsell_behavior = block.settings.upsell_behavior
+  # If there are 250 or more variants, always use quick buy modal to ensure working with Shopify high variant count
+  # If there is only 1 variant and quick buy selection method is used, force behavior to 'separate'
+  if block.settings.variant_selection_method == 'quick_buy'
+    assign upsell_behavior = 'separate'
+    if product.variants.size > 1
+      assign quick_buy_modal = true
+    else
+      assign quick_buy_modal = false
+    endif
+  elsif product.variants.size >= 250
+    assign quick_buy_modal = true
+  else
+    assign quick_buy_modal = false
+  endif
+
+  # See component-product-form.js and onSubmitHandler() to see add to cart behavior for "default"
+  # "separate" does not require Javascript to submit the form
+  assign upsell_id_selector = 'upsell-id'
+  assign upsell_quantity_selector = 'upsell-quantity'
+  assign upsell_product_form_id = product_form_id
+
+  if upsell_behavior == 'separate'
+    assign upsell_id_selector = 'upsell-id-separate'
+    assign upsell_quantity_selector = 'upsell-quantity-separate'
+    assign upsell_product_form_id = 'product-form-' | append: block.id | append: '-upsell-' | append: product.id
+  endif
+-%}
+
+{%- if product and product != empty -%}
+  <upsell-card
+    class="card card--product card--default layout--thumbnail {{ class }}"
+    data-form="{{ upsell_product_form_id }}"
+  >
+    <a href="{{ product.url }}" class="card-media">
+      <figure class="media {{ aspect_ratio }} {{ sizing_rule }} br-img">
+        <img width="90" height="90" loading="lazy" src="{{ product.featured_image | image_url: width: 128 }}">
+      </figure>
+    </a>
+
+    {%- capture card_body -%}
+      <div class="card-body">
+        {%- if upsell_behavior == 'separate' -%}
+          <div form="{{ upsell_product_form_id }}" class="product-form__error-message-wrapper flex horizontal vertical-center mb-16 mt-16" role="alert" hidden>
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+              <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+              <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+              <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+              <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+            </svg>
+            <span class="product-form__error-message"></span>
+          </div>
+        {%- endif -%}
+        <h3 class="card-title h5 size--small"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+        {% if product.has_only_default_variant %}
+          {%- render 'price', product: product, price_class: 'size--small mt-4' -%}
+        {% elsif quick_buy_modal and product.variants.size > 1 %}
+          <div class="price size--small mt-4">
+            {% liquid
+              assign money_price = product.price_min | money
+              assign money_compare_price = product.compare_at_price_min | money
+              if settings.currency_code_enabled
+                assign money_price = product.price_min | money_with_currency
+                assign money_compare_price = product.compare_at_price_min | money_with_currency
+              endif
+            %}
+            {% if product.compare_at_price_varies and product.compare_at_price_min > product.price_min %}
+              <span class="price__compare">{{ 'products.product.price.from_price_html' | t: price: money_compare_price }}</span>
+            {% endif %}
+            <span class="price__current">{{ 'products.product.price.from_price_html' | t: price: money_price }}</span>
+          </div>
+        {% endif %}
+        {%- if settings.enable_swatches and quick_buy_modal == false -%}
+          {%- render 'product-card-swatches', product: product -%}
+        {%- endif -%}
+
+        {%- unless quick_buy_modal -%}
+          <div class="upsell-variant">
+            {% if product.has_only_default_variant %}
+              <input type="hidden" name="id" class="{{ upsell_id_selector }}" value="{{ product.selected_or_first_available_variant.id }}">
+            {% elsif product.variants.size == 1 %}
+              <input type="hidden" name="id" class="{{ upsell_id_selector }}" value="{{ product.selected_or_first_available_variant.id }}">
+              <div class="price size--small mt-4">
+              {% liquid
+                assign money_price = product.price | money
+                if settings.currency_code_enabled
+                  assign money_price = product.price | money_with_currency
+                endif %}
+              {{ product.variants[0].title }} - {{ money_price }}
+              </div>
+            {% else %}
+              <div class="select size--tiny mt-8">
+                <select name="id" class="select__select {{ upsell_id_selector }}">
+                {%- for variant in product.variants -%}
+                  <option
+                    {% if variant.featured_image %}
+                      data-variant-img-src="{{ variant.featured_image | image_url: width: 128 }}"
+                    {% endif %}
+                    {% if variant == product.selected_or_first_available_variant %}
+                      selected="selected"
+                    {% endif %}
+                    {% if variant.available == false %}
+                      disabled
+                    {% endif %}
+                    value='{{ variant.id }}'>
+                    {{ variant.title }}
+                    {%- if variant.available == false %}
+                      -
+                      {{ 'products.product.sold_out' | t }}
+                    {% endif %}
+                    {% liquid
+                      assign money_price = variant.price | money
+                      if settings.currency_code_enabled
+                        assign money_price = variant.price | money_with_currency
+                      endif
+                    %}
+                    -
+                    {{ money_price }}
+                  </option>
+                {%- endfor -%}
+                </select>
+                {%- render 'icon-chevron-down--small' -%}
+              </div>
+            {% endif %}
+          </div>
+        {%- endunless -%}
+      </div>
+
+      {%- unless quick_buy_modal -%}
+        {%- if upsell_behavior == 'default' -%}
+          {% render 'quantity-input', class: 'small', input_class: upsell_quantity_selector %}
+        {%- elsif upsell_behavior == 'separate' -%}
+          <div class="card-actions flex flex-col">
+              <input type="hidden" name="quantity" value="1" disabled/>
+
+              {%- if is_preorder -%}
+                <input type="hidden" name="attributes[_preorder]" value="true">
+              {%- endif -%}
+              <div class="product-form__buttons flex col-justify-content-end">
+                <button type="submit" name="add" class="product-form__submit btn btn--primary" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                  {%- render 'icon-cart' -%}
+                  {%- render 'icon-plus' -%}
+                  <span class="visually-hidden">
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      {%- if is_preorder -%}
+                        {{ 'products.product.preorder.preorder' | t }}
+                      {%- else -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- endif -%}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </span>
+                  <div class="loading-overlay loading-overlay__spinner hidden">
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                    </svg>
+                  </div>
+                </button>
+              </div>
+          </div>
+        {%- endif -%}
+      {%- endunless -%}
+
+      {%- if quick_buy_modal -%}
+        <div class="card-actions">
+          <quick-buy data-product="{{ product.id }}" data-url="{{ product.url }}" class="js quick-buy">
+            <a class="btn size--tiny btn--primary btn--full quick-buy_link" data-product-handle="{{ product.handle }}" href="{{ '#modal-' | append: product.id | append: '-product' }}" aria-haspopup="dialog" aria-label="{{ 'accessibility.open_quick_buy_modal' | t: product: product.title }}">
+              <span class="quick-buy_text">{{ 'products.quick_buy_label' | t }}</span>
+              <span class="quick-buy_icon">
+                {%- render 'icon-cart' -%}
+                {%- render 'icon-plus' -%}
+              </span>
+              {% render 'loading' %}
+            </a>
+          </quick-buy>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if quick_buy_modal or upsell_behavior == 'default' -%}
+      <div class="upsell-body">
+        {{ card_body }}
+      </div>
+    {%- else -%}
+      <product-form class="product-form">
+        {%- form 'product',
+          product,
+          id: upsell_product_form_id,
+          class: 'form upsell-body',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          {{ card_body }}
+        {%- endform -%}
+      </product-form>
+    {%- endif -%}
+  </upsell-card>
+{%- endif -%}

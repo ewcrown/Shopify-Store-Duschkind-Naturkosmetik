@@ -1,0 +1,377 @@
+/* NOTES:
+/* Edit the '--drawer-animation' and '--drawer-position' variables to change the position */
+
+/* Drawer container - not actual drawer panel */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  --drawer-size: min(92vw, 375px);
+  visibility: hidden;
+  opacity: 1 !important;
+  z-index: 70;
+
+  font-size: var(--font-navigation-size);
+  font-family: var(--font-navigation-family);
+  font-style: var(--font-navigation-style);
+  font-weight: var(--font-navigation-weight);
+  text-transform: var(--font-navigation-text-transform);
+  letter-spacing: var(--font-navigation-letter-spacing);
+
+  display: block !important;
+  pointer-events: auto !important;
+}
+
+/* Drawer panels */
+.drawer-panel,
+html.js .drawer-submenu__panel {
+  --drawer-animation: all 0.3s ease-in-out;
+  --drawer-padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  width: var(--drawer-size);
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  opacity: 0;
+  z-index: 10;
+
+  transform: translateX(var(--drawer-position));
+}
+
+html.no-js .drawer-panel {
+  --drawer-animation: transform 0.3s ease-in-out; /* for non-JS users only animate transform to avoid flash of opacity on page load */
+}
+html.js .drawer-submenu__panel {
+  --drawer-animation: all 0.3s ease-in-out; /* Default (mobile) animation properties */
+  background-color: var(--color-background);
+}
+
+/* set position of origin for different types of drawers */
+.drawer-panel:not(.slide-from-right), html.js .drawer-submenu__panel {
+  --drawer-original-position: -100%;
+  --drawer-position: var(--drawer-original-position);
+}
+.drawer-panel.slide-from-right {
+  --drawer-original-position: 100vw;
+  --drawer-position: var(--drawer-original-position);
+}
+
+/* Apply transition only when drawer is initialized to avoid them flashing on page load */
+html.js .initialized .drawer-panel,
+html.no-js .drawer-panel,
+html.js .initialized .drawer-submenu__panel {
+  transition: var(--drawer-animation);
+}
+
+/* Only allow pointer-events for container when drawer is open */
+html.no-js .drawer:target,
+html.js .drawer.is-open {
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+/* Set opacity for backdrop when panel is open */
+html.no-js .drawer:target > .page-overlay,
+html.js .drawer.is-open > .page-overlay {
+  z-index: 1;
+  opacity: 1;
+}
+html.js .is-open > .page-overlay {
+  cursor: var(--css-icon-close) 22 22, auto;
+}
+
+/* Set opacity and position for open panel element */
+html.no-js .drawer:target .drawer-panel:not(.slide-from-right),
+html.js .drawer.is-open .drawer-panel:not(.slide-from-right),
+html.js .drawer-submenu__panel {
+  --drawer-position: 0;
+  opacity: 1;
+}
+html.no-js .drawer:target .drawer-panel.slide-from-right,
+html.js .drawer.is-open .drawer-panel.slide-from-right {
+  --drawer-position: calc(100vw - var(--drawer-size));
+  opacity: 1;
+}
+
+/* Drawer panel header section */
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--drawer-padding) * 0.6) var(--drawer-padding);
+  min-height: 80px;
+}
+
+/* Drawer panel close icons */
+.drawer-header .close,
+.drawer-header .close--submenu {
+  display: grid;
+  place-content: center;
+
+  min-height: 4.8rem;
+  min-width: 4.8rem;
+  cursor: pointer;
+}
+
+.drawer-menu__item.--drilldown {
+  overflow: unset;
+}
+
+/* Drawer panel content section */
+.drawer-content {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 25vh;
+}
+
+/* Drawer panel footer section */
+.drawer-footer {
+  padding: var(--drawer-padding);
+  align-self: flex-end;
+  width: 100%;
+}
+
+/* Drawer submenu panel default styles */
+html.js .drawer-submenu__panel-container {
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: var(--drawer-size);
+  display: flex;
+  flex-direction: row;
+  width: var(--drawer-size);
+}
+
+/* State related styles */
+.drawer-menu__item-label span {
+  position: relative;
+}
+.drawer-menu__item-label span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  transition: all 0.3s ease-out;
+  background-color: var(--color-foreground);
+}
+.is-open > .drawer-menu__item-label span::before {
+  width: 100%;
+}
+.drawer-panel.has-open-submenu {
+  background-color: var(--color-background-alt);
+}
+.drawer-menu-nav > a.drawer-menu__item,
+.drawer-menu-nav :not(.is-open) .drawer-menu__item-label {
+  transition: all 0.3s;
+}
+.has-open-submenu .drawer-menu-nav > a.drawer-menu__item,
+.has-open-submenu .drawer-menu-nav :not(.is-open) .drawer-menu__item-label {
+  opacity: 0.35;
+}
+.drawer-menu-nav > a.drawer-menu__item:hover,
+.drawer-menu-nav :not(.is-open) .drawer-menu__item-label:hover {
+  opacity: 1;
+}
+
+/* Drawer menu items - emphasize links - only for JS users */
+html.js .--emphasize {
+  font-weight: bold;
+}
+
+/* Set styles for submenu item panel when it's open */
+html.no-js .drawer:target [data-accordion-item] > input:checked~[data-accordion-panel] .drawer-submenu__panel,
+html.js [data-accordion-item].is-open .drawer-submenu__panel {
+  --drawer-position: 0 !important;
+  z-index: 9;
+  opacity: 1;
+}
+
+/* Set dropdown item paddings for non-JS users */
+html.no-js .drawer-submenu__panel-container,
+html.no-js .drawer-subsubmenu__panel {
+  padding-left: 1rem !important;
+}
+
+/* Drawer media close - hidden for mobile */
+.drawer-media__close {
+  display: none;
+}
+
+@media only screen and (max-width: 1023px) {
+  /* SVG used to clip animations */
+  .drawer-clip {
+    display: none;
+  }
+  .drawer-clip rect {
+    transform: translateY(-100%);
+  }
+  .drawer-panel {
+    overflow-x: hidden;
+  }
+  html.js .drawer-submenu__panel{
+    --drawer-position: var(--drawer-size) !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  /*
+    Set initial desktop positions and sizes for navigation drawer
+  */
+  .drawer {
+    --drawer-size: min(40vw, 400px);
+  }
+  .drawer.drawer--wide {
+    --drawer-size: min(45vw, 480px);
+  }
+  /* SVG used to clip animations */
+  .drawer-clip {
+    position: fixed;
+    top: 0;
+    left: var(--drawer-size);
+  }
+  .drawer-media__close {
+    position:absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    padding: 2.4rem 4.8rem;
+    display: grid;
+    opacity: 0;
+  }
+  .drawer-panel,
+  html.js .drawer-submenu__panel {
+    --drawer-padding: 30px;
+  }
+  html.js .drawer-panel .drawer-submenu__panel {
+    --drawer-size: min(40vw, 400px);
+    --drawer-position: calc(var(--drawer-size) * 0);
+  }
+  html.js .drawer-submenu__panel-media {
+    width: calc(100% - var(--drawer-size));
+    left: var(--drawer-size);
+    max-height: 100dvh;
+    opacity: 0;
+  }
+  html.js .drawer-submenu__panel-container {
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  html.js .drawer-submenu__panel-container.--content,
+  html.js .drawer-panel .--content .drawer-submenu__panel {
+    width: calc(100vw - var(--drawer-size));
+    max-width: 2000px;
+    --drawer-position: calc(-100vw  + var(--drawer-size));
+  }
+
+  /* Desktop media - default styles */
+  html.js .drawer-submenu__panel-media .media {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+  }
+
+  /* Desktop media - reset transition */
+  html.js [data-accordion-item]:not(.is-open) .drawer-submenu__panel-media .media {
+    transition: none;
+  }
+
+  /* Open transitions */
+  html.js [data-accordion-item].is-open .drawer-submenu__panel-media {
+    opacity: 1;
+  }
+  html.js [data-accordion-item].is-open .drawer-submenu__panel-media .media {
+    --transition: opacity 0.8s linear 0.416s;
+    transition: var(--transition);
+    opacity: 1;
+  }
+  html.js [data-accordion-item].is-open .drawer-media__close {
+    --transition: opacity 0.416s ease-in-out 0.416s;
+    transition: var(--transition);
+    opacity: 1;
+  }
+
+  /* Open transitions (for when toggling between subitems */
+  html.js .drawer-panel.has-open-submenu [data-accordion-item].is-open .drawer-submenu__panel-media .media {
+    --transition: opacity 0.6s linear;
+  }
+  html.js .drawer-panel.has-open-submenu [data-accordion-item].is-open .drawer-media__close {
+    --transition: opacity 0.416s ease-in-out;
+  }
+
+  /* Desktop submenu item panel - open styles */
+  html.no-js .drawer:target [data-accordion-item] > input:checked~[data-accordion-panel] .drawer-submenu__panel,
+  html.js [data-accordion-item].is-open .drawer-submenu__panel {
+    --drawer-position: var(--drawer-size) !important;
+    transition: var(--drawer-animation);
+  }
+
+  html.js .drawer-submenu__panel-container.--has-media {
+    width: calc(100vw - var(--drawer-size));
+  }
+}
+
+.drawer-banner-panel,
+.drawer-cart__content,
+.--with-padding {
+  padding: var(--drawer-padding);
+}
+.drawer-menu__divider {
+  border-top: 1px solid var(--color-borders);
+  width: calc(100% - var(--drawer-padding)*3.2);
+  margin: calc(var(--drawer-padding)*1.2);
+  position: relative;
+}
+
+/* Content menu items */
+.menu-banner {
+  position: relative;
+}
+.menu-banner__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--gutter);
+}
+.drawer-menu .menu-banner.--after {
+  order: 2;
+}
+.menu-divider hr {
+  border-top: 1px solid var(--color-borders);
+  width: 100%;
+}
+.menu-divider hr + * {
+  margin-top: var(--gutter);
+}
+
+/* iOS 14 fixes */
+drawer-menu .drawer-menu__contents {
+  height: 100%;
+}
+drawer-menu .drawer-submenu__panel {
+  left: 0;
+}
+
+.drawer img {
+  display: none;
+}
+.drawer.is-open img {
+  display: block;
+}
+#drawer-filter .drawer-panel {
+  overflow-y: scroll;
+}

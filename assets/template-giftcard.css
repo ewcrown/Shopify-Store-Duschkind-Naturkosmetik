@@ -1,0 +1,29 @@
+.gift-card {
+  width: calc(100% - var(--gutter) * 2);
+  max-width: 35ch;
+  margin: 0 auto 0;
+}
+
+.gift-card__copy-button {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.gift-card__copy-button-icon {
+  display: grid;
+  place-content: center;
+}
+.gift-card__copy-button-icon svg {
+  color: inherit;
+}
+.gift-card__qr-code {
+  display: grid;
+  place-content: center;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}

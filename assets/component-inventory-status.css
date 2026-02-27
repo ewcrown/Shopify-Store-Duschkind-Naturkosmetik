@@ -1,0 +1,52 @@
+.inventory-status:not(.inventory-status--low):not(.inventory-status--sold-out) {
+  --ping-color: var(--success);
+}
+.inventory-status--low {
+  --ping-color: var(--error);
+}
+.inventory-status--sold-out {
+  --ping-color: #ccc;
+}
+.inventory-status .inventory-status__text {
+  position: relative;
+  padding-left: calc(12px + 1rem);
+}
+.inventory-status .inventory-status__text::before,
+.inventory-status .inventory-status__text::after {
+  --size: 12px;
+  content: "";
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--ping-color);
+  position: absolute;
+  left: 0;
+}
+
+.inventory-status .inventory-status__text::before {
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  top: calc(50% - calc(var(--size) / 2));
+}
+.inventory-status .inventory-status__text::after {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.stock-additional {
+  display: none;
+}
+.inventory-status--in-stock .for-in-stock,
+.inventory-status--sold-out .for-sold-out,
+.inventory-status--sold-out-continue-selling .for-sold-out-continue-selling,
+.inventory-status--low .for-low {
+  display: revert;
+}

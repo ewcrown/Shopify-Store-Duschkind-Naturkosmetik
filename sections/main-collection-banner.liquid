@@ -1,0 +1,157 @@
+{%- liquid
+  assign show_image = false
+  if collection.image != blank and section.settings.image_layout contains 'show'
+    assign show_image = true
+  endif
+-%}
+
+<header
+  class="container sm-down-edge-to-edge pt pb sm-pt sm-pb color-{{ section.settings.color_scheme }}{% if section.settings.center_text %} text-align-center{% endif %}"
+  style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+    ">
+
+  <div class="grid vertical-center" style="position: relative; z-index: 1;">
+    {% if show_image and section.settings.image_layout == 'show next_to' %}
+    <div class="collection-image col-12 {% if section.settings.center_text %}col-sm-4 col-sm-offset-5{% else %}col-sm-3 col-md-2{% endif %}">
+      {% render 'img', src: collection.image, custom_classes: 'sm-br-img' %}
+    </div>
+    {% endif %}
+    <div class="collection-title pt-24 pb-24 sm-down-p-page col-12{% if show_image and section.settings.image_layout == 'show next_to' and section.settings.center_text == false %} col-sm-6{% endif %}">
+      {% if section.settings.show_breadcrumb %}
+        <div class="mb-24">
+          {% render 'breadcrumb' %}
+        </div>
+      {% endif %}
+      <h1 class="heading">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        {% assign rte_length = collection.description | strip_html | size %}
+        {% if section.settings.read_more and rte_length > 250 %}
+          {%- render 'read-more-text',
+            content: collection.description,
+            block_id: 'collection-description',
+            attributes: '',
+            context_label: 'collection description'
+          -%}
+        {% else %}
+          <div class="mt-12 rte description">{{ collection.description }}</div>
+        {% endif %}
+      {%- endif -%}
+    </div>
+  </div>
+  {% if show_image and section.settings.image_layout == 'show as_bg' %}
+  <div class="collection-header-background">
+    {% render 'img', src: collection.image %}
+  </div>
+  {% endif %}
+</header>
+
+{% schema %}
+  {
+    "name": "t:sections.main-collection-banner.name",
+    "class": "ignore-section-animation",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.main-collection-banner.info"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "default",
+        "label": "t:sections.colors.color_scheme.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_breadcrumb",
+        "label": "t:sections.inputs.checkbox.show_breadcrumb",
+        "info": "t:sections.inputs.checkbox.show_breadcrumb_info",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "image_layout",
+        "label": "t:sections.main-collection-banner.settings.image_layout.label",
+        "default": "show next_to",
+        "options": [
+          {
+            "value": "hide",
+            "label": "t:sections.main-collection-banner.settings.image_layout.options.hide"
+          },
+          {
+            "value": "show as_bg",
+            "label": "t:sections.main-collection-banner.settings.image_layout.options.show_as_background"
+          },
+          {
+            "value": "show next_to",
+            "label": "t:sections.main-collection-banner.settings.image_layout.options.show_next_to"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "center_text",
+        "default": false,
+        "label": "t:sections.main-collection-banner.settings.center_text.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "read_more",
+        "label": "t:sections.inputs.text.read_more",
+        "info": "t:sections.inputs.text.read_more_info",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 80
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 0
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,8 @@
+{%- if settings.show_cart_note -%}
+<div id="cart-note">
+  <cart-note class="order-note{% if cart.item_count == 0 %} hide{% endif %}">
+    <label class="cart__note-title mb-8 size--small" style="display:block;" for="cart-note-input">{{ 'sections.cart.note' | t }}</label>
+    <textarea class="text-area field__input" name="note" form="cart" id="cart-note-input" placeholder="">{{ cart.note }}</textarea>
+  </cart-note>
+</div>
+{%- endif -%}

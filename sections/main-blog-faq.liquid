@@ -1,0 +1,52 @@
+{{ 'template-blog-faq.css' | asset_url | stylesheet_tag }}
+
+<div class="blog-faq full-width grid">
+  <aside class="blog__sidebar col-12 col-md-2 col-md-offset-2">
+    <div class="sticky">
+      <header class="blog__sidebar-header">
+        <h1 class="heading h3">
+          {{ blog.title }}
+        </h1>
+      </header>
+      <nav class="blog__sidebar-nav section__subheader">
+        <a class="blog__sidebar-nav--link{% unless current_tags %} link{% endunless %}" href="{{ blog.url }}">
+          {{ 'blogs.article.show_all' | t }}
+        </a>
+        {%- for tag in blog.all_tags -%}
+          {%- if current_tags contains tag -%}
+            <a class="blog__sidebar-nav--link link" href="{{ blog.url }}">
+              {{ tag }}
+            </a>
+          {%- else -%}
+            {%- assign tag_handle = tag | handleize -%}
+            <a class="blog__sidebar-nav--link" href="{{ blog.url }}/tagged/{{ tag_handle }}">
+              {{ tag }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    </div>
+  </aside>
+
+  {%- paginate blog.articles by 50 -%}
+    <div class="blog__body col-12 col-md-offset-5 col-md-4">
+      <div data-id="{{ section.id }}" class="blog__body-content">
+        {%- render 'faq-items' -%}
+        {%- render 'loading' -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        {% render 'pagination', paginate: paginate, anchor: '' %}
+      {%- endif -%}
+    </div>
+  {%- endpaginate -%}
+</div>
+
+{%- render 'schema-faq', items: blog.articles, context: 'article' -%}
+
+{% schema %}
+  {
+    "name": "t:sections.main-blog-faq.name",
+    "class": "section"
+  }
+{% endschema %}

@@ -1,0 +1,10 @@
+.section--image-with-text {
+  .media--empty {
+    background: radial-gradient(var(--color-background-alt) 60%, transparent 60%);
+    opacity: 1;
+  }
+  .media--empty  svg {
+    fill: var(--color-foreground);
+    opacity: 0.65;
+  }
+}

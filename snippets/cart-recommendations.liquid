@@ -1,0 +1,35 @@
+{%- if settings.show_cart_recommendations -%}
+<div id="cart-recommendations">
+  <cart-recommendations
+  class="recommendations{% if cart.item_count == 0 %} hide{% endif %}"
+  data-product-id="{{ cart.items.first.product.id }}"
+  data-limit="6"
+>
+  <h6 class="cart-recommendations__title subheading mt-24 mb-12">{{ 'sections.cart.you_might_like' | t }}</h6>
+  <div class="grid" data-products-ajax>
+    {%- for i in (1..6) -%}
+      <div class="pulse media {{ settings.product_card_aspect_ratio }}" style="display: grid; place-content: center;">
+        {%- render 'loading', show: true -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  <template id="template-recommendation-item">
+    <div class="card card--product">
+      <a href="" title="" class="card-media">
+        <figure class="media {{ settings.product_card_aspect_ratio }} {{ settings.product_card_fill_rule }}">
+          <img width="300" height="300" src="" loading="lazy" />
+        </figure>
+      </a>
+      <div class="card-body text-align-center">
+        <h3 class="card-title h6 size--tiny"><a href=""></a></h3>
+      </div>
+    </div>
+  </template>
+</cart-recommendations>
+</div>
+{%- endif -%}
+
+<link rel="stylesheet" href="{{ 'component-cart-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>
+  {{ 'component-cart-recommendations.css' | asset_url | stylesheet_tag }}
+</noscript>

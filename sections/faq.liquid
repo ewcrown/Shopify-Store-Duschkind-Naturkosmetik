@@ -1,0 +1,451 @@
+{%- liquid
+  assign media_block = section.blocks | where: 'type', 'image' | first
+  assign section_header_block = section.blocks | where: 'type', 'section_header' | first
+  assign the_questions = section.blocks | where: 'type', 'question'
+  assign header_position = section_header_block.settings.header_position | default: false
+  assign column_amount = 1
+  if header_position == 'column_media' or media_block != blank
+    assign column_amount = 2
+  endif
+
+  if section.settings.title_style == 'h3'
+    assign title_html = '<h3 class="h5 size--small">[title]</h3>'
+  elsif section.settings.title_style == 'subheading'
+    assign title_html = '<h3 class="h5 size--small subheading">[title]</h3>'
+  elsif section.settings.title_style == 'body-text'
+    assign title_html = '<h3 class="font-body">[title]</h3>'
+  else
+    assign title_html = '<h3 class="font-body"><strong>[title]</strong></h3>'
+  endif
+
+  capture sizes
+    render 'img_sizes', full_width: section.settings.full_width, ipr_mobile: 1, ipr_tablet: 2, ipr_desktop: 2
+  endcapture
+-%}
+
+{% capture section_header %}
+{%- if section_header_block != blank -%}
+  <div class="section-header mb-32 col-sm-max-6 m-auto text-align-{{ section_header_block.settings.text_alignment }}" {{ section_header_block.shopify_attributes }}>
+  {% if section_header_block.settings.title != blank %}
+    <h2 class="mb-16">
+      {{ section_header_block.settings.title }}
+    </h2>
+  {% endif %}
+  {% if section_header_block.settings.text != blank %}
+    <div class="rte rte--no-max mb-16">
+      {{ section_header_block.settings.text }}
+    </div>
+  {% endif %}
+  </div>
+{%- endif -%}
+{% endcapture %}
+
+<div
+  id="{{ section.id }}"
+  class="pt pb sm-pt sm-pb container{% if section.settings.enable_full_width %} sm-edge-to-edge sm-p-page{% endif %} color-{{ section.settings.color_scheme }}"
+  style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+  {% if header_position == 'top' and section_header != blank %}
+    {{ section_header }}
+  {% endif %}
+
+  <div class="grid grid-cols-1 {% if column_amount > 1 %}sm-grid-cols-2 {% endif %}col-align-items-center col-justify-items-center">
+    {%- if column_amount == 2 -%}
+      <div {% if section.settings.media_position == 'media_last' %}class="col-sm-order-2"{% endif %}>
+        {% if header_position == 'column_media' and section_header != blank %}
+          {{ section_header }}
+        {% endif %}
+
+        {% if media_block != blank %}
+          <div class="faq-section-media" {{ media_block.shopify_attributes }}>
+          {%- if media_block.settings.media_type == 'image' -%}
+            {%- render 'img',
+              src: media_block.settings.image,
+              sizes: sizes,
+              aspect_ratio: media_block.settings.media_aspect_ratio,
+              custom_classes: 'sm-br-img' -%}
+          {%- else -%}
+            {%- render 'video',
+              src: media_block.settings.video_url,
+              autoplay: true,
+              loop: true,
+              aspect_ratio: media_block.settings.media_aspect_ratio,
+              lazyload: true,
+              custom_classes: 'sm-br-img'
+            -%}
+            {%- endif -%}
+          </div>
+        {% endif %}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="questions__wrapper col-sm-max-6 text-align-left sm-text-align-left">
+        {% if header_position == 'column_questions' and section_header != blank %}
+          {{ section_header }}
+        {% endif %}
+        {%- for block in section.blocks -%}
+          {% case block.type %}
+            {% when 'question' %}
+              {%- assign question = block -%}
+
+              <details class="faq-item" {{ question.shopify_attributes }}>
+                <summary>
+                  {{ title_html | replace: '[title]', question.settings.title }}
+                  {% render 'icon-caret' %}
+                </summary>
+                <div class="content faq-item__body">
+                  {% if question.settings.media_type == 'image' and question.settings.image != blank %}
+                    {% render 'img', src: question.settings.image, sizes: sizes, custom_classes: 'br-img mb-12' %}
+                  {% endif %}
+                  {% if question.settings.media_type == 'video' and question.settings.video != blank %}
+                    {% render 'video_store_cdn', video_default: question.settings.video, autoplay: false, class: 'br-img mb-12' %}
+                  {% endif %}
+                  <div class="rte mb-12">
+                    {{ question.settings.text }}
+                  </div>
+                  {% if question.settings.custom_liquid != blank %}
+                    {{ question.settings.custom_liquid }}
+                  {% endif %}
+                </div>
+              </details>
+            {% when 'subheading' %}
+              <h3 class="h5 size--small subheading mt-40 mb-12" {{ block.shopify_attributes }}>{{ block.settings.title }}</h3>
+          {% endcase %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- render 'schema-faq', items: the_questions, context: 'block' -%}
+
+{% schema %}
+  {
+    "name": "t:sections.faq.name",
+    "disabled_on": {
+      "groups": ["header", "aside"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.faq.info"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "default",
+        "label": "t:sections.colors.color_scheme.label"
+      },
+      {
+        "type": "select",
+        "id": "title_style",
+        "label": "t:sections.typography.style_options.question_style_label",
+        "default": "h3",
+        "info": "t:sections.banner-grid.blocks.title_style__info",
+        "options": [
+          {
+            "value": "h3",
+            "label": "t:sections.typography.style_options.heading"
+          },
+          {
+            "value": "subheading",
+            "label": "t:sections.inputs.text.subtitle"
+          },
+          {
+            "value": "body-text",
+            "label": "t:sections.typography.style_options.body_text"
+          },
+          {
+            "value": "body-text-bold",
+            "label": "t:sections.typography.style_options.body_text_bold"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_full_width",
+        "label": "t:sections.layout.section_width.full_width",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "media_position",
+        "label": "t:sections.layout.media_position.label",
+        "options": [
+          {
+            "value": "media_first",
+            "label": "t:sections.layout.media_position.media_first"
+          },
+          {
+            "value": "media_last",
+            "label": "t:sections.layout.media_position.media_last"
+          }
+        ],
+        "default": "media_first"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 40
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 24
+      }
+    ],
+    "blocks": [
+      {
+        "name": "t:sections.blocks.image_or_video.name",
+        "type": "image",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "media_type",
+            "label": "t:sections.images.media_type.label",
+            "options": [
+              {
+              "value": "image",
+              "label": "t:sections.images.media_type.image"
+              },
+              {
+                "value": "video",
+                "label": "t:sections.images.media_type.video"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.inputs.image_picker.image",
+            "visible_if": "{{ block.settings.media_type == 'image' }}"
+          },
+          {
+            "type": "text",
+            "id": "video_url",
+            "label": "t:sections.inputs.url.video_url",
+            "info": "t:sections.inputs.url.video_url__info",
+            "visible_if": "{{ block.settings.media_type == 'video' }}"
+          },
+          {
+            "id": "media_aspect_ratio",
+            "type": "select",
+            "label": "t:sections.images.aspect_ratio.label",
+            "options": [
+              {
+                "value": "natural",
+                "label": "t:sections.images.aspect_ratio.natural"
+              },
+              {
+                "value": "portrait",
+                "label": "t:sections.images.aspect_ratio.portrait_2_3"
+              },
+              {
+                "value": "portrait_alt",
+                "label": "t:sections.images.aspect_ratio.portrait_3_4"
+              },
+              {
+                "value": "square",
+                "label": "t:sections.images.aspect_ratio.square"
+              },
+              {
+                "value": "landscape",
+                "label": "t:sections.images.aspect_ratio.landscape_4_3"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "t:sections.blocks.section_header.name",
+        "type": "section_header",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "t:sections.inputs.text.title",
+            "default": "FAQ section"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.inputs.text.text",
+            "default": "<p>Show usually asked questions with answers. You can also add a media to the section. Images and videos usually help to explain the answer. You can also add media to each question from the question block. To group questions under a common topic, you can add a subheading block.</p>"
+          },
+          {
+            "type": "text_alignment",
+            "id": "text_alignment",
+            "label": "t:sections.typography.text_align",
+            "default": "left"
+          },
+          {
+            "type": "select",
+            "id": "header_position",
+            "label": "t:sections.faq.blocks.header_position.label",
+            "default": "top",
+            "options": [
+              {
+                "value": "top",
+                "label": "t:sections.faq.blocks.header_position.options.top"
+              },
+              {
+                "value": "column_media",
+                "label": "t:sections.faq.blocks.header_position.options.column_media"
+              },
+              {
+                "value": "column_questions",
+                "label": "t:sections.faq.blocks.header_position.options.column_questions"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "subheading",
+        "name": "Subheading",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Use this block to divide the questions into groups."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.inputs.text.title",
+            "default": "Optional topic"
+          }
+        ]
+      },
+      {
+        "type": "question",
+        "name": "Question",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.inputs.text.title",
+            "default": "Sample question?"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.inputs.text.text",
+            "default": "<p>Add you answer here. Try to be specific and concise. You can also add a media to the question. Images and videos usually help to explain the answer.</p>"
+          },
+          {
+            "type": "liquid",
+            "id": "custom_liquid",
+            "label": "t:sections.custom-liquid.settings.custom_liquid.label"
+          },
+          {
+            "type": "header",
+            "content": "Media",
+            "info": "If you want to add a media to the question, you can add an image or a video."
+          },
+          {
+            "type": "select",
+            "id": "media_type",
+            "label": "t:sections.images.media_type.label",
+            "options": [
+              {
+              "value": "image",
+              "label": "t:sections.images.media_type.image"
+              },
+              {
+                "value": "video",
+                "label": "t:sections.images.media_type.video"
+              }
+            ],
+            "default": "image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.inputs.image_picker.image",
+            "visible_if": "{{ block.settings.media_type == 'image' }}"
+          },
+          {
+            "type": "video",
+            "id": "video",
+            "label": "t:sections.inputs.url.video_url",
+            "info": "t:sections.inputs.url.video_url__info",
+            "visible_if": "{{ block.settings.media_type == 'video' }}"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "t:sections.faq.name",
+      "category": "t:sections.section_categories.utility_and_support",
+      "blocks": [
+        {
+          "type": "section_header"
+        },
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "question"
+        },
+        {
+          "type": "question"
+        }
+      ]
+    }]
+  }
+{% endschema %}

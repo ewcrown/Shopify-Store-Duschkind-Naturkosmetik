@@ -1,0 +1,42 @@
+{%- liquid
+  assign section_blocks = section.blocks | map: 'settings'
+
+  # Banner that is set to position 0
+  assign first_banner = section_blocks | where: 'nth_item', 0 | first
+  unless first_banner == blank
+    assign show_first_banner = true
+    if first_banner.only_on_first_page and paginate.current_page > 1
+      assign show_first_banner = false
+    endif
+
+    if show_first_banner == true
+      render 'card-banner', current_block: first_banner, lazyload: false, section: section, ipr_array: ipr_array
+    endif
+  endunless
+
+  capture sizes
+    render 'img_sizes', full_width: full_width, ipr_mobile: ipr_array[0], ipr_tablet: ipr_array[1], ipr_desktop: ipr_array[2]
+  endcapture
+
+	for product in collection.products
+    # Banner that is set to position 1 or higher
+    assign blocks = section_blocks | where: 'nth_item', forloop.index
+    assign current_block = blocks[0]
+
+    assign only_on_first_page = current_block.only_on_first_page
+    assign show_banner = true
+    if only_on_first_page and paginate.current_page > 1
+      assign show_banner = false
+    endif
+
+    assign lazy_load = false
+    if forloop.index > section.settings.products_per_row_mobile
+      assign lazy_load = true
+    endif
+
+    render 'card-product', product: product, lazyload: lazy_load, preload: lazy_load, sizes: sizes
+    if current_block and show_banner == true
+      render 'card-banner', current_block: current_block, lazyload: lazy_load, section: section, ipr_array: ipr_array
+    endif
+  endfor
+-%}

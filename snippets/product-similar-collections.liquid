@@ -1,0 +1,19 @@
+{%- if product.collections.size > 0 -%}
+  {%- assign collections_to_exclude = block.settings.to_exclude | remove: ' ' | split: ',' -%}
+
+  <div class="similar-collections">
+    <p class="similar-collections__title mb-8">{{ block.settings.title }}</p>
+
+    <ul role="list">
+      {% for collection in product.collections %}
+        {%- unless collections_to_exclude contains collection.handle -%}
+          <li class="similar-collections__item">
+            <a href="{{ collection.url }}">
+              {{ collection.title }}
+            </a>
+          </li>
+        {%- endunless -%}
+      {% endfor %}
+    </ul>
+  </div>
+{%- endif -%}

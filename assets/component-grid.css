@@ -1,0 +1,438 @@
+.grid {
+  --gap: var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /*HERE YOU CAN SET YOUR CUSTOM COLUMN GAP*/
+  grid-column-gap: var(--gap);
+  /*HERE YOU CAN SET YOUR CUSTOM ROW GAP*/
+  grid-row-gap: var(--gap);
+
+  /*
+  grid-auto-flow DETERMINES HOW THE GRID WILL FILL UP. IF YOU ENABLE THE
+  grid-auto-flow PROPERTY, grid-column-gap WILL HAVE NO EFFECT ON THE
+  AUTO-GENERATED ROWS, SO YOU WILL NEED TO SET A MARGIN TOP &/OR BOTTOM
+  TO THE ELEMENTS INSIDE THE GRID CONTAINER IF YOU WANT A ROW GAP.
+  dense tells the auto-placement algorithm to attempt to fill in holes
+  earlier in the grid if smaller items come up later,
+
+  row TELLS THE AUTO-PLACEMENT ALGORITHM TO FILL IN EACH ROW IN TURN,
+  ADDING NEW ROWS AS NECESSARY
+
+  column TELLS THE AUTO-PLACEMENT ALGORITHM TO FILL IN EACH COLUMN IN
+  TURN, ADDING NEW COLUMNS AS NECESSARY
+  */
+
+  grid-auto-flow: dense;
+  position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.grid > * {
+  width: 100%;
+}
+
+.grid.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr))}
+.grid.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr))}
+.grid.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr))}
+.grid.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr))}
+.grid.grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr))}
+.grid.grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr))}
+.grid.grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr))}
+.grid.grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr))}
+.grid.grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr))}
+.grid.grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr))}
+.grid.grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr))}
+.grid.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr))}
+
+@media only screen and (min-width: 768px) {
+  .grid.sm-grid-cols-1 {grid-template-columns: repeat(1, minmax(0, 1fr))}
+  .grid.sm-grid-cols-2 {grid-template-columns: repeat(2, minmax(0, 1fr))}
+  .grid.sm-grid-cols-3 {grid-template-columns: repeat(3, minmax(0, 1fr))}
+  .grid.sm-grid-cols-4 {grid-template-columns: repeat(4, minmax(0, 1fr))}
+  .grid.sm-grid-cols-5 {grid-template-columns: repeat(5, minmax(0, 1fr))}
+  .grid.sm-grid-cols-6 {grid-template-columns: repeat(6, minmax(0, 1fr))}
+  .grid.sm-grid-cols-7 {grid-template-columns: repeat(7, minmax(0, 1fr))}
+  .grid.sm-grid-cols-8 {grid-template-columns: repeat(8, minmax(0, 1fr))}
+  .grid.sm-grid-cols-9 {grid-template-columns: repeat(9, minmax(0, 1fr))}
+  .grid.sm-grid-cols-10 {grid-template-columns: repeat(10, minmax(0, 1fr))}
+  .grid.sm-grid-cols-11 {grid-template-columns: repeat(11, minmax(0, 1fr))}
+  .grid.sm-grid-cols-12 {grid-template-columns: repeat(12, minmax(0, 1fr))}
+}
+
+@media only screen and (min-width: 1024px) {
+  .grid.md-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr))}
+  .grid.md-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr))}
+  .grid.md-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr))}
+  .grid.md-grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr))}
+  .grid.md-grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr))}
+  .grid.md-grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr))}
+  .grid.md-grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr))}
+  .grid.md-grid-cols-8 { grid-template-columns: repeat(8, minmax(0, 1fr))}
+  .grid.md-grid-cols-9 { grid-template-columns: repeat(9, minmax(0, 1fr))}
+  .grid.md-grid-cols-10 { grid-template-columns: repeat(10, minmax(0, 1fr))}
+  .grid.md-grid-cols-11 { grid-template-columns: repeat(11, minmax(0, 1fr))}
+  .grid.md-grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr))}
+}
+
+/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+.col-justify-items-start { justify-items: start }
+.col-justify-items-end { justify-items: end }
+.col-justify-items-center { justify-items: center }
+.col-justify-items-stretch { justify-items: stretch }
+
+/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+.col-align-items-start { align-items: start }
+.col-align-items-end { align-items: end }
+.col-align-items-center { align-items: center }
+.col-align-items-stretch { align-items: stretch }
+
+/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+.col-justify-content-start { justify-content: start }
+.col-justify-content-end { justify-content: end }
+.col-justify-content-center { justify-content: center }
+.col-justify-content-stretch { justify-content: stretch }
+.col-justify-content-space-around { justify-content: space-around }
+.col-justify-content-space-between { justify-content: space-between }
+.col-justify-content-space-evenly { justify-content: space-evenly }
+
+/*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+.col-align-content-start { align-content: start }
+.col-align-content-end { align-content: end }
+.col-align-content-center { align-content: center }
+
+.col-align-content-stretch { align-content: stretch }
+.col-align-content-space-around { align-content: space-around }
+.col-align-content-space-between { align-content: space-between }
+.col-align-content-space-evenly { align-content: space-evenly }
+
+.col-grid-auto-flow-row { grid-auto-flow: row }
+.col-grid-auto-flow-column { grid-auto-flow: column }
+.col-grid-auto-flow-dense { grid-auto-flow: dense }
+
+/* NOTE since Taiga 3.4.0 the mobile gird is 6 columns instead of 12 */
+.col-2 { grid-column-end: span 1 }
+.col-4 { grid-column-end: span 2 }
+.col-6 { grid-column-end: span 3 }
+.col-8 { grid-column-end: span 4 }
+.col-10 { grid-column-end: span 5 }
+.col-12 { grid-column-end: span 6 }
+
+.col-justify-self-start { justify-self: start }
+.col-justify-self-end { justify-self: end }
+.col-justify-self-center { justify-self: center }
+.col-justify-self-stretch { justify-self: stretch }
+
+.col-align-self-start { align-self: start }
+.col-align-self-end { align-self: end }
+.col-align-self-center { align-self: center }
+.col-align-self-stretch { align-self: stretch }
+
+@media only screen and (min-width: 768px) {
+  .sm-gap {
+    --gap: var(--sm-gap) !important;
+  }
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-sm-justify-items-start { justify-items: start }
+  .col-sm-justify-items-end { justify-items: end }
+  .col-sm-justify-items-center { justify-items: center }
+  .col-sm-justify-items-stretch { justify-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-sm-align-items-start { align-items: start }
+  .col-sm-align-items-end { align-items: end }
+  .col-sm-align-items-center { align-items: center }
+  .col-sm-align-items-stretch { align-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-sm-justify-content-start { justify-content: start }
+  .col-sm-justify-content-end { justify-content: end }
+  .col-sm-justify-content-center { justify-content: center }
+  .col-sm-justify-content-stretch { justify-content: stretch }
+  .col-sm-justify-content-space-around { justify-content: space-around }
+  .col-sm-justify-content-space-between { justify-content: space-between }
+  .col-sm-justify-content-space-evenly { justify-content: space-evenly }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-sm-align-content-start { align-content: start }
+  .col-sm-align-content-end { align-content: end }
+  .col-sm-align-content-center { align-content: center }
+
+  .col-sm-align-content-stretch { align-content: stretch }
+  .col-sm-align-content-space-around { align-content: space-around }
+  .col-sm-align-content-space-between { align-content: space-between }
+  .col-sm-align-content-space-evenly { align-content: space-evenly }
+
+  .col-sm-grid-auto-flow-row { grid-auto-flow: row }
+  .col-sm-grid-auto-flow-column { grid-auto-flow: column }
+  .col-sm-grid-auto-flow-dense { grid-auto-flow: dense }
+
+  .col-2 { grid-column-end: span 2 }
+  .col-4 { grid-column-end: span 4 }
+  .col-6 { grid-column-end: span 6 }
+  .col-8 { grid-column-end: span 8 }
+  .col-10 { grid-column-end: span 10 }
+  .col-12 { grid-column-end: span 12 }
+
+  .col-sm-1 { grid-column-end: span 1 }
+  .col-sm-2 { grid-column-end: span 2 }
+  .col-sm-3 { grid-column-end: span 3 }
+  .col-sm-4 { grid-column-end: span 4 }
+  .col-sm-5 { grid-column-end: span 5 }
+  .col-sm-6 { grid-column-end: span 6 }
+  .col-sm-7 { grid-column-end: span 7 }
+  .col-sm-8 { grid-column-end: span 8 }
+  .col-sm-9 { grid-column-end: span 9 }
+  .col-sm-10 { grid-column-end: span 10 }
+  .col-sm-11 { grid-column-end: span 11 }
+  .col-sm-12 { grid-column-end: span 12 }
+
+  .col-sm-offset-2 { grid-column-start: 2 }
+  .col-sm-offset-3 { grid-column-start: 3 }
+  .col-sm-offset-4 { grid-column-start: 4 }
+  .col-sm-offset-5 { grid-column-start: 5 }
+  .col-sm-offset-6 { grid-column-start: 6 }
+  .col-sm-offset-7 { grid-column-start: 7 }
+  .col-sm-offset-8 { grid-column-start: 8 }
+  .col-sm-offset-9 { grid-column-start: 9 }
+  .col-sm-offset-10 { grid-column-start: 10 }
+  .col-sm-offset-11 { grid-column-start: 11 }
+  .col-sm-offset-12 { grid-column-start: 12 }
+
+  .col-sm-justify-self-start { justify-self: start }
+  .col-sm-justify-self-end { justify-self: end }
+  .col-sm-justify-self-center { justify-self: center }
+  .col-sm-justify-self-stretch { justify-self: stretch }
+
+  .col-sm-align-self-start { align-self: start }
+  .col-sm-align-self-end { align-self: end }
+  .col-sm-align-self-center { align-self: center }
+  .col-sm-align-self-stretch { align-self: stretch }
+}
+
+@media only screen and (min-width: 1024px) {
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-md-justify-items-start { justify-items: start }
+  .col-md-justify-items-end { justify-items: end }
+  .col-md-justify-items-center { justify-items: center }
+  .col-md-justify-items-stretch { justify-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-md-align-items-start { align-items: start }
+  .col-md-align-items-end { align-items: end }
+  .col-md-align-items-center { align-items: center }
+  .col-md-align-items-stretch { align-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-md-justify-content-start { justify-content: start }
+  .col-md-justify-content-end { justify-content: end }
+  .col-md-justify-content-center { justify-content: center }
+  .col-md-justify-content-stretch { justify-content: stretch }
+  .col-md-justify-content-space-around { justify-content: space-around }
+  .col-md-justify-content-space-between { justify-content: space-between }
+  .col-md-justify-content-space-evenly { justify-content: space-evenly }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-md-align-content-start { align-content: start }
+  .col-md-align-content-end { align-content: end }
+  .col-md-align-content-center { align-content: center }
+
+  .col-md-align-content-stretch { align-content: stretch }
+  .col-md-align-content-space-around { align-content: space-around }
+  .col-md-align-content-space-between { align-content: space-between }
+  .col-md-align-content-space-evenly { align-content: space-evenly }
+
+  .col-md-grid-auto-flow-row { grid-auto-flow: row }
+  .col-md-grid-auto-flow-column { grid-auto-flow: column }
+  .col-md-grid-auto-flow-dense { grid-auto-flow: dense }
+
+  .col-md-1 { grid-column-end: span 1 }
+  .col-md-2 { grid-column-end: span 2 }
+  .col-md-3 { grid-column-end: span 3 }
+  .col-md-4 { grid-column-end: span 4 }
+  .col-md-5 { grid-column-end: span 5 }
+  .col-md-6 { grid-column-end: span 6 }
+  .col-md-7 { grid-column-end: span 7 }
+  .col-md-8 { grid-column-end: span 8 }
+  .col-md-9 { grid-column-end: span 9 }
+  .col-md-10 { grid-column-end: span 10 }
+  .col-md-11 { grid-column-end: span 11 }
+  .col-md-12 { grid-column-end: span 12 }
+
+  .col-md-offset-2 { grid-column-start: 2 }
+  .col-md-offset-3 { grid-column-start: 3 }
+  .col-md-offset-4 { grid-column-start: 4 }
+  .col-md-offset-5 { grid-column-start: 5 }
+  .col-md-offset-6 { grid-column-start: 6 }
+  .col-md-offset-7 { grid-column-start: 7 }
+  .col-md-offset-8 { grid-column-start: 8 }
+  .col-md-offset-9 { grid-column-start: 9 }
+  .col-md-offset-10 { grid-column-start: 10 }
+  .col-md-offset-11 { grid-column-start: 11 }
+  .col-md-offset-12 { grid-column-start: 12 }
+
+  .col-md-justify-self-start { justify-self: start }
+  .col-md-justify-self-end { justify-self: end }
+  .col-md-justify-self-center { justify-self: center }
+  .col-md-justify-self-stretch { justify-self: stretch }
+
+  .col-md-align-self-start { align-self: start }
+  .col-md-align-self-end { align-self: end }
+  .col-md-align-self-center { align-self: center }
+  .col-md-align-self-stretch { align-self: stretch }
+}
+
+@media only screen and (min-width: 1200px) {
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-lg-justify-items-start { justify-items: start }
+  .col-lg-justify-items-end { justify-items: end }
+  .col-lg-justify-items-center { justify-items: center }
+  .col-lg-justify-items-stretch { justify-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-lg-align-items-start { align-items: start }
+  .col-lg-align-items-end { align-items: end }
+  .col-lg-align-items-center { align-items: center }
+  .col-lg-align-items-stretch { align-items: stretch }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-lg-justify-content-start { justify-content: start }
+  .col-lg-justify-content-end { justify-content: end }
+  .col-lg-justify-content-center { justify-content: center }
+  .col-lg-justify-content-stretch { justify-content: stretch }
+  .col-lg-justify-content-space-around { justify-content: space-around }
+  .col-lg-justify-content-space-between { justify-content: space-between }
+  .col-lg-justify-content-space-evenly { justify-content: space-evenly }
+
+  /*IN ORDER FOR THIS TO WORK, ALL ELEMENTS MUST HAVE A DEFINED WIDTH AND HEIGHT*/
+  .col-lg-align-content-start { align-content: start }
+  .col-lg-align-content-end { align-content: end }
+  .col-lg-align-content-center { align-content: center }
+
+  .col-lg-align-content-stretch { align-content: stretch }
+  .col-lg-align-content-space-around { align-content: space-around }
+  .col-lg-align-content-space-between { align-content: space-between }
+  .col-lg-align-content-space-evenly { align-content: space-evenly }
+
+  .col-lg-grid-auto-flow-row { grid-auto-flow: row }
+  .col-lg-grid-auto-flow-column { grid-auto-flow: column }
+  .col-lg-grid-auto-flow-dense { grid-auto-flow: dense }
+
+  .col-lg-1 { grid-column-end: span 1 }
+  .col-lg-2 { grid-column-end: span 2 }
+  .col-lg-3 { grid-column-end: span 3 }
+  .col-lg-4 { grid-column-end: span 4 }
+  .col-lg-5 { grid-column-end: span 5 }
+  .col-lg-6 { grid-column-end: span 6 }
+  .col-lg-7 { grid-column-end: span 7 }
+  .col-lg-8 { grid-column-end: span 8 }
+  .col-lg-9 { grid-column-end: span 9 }
+  .col-lg-10 { grid-column-end: span 10 }
+  .col-lg-11 { grid-column-end: span 11 }
+  .col-lg-12 { grid-column-end: span 12 }
+
+  .col-lg-offset-2 { grid-column-start: 2 }
+  .col-lg-offset-3 { grid-column-start: 3 }
+  .col-lg-offset-4 { grid-column-start: 4 }
+  .col-lg-offset-5 { grid-column-start: 5 }
+  .col-lg-offset-6 { grid-column-start: 6 }
+  .col-lg-offset-7 { grid-column-start: 7 }
+  .col-lg-offset-8 { grid-column-start: 8 }
+  .col-lg-offset-9 { grid-column-start: 9 }
+  .col-lg-offset-10 { grid-column-start: 10 }
+  .col-lg-offset-11 { grid-column-start: 11 }
+  .col-lg-offset-12 { grid-column-start: 12 }
+
+  .col-lg-justify-self-start { justify-self: start }
+  .col-lg-justify-self-end { justify-self: end }
+  .col-lg-justify-self-center { justify-self: center }
+  .col-lg-justify-self-stretch { justify-self: stretch }
+
+  .col-lg-align-self-start { align-self: start }
+  .col-lg-align-self-end { align-self: end }
+  .col-lg-align-self-center { align-self: center }
+  .col-lg-align-self-stretch { align-self: stretch }
+}
+
+/* ORDER UTILITIES */
+.col-order-1 {order: 1}
+.col-order-2 {order: 2}
+.col-order-3 {order: 3}
+.col-order-4 {order: 4}
+.col-order-5 {order: 5}
+.col-order-6 {order: 6}
+
+@media only screen and (min-width: 768px) {
+  .col-sm-order-1 {order: 1}
+  .col-sm-order-2 {order: 2}
+  .col-sm-order-3 {order: 3}
+  .col-sm-order-4 {order: 4}
+  .col-sm-order-5 {order: 5}
+  .col-sm-order-6 {order: 6}
+}
+
+/* SIZE UTILITIES */
+.item-span-2 {grid-column: span 2}
+.item-span-3 {grid-column: span 3}
+.item-span-4 {grid-column: span 4}
+.item-span-5 {grid-column: span 5}
+.item-span-6 {grid-column: span 6}
+
+@media only screen and (min-width: 768px) {
+  .sm-item-span-2 {grid-column: span 2}
+  .sm-item-span-3 {grid-column: span 3}
+  .sm-item-span-4 {grid-column: span 4}
+  .sm-item-span-5 {grid-column: span 5}
+  .sm-item-span-6 {grid-column: span 6}
+}
+
+@media only screen and (min-width: 1024px) {
+  .md-item-span-2 {grid-column: span 2}
+  .md-item-span-3 {grid-column: span 3}
+  .md-item-span-4 {grid-column: span 4}
+  .md-item-span-5 {grid-column: span 5}
+  .md-item-span-6 {grid-column: span 6}
+}
+
+/* MAX WIDTH UTILITIES */
+@media only screen and (min-width: 768px) {
+  .col-sm-max-1 { max-width: var(--max-col-width)}
+  .col-sm-max-2 { max-width: calc(var(--max-col-width) * 2 + var(--gutter) )}
+  .col-sm-max-3 { max-width: calc(var(--max-col-width) * 3 + var(--gutter) * 2 )}
+  .col-sm-max-4 { max-width: calc(var(--max-col-width) * 4 + var(--gutter) * 3 )}
+  .col-sm-max-5 { max-width: calc(var(--max-col-width) * 5 + var(--gutter) * 4 )}
+  .col-sm-max-6 { max-width: calc(var(--max-col-width) * 6 + var(--gutter) * 5 )}
+  .col-sm-max-7 { max-width: calc(var(--max-col-width) * 7 + var(--gutter) * 6 )}
+  .col-sm-max-8 { max-width: calc(var(--max-col-width) * 8 + var(--gutter) * 7 )}
+  .col-sm-max-9 { max-width: calc(var(--max-col-width) * 9 + var(--gutter) * 8 )}
+  .col-sm-max-10 { max-width: calc(var(--max-col-width) * 10 + var(--gutter) * 9 )}
+  .col-sm-max-11 { max-width: calc(var(--max-col-width) * 11 + var(--gutter) * 10 )}
+}
+@media only screen and (min-width: 1024px) {
+  .col-md-max-1 { max-width: var(--max-col-width)}
+  .col-md-max-2 { max-width: calc(var(--max-col-width) * 2 + var(--gutter) )}
+  .col-md-max-3 { max-width: calc(var(--max-col-width) * 3 + var(--gutter) * 2 )}
+  .col-md-max-4 { max-width: calc(var(--max-col-width) * 4 + var(--gutter) * 3 )}
+  .col-md-max-5 { max-width: calc(var(--max-col-width) * 5 + var(--gutter) * 4 )}
+  .col-md-max-6 { max-width: calc(var(--max-col-width) * 6 + var(--gutter) * 5 )}
+  .col-md-max-7 { max-width: calc(var(--max-col-width) * 7 + var(--gutter) * 6 )}
+  .col-md-max-8 { max-width: calc(var(--max-col-width) * 8 + var(--gutter) * 7 )}
+  .col-md-max-9 { max-width: calc(var(--max-col-width) * 9 + var(--gutter) * 8 )}
+  .col-md-max-10 { max-width: calc(var(--max-col-width) * 10 + var(--gutter) * 9 )}
+  .col-md-max-11 { max-width: calc(var(--max-col-width) * 11 + var(--gutter) * 10 )}
+}
+
+/* GALLERY GRID */
+.grid--gallery {
+  grid-auto-flow: initial;
+}
+.grid--gallery .media {
+  height: 100%;
+}
+.grid--gallery .media > * {
+  height: 100%;
+}

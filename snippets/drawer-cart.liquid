@@ -1,0 +1,25 @@
+<drawer-cart id="drawer-cart" data-id="{{ section.id }}" class="drawer drawer--wide main-cart" data-drawer data-parent style="opacity: 0; display: none;">
+  <form id="cart" action="{{ routes.cart_url }}" method="post" class="drawer-panel user-select-none slide-from-right color-{{ settings.color_scheme_drawers }}" data-contents>
+    <header class="drawer-cart__header">
+      <div class="drawer-header">
+        <h3 class="size--small" aria-label="{{ 'accessibility.your_cart' | t }}">{{ 'sections.cart.title' | t }}</h3>
+        <a role="button" href="#" class="close" data-close aria-label="{{ 'accessibility.close_cart_drawer' | t }}">{%- render 'icon-close' -%}</a>
+      </div>
+
+      {%- render 'cart-shipping-notification', cart: cart -%}
+    </header>
+
+    <div class="drawer-content drawer-cart__content">
+      {%- render 'cart-items' -%}
+      {%- render 'cart-recommendations' -%}
+    </div>
+
+    <footer class="drawer-footer">
+      {%- render 'cart-note' -%}
+      {%- render 'cart-footer' -%}
+    </footer>
+  </form>
+
+  {% comment %} Background, click to close {% endcomment %}
+  <a href="#" class="page-overlay" data-overlay aria-hidden="true"></a>
+</drawer-cart>

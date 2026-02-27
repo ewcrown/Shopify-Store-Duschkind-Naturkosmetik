@@ -1,0 +1,365 @@
+{%- liquid
+  assign ipr_desktop = section.settings.md_items_per_row
+  assign ipr_tablet = section.settings.sm_items_per_row
+  assign ipr_mobile = 1
+
+  assign ipr_array = ipr_mobile | append: ',' | append: ipr_tablet | append: ',' | append: ipr_desktop | split: ','
+-%}
+
+{{ 'template-blog.css' | asset_url | stylesheet_tag }}
+<script type="text/javascript" defer src="{{ 'template-blog.js' | asset_url }}"></script>
+
+<div
+  id="{{section.id}}"
+  class="container pt pb sm-pt sm-pb color-{{ section.settings.color_scheme }}"
+  style="
+    --pt: {{ section.settings.padding_top | append: 'px' }};
+    --pb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-pt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-pb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+  <div class="m-auto{% if ipr_desktop == 2 %} col-md-max-8{% endif %}">
+    {%- if section.settings.show_blog_title or section.settings.enable_filtering and blog.all_tags.size > 0 -%}
+    <header class="mb-gutter mt-40 mb-40">
+      {%- if section.settings.show_blog_title -%}
+      <h1 class="heading mb-16 {% if section.settings.center_text %} text-align-center{% endif %}">{{ blog.title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.enable_filtering and blog.all_tags.size > 0 -%}
+      <div class="blog-filters{% if section.settings.center_text %} m-auto{% endif %}">
+        <link-dropdown>
+          <select id="filter-by" class="btn size--small filter-select" data-blog-url="{{blog.url}}">
+            <option value="" {% unless current_tags %}selected="selected"{% endunless %}>
+              {{- 'blogs.article.show_all' | t -}}
+            </option>
+            {%- for tag in blog.all_tags -%}
+              {%- if current_tags contains tag -%}
+                {%- assign tag_handle = tag | handleize -%}
+                <option value="{{ tag_handle }}" selected="selected">
+                  {{- tag -}}
+                </option>
+              {%- else -%}
+                {%- assign tag_handle = tag | handleize -%}
+                <option value="{{ tag_handle }}">
+                  {{- tag -}}
+                </option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+          <span class="link-icon select-icon dropmenu-arrow icon--round">{% render 'icon-caret' %}</span>
+        </link-dropdown>
+      </div>
+      {%- endif -%}
+    </header>
+    {%- endif -%}
+
+    {%- paginate blog.articles by section.settings.posts_per_page -%}
+      <div style="--gap: {{ section.settings.grid_gap | append: 'px'}};" data-id="{{ section.id }}" class="grid grid-cols-1 sm-grid-cols-{{ ipr_tablet }} md-grid-cols-{{ ipr_desktop }}">
+        {%- render 'blog-items', paginate:paginate, section:section, ipr_array:ipr_array -%}
+        {%- render 'loading' -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        {% render 'pagination', paginate: paginate, anchor: '' %}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.main-blog.name",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "default",
+        "label": "t:sections.colors.color_scheme.label"
+      },
+      {
+        "type": "range",
+        "id": "posts_per_page",
+        "min": 1,
+        "max": 50,
+        "default": 16,
+        "label": "t:sections.main-blog.settings.posts_per_page.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_blog_title",
+        "default": true,
+        "label": "t:sections.main-blog.settings.show_blog_title.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_filtering",
+        "default": true,
+        "label": "t:sections.main-blog.settings.enable_filtering.label",
+        "info": "t:sections.main-blog.settings.enable_filtering.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "center_text",
+        "label": "t:sections.main-blog.settings.center_text.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "grid_gap",
+        "label": "t:sections.main-blog.settings.grid_gap.label",
+        "unit": "px",
+        "min": 0,
+        "max": 40,
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "range",
+        "id": "md_items_per_row",
+        "min": 1,
+        "max": 6,
+        "default": 4,
+        "label": "t:sections.main-blog.settings.articles_per_row.label"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 80
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.tablet_layout"
+      },
+      {
+        "type": "range",
+        "id": "sm_items_per_row",
+        "min": 1,
+        "max": 4,
+        "default": 4,
+        "label": "t:sections.main-blog.settings.articles_per_row.label"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 40
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "t:sections.banners.label",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.images.bg_image",
+            "info": "t:sections.images.bg_image__info"
+          },
+          {
+            "type": "text",
+            "id": "video_file_name",
+            "label": "t:sections.images.bg_video",
+            "info": "t:sections.inputs.url.video_url__info"
+          },
+          {
+            "type": "range",
+            "id": "nth_item",
+            "label": "t:sections.banners.visibility.nth_item",
+            "min": 0,
+            "max": 50,
+            "default": 3,
+            "info": "t:sections.banners.visibility.nth_item__info"
+          },
+          {
+            "type": "checkbox",
+            "id": "only_on_first_page",
+            "label": "t:sections.banners.visibility.only_on_first_page",
+            "info" : "t:sections.banners.visibility.only_on_first_page__info",
+            "default": true
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "t:sections.inputs.url.link"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.overlay_content"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.inputs.text.title"
+          },
+          {
+            "type": "select",
+            "id": "title_style",
+            "label": "t:sections.typography.style_options.heading_style_label",
+            "default": "h3",
+            "info": "t:sections.banner-grid.blocks.title_style__info",
+            "options": [
+              {
+                "value": "h3",
+                "label": "t:sections.inputs.text.title",
+                "group": "t:sections.typography.style_options.text_group"
+              },
+              {
+                "value": "body-text",
+                "label": "t:sections.typography.style_options.body_text",
+                "group": "t:sections.typography.style_options.text_group"
+              },
+              {
+                "value": "subheading",
+                "label": "t:sections.inputs.text.subtitle",
+                "group": "t:sections.typography.style_options.text_group"
+              },
+              {
+                "value": "btn btn--primary",
+                "label": "t:sections.typography.style_options.primary_button",
+                "group": "t:sections.typography.style_options.button_group"
+              },
+              {
+                "value": "btn btn--secondary",
+                "label": "t:sections.typography.style_options.secondary_button",
+                "group": "t:sections.typography.style_options.button_group"
+              },
+              {
+                "value": "btn btn--link",
+                "label": "t:sections.typography.style_options.link",
+                "group": "t:sections.typography.style_options.button_group"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "content_alignment",
+            "label": "t:sections.layout.position.heading_label",
+            "default": "vertical-bottom horizontal-left",
+            "options": [
+              {
+                "value": "vertical-top horizontal-left",
+                "label": "t:sections.layout.position.options.top_left"
+              },
+              {
+                "value": "vertical-top horizontal-center",
+                "label": "t:sections.layout.position.options.top_center"
+              },
+              {
+                "value": "vertical-top horizontal-right",
+                "label": "t:sections.layout.position.options.top_right"
+              },
+              {
+                "value": "vertical-center horizontal-left",
+                "label": "t:sections.layout.position.options.middle_left"
+              },
+              {
+                "value": "vertical-center horizontal-center",
+                "label": "t:sections.layout.position.options.middle_center"
+              },
+              {
+                "value": "vertical-center horizontal-right",
+                "label": "t:sections.layout.position.options.middle_right"
+              },
+              {
+                "value": "vertical-bottom horizontal-left",
+                "label": "t:sections.layout.position.options.bottom_left"
+              },
+              {
+                "value": "vertical-bottom horizontal-center",
+                "label": "t:sections.layout.position.options.bottom_center"
+              },
+              {
+                "value": "vertical-bottom horizontal-right",
+                "label": "t:sections.layout.position.options.bottom_right"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "text_color",
+            "label": "t:sections.colors.heading_color",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "overlay_color",
+            "label": "t:sections.colors.overlay_color",
+            "default": "#000000"
+          },
+          {
+            "type": "range",
+            "id": "overlay_opacity",
+            "label": "t:sections.colors.overlay_opacity",
+            "default": 0,
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "%"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+            "type": "range",
+            "id": "md_column_span",
+            "label": "t:sections.banners.column_span.label",
+            "min": 1,
+            "max": 6,
+            "default": 1,
+            "info": "t:sections.banners.column_span.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.tablet_layout"
+          },
+          {
+            "type": "range",
+            "id": "sm_column_span",
+            "label": "t:sections.banners.column_span.label",
+            "min": 1,
+            "max": 4,
+            "default": 1,
+            "info": "t:sections.banners.column_span.info"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

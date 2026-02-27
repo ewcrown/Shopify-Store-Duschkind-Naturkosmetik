@@ -1,0 +1,222 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "color_scheme": "alternative-1",
+        "show_breadcrumb": false,
+        "image_layout": "show as_bg",
+        "center_text": true,
+        "read_more": false,
+        "md_padding_top": 80,
+        "md_padding_bottom": 80,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "products": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "banner_T6aFw9": {
+          "type": "banner",
+          "settings": {
+            "video_file_name": "",
+            "nth_item": 2,
+            "only_on_first_page": true,
+            "url": "",
+            "title": "",
+            "title_style": "h3",
+            "content_alignment": "vertical-bottom horizontal-left",
+            "text_color": "#111111",
+            "overlay_color": "#fce6ea",
+            "overlay_opacity": 0,
+            "md_column_span": 1,
+            "sm_column_span": 1,
+            "column_span": 1
+          }
+        }
+      },
+      "block_order": [
+        "banner_T6aFw9"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "products_per_page": 16,
+        "show_count": true,
+        "enable_sorting": true,
+        "enable_filtering": true,
+        "enable_swatches": true,
+        "pagination_type": "button",
+        "show_sidebar": false,
+        "enable_full_width": false,
+        "md_items_per_row": 3,
+        "sm_grid_gap": -1,
+        "md_padding_top": 24,
+        "md_padding_bottom": 56,
+        "sm_items_per_row": 3,
+        "items_per_row": 2,
+        "grid_gap": 10,
+        "padding_top": 24,
+        "padding_bottom": 32
+      }
+    },
+    "image_with_text_zhpCT3": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_iDwJ4Q": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Smuutiskin_Lowres_Final_Verti_1_d27baeed-3b65-4f3d-8545-b758ac4503a0.jpg",
+            "video_url": "",
+            "media_aspect_ratio": "square",
+            "media_toggle": "show_image",
+            "media_link": ""
+          }
+        },
+        "title_g3FYWB": {
+          "type": "title",
+          "settings": {
+            "title": "Do you already know the skincare basics?",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "text_jXkDYn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Getting the fundamentals right makes all the difference. When you understand the simple steps behind cleansing, hydrating and protecting, building your routine becomes effortless—and every product you use works even better.</p>",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 12,
+            "size_multiplier": "size--default",
+            "margin_top": 10
+          }
+        }
+      },
+      "block_order": [
+        "image_iDwJ4Q",
+        "title_g3FYWB",
+        "text_jXkDYn"
+      ],
+      "settings": {
+        "color_scheme": "default",
+        "enable_full_width": false,
+        "media_position": "media_last",
+        "content_width": "col-sm-max-4",
+        "desktop_alignment": "sm-text-align-left",
+        "sm_full_width_buttons": false,
+        "md_padding_top": 40,
+        "md_padding_bottom": 40,
+        "mobile_alignment": "text-align-center",
+        "full_width_buttons": false,
+        "padding_top": 16,
+        "padding_bottom": 24
+      }
+    },
+    "faq_pXaYKB": {
+      "type": "faq",
+      "blocks": {
+        "section_header_K4cqYy": {
+          "type": "section_header",
+          "settings": {
+            "title": "Do you already know the skincare basics?",
+            "text": "<p>Getting the fundamentals right makes all the difference. When you understand the simple steps behind cleansing, hydrating and protecting, building your routine becomes effortless—and every product you use works even better.</p>",
+            "text_alignment": "left",
+            "header_position": "column_questions"
+          }
+        },
+        "image_neDfWP": {
+          "type": "image",
+          "settings": {
+            "media_type": "image",
+            "image": "shopify://shop_images/soft_lips_starter_pack.png",
+            "video_url": "",
+            "media_aspect_ratio": "square"
+          }
+        },
+        "question_cekpBB": {
+          "type": "question",
+          "settings": {
+            "title": "Skincare Steps",
+            "text": "<p>The basic steps of skincare are makeup removal, cleansing, targeted treatments, hydration (both water-based and oil-based) and sun protection.</p>",
+            "custom_liquid": "",
+            "media_type": "image"
+          }
+        },
+        "question_nNMeDA": {
+          "type": "question",
+          "settings": {
+            "title": "Building your skincare routine",
+            "text": "<p>Creating your own skincare routine can feel challenging, as it depends on how many steps you want, your skin type, your concerns and your personal preferences.</p><p>A good place to start is by choosing a cleanser and a moisturizer that suit your skin, then considering if you need anything extra.</p>",
+            "custom_liquid": "",
+            "media_type": "image"
+          }
+        },
+        "question_XqjRqV": {
+          "type": "question",
+          "settings": {
+            "title": "Cleansing the skin",
+            "text": "<p>Cleansing can be done with either one or two products. In a double cleanse, the skin is first washed with an oil-based product (such as a cleansing balm or oil) and then followed by a water-based product (such as a gel, cream or milk cleanser).</p>",
+            "custom_liquid": "",
+            "media_type": "image"
+          }
+        },
+        "question_xzWNxX": {
+          "type": "question",
+          "settings": {
+            "title": "Moisturizing the skin",
+            "text": "<p>The skin needs both hydration (water) and moisture (oil). All skin types benefit from hydration, but some may be especially dehydrated and require more water-based care.</p>",
+            "custom_liquid": "",
+            "media_type": "image"
+          }
+        },
+        "question_rzcVBd": {
+          "type": "question",
+          "settings": {
+            "title": "Exfoliating the skin",
+            "text": "<p>The skin naturally sheds dead cells, but sometimes it needs a little help. Dead skin buildup can make the complexion look dull and clog pores, which may lead to breakouts and blackheads.</p>",
+            "custom_liquid": "",
+            "media_type": "image"
+          }
+        }
+      },
+      "block_order": [
+        "section_header_K4cqYy",
+        "image_neDfWP",
+        "question_cekpBB",
+        "question_nNMeDA",
+        "question_XqjRqV",
+        "question_xzWNxX",
+        "question_rzcVBd"
+      ],
+      "name": "t:sections.faq.name",
+      "settings": {
+        "color_scheme": "",
+        "title_style": "subheading",
+        "enable_full_width": false,
+        "media_position": "media_first",
+        "md_padding_top": 56,
+        "md_padding_bottom": 40,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "products",
+    "image_with_text_zhpCT3",
+    "faq_pXaYKB"
+  ]
+}

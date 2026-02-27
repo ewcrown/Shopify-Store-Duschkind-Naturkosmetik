@@ -1,0 +1,83 @@
+.price-range-slider .slider-container {
+  --thumb-width: 18px;
+  --slider-height: 6px;
+  position: relative;
+  width: calc(100% - var(--thumb-width));
+  height: var(--slider-height);
+  background: var(--color-borders);
+  margin: 20px calc(var(--thumb-width) / 2);
+  border-radius: var(--slider-height);
+}
+.price-range-slider .thumb {
+  position: absolute;
+  top: calc(var(--slider-height) / 2 - var(--thumb-width) / 2);
+  width: var(--thumb-width);
+  height: var(--thumb-width);
+  background: var(--color-foreground);
+  box-shadow:inset 0 0 0 1px var(--color-foreground), inset 0 0 0 4px var(--color-background);
+  border-radius: 50%;
+  cursor: pointer;
+  touch-action: none;
+}
+/* Visible focus style for keyboard navigation */
+.price-range-slider .thumb:focus {
+  outline: 2px solid var(--color-foreground);
+}
+.price-range-slider .range {
+  position: absolute;
+  height: 6px;
+  background: var(--color-foreground);
+  top: 0;
+}
+
+.price-range-slider .inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  gap: clamp(10px, var(--gutter), 24px);
+}
+
+.price-range-input-wrapper .currency {
+  flex-basis: 2rem;
+  text-align: center;
+  opacity: 0.6;
+  position: absolute;
+  left: 12px;
+  color: var(--input-foreground);
+}
+
+.price-range-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+}
+
+.price-range-input {
+  color: var(--input-foreground);
+  background-color: var(--input-background);
+  box-shadow: var(--input-box-shadow);
+  flex: 1 0 auto;
+  text-align: right;
+  padding: 8px 12px;
+  border-radius: var(--input-border-radius);
+  border: solid var(--input-border-width) var(--input-border-color);
+}
+
+/* Chrome, Safari, Edge, Opera */
+.price-range-input::-webkit-outer-spin-button,
+.price-range-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.price-range-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.price-range__horizontal-divider {
+  display: grid;
+  place-content: center;
+  opacity: 0.6;
+}

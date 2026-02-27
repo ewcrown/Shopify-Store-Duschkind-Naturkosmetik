@@ -1,0 +1,25 @@
+{%- comment -%}
+
+  ** Purpose **
+  'button' snippet generates HTML <a> element with given style and color schema parameters. Colors inherited from parent elements.
+
+  ** Parameters **
+  label         =>  Button label text  - REQUIRED
+  link          =>  URL  - OPTIONAL, if not provided the button will be disabled
+  style         =>  'primary', 'secondary', 'text_link' - OPTIONAL (default: 'primary')
+  width         =>  'inline', 'full' - OPTIONAL (default: 'inline')
+  target        =>  '_blank' - OPTIONAL, use only if you wan't to open the linked location on a new tab
+  tag           => 'a', 'button' - OPTIONAL (default: 'a')
+  classes       =>  OPTIONAL, add further classes
+
+{%- endcomment -%}
+
+{%- if label != blank -%}
+  {%- if tag == 'button' -%}
+    <button class="btn btn--{{ style | default: "primary" }} btn--{{ width | default: "inline" }}{% if classes %} {{ classes }}{% endif %}" {% if block_attributes %}{{ block_attributes }}{% endif %}>{{ label }}</button>
+  {%- elsif tag == 'faux' -%}
+    <span class="btn btn--{{ style | default: "primary" }} btn--{{ width | default: "inline" }}{% if classes %} {{ classes }}{% endif %}" {% if block_attributes %}{{ block_attributes }}{% endif %}>{{ label }}</span>
+  {%- else -%}
+    <a class="btn btn--{{ style | default: "primary" }} btn--{{ width | default: "inline" }}{% unless link %} disabled{% endunless %}{% if classes %} {{ classes }}{% endif %}" {% if link %}href="{{ link }}"{% endif %}{% if target == '_blank' %}target="_blank"{% endif %} {% if block_attributes %}{{ block_attributes }}{% endif %}>{{ label }}</a>
+  {%- endif -%}
+{%- endif -%}

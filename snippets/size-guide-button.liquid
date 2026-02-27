@@ -1,0 +1,10 @@
+<size-guide-button data-open-drawer="drawer-{{ drawer_id }}">
+  <button class="size-guide-button link flex size--small" style="gap: 4px;" aria-controls="drawer-{{ drawer_id }}" aria-haspopup="dialog">
+    {% if show_ruler %}
+      {% render 'icon-ruler' %}
+    {% endif %}
+    <span>{{ label}}</span>
+  </button>
+</size-guide-button>
+
+<script type="text/javascript" src="{{ 'component-size-guide-button.js' | asset_url }}" defer></script>

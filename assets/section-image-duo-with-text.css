@@ -1,0 +1,148 @@
+.image-duo-with-text {
+  overflow-x: scroll;
+  height: 100%;
+  max-width: 100%;
+}
+.image-duo-grid {
+  height: 100%;
+  width: 150%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--grid-gap);
+  grid-template-areas:
+  'b b b s s s'
+  't t t t . .'
+}
+
+.image-duo-grid .media-block--big {
+  grid-area: b;
+}
+
+.image-duo-grid .media-block--small {
+  grid-area: s;
+}
+
+.body-block {
+  width: 100vw;
+  padding: var(--gutter) var(--container-margin);
+  position: sticky;
+  left: 0;
+  grid-area: t;
+  height: max-content;
+}
+
+.image-duo-grid .media-block img,
+.image-duo-grid .media-block video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.image-duo-grid .media-block figure {
+  height: 100%;
+}
+
+.image-duo-grid superpowered-video iframe {
+  width: 300% !important;
+  height: 300% !important;
+  left: -100% !important;
+  top: -100% !important;
+}
+
+.image-duo-grid superpowered-video {
+  aspect-ratio: auto !important;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .image-duo-with-text {
+    overflow-x: auto;
+  }
+
+  .image-duo-grid {
+    width: 100%;
+  }
+
+  .body-block {
+    width: 100%;
+    padding: var(--container-margin) 0;
+    position: static;
+    left: auto;
+  }
+
+  .layout--bottom-left .body-block,
+  .layout--bottom-right .body-block {
+    align-self: end;
+  }
+  .image-duo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+  }
+
+  .layout--top-right{
+    grid-template-areas:
+    '. . . . . . . t t t t t'
+    'b b b b b b . t t t t t'
+    'b b b b b b s s s s s .'
+    'b b b b b b s s s s s .'
+  }
+
+  .layout--top-left{
+    grid-template-areas:
+    't t t t t . . . . . . .'
+    't t t t t . b b b b b b'
+    '. s s s s s b b b b b b'
+    '. s s s s s b b b b b b'
+  }
+
+  .layout--bottom-left{
+    grid-template-areas:
+    '. s s s s s b b b b b b'
+    '. s s s s s b b b b b b'
+    't t t t t . b b b b b b'
+    't t t t t . . . . . . .'
+  }
+
+  .layout--bottom-right{
+    grid-template-areas:
+    'b b b b b b s s s s s .'
+    'b b b b b b s s s s s .'
+    'b b b b b b . t t t t t'
+    '. . . . . . . t t t t t'
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .layout--top-right{
+    grid-template-areas:
+    '. . . . . . . . t t t .'
+    '. . b b b b b . t t t .'
+    '. . b b b b b s s s . .'
+    '. . b b b b b s s s . .'
+  }
+
+  .layout--top-left{
+    grid-template-areas:
+    '. t t t . . . . . . . .'
+    '. t t t . b b b b b . .'
+    '. . s s s b b b b b . .'
+    '. . s s s b b b b b . .'
+  }
+
+  .layout--bottom-left{
+    grid-template-areas:
+    '. . s s s b b b b b . .'
+    '. . s s s b b b b b . .'
+    '. t t t . b b b b b . .'
+    '. t t t . . . . . . . .'
+  }
+
+  .layout--bottom-right{
+    grid-template-areas:
+    '. . b b b b b s s s . .'
+    '. . b b b b b s s s . .'
+    '. . b b b b b . t t t .'
+    '. . . . . . . . t t t .'
+  }
+}

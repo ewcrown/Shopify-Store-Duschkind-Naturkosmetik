@@ -1,0 +1,76 @@
+{%- comment -%}
+  Create product badges based on product tags and settings. Also creates rating badge for product cards.
+
+  Accepts:
+  - product: {Object} The product object (required/template variable)
+  - use_variant_price: {Boolean} Whether to use the variant price for the sale badge (default: false)
+
+  Used in:
+  - snippets/card-product.liquid
+  - sections/main-product.liquid
+{%- endcomment -%}
+
+{% capture badges -%}
+  {%- if product.compare_at_price_max > product.price_min -%}
+    {%- if use_variant_price -%}
+      {%- assign badge_price = product.selected_or_first_available_variant.price -%}
+      {%- assign badge_compare_at_price = product.selected_or_first_available_variant.compare_at_price | default: badge_price -%}
+      {%- assign force_default_badge = false -%}
+    {%- else -%}
+      {%- assign badge_price = product.price -%}
+      {%- assign badge_compare_at_price = product.compare_at_price -%}
+      {% if product.price_varies or product.compare_at_price_varies %}
+        {%- assign force_default_badge = true -%}
+      {% endif %}
+    {%- endif -%}
+    <div class="badge sale {% if badge_price >= badge_compare_at_price %}hidden{% endif %}" aria-label="{{ 'accessibility.badge_sale' | t }}" {% if use_variant_price %} id="saleBadge-{{ section.id }}" data-sale-badge-type="{{ settings.sale_badge_text }}"{% endif %}>
+      {%- if force_default_badge or settings.sale_badge_text == 'default' -%}
+        {{- 'products.product.badges.on_sale' | t -}}
+      {%- elsif settings.sale_badge_text == 'savings' -%}
+        {% assign savings = badge_compare_at_price | minus: badge_price | money %}
+        {{- 'products.product.badges.on_sale_savings' | t: amount: savings -}}
+      {%- elsif settings.sale_badge_text == 'percentage' -%}
+        {% assign savings = badge_compare_at_price | minus: badge_price %}
+        {% assign percentage = savings | times: 100 | divided_by: badge_compare_at_price %}
+        {{- 'products.product.badges.on_sale_percentage_off' | t: percentage: percentage -}}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  {%- if product.tags contains 'Preorder' or product.tags contains 'preorder' -%}
+    <div class="badge preorder" aria-label="{{ 'accessibility.badge_preorder' | t }}">
+      {{- 'products.product.badges.preorder' | t -}}
+    </div>
+  {%- endif -%}
+  {%- if product.tags contains 'New' or product.tags contains 'new' -%}
+    <div class="badge new" aria-label="{{ 'accessibility.badge_new' | t }}">
+      {{- 'products.product.badges.new' | t -}}
+    </div>
+  {%- endif -%}
+  {%- if current_variant.inventory_management == 'shopify' and current_variant.inventory_policy == 'deny' and current_variant.inventory_quantity <= 0 -%}
+    <div class="badge soldout" aria-label="{{ 'accessibility.badge_soldout' | t }}">
+      {{- 'products.product.badges.soldout' | t -}}
+    </div>
+  {%- endif -%}
+  {%- if settings.custom_badges != empty -%}
+    {%- liquid
+      assign custom_badges_html = ''
+      assign custom_badges_array = settings.custom_badges | split: ';'
+      for custom_badge in custom_badges_array
+        assign custom_badge_array = custom_badge | split: ':'
+        if product.tags contains custom_badge_array[0]
+          assign badge_class = custom_badge_array[0] | handleize
+          assign aria_label = 'accessibility.badge_custom' | t: label: custom_badge_array[0]
+          assign custom_badge_html = '<div class="badge custom-[badge_class]" aria-label="[aria_label]">[badge_name]</div>' | replace: '[badge_class]', badge_class | replace: '[badge_name]', custom_badge_array[0] | replace: '[aria_label]', aria_label
+          assign custom_badges_html = custom_badges_html | append: custom_badge_html
+        endif
+      endfor
+    -%}
+    {{- custom_badges_html -}}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if badges != blank -%}
+  <div class="badges">
+    {{- badges -}}
+  </div>
+{%- endif -%}

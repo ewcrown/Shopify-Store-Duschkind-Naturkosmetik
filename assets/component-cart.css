@@ -1,0 +1,319 @@
+/* GLOBAL -----------------*/
+cart-items {
+  display: block;
+}
+.cart-items__header {
+  display: none;
+}
+.cart-item {
+  display: grid;
+  grid-template-columns: 80px auto 60px 120px;
+  grid-template-rows: 1fr auto;
+  gap: 0px 8px;
+  padding: 12px 0;
+  align-items: center;
+}
+.cart-item__error {
+  grid-column: 1 / all;
+  background-color: var(--error);
+  color: #FFF;
+  border-radius: 4px;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.6rem;
+  margin-top: 12px;
+}
+.cart-item__title {
+  display: block;
+}
+#cart-note,
+#cart-footer {
+  width: 100%;
+}
+#cart-footer {
+  margin-left: auto;
+}
+.cart__subtotals {
+  margin: 24px 0;
+}
+.cart__subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart__tax {
+  margin-top: 12px;
+}
+
+.shipping-notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.shipping-notification .checkmark {
+  display: none;
+}
+.shipping-notification.threshold-reached .checkmark {
+  display: block;
+  min-width: 26px;
+  min-height: 26px;
+  stroke-width: 4px;
+  background: transparent;
+  border-radius: 50%;
+}
+.main-cart:not(.drawer) .shipping-notification.threshold-reached .checkmark {
+  animation: fill .4s ease-in-out 1.4s forwards, scale .3s ease-in-out 1.9s both;
+}
+.shipping-notification .checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+}
+.main-cart:not(.drawer) .shipping-notification .checkmark__check {
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1.8s forwards;
+}
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-miterlimit: 10;
+  fill: none;
+}
+.main-cart:not(.drawer) .checkmark__circle {
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 1s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    background: var(--success);
+  }
+}
+
+.cart-item__total .cart-item__discounted-prices {
+  justify-content: flex-end;
+}
+
+.cart-item__discounted-prices {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.cart-item__discounted-prices .cart-item__old-price{
+  text-decoration: line-through;
+}
+.cart-item__discount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  font-family: var(--font-body-family);
+}
+.cart-item__discount svg {
+  width: 16px;
+  min-width: 16px;
+}
+
+.cart__discount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart__subtotal-final {
+  font-weight: bold;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-borders);
+  margin-top: 12px;
+}
+
+.cart__discounts > * + * {
+  --spacing: 4px;
+  margin-top: var(--spacing);
+}
+
+.cart__discounts {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.cart__discount .discount-title {
+  max-width: 80%;
+  line-height: 1.25;
+}
+
+.cart__discount .discount-price {
+  flex: 1 0 auto;
+  text-align: right;
+}
+
+.cart__subtotal-final {
+  font-weight: bold;
+}
+.cart-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+/* TEMPLATE -----------------*/
+.cart-column {
+  width: 100%;
+}
+.template-cart .empty-cart-notice {
+  margin-top: 40px;
+}
+.template-cart cart-items {
+  margin-top: 40px;
+  border-bottom: 1px solid var(--border-color);
+}
+.template-cart .cart-items__header {
+  grid-template-columns: 2fr 1fr;
+}
+.template-cart .cart-item {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 72px 1fr auto;
+  grid-template-areas:
+    "a b c"
+    "a b d"
+    "e e e";
+  align-items: start;
+}
+.template-cart .cart-item {
+  border-top: 1px solid var(--border-color);
+}
+
+.template-cart .shipping-notification {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.2rem 0;
+  background: var(--color-background-alt);
+  border-radius: var(--button-border-radius);
+}
+.template-cart .view-cart {
+  display: none !important;
+}
+.template-cart .cart-item__image-container {
+  grid-area: a;
+}
+.template-cart .cart-item__details {
+  grid-area: b;
+}
+.template-cart .cart-item__total {
+  grid-area: c;
+}
+.template-cart .cart-item__actions {
+  grid-area: d;
+  justify-self: end;
+}
+.template-cart .cart-item__error {
+  grid-area: e;
+}
+
+@media only screen and (min-width: 768px) {
+  .template-cart .cart-items__header {
+    grid-template-columns: auto 96px 160px;
+  }
+  .template-cart .cart-item {
+    align-items: center;
+    grid-template-columns: 120px auto 96px 160px;
+    grid-template-areas:
+    "a b c d"
+    "e e e e";
+  }
+  .template-cart .cart-item__total {
+    grid-area: d;
+  }
+  .template-cart .cart-item__actions {
+    grid-area: c;
+  }
+  .template-cart .cart__subtotal {
+    margin-top: 0;
+  }
+  .template-cart #cart-note,
+  .template-cart #cart-footer {
+    width: max(40%, 260px);
+  }
+}
+
+
+/* DRAWER -----------------*/
+.drawer cart-items {
+  margin-bottom: 40px;
+}
+.drawer .empty-cart-notice,
+.drawer .empty-cart-haiku {
+  text-align: center;
+}
+.drawer .shipping-notification {
+  padding: 12px var(--drawer-padding);
+  font-size: 1.6rem;
+  background-color: var(--color-background-alt);
+  color: var(--color-foreground);
+}
+.drawer .shipping-notification.threshold-reached {
+  background-color: var(--success);
+  color: var(--success-foreground);
+}
+
+.drawer .cart-item {
+  grid-template-columns: 72px 1fr auto;
+  grid-template-areas:
+    "a b c"
+    "a b d"
+    "e e e";
+  align-items: start;
+}
+.drawer .cart-item__image-container {
+  grid-area: a;
+}
+.drawer .cart-item__details {
+  grid-area: b;
+}
+.drawer .cart-item__total {
+ grid-area: c;
+}
+.drawer .cart-item__actions {
+  grid-area: d;
+  justify-self: end;
+}
+.drawer .quantity__input {
+  padding: 2px 0;
+}
+
+.drawer cart-remove-button {
+  display: none;
+}
+
+.drawer.is-open .shipping-notification.threshold-reached .checkmark {
+  animation: fill .4s ease-in-out 0.9s forwards, scale .3s ease-in-out 1.4s both;
+}
+.drawer.is-open .shipping-notification .checkmark__check {
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1.3s forwards;
+}
+.drawer.is-open .checkmark__circle {
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+/* iOS 14 fixes */
+drawer-cart [data-contents] {
+  height: 100%;
+}

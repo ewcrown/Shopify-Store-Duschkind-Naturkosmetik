@@ -1,0 +1,37 @@
+<before-after-slider class="before-after-wrapper" style="--position: 50%;">
+  <div class="before-after-container {{ block.settings.media_aspect_ratio }} label-position-{{ block.settings.label_position }}" {% if block.settings.media_aspect_ratio == 'natural' %}style="aspect-ratio: {{ block.settings.image_before.aspect_ratio | default: 1 }};"{% endif %}>
+    <div class="before-content">
+      {%- render 'img',
+        src: block.settings.image_before,
+        lazyload: true,
+        sizes: sizes,
+        custom_classes: 'br-img image-before slider-image'
+      -%}
+      <p class="label-text label-text--before color-{{ section.settings.color_scheme }}" style="color: {{ block.settings.label_colors }};">{{ block.settings.before_label }}</p>
+    </div>
+
+    <div class="after-content">
+      {%- render 'img',
+        src: block.settings.image_after,
+        lazyload: true,
+        sizes: sizes,
+        custom_classes: 'br-img image-after slider-image'
+      -%}
+      <p class="label-text label-text--after color-{{ section.settings.color_scheme }}" style="color: {{ block.settings.label_colors }};">{{ block.settings.after_label }}</p>
+    </div>
+
+    <div class="before-after-slider">
+      <input
+        type="range"
+        min="0"
+        max="1000"
+        value="500"
+        aria-label="{{ 'accessibility.before_after_slider' | t }}"
+      >
+      <div class="slider-line" aria-hidden="true"></div>
+      <div class="slider-button" aria-hidden="true">
+        {% render 'icon-slider' %}
+      </div>
+    </div>
+  </div>
+</before-after-slider>

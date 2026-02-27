@@ -1,0 +1,99 @@
+.filter-option .checkbox {
+  margin: 0 !important;
+}
+.filter-option label {
+  --swatch-size: 32px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px 12px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+}
+.filter-option label:hover {
+  background-color: var(--color-background-alt);
+  transform: scale(1.025);
+}
+
+/* COLOR SWATCH */
+.filter-option input.for-swatch {
+  width: var(--swatch-size);
+  height: var(--swatch-size);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px;
+  margin: 0;
+}
+.filter-option input.for-swatch + .swatch:before {
+  content: '';
+  position: absolute;
+  border-radius: min(3px, var(--button-border-radius));
+  width: 16px;
+  height: 16px;
+  left: -6px;
+  top: -2px;
+  background: var(--color-background);
+  border: 1px solid var(--color-foreground);
+  box-shadow: inset 0 0 0 2.5px var(--color-background);
+  z-index: 1;
+}
+.filter-option input:checked.for-swatch + .swatch:before {
+  background: var(--color-foreground);
+}
+.filter-option label.filter-type-color .swatch {
+  position: absolute;
+  left: 12px;
+  border: 0;
+  --swatch-size: inherit;
+}
+
+/* AS BUTTON */
+.filter-option label.filter-type-as-button {
+  text-align: center;
+  border-radius: min(4px, var(--button-border-radius));
+  padding: 12px;
+  justify-content: center;
+  transform-origin: center;
+  height: 100%;
+}
+.filter-option input.as-button {
+  border-radius: min(4px, var(--button-border-radius));
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 1px solid var(--color-borders);
+}
+.filter-option input.as-button:checked {
+  border-color: var(--color-button-background);
+}
+.filter-option input.as-button:before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: var(--color-background);
+  border: 1px solid  var(--color-borders);
+  box-shadow: inset 0 0 0 3px var(--color-background);
+  z-index: 1;
+  border-radius: min(3px, var(--button-border-radius));
+}
+.filter-option input.as-button:checked:before {
+  background: var(--color-button-background);
+  border-color: var(--color-button-background);
+}
+
+/* ACCESSABILITY */
+.filter-option input.for-swatch:focus-visible {
+  box-shadow: 0 0 0 3px;
+}
+.filter-option input:checked.for-swatch:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-button-background);
+  outline: 0 !important;
+}

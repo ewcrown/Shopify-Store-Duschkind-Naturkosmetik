@@ -1,0 +1,119 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_text_align": "text-align-left",
+        "sm_size_multiplier": "sm-size--default",
+        "md_padding_top": 40,
+        "md_padding_bottom": 40,
+        "size_multiplier": "size--default",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "contact_form": {
+      "type": "contact-form",
+      "blocks": {
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-title-1": {
+          "type": "title",
+          "settings": {
+            "title": "Contact form",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "sm_margin_bottom": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Hours<\/strong><br>Monday – Friday: 10:00am – 7:30pm CET<br>Saturday: 10:00am – 6:00pm CET <br> Sunday: 11:00am – 6:00pm CET<\/p>",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "sm_margin_bottom": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-1": {
+          "type": "input",
+          "settings": {
+            "label": "Name",
+            "type": "text",
+            "width": "half-width",
+            "required": true
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-email-1": {
+          "type": "email",
+          "settings": {
+            "label": "Email",
+            "width": "half-width"
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-2": {
+          "type": "input",
+          "settings": {
+            "label": "Phone",
+            "type": "tel",
+            "width": "full-width",
+            "required": false
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-3": {
+          "type": "input",
+          "settings": {
+            "label": "Subject",
+            "type": "text",
+            "width": "full-width",
+            "required": false
+          }
+        },
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-4": {
+          "type": "input",
+          "settings": {
+            "label": "Message",
+            "type": "textarea",
+            "width": "full-width",
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-title-1",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-text-1",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-1",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-email-1",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-2",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-3",
+        "template--16212602060989__3a48de0d-8d7b-4d18-8fac-44c00f552f27-input-4"
+      ],
+      "settings": {
+        "text_align": "text-align-left",
+        "md_padding_top": 104,
+        "md_padding_bottom": 104,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "main",
+    "contact_form"
+  ]
+}

@@ -1,0 +1,48 @@
+{%- comment -%}
+  Generates a <sort-by> web component for sorting. Used in collection or search pages.
+
+  Accepts:
+  - display_type: {String} 'Radio', other values will default to select (optional)
+  - name_suffix: {String} Used to distinquish multiple radio input names (optional)
+{%- endcomment -%}
+
+{% liquid
+  if collection != blank
+    assign context_object = collection
+  elsif search != blank
+    assign context_object = search
+  endif
+%}
+
+{% case display_type %}
+  {% when 'radio' %}
+    <sort-by class="sort-by-ratios {{ class }}">
+      {%- assign sort_by = context_object.sort_by | default: context_object.default_sort_by -%}
+      <fieldset>
+        <legend class="visually-hidden">{{ 'products.facets.sort_button' | t }}</legend>
+        {%- for option in context_object.sort_options -%}
+        <div class="filter-option">
+          <label class="radio-input">
+            <input type="radio" name="sort_by{{ name_suffix }}" value="{{ option.value }}" {%- if option.value == sort_by -%}checked="checked"{%- endif -%}>
+            {{ option.name }}
+          </label>
+        </div>
+        {%- endfor -%}
+      </fieldset>
+    </sort-by>
+  {% else %}
+    <label class="sort-by {{ class }}">
+      <span class="visually-hidden">{{ 'products.facets.sort_button' | t }}</span>
+      <sort-by>
+        {%- assign sort_by = context_object.sort_by | default: context_object.default_sort_by -%}
+        <select name="{{ 'products.facets.sort_by_label' | t }}" class="btn btn--link size--small">
+          {%- for option in context_object.sort_options -%}
+            <option value="{{ option.value }}" {%- if option.value == sort_by -%}selected="selected"{%- endif -%}>
+              {{ option.name }}
+            </option>
+          {%- endfor -%}
+        </select>
+        <span class="link-icon icon--round">{%- render 'icon-caret' -%}</span>
+      </sort-by>
+    </label>
+{% endcase %}

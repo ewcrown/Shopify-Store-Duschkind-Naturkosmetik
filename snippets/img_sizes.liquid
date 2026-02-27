@@ -1,0 +1,31 @@
+{%- liquid
+
+  # ** PURPOSE **
+  # Snippet for calculating img size string in items in a grid.
+
+  # ** PARAMETERS **
+  # full_width            =>  OPTIONAL | true/false | if true the sizes are calculated using 100vw else using content_ideal_width
+  # ipr_mobile            =>  REQUIRED | number
+  # ipr_tablet            =>  REQUIRED | number
+  # ipr_desktop           =>  REQUIRED | number
+
+  # ** HOW TO USE **
+  # Render snippet inside a capture definition to store the sizes string in the captured variable.
+  #
+  # capture sizes
+  #   render 'img_sizes', full_width: full_width, ipr_mobile: ipr_mobile, ipr_tablet: ipr_tablet, ipr_desktop: ipr_desktop
+  # endcapture
+
+  assign container_margin = settings.container_margin | append: 'px'
+
+  assign sizes_template = '(max-width: 767px) calc((100vw - [container-margin]) / [ipr_mobile]),(max-width: 1023px) calc(100vw / [ipr_tablet]), calc([container_max_width] / [ipr_desktop])' | replace: '[container-margin]', container_margin
+  if full_width
+    assign sizes_template = sizes_template | replace: '[container_max_width]', '100vw'
+  else
+    assign ideal_width = settings.content_ideal_width | append: 'px'
+    assign sizes_template = sizes_template | replace: '[container_max_width]', ideal_width
+  endif
+  assign sizes = sizes_template | replace: '[ipr_mobile]', ipr_mobile | replace: '[ipr_tablet]', ipr_tablet | replace: '[ipr_desktop]', ipr_desktop
+-%}
+
+{{- sizes -}}

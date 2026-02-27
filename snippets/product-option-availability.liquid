@@ -1,0 +1,14 @@
+{%- liquid
+  assign card_availability_trigger = 'products.product.card_availability_option_trigger' | t
+  assign option_values = product.options_by_name[card_availability_trigger].values
+-%}
+
+{%- if option_values -%}
+  <div class="options-availability flex align-center mt-24 size--tiny">
+    {% for option in option_values %}
+      <span class="variant-option-title {% if option.available == false %} unavailable{% endif %}">
+        {{- option -}}
+      </span>
+    {% endfor %}
+  </div>
+{%- endif -%}

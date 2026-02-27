@@ -1,0 +1,88 @@
+/* Hotspots - Basic styles */
+.hotspot {
+  --hotspot-dimension: 40px;
+
+  position: relative !important;
+  display: flex !important;
+  padding: 0 !important;
+  align-items: center;
+  justify-content: center;
+  left: var(--hotspot-horizontal-position);
+  top: var(--hotspot-vertical-position);
+  width: var(--hotspot-dimension);
+  height: var(--hotspot-dimension);
+  border-radius: 50% !important;
+  overflow: visible !important;
+  z-index: 1;
+}
+.hotspot:before {
+  content: '';
+  background: inherit;
+  opacity:.35;
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  border-radius: 50% !important;
+  z-index: -1;
+}
+.hotspot-title {
+  color: var(--color-foreground);
+  position: absolute;
+  white-space: nowrap;
+  background-color: transparent;
+  padding: 12px;
+}
+.hotspot-title.position--right {
+  text-align: left;
+  left: 0;
+  padding-left: calc(100% + 12px);
+}
+.hotspot-title.position--left {
+  text-align: right;
+  right: 0;
+  padding-right: calc(100% + 12px);
+}
+
+.hotspot-container {
+  position: relative;
+}
+.hotspot-container .hotspot {
+  position: absolute !important;
+  transform: translate(-50%, -50%);
+}
+
+a.hotspot:hover {
+  transform: scale(1.4);
+}
+.hotspot-container a.hotspot:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  box-shadow: none !important;
+}
+
+/* Hotspots - Animation */
+.hotspot.animated:before {
+ animation: hotspot-blink 2s ease-in-out infinite both;
+}
+
+.hotspot.animated:nth-child(2):before { animation-delay: 0.2s }
+.hotspot.animated:nth-child(3):before { animation-delay: 0.4s }
+.hotspot.animated:nth-child(4):before { animation-delay: 0.6s }
+.hotspot.animated:nth-child(5):before { animation-delay: 0.8s }
+.hotspot.animated:nth-child(6):before { animation-delay: 1.0s }
+
+
+/* Keyframes - Heartbeat */
+@keyframes hotspot-blink {
+  0% {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+  75% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}

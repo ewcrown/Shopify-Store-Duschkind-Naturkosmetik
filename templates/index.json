@@ -1,0 +1,748 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "big-hero-image": {
+          "type": "image",
+          "settings": {
+            "media_toggle": "show_video",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/919005a21fc34e309aa531acce0a28a1.mp4",
+            "video_url_mobile": ""
+          }
+        }
+      },
+      "block_order": [
+        "big-hero-image"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "alternative-1",
+        "overlay_opacity": 0,
+        "media_link": "",
+        "enable_full_width": true,
+        "section_height_desktop": "by_pixels",
+        "section_pixel_height_desktop": 860,
+        "content_width": "col-sm-max-4",
+        "content_align_desktop": "sm-vertical-center sm-horizontal-left",
+        "desktop_alignment": "sm-text-align-left",
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "section_height": "by_pixels",
+        "section_pixel_height": 510,
+        "content_align_mobile": "vertical-center horizontal-center",
+        "mobile_alignment": "text-align-center",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "hero-divider": {
+      "type": "divider",
+      "blocks": {
+        "hero-divider-standard-1": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#ffffff",
+            "position": "top-previous",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "hero-divider-standard-1"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_dVm8mf": {
+      "type": "rich-text",
+      "blocks": {
+        "title_QkExww": {
+          "type": "title",
+          "settings": {
+            "title": "Your glow-up starts here",
+            "heading_tag": "h1",
+            "sm_size_multiplier": "sm-size--huge",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "text_84jmzh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whether you're soothing sensitive skin, clearing breakouts, or chasing that glass-skin glow, <strong>Smuuti Skin</strong> products makes skincare fun, effective, and easy to love. Playful yet powerful skincare products that blends K-beauty innovation with fruity goodness.</p>",
+            "read_more": false,
+            "sm_size_multiplier": "sm-size--large",
+            "sm_margin_top": 12,
+            "size_multiplier": "size--large",
+            "margin_top": 12
+          }
+        }
+      },
+      "block_order": [
+        "title_QkExww",
+        "text_84jmzh"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "color_scheme": "",
+        "text_gradient_color": "",
+        "content_width": 60,
+        "desktop_content_alignment": "center",
+        "desktop_alignment": "sm-text-align-center",
+        "md_padding_top": 40,
+        "md_padding_bottom": 40,
+        "mobile_alignment": "text-align-left",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "banner_grid_iXHLhp": {
+      "type": "banner-grid",
+      "blocks": {
+        "image_a9zMKx": {
+          "type": "image",
+          "settings": {
+            "color_scheme": "",
+            "overlay_opacity": 0,
+            "image": "shopify://shop_images/pearbalancetoner2.png",
+            "media_link": "",
+            "title": "Pear Balance",
+            "title_style": "btn btn--primary",
+            "content_alignment": "vertical-bottom horizontal-center",
+            "padding": 24
+          }
+        },
+        "image_rQHrzT": {
+          "type": "image",
+          "settings": {
+            "color_scheme": "",
+            "overlay_opacity": 0,
+            "image": "shopify://shop_images/Watermelon_Sorbet_Balm_Fruit.jpg",
+            "media_link": "",
+            "title": "Watermelon Dew",
+            "title_style": "btn btn--primary",
+            "content_alignment": "vertical-bottom horizontal-center",
+            "padding": 24
+          }
+        },
+        "image_CttDh4": {
+          "type": "image",
+          "settings": {
+            "color_scheme": "",
+            "overlay_opacity": 0,
+            "image": "shopify://shop_images/Smuutiskin_Lowres_Final_Verti_1_d27baeed-3b65-4f3d-8545-b758ac4503a0.jpg",
+            "media_link": "",
+            "title": "Peach Barrier",
+            "title_style": "btn btn--primary",
+            "content_alignment": "vertical-bottom horizontal-center",
+            "padding": 24
+          }
+        },
+        "image_wtX9T7": {
+          "type": "image",
+          "settings": {
+            "color_scheme": "default",
+            "overlay_opacity": 0,
+            "image": "shopify://shop_images/kiwi-clear.jpg",
+            "media_link": "",
+            "title": "",
+            "title_style": "btn btn--primary",
+            "content_alignment": "vertical-bottom horizontal-center",
+            "padding": 24
+          }
+        }
+      },
+      "block_order": [
+        "image_a9zMKx",
+        "image_rQHrzT",
+        "image_CttDh4",
+        "image_wtX9T7"
+      ],
+      "name": "t:sections.banner-grid.name",
+      "settings": {
+        "block_aspect_ratio": "portrait",
+        "color_scheme": "",
+        "section_columns_desktop": 4,
+        "enable_full_width": false,
+        "sm_rounded_corners": true,
+        "layout_desktop": "grid",
+        "sm_grid_gap": 12,
+        "md_padding_top": 40,
+        "md_padding_bottom": 40,
+        "section_columns_tablet": 2,
+        "section_columns_mobile": 2,
+        "layout_mobile": "grid",
+        "sm_down_edge_to_edge": true,
+        "rounded_corners": false,
+        "grid_gap": 4,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "sliding_behavior": "single"
+      }
+    },
+    "image_duo_with_text_tVjPqy": {
+      "type": "image-duo-with-text",
+      "blocks": {
+        "image_WLBLWb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/soft_lips_starter_pack.png",
+            "video_url": "",
+            "media_toggle": "show_image",
+            "link_url": ""
+          }
+        },
+        "image_ykzehd": {
+          "type": "image",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/6275b2678b384940b0247755382542eb.mp4",
+            "media_toggle": "show_video",
+            "link_url": ""
+          }
+        },
+        "text_aQjftB": {
+          "type": "text",
+          "settings": {
+            "subtitle": "",
+            "title": "Soft Lips Starter Pack",
+            "text": "<p>Use them overnight for deep moisture, as a glossy daytime treatment, or as a perfect primer for your lip makeup. Plus, their sweet fruity scents make every application a treat! </p>"
+          }
+        },
+        "button_MRQdTr": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all-products",
+            "button_style": "",
+            "button_width": "inline"
+          }
+        }
+      },
+      "block_order": [
+        "image_WLBLWb",
+        "image_ykzehd",
+        "text_aQjftB",
+        "button_MRQdTr"
+      ],
+      "name": "t:sections.image-duo-with-text.name",
+      "settings": {
+        "color_scheme": "default",
+        "enable_full_width": false,
+        "desktop_height": 640,
+        "layout": "top-left",
+        "desktop_alignment": "sm-text-align-left",
+        "md_padding_top": 40,
+        "md_padding_bottom": 80,
+        "mobile_height": 400,
+        "mobile_alignment": "text-align-left",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "divider_yGCHY8": {
+      "type": "divider",
+      "blocks": {
+        "standard_JBfzFA": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#ecfdd1",
+            "position": "in-between",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "standard_JBfzFA"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_or_products_8cJN6Y": {
+      "type": "featured-collection-or-products",
+      "blocks": {
+        "section_header_9P6kPP": {
+          "type": "section_header",
+          "settings": {
+            "subtitle": "",
+            "subtitle_tag": "h3",
+            "title": "The Bestsellers",
+            "title_tag": "h2",
+            "text": "",
+            "text_alignment": "text-align-left",
+            "sm_size_multiplier": "sm-size--default",
+            "size_multiplier": "size--default"
+          }
+        }
+      },
+      "block_order": [
+        "section_header_9P6kPP"
+      ],
+      "name": "t:sections.featured-collection-or-products.name",
+      "settings": {
+        "color_scheme": "alternative-1",
+        "collection": "",
+        "product_list": [],
+        "product_limit": 12,
+        "view_all": true,
+        "enable_full_width": false,
+        "sm_enable_card_thumbnail": false,
+        "layout_desktop": "slide",
+        "products_per_row_desktop": 4,
+        "sm_custom_gap": -1,
+        "md_padding_top": 64,
+        "md_padding_bottom": 64,
+        "products_per_row_tablet": 3,
+        "sm_down_enable_card_thumbnail": false,
+        "layout_mobile": "slide peek",
+        "products_per_row_mobile": 2,
+        "custom_gap": -1,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "sliding_behavior": "all"
+      }
+    },
+    "divider_pwUT8C": {
+      "type": "divider",
+      "blocks": {
+        "standard_4hDrpx": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#ffffff",
+            "position": "top-previous",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "standard_4hDrpx"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "before_after_Pi4YY8": {
+      "type": "before-after",
+      "blocks": {
+        "before_after_Xffrhq": {
+          "type": "before_after",
+          "settings": {
+            "media_aspect_ratio": "landscape",
+            "image_before": "shopify://shop_images/before-image-second.jpg",
+            "image_after": "shopify://shop_images/after-image-second.jpg",
+            "label_colors": "#000000",
+            "before_label": "Before",
+            "after_label": "After",
+            "label_position": "top"
+          }
+        },
+        "title_ADbpQG": {
+          "type": "title",
+          "settings": {
+            "title": "From fruit to fresh glow",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 4,
+            "size_multiplier": "size--default",
+            "margin_top": 4
+          }
+        },
+        "text_7jYJ3E": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Skincare has trusted moisturising fruit extracts for decades. Combine these with ceramides and hyaluronic acid to reveal your brightest skin.</p>",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 12,
+            "size_multiplier": "size--default",
+            "margin_top": 12
+          }
+        }
+      },
+      "block_order": [
+        "before_after_Xffrhq",
+        "title_ADbpQG",
+        "text_7jYJ3E"
+      ],
+      "name": "t:sections.before_after.name",
+      "settings": {
+        "color_scheme": "default",
+        "media_position_desktop": "right",
+        "media_width": "wide",
+        "content_width": "col-sm-max-4",
+        "desktop_alignment": "left",
+        "sm_full_width_buttons": false,
+        "md_padding_top": 80,
+        "md_padding_bottom": 24,
+        "media_position": "top",
+        "mobile_alignment": "center",
+        "full_width_buttons": false,
+        "padding_top": 40,
+        "padding_bottom": 24
+      }
+    },
+    "image_with_text_tDWCF8": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_APB8BB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/c6be86a2ff82b6311ce3cd0cc53c9f76.jpg",
+            "video_url": "",
+            "media_aspect_ratio": "landscape",
+            "media_toggle": "show_image",
+            "media_link": ""
+          }
+        },
+        "subtitle_WgMMWH": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "Better together",
+            "heading_tag": "h3",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "title_YQbmUQ": {
+          "type": "title",
+          "settings": {
+            "title": "Fresh skin, fresh confidence",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "text_h9BAkX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>With vitamin-rich fruit extracts and skin-loving actives, this collection helps you and your skin feel healthy, radiant and refreshed.</p>",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "button_cPAz6a": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get Your Glow",
+            "button_link": "shopify://collections/all-products",
+            "button_style": "",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 24,
+            "size_multiplier": "size--default",
+            "margin_top": 24
+          }
+        }
+      },
+      "block_order": [
+        "image_APB8BB",
+        "subtitle_WgMMWH",
+        "title_YQbmUQ",
+        "text_h9BAkX",
+        "button_cPAz6a"
+      ],
+      "name": "t:sections.image-with-text.name",
+      "settings": {
+        "color_scheme": "",
+        "enable_full_width": false,
+        "media_position": "media_first",
+        "content_width": "col-sm-max-4",
+        "desktop_alignment": "sm-text-align-left",
+        "sm_full_width_buttons": false,
+        "md_padding_top": 24,
+        "md_padding_bottom": 64,
+        "mobile_alignment": "text-align-center",
+        "full_width_buttons": true,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "divider_mzNBzm": {
+      "type": "divider",
+      "blocks": {
+        "standard_cPA4Qg": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#ecfdd1",
+            "position": "in-between",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "standard_cPA4Qg"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "hero_countdown_WNDLTi": {
+      "type": "hero-countdown",
+      "blocks": {
+        "title_dG7XkW": {
+          "type": "title",
+          "settings": {
+            "title": "Save up to 40%[br]with Bundle Deals!",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--gigantic",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "timer_NpU8JR": {
+          "type": "timer",
+          "settings": {
+            "the_date": "2025-10-29T12:00-04:00",
+            "time_units": "units-below",
+            "units_spacing": "units-spacing-medium",
+            "text_gradient_color": "linear-gradient(225deg, rgba(255, 145, 129, 1), rgba(254, 91, 124, 1) 49%, rgba(255, 140, 162, 1) 100%)",
+            "sm_size_multiplier": "sm-size--outrageous",
+            "sm_margin_top": 24,
+            "size_multiplier": "size--default",
+            "margin_top": 12
+          }
+        },
+        "post_timer_message_ateKHe": {
+          "type": "post_timer_message",
+          "settings": {
+            "text": "<h1>The time is up!</h1><p>Tell your customer what happens now, since the timer has run out.</p>",
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "",
+            "text_sm_size_multiplier": "sm-size--default",
+            "button_sm_size_multiplier": "sm-size--default",
+            "text_size_multiplier": "size--default",
+            "button_size_multiplier": "size--default"
+          }
+        }
+      },
+      "block_order": [
+        "title_dG7XkW",
+        "timer_NpU8JR",
+        "post_timer_message_ateKHe"
+      ],
+      "settings": {
+        "color_scheme": "alternative-1",
+        "overlay_opacity": 0,
+        "enable_full_width": true,
+        "section_height_desktop": "auto",
+        "section_pixel_height_desktop": 600,
+        "desktop_alignment": "sm-timer-justify",
+        "content_align_desktop": "sm-vertical-center sm-horizontal-center",
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "section_height": "auto",
+        "section_pixel_height": 360,
+        "mobile_alignment": "text-align-center",
+        "content_align_mobile": "vertical-center horizontal-center",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_or_products_jmdJR7": {
+      "type": "featured-collection-or-products",
+      "settings": {
+        "color_scheme": "alternative-1",
+        "collection": "",
+        "product_list": [],
+        "product_limit": 8,
+        "view_all": true,
+        "enable_full_width": false,
+        "sm_enable_card_thumbnail": false,
+        "layout_desktop": "slide",
+        "products_per_row_desktop": 5,
+        "sm_custom_gap": -1,
+        "md_padding_top": 0,
+        "md_padding_bottom": 72,
+        "products_per_row_tablet": 4,
+        "sm_down_enable_card_thumbnail": false,
+        "layout_mobile": "slide peek",
+        "products_per_row_mobile": 2,
+        "custom_gap": -1,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "sliding_behavior": "all"
+      }
+    },
+    "divider_QFjWAi": {
+      "type": "divider",
+      "blocks": {
+        "standard_ntGDWc": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#ffffff",
+            "position": "top-previous",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "standard_ntGDWc"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_look_HMzRDg": {
+      "type": "featured-look",
+      "blocks": {
+        "section_header_Kx4A9B": {
+          "type": "section_header",
+          "settings": {
+            "subtitle": "",
+            "subtitle_tag": "h3",
+            "title": "Your all-in-one routine for beaming, balanced skin",
+            "title_tag": "h2",
+            "text": "<p>All of the textures are about balance of oil and water, without the feeling of dryness or greasiness. Let's talk through the products:</p>",
+            "text_alignment": "text-align-left",
+            "sm_size_multiplier": "sm-size--default",
+            "size_multiplier": "size--default"
+          }
+        },
+        "product_B3VkVE": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "vertical_position": 52,
+            "horizontal_position": 14
+          }
+        },
+        "product_bJCxEt": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "vertical_position": 64,
+            "horizontal_position": 34
+          }
+        },
+        "product_Ggex4x": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "vertical_position": 15,
+            "horizontal_position": 79
+          }
+        },
+        "product_aVx9hb": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "vertical_position": 65,
+            "horizontal_position": 89
+          }
+        }
+      },
+      "block_order": [
+        "section_header_Kx4A9B",
+        "product_B3VkVE",
+        "product_bJCxEt",
+        "product_Ggex4x",
+        "product_aVx9hb"
+      ],
+      "settings": {
+        "color_scheme": "default",
+        "enable_full_width": false,
+        "media_position": "media_first",
+        "md_padding_top": 64,
+        "md_padding_bottom": 64,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "hero-divider",
+    "rich_text_dVm8mf",
+    "banner_grid_iXHLhp",
+    "image_duo_with_text_tVjPqy",
+    "divider_yGCHY8",
+    "featured_collection_or_products_8cJN6Y",
+    "divider_pwUT8C",
+    "before_after_Pi4YY8",
+    "image_with_text_tDWCF8",
+    "divider_mzNBzm",
+    "hero_countdown_WNDLTi",
+    "featured_collection_or_products_jmdJR7",
+    "divider_QFjWAi",
+    "featured_look_HMzRDg"
+  ]
+}

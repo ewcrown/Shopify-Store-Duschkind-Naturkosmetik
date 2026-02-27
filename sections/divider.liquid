@@ -1,0 +1,342 @@
+{{ 'section-divider.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  # Init
+  assign block = section.blocks.first
+
+  # Flip controls
+  if block.settings.flip_horizontal and block.settings.flip_vertical
+    assign transform_style = 'transform: scale(-1)'
+  elsif block.settings.flip_vertical
+    assign transform_style = 'transform: scale(1, -1)'
+  elsif block.settings.flip_horizontal
+    assign transform_style = 'transform: scale(-1, 1)'
+  else
+    assign transform_style = 'transform: scale(1)'
+  endif
+
+-%}
+
+<div
+  id="{{ section.id }}"
+  class="container edge-to-edge mt mb sm-mt sm-mb"
+  style="
+    --mt: {{ section.settings.padding_top | append: 'px' }};
+    --mb: {{ section.settings.padding_bottom | append: 'px' }};
+    --sm-mt: {{ section.settings.md_padding_top | append: 'px' }};
+    --sm-mb: {{ section.settings.md_padding_bottom | append: 'px' }};
+  ">
+
+  <div class="divider-graphics {{ block.settings.position }}" {{ block.shopify_attributes }} style="{{ transform_style }}">
+    {%- case block.type -%}
+      {%- when 'standard' -%}
+        {%- render 'divider-graphics',
+          graphics: block.settings.divider_graphics,
+          id: block.id,
+          top_part_color: block.settings.top_part_color,
+          middle_part_color: block.settings.middle_part_color,
+          bottom_part_color: block.settings.bottom_part_color,
+          sm_height: block.settings.sm_graphics_height,
+          sm_width: block.settings.sm_graphics_width,
+          height: block.settings.graphics_height,
+          width: block.settings.graphics_width -%}
+      {%- when 'custom' -%}
+        {% if block.settings.graphics != empty %}
+        <div class="sm-hide">
+          {{ block.settings.graphics }}
+        </div>
+        {% endif %}
+        <div {% if block.settings.graphics != empty %}class="sm-down-hide"{% endif %}>
+          {{ block.settings.sm_graphics }}
+        </div>
+    {%- endcase -%}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "t:sections.divider.name",
+    "class": "section-divider",
+    "max_blocks": 1,
+    "disabled_on": {
+      "groups": ["header", "aside"]
+    },
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:sections.divider.info"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.desktop_layout"
+      },
+      {
+        "type": "range",
+        "id": "md_padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "md_padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "t:sections.headers.mobile_layout"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 8,
+        "unit": "px",
+        "label": "t:sections.layout.margin_bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "standard",
+        "name": "t:sections.divider.blocks.standard.name",
+        "settings": [
+          {
+            "type": "select",
+            "id": "divider_graphics",
+            "label": "t:sections.divider.settings.divider_graphics.label",
+            "default": "wave",
+            "options": [
+              {
+                "value": "curve",
+                "label": "t:sections.divider.settings.divider_graphics.options.curve"
+              },
+              {
+                "value": "elliptic",
+                "label": "t:sections.divider.settings.divider_graphics.options.elliptic"
+              },
+              {
+                "value": "jagged",
+                "label": "t:sections.divider.settings.divider_graphics.options.jagged"
+              },
+              {
+                "value": "tilted",
+                "label": "t:sections.divider.settings.divider_graphics.options.tilted"
+              },
+              {
+                "value": "wave",
+                "label": "t:sections.divider.settings.divider_graphics.options.wave"
+              },
+              {
+                "value": "waves",
+                "label": "t:sections.divider.settings.divider_graphics.options.waves"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "t:sections.divider.settings.graphics_colors.header",
+            "info": "t:sections.divider.settings.graphics_colors.info"
+          },
+          {
+            "type": "color",
+            "id": "top_part_color",
+            "label": "t:sections.divider.settings.graphics_colors.top_part_color",
+            "default": "transparent"
+          },
+          {
+            "type": "color_background",
+            "id": "middle_part_color",
+            "label": "t:sections.divider.settings.graphics_colors.middle_part_color"
+          },
+          {
+            "type": "color",
+            "id": "bottom_part_color",
+            "label": "t:sections.divider.settings.graphics_colors.bottom_part_color",
+            "default": "#000"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.divider.settings.graphics_position.header"
+          },
+          {
+            "type": "select",
+            "id": "position",
+            "label": "t:sections.divider.settings.graphics_position.label",
+            "default": "top-previous",
+            "options": [
+              {
+                "value": "top-previous",
+                "label": "t:sections.divider.settings.graphics_position.options.top_previous"
+              },
+              {
+                "value": "in-between",
+                "label": "t:sections.divider.settings.graphics_position.options.in_between"
+              },
+              {
+                "value": "top-next",
+                "label": "t:sections.divider.settings.graphics_position.options.top_next"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "flip_horizontal",
+            "label": "t:sections.divider.settings.flip_horizontal",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "flip_vertical",
+            "label": "t:sections.divider.settings.flip_vertical",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_settings"
+          },
+          {
+            "type": "range",
+            "id": "sm_graphics_height",
+            "label": "t:sections.divider.settings.graphics_size.graphics_height",
+            "info": "t:sections.divider.settings.graphics_size.graphics_height_info",
+            "unit": "px",
+            "min": 0,
+            "max": 800,
+            "step": 10,
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "sm_graphics_width",
+            "label": "t:sections.divider.settings.graphics_size.graphics_width",
+            "unit": "%",
+            "min": 100,
+            "max": 300,
+            "step": 2,
+            "default": 100
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_settings"
+          },
+          {
+            "type": "range",
+            "id": "graphics_height",
+            "label": "t:sections.divider.settings.graphics_size.graphics_height",
+            "info": "t:sections.divider.settings.graphics_size.graphics_height_info",
+            "unit": "px",
+            "min": 0,
+            "max": 800,
+            "step": 10,
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "graphics_width",
+            "label": "t:sections.divider.settings.graphics_size.graphics_width",
+            "unit": "%",
+            "min": 100,
+            "max": 300,
+            "step": 2,
+            "default": 100
+          }
+        ]
+      },
+      {
+        "type": "custom",
+        "name": "t:sections.divider.blocks.custom.name",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.divider.settings.divider_graphics.custom_info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.divider.settings.graphics_position.header"
+          },
+          {
+            "type": "select",
+            "id": "position",
+            "label": "t:sections.divider.settings.graphics_position.label",
+            "default": "top-previous",
+            "options": [
+              {
+                "value": "top-previous",
+                "label": "t:sections.divider.settings.graphics_position.options.top_previous"
+              },
+              {
+                "value": "in-between",
+                "label": "t:sections.divider.settings.graphics_position.options.in_between"
+              },
+              {
+                "value": "top-next",
+                "label": "t:sections.divider.settings.graphics_position.options.top_next"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "flip_horizontal",
+            "label": "t:sections.divider.settings.flip_horizontal",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "flip_vertical",
+            "label": "t:sections.divider.settings.flip_vertical",
+            "default": false
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.desktop_layout"
+          },
+          {
+
+            "type": "html",
+            "id": "sm_graphics",
+            "label": "t:sections.divider.settings.divider_graphics.custom_label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.headers.mobile_layout"
+          },
+          {
+            "type": "html",
+            "id": "graphics",
+            "label": "t:sections.divider.settings.divider_graphics.custom_label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.divider.name",
+        "category": "t:sections.section_categories.utility_and_support",
+        "blocks": [
+          { "type": "standard" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

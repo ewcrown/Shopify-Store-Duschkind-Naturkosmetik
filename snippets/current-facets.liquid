@@ -1,0 +1,32 @@
+{%- liquid
+  unless context == 'search'
+    assign object = collection
+  else
+    assign object = search
+  endunless
+-%}
+<div id="current-facets-ajax" class="active-filters scrollbar--hide sm-down-scroll flex" style="gap:12px;">
+  {%- for filter in object.filters -%}
+    {%- if filter.type == "price_range" -%}
+      {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+      <current-facet-button>
+        <a class="btn btn--with-icon size--tiny" href="{{ filter.url_to_remove | replace: '&view=ajax', '' | replace: '?view=ajax', '' }}" data-remove-single-filter data-filter-param-name="{{ filter.param_name }}">
+          {%- assign min_value = filter.min_value.value | default: 0 -%}
+          {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+          <span>{{ filter.label | remove: '[closed]' | strip }}: {{ min_value | money_without_trailing_zeros }} - {{ max_value | money_without_trailing_zeros }}</span>
+          <svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </a>
+      </current-facet-button>
+      {%- endif -%}
+    {%- else -%}
+      {%- for filter_value in filter.active_values -%}
+      <current-facet-button>
+        <a class="btn btn--with-icon size--tiny" href="{{ filter_value.url_to_remove | replace: '&view=ajax', '' | replace: '?view=ajax', '' }}" data-remove-single-filter data-filter-param-name="{{ filter_value.param_name }}" data-filter-value="{{ filter_value.value }}">
+          <span>{{ filter.label | remove: '[closed]' | strip }}: {{ filter_value.label }}</span>
+          <svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </a>
+      </current-facet-button>
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>

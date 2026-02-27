@@ -1,0 +1,42 @@
+{%- liquid
+  if video_type == 'youtube'
+    if src contains 'watch?v='
+      assign src = src | replace: 'watch?v=', 'embed/'
+    elsif src contains 'youtu.be/'
+      assign src = src | replace: 'youtu.be/', 'youtube.com/embed/'
+    endif
+    assign video_id = src | split: '/' | last | split: '?' | first
+
+    assign src = 'https://www.youtube.com/embed/' | append: video_id | append: '?rel=0&modestbranding=1&enablejsapi=1&showinfo=0'
+
+    if autoplay == true
+      assign src = src | append: '&autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&iv_load_policy=3'
+      assign loop = true
+    endif
+
+    if loop == true
+      assign src = src | append: '&loop=1' | append: '&playlist=' | append: video_id
+    endif
+  else
+    assign video_id = src | split: '/' | last | split: '?' | first
+    assign src = 'https://player.vimeo.com/video/' | append: video_id
+
+    if autoplay == true
+      assign src = src | append: '?autoplay=1&muted=1&playsinline=1&controls=0&background=1'
+      assign loop = true
+    else
+      assign src = src | append: '?background=0'
+    endif
+
+    if loop == true
+      assign src = src | append: '&loop=1'
+    endif
+  endif
+-%}
+<iframe
+  src="{{ src }}"
+  width="1280"
+  height="720"
+  frameborder="0"
+  allowfullscreen>
+</iframe>

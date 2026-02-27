@@ -1,0 +1,63 @@
+{%- liquid
+
+  # CARD options
+  assign collection_card_options = settings.collection_card_options | split: ':'
+  assign card_type = card_type | default: collection_card_options[0]
+  assign card_bg = card_bg | default: 'bg-solid'
+  assign content_position = content_position | default: settings.collection_card_content_position
+  assign text_align = text_align | default: settings.collection_card_text_alignment
+  assign show_link_icon = show_link_icon | default: settings.show_collection_link_icon
+  assign aspect_ratio = aspect_ratio | default: settings.collection_card_aspect_ratio
+  assign sizing_rule = sizing_rule | default: settings.collection_card_fill_rule
+  assign show_count = show_count | default: false
+
+  # IMG src
+  if custom_img != blank
+    assign card_image = custom_img
+  else
+    assign card_image = collection.featured_image
+  endif
+
+  # Placeholders
+  assign title_placeholder = 'onboarding.collection_title' | t
+-%}
+
+{%- if show_count -%}
+  {%- capture count_badge -%}
+    <div class="badges"><span class="badge --product-count" style="
+        --text-color: {{ settings.primary_color_foreground }};
+        --background-color: {{ settings.primary_color_background | color_modify: 'alpha', 0.25 }};
+        ">{{- 'products.facets.product_count_simple' | t: count: collection.products_count -}}</span>
+    </div>
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- capture card_content -%}
+  <h3 class="h5 flex flex-grow-1 vertical-center gap-half-gutter" style="flex-wrap:nowrap;"><span class="link-text">{{ collection.title | default: title_placeholder }}</span>{% if show_link_icon %}<span class="link-icon" style="min-width:24px;">{% render 'icon-chevron-right' %}</span>{% endif %}</h3>
+{%- endcapture -%}
+
+<a class="card card--collection card--{{ card_type }} {{ card_bg }} {{ text_align }}" href="{{ collection.url }}"{% if shopify_attributes != empty %} {{ shopify_attributes }}{% endif %}{% if card_id != empty %} id="{{ card_id }}"{% endif %}>
+  <div class="card-media">
+    {%- render 'img',
+      src: card_image,
+      aspect_ratio: aspect_ratio,
+      sizing_rule: sizing_rule,
+      sizes: sizes,
+      lazyload: true -%}
+    {%- if collection_card_options[1] == 'overlay' or show_count -%}
+    <div class="card-media-overlay flex {{ collection_card_options[2] }}">
+      {%- if show_count -%}
+        {{ count_badge }}
+      {%- endif -%}
+      {%- if collection_card_options[1] == 'overlay' -%}
+        {{ card_content }}
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+  </div>
+  {%- if collection_card_options[1] == 'default' -%}
+    <div class="card-body">
+      {{ card_content }}
+    </div>
+  {%- endif -%}
+</a>

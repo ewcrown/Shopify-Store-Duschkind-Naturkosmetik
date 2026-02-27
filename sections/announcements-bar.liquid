@@ -1,0 +1,164 @@
+{%- liquid
+  if section.settings.announcement_font == 'base'
+    assign font_family = 'font-body'
+  else
+    assign font_family = 'font-heading'
+  endif
+
+  assign autoplay_speed = section.settings.autoplay_speed | times: 1000
+-%}
+
+
+{% if section.blocks.size > 0 %}
+  <style>
+    .announcements-bar {
+      font-size: {{ section.settings.announcement_font_scaling_property | append: 'px' }};
+      text-transform: {% if section.settings.announcement_uppercase %}uppercase{% else %}none{% endif %};
+      letter-spacing: {{ section.settings.announcement_letter_spacing | times: 0.01 | append: 'em' }};
+    }
+    .announcement {
+      max-width: none;
+      padding: 8px;
+    }
+    .announcement a {
+      text-decoration: underline;
+    }
+  </style>
+
+  {%- case section.blocks.size -%}
+    {%- when 1 -%}
+      {%- assign md_cols = 1 -%}
+    {%- when 2 -%}
+      {%- assign md_cols = 2 -%}
+    {%- else -%}
+      {%- assign md_cols = 3 -%}
+  {%- endcase -%}
+
+  <div class="announcements-bar color-{{ section.settings.color_scheme }} {{ font_family }}">
+    <gridy-slider
+      class="gridy-slider"
+      data-mobile-enabled="true"
+      data-tablet-enabled="true"
+      data-desktop-enabled="true"
+      data-ipr-mobile="1"
+      data-ipr-tablet="1"
+      data-ipr-desktop="{{ md_cols }}"
+      data-autoplay="true"
+      data-autoplay-delay="{{ autoplay_speed }}"
+      data-sliding-behavior="{{ section.settings.sliding_behavior }}">
+      <div class="gridy-track disable-scroll grid grid-cols-1 md-grid-cols-{{ md_cols }}" style="--gap:0px;">
+        {% for announcement in section.blocks %}
+        <div class="announcement flex center-center text-center"><p>{{ announcement.settings.title }}</p>
+        </div>
+      {% endfor %}
+      </div>
+    </gridy-slider>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.announcements-bar.name",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "default",
+      "label": "t:sections.colors.color_scheme.label"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.typography.name"
+    },
+    {
+      "type": "select",
+      "id": "announcement_font",
+      "label": "t:sections.typography.select_font",
+      "options": [
+        {
+          "value": "base",
+          "label": "t:sections.typography.use_base_font"
+        },
+        {
+          "value": "header",
+          "label": "t:sections.typography.use_heading_font"
+        }
+      ],
+      "default": "header"
+    },
+    {
+      "type": "range",
+      "id": "announcement_font_scaling_property",
+      "default": 12,
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "t:sections.typography.font_size"
+    },
+    {
+      "type": "range",
+      "id": "announcement_letter_spacing",
+      "label": "t:sections.typography.letter_spacing",
+      "default": 0,
+      "step": 1,
+      "min": -20,
+      "max": 60,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_uppercase",
+      "label": "t:sections.typography.uppercase",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.headers.slideshow_settings"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:sections.sliders.autoplay_speed.label",
+      "info": "t:sections.sliders.autoplay_speed.info",
+      "default": 3,
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "select",
+      "id": "sliding_behavior",
+      "label": "t:sections.sliders.sliding_behavior.label",
+      "default": "single",
+      "info": "t:sections.sliders.sliding_behavior.info",
+      "options": [
+        {
+          "value": "single",
+          "label": "t:sections.sliders.sliding_behavior.options.single"
+        },
+        {
+          "value": "all",
+          "label": "t:sections.sliders.sliding_behavior.options.all"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "t:sections.announcements-bar.blocks.announcement.name",
+      "type": "announcement",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:sections.inputs.text.title",
+          "default": "Use announcements for promotions, campaigns and general info."
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

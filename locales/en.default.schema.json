@@ -1,0 +1,2392 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "settings_schema": {
+    "general_layout": {
+      "name": "General layout",
+      "settings": {
+        "paragraph__1": {
+          "content": "General layout settings to manage spacing between content and edges of the screen. Gutter settings manage spacing between elements inside sections. Product grid gap controls gap between Product cards in product lists. [Learn more](https://themes.woolman.co/blogs/taiga/general-layout)"
+        },
+        "card_grid_gap": {
+          "label": "Grid gap",
+          "info": "Used in grids and sliders."
+        },
+        "content_ideal_width": {
+          "label": "Content width",
+          "info": "Maximum width of contained sections"
+        },
+        "content_padding": {
+          "label": "Content padding"
+        },
+        "gutter": {
+          "label": "Gutter"
+        },
+        "product_grid_gap": {
+          "label": "Product grid gap"
+        },
+        "header__1": {
+          "content": "Fixed maximum width"
+        },
+        "body_contained": {
+          "label": "Enable fixed maximum width"
+        },
+        "paragraph__2": {
+          "content": "When enabled the main container won't exceed the content width. White space is added to the left and right side of the main content area when the window size is larger than the content width."
+        },
+        "html_bg_color": {
+          "label": "White space color"
+        },
+        "body_shadow_opacity": {
+          "label": "Main content shadow"
+        }
+      }
+    },
+    "colors": {
+      "name": "Colors",
+      "settings": {
+        "paragraph__1": {
+          "content": "Manage color schemes and set static color settings. Badge colors are managed in \"Product badges\" dropdown. [Learn more](https://themes.woolman.co/blogs/taiga/colors)"
+        },
+        "static_colors": {
+          "content": "Static colors",
+          "info": "Static colors are not affected by the color schemes."
+        },
+        "cart_dot": {
+          "label": "Cart dot background"
+        },
+        "review_stars": {
+          "label": "Review stars",
+          "info": "Only affects the theme's native review stars block and product card stars when standard metafields are used for reviews."
+        }
+      }
+    },
+    "typography": {
+      "name": "Typography",
+      "headers": {
+        "general": "General",
+        "headings":"Headings",
+        "subheadings":"Subheadings",
+        "body_text":"Body text",
+        "buttons":"Buttons",
+        "announcements_bar":"Announcement bar",
+        "drawers":"Drawers",
+        "header": "Header"
+      },
+      "settings": {
+        "info_paragraph": "Choose heading and body fonts. Set the base font size and if needed fine tune letter spacing, line height and other settings by typography type.",
+        "select_heading_font": "Heading font",
+        "select_base_font": "Body font",
+        "info_font_picker": "Selected font can affect the speed of your store. [Learn about system fonts](https://help.shopify.com/manual/online-store/os/store-speed/improving-speed#fonts)",
+        "font_scaling_property": {
+          "label": "Mobile base font size",
+          "info": "16 px recommended"
+        },
+        "font_scaling_desktop_property": {
+          "label": "Desktop base font size",
+          "info": "18 px recommended"
+        }
+      }
+    },
+    "buttons": {
+      "name": "Buttons"
+    },
+    "drawers": {
+      "name": "Drawers",
+      "info": "Common drawer settings that are used on all drawers. Drawers are used for Main navigation, Search, Cart, Collection filtering and product pages."
+    },
+    "modals": {
+      "name": "Modals",
+      "info": "Modals appear on top of the main content and typically user interaction before allowing them to return. Used in following sections Promotional Popup, On Demand Info, Image With Hotspots."
+    },
+    "aesthetics": {
+      "name": "Aesthetics",
+      "info": "Use aesthetics settings to make your store feel more aligned with your brand. Aesthetically store pleasing design is often perceived as design that is more usable.",
+      "settings": {
+        "border_radius": {
+          "label": "Border radius"
+        },
+        "button_border_radius": {
+          "label": "Border radius"
+        },
+        "button_padding": {
+          "label": "Button padding",
+          "option__1": {
+            "label": "Small"
+          },
+          "option__2": {
+            "label": "Medium"
+          },
+          "option__3": {
+            "label": "Large"
+          },
+          "option__4": {
+            "label": "Extra large"
+          }
+        },
+        "cards_header": {
+          "content": "Cards"
+        },
+        "card_border_radius": {
+          "label": "Border radius"
+        },
+        "enable_on_images": {
+          "label": "Use border radius on images",
+          "info": "This setting doesn't affect full screen images."
+        },
+        "header__modals": {
+          "content": "Modals"
+        },
+        "icons_header": {
+          "content": "Icons"
+        },
+        "icon_stroke": {
+          "label": "Icon stroke size",
+          "info": "Adjust the stroke size of icons. Smaller value means thinner icons while larger value means thicker icons."
+        },
+        "animations_header": {
+          "content": "Animations"
+        },
+        "css_animations": {
+          "label": "Use section animations"
+        },
+        "arrows_header": {
+          "content": "Slider arrows"
+        },
+        "arrows_animations": {
+          "label": "Show arrows on hover",
+          "info": "By default the arrows will be shown. When this options is enabled slider arrows will appear when user hovers the slider."
+        },
+        "arrows_style": {
+          "label": "Arrows style",
+          "options": {
+            "default": "Default",
+            "minimal": "Minimal",
+            "no-bg": "No background"
+          }
+        }
+      }
+    },
+    "product_card": {
+      "name": "Product card",
+      "settings": {
+        "product_card_show_vendor": {
+          "label": "Show vendor"
+        },
+        "product_card_show_secondary_image": {
+          "label": "Show second image on hover"
+        },
+        "image_padding": {
+          "label": "image padding"
+        },
+        "product_card_show_rating": {
+          "label": "Show rating stars",
+          "info": "Only supports ratings via standard metafield definitions. Make sure your product rating/reviews app provider follows the Shopify guidelines."
+        },
+        "header__quick_buy": {
+          "content": "Quick view"
+        },
+        "product_card_quick_buy": {
+          "label": "Enable quick view button"
+        },
+        "product_card_quick_buy_mode": {
+          "label": "Quick view button mode",
+          "info": "In 'Add to cart' mode, products with multiple variants show a Quick view button for variant selection.",
+          "options": {
+            "add": "Add to cart",
+            "quick_view": "Quick view"
+          }
+        },
+        "product_card_quick_buy_position": {
+          "label": "Quick view button position",
+          "option_groups": {
+            "full_width": "Hover full width",
+            "auto_width": "Hover auto width",
+            "below_static": "Below"
+          },
+          "below_options": {
+            "full_width": "Full width",
+            "auto_width": "Auto width"
+          }
+        },
+        "header__swatches": {
+          "content": "Color swatches"
+        },
+        "enable_swatches": {
+          "label": "Show color swatches",
+          "info": "Applies to product pages and cards. Configure [category metafields](https://help.shopify.com/en/manual/custom-data/metafields/category-metafields/using-category-metafields) or add custom swatches images to the files in Shopify Admin. [Get Help](https://themes.woolman.co/blogs/taiga/product-card#color-swatches)"
+        },
+        "header__variant_availability": {
+          "content": "Variant availability"
+        },
+        "show_variant_availability": {
+          "label": "Show variant availability",
+          "info": "Shows availability by a single variant option. By default shows \"Size\" availability, that can be changed through the theme translations (\"card_availability_option_trigger\")."
+        },
+        "header__advanced": {
+          "content": "Advanced"
+        },
+        "custom_fields": {
+          "label": "Metafields to show",
+          "info": "Show information from product metafields. Comma separated list of \"namespace.key\" values."
+        }
+      }
+    },
+    "collection_card": {
+      "name": "Collection card"
+    },
+    "article_card": {
+      "name": "Article card",
+      "settings": {
+        "article_card_show_author": {
+          "label": "Show author"
+        },
+        "article_card_show_date": {
+          "label": "Show date"
+        },
+        "article_card_show_content": {
+          "label": "Show content"
+        }
+      }
+    },
+    "badges": {
+      "name": "Product badges",
+      "settings": {
+        "info_paragraph": "You can use badges on product cards and on product pages. Default badges are: Sale, New, Preorder and Sold out. [Learn more about badges](https://themes.woolman.co/blogs/taiga/product-card#product-card-badges).",
+        "badge_border_radius": {
+          "label": "Border radius"
+        },
+        "product_card_badges": {
+          "label": "Show on product cards"
+        },
+        "position_on_cards" : {
+          "label": "Position on product cards"
+        },
+        "badge_sale_foreground": {
+          "label": "On sale text"
+        },
+        "badge_sale_background": {
+          "label": "On sale background"
+        },
+        "badge_new_foreground": {
+          "label": "New text"
+        },
+        "badge_new_background": {
+          "label": "New background"
+        },
+        "badge_preorder_foreground": {
+          "label": "Pre-order text"
+        },
+        "badge_preorder_background": {
+          "label": "Pre-order background"
+        },
+        "badge_sold_out_foreground": {
+          "label": "Sold out text"
+        },
+        "badge_sold_out_background": {
+          "label": "Sold out background"
+        },
+        "custom_badges": {
+          "label": "Custom badge definitions",
+          "info": "\"[Product tag]:[Badge color]:[Text color]\". Values separated with colon, each badge definition with a semicolon(;)."
+        },
+        "sale_badge_text": {
+          "label": "On sale badge text",
+          "options": {
+            "default": "\"Sale\"",
+            "savings": "Savings",
+            "percentage": "% Off"
+          }
+        }
+      }
+    },
+    "currency_format": {
+      "name": "Currency format",
+      "settings": {
+        "content": "Currency codes",
+        "paragraph": "Cart and checkout prices always show currency codes. Example: $1.00 USD.",
+        "currency_code_enabled": {
+          "label": "Show currency codes"
+        }
+      }
+    },
+    "cart": {
+      "name": "Cart",
+      "settings": {
+        "cart_icon": {
+          "label": "Cart icon",
+          "options": {
+            "basket": "Basket",
+            "bag": "Bag",
+            "cart": "Cart"
+          }
+        },
+        "cart_type": {
+          "label": "Cart type",
+          "options": {
+            "drawer": "Drawer",
+            "page": "Page",
+            "notification": "Notification"
+          }
+        },
+        "show_accelerated_checkout": {
+          "label": "Show accelerated checkout buttons",
+          "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/payments/accelerated-checkouts)"
+        },
+        "show_cart_recommendations": {
+          "label": "Show cart recommendations",
+          "info": "Shows product recommendations on the cart"
+        },
+        "show_cart_note": {
+          "label": "Show cart note",
+          "info": "Allows customers to leave additional details to the order"
+        },
+        "show_cart_link": {
+          "label": "Show cart link in drawer",
+          "info": "Shows 'View cart' link at the bottom of the cart drawer."
+        },
+        "plus_minus_on_mobile": {
+          "label": "Show + and - controls on mobile",
+          "info": "Quantity plus and minus icons are always displayed with larger screens. With this setting you can also make them visible on mobile devices."
+        },
+        "show_empty_cart_haiku": {
+          "label": "Show empty cart haiku"
+        },
+        "header__1": {
+          "content": "Free shipping notification"
+        },
+        "paragraph__1": {
+          "content": "Free shipping notification is shown on cart when the order value is greater than the threshold. You will also need to set up matching shipping configuration in your store settings. [Get Support](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/free-shipping-rates)"
+        },
+        "paragraph__2": {
+          "content": "Enter minimum order value for free shipping without the currency symbol, e.g. 100. Use the store primary currency. Conversion rate is automatically calculated for any additional currencies."
+        },
+        "free_shipping_threshold": {
+          "label": "Free shipping threshold",
+          "info": "Leave blank to disable free shipping notification on cart."
+        }
+      }
+    },
+    "social_media": {
+      "name": "Social media",
+      "settings": {
+        "header__1": {
+          "content": "Social accounts"
+        },
+        "social_facebook_link": {
+          "label": "Facebook",
+          "info": "https://facebook.com/shopify"
+        },
+        "social_instagram_link": {
+          "label": "Instagram",
+          "info": "http://instagram.com/shopify"
+        },
+        "social_linkedin_link": {
+          "label": "LinkedIn",
+          "info": "https://ca.linkedin.com/company/shopify"
+        },
+        "social_pinterest_link": {
+          "label": "Pinterest",
+          "info": "https://pinterest.com/shopify"
+        },
+        "social_snapchat_link": {
+          "label": "Snapchat",
+          "info": "https://www.snapchat.com/add/shopify"
+        },
+        "social_tiktok_link": {
+          "label": "TikTok",
+          "info": "https://tiktok.com/@shopify"
+        },
+        "social_tumblr_link": {
+          "label": "Tumblr",
+          "info": "https://shopify.tumblr.com"
+        },
+        "social_twitter_link": {
+          "label": "X (Twitter)",
+          "info": "https://twitter.com/shopify"
+        },
+        "social_untappd_link": {
+          "label": "Untappd",
+          "info": "https://untappd.com/shopify"
+        },
+        "social_vimeo_link": {
+          "label": "Vimeo",
+          "info": "https://vimeo.com/shopify"
+        },
+        "social_youtube_link": {
+          "label": "YouTube",
+          "info": "https://www.youtube.com/shopify"
+        }
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "settings": {
+        "favicon": {
+          "label": "Favicon",
+          "info": "Favicon will be scaled down to 32 x 32px"
+        }
+      }
+    },
+    "search": {
+      "name": "Search",
+      "settings": {
+        "paragraph__1": {
+          "content": "Search related settings. [Learn more](https://themes.woolman.co/blogs/taiga/header-and-navigation#search)"
+        },
+        "enable_search": {
+          "label": "Enable search"
+        },
+        "search_recommendations": {
+          "label": "Search recommendations",
+          "info": "If set, show recommended terms in search. One recommendation per line."
+        }
+      }
+    },
+    "advanced": {
+      "name": "Advanced",
+      "info": "Settings for advanced users and developers that are familiar with HTML document structure.",
+      "settings": {
+        "head_custom_liquid": {
+          "label": "Custom liquid <head>",
+          "info": "Placed just before </head> closing tag."
+        },
+        "body_custom_liquid": {
+          "label": "Custom liquid <body>",
+          "info": "Placed just before </body> closing tag."
+        },
+        "disable_product_structured_data": {
+          "label": "Disable product structured data",
+          "info": "Disables product structured data on product pages. Use this setting if you have a third party app that handles structured data."
+        }
+      }
+    }
+  },
+  "sections": {
+    "section_categories": {
+      "product_and_collection_promotion": "2 - Products and collections",
+      "visual_and_storytelling": "1 - Visual and storytelling",
+      "marketing_and_conversion": "3 - Marketing and conversion",
+      "utility_and_support": "4 - Utility and support"
+    },
+    "before_after": {
+      "name": "Before/after image slider",
+      "info": "Manage the section content through section blocks. And use the options below to change the overall style and layout of this sections. [Get Support](https://themes.woolman.co/blogs/taiga/before-after-image-slider)",
+      "settings": {
+        "header_position": {
+          "label": "Header (and button) position",
+            "options": {
+              "top": "Top",
+              "left": "Left",
+              "right": "Right",
+              "bottom": "Bottom",
+          }
+        }
+      },
+    },
+    "blogs_and_articles": {
+      "articles_per_row": "Articles per row",
+      "article_card_layout": {
+        "label": "Layout",
+        "traditional": "Text below image",
+        "image": "Text over image"
+      }
+    },
+    "cards": {
+      "style": {
+        "label": "Style",
+        "options": {
+          "card": "Card",
+          "traditional": "Traditional"
+        }
+      },
+      "text_position": {
+        "label": "Text position",
+        "groups": {
+          "below_media": "Below media",
+          "overlay": "Overlay"
+        },
+        "options": {
+          "without_background": "Outside the card",
+          "with_card_background": "Inside the card"
+        }
+      },
+      "card_background": {
+        "label": "Card background",
+        "info": "Set colors from Theme Settings in the Colors tab.",
+        "options": {
+          "default": "Solid",
+          "gradient": "Gradient",
+          "transparent": "Transparent"
+        }
+      },
+      "custom_image": {
+        "label": "Custom image",
+        "info": "Optional. Overwrites the default image."
+      }
+    },
+    "colors": {
+      "foreground": "Text",
+      "foreground_gradient": "Text gradient",
+      "foreground_gradient_info": "Using Text gradient will overwrite the default text color. Remove gradient to use the default color.",
+      "background": "Background",
+      "background_gradient": "Background gradient",
+      "borders": "Borders",
+      "button_text": "Button text",
+      "button_background": "Button background",
+      "button_outline": "Outline button / Links",
+      "card_foreground": "Card text",
+      "card_background": "Card background",
+      "card_background_gradient": "Card background gradient",
+      "heading_color": "Heading color",
+      "text_color": "Text color",
+      "overlay_text": "Overlay text",
+      "overlay_color": "Overlay color",
+      "overlay_opacity": "Overlay opacity",
+      "overlay_blur": "Overlay blur",
+      "color_scheme": {
+        "label": "Color scheme",
+        "overwrite_info": "When set overwrites color schemes default value"
+      },
+      "media_bg": {
+        "label": "Media background"
+      },
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "typography": {
+      "select_font": "Select font",
+      "use_base_font": "Use body font",
+      "use_base_font_bold": "Body font (bold)",
+      "use_heading_font": "Use heading font",
+      "font_size": "Font size",
+      "heading_size": "Heading size",
+      "font_size_multiplier": "Font size",
+      "line_height": "Line height",
+      "letter_spacing": "Letter spacing",
+      "uppercase": "Enable uppercase",
+      "text_align": "Text alignment",
+      "style_options": {
+        "heading_style_label": "Heading style",
+        "question_style_label": "Question style",
+        "text_group": "Text styles",
+        "heading": "Heading",
+        "subheading": "Subheading",
+        "body_text": "Body text",
+        "body_text_bold": "Body text (bold)",
+        "button_group": "Button styles",
+        "primary_button": "Primary button",
+        "secondary_button": "Secondary button",
+        "link": "Link"
+      },
+      "weight_options": {
+        "label": "Font weight",
+        "normal": "Normal",
+        "bold": "Bold"
+      },
+      "size_options": {
+        "label": "Size modifier",
+        "label_mobile": "Mobile size modifier",
+        "label_desktop": "Desktop size modifier",
+        "label_heading_size": "Heading size modifier",
+        "label_text": "Text size modifier",
+        "label_button": "Button size modifier",
+        "tiny": "Tiny",
+        "small": "Small",
+        "regular": "Regular",
+        "default": "Default",
+        "normal": "Normal",
+        "medium": "Medium",
+        "large": "Large",
+        "huge": "Huge",
+        "gigantic": "Gigantic",
+        "outrageous": "Outrageous"
+      },
+      "heading_tag": {
+        "label": "HTML tag",
+        "info": "Choose the desired HTML tag to be used in the heading. Selection affects the heading base size.",
+        "h1": "H1",
+        "h2": "H2",
+        "h3": "H3",
+        "h4": "H4",
+        "h5": "H5",
+        "h6": "H6"
+      },
+      "text_transform": {
+        "label": "Text style",
+        "none": "Normal",
+        "uppercase": "Uppercase"
+      },
+      "link_icon": {
+        "show_label": "Show link arrow"
+      }
+    },
+    "buttons": {
+      "color_scheme": "Button color scheme",
+      "invert_colors": {
+        "label": "Inverted button colors",
+        "info": "Doesn't affect link styled button"
+      },
+      "style": {
+        "label": "Button style",
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "link": "Link"
+      },
+      "width": {
+        "label": "Button width",
+        "full": "Full",
+        "inline": "Normal"
+      },
+      "button_group": {
+        "full_width_buttons": {
+          "label":"Full width buttons"
+        }
+      }
+    },
+    "images": {
+      "featured_image": "Featured image",
+      "bg_image": "Background image",
+      "bg_image__info": "If video is set, image is used as preview image for the video.",
+      "bg_video": "Background video",
+      "cover_image": "Cover image",
+      "aspect_ratio": {
+        "label": "Image aspect ratio",
+        "info": "Leave aspect ratio as 'Natural' to disable aspect ratio forcing",
+        "natural": "Natural",
+        "portrait_2_3": "Portrait (2:3)",
+        "portrait_3_4": "Portrait (3:4)",
+        "square": "Square (1:1)",
+        "landscape_4_3": "Landscape (4:3)",
+        "landscape_16_9": "Landscape (16:9)"
+      },
+      "fill_rule": {
+        "label": "Media fit",
+        "contain": "Original",
+        "cover": "Fill"
+      },
+      "focal_point": {
+        "label": "Focal point",
+        "image_label": "Image focal point",
+        "video_label": "Video focal point",
+        "info": "Adjust focal point to keep the subject of the image in view."
+      },
+      "media_toggle": {
+        "label": "Media toggle",
+        "show_image": "Show image",
+        "show_video": "Show video",
+        "info": "Used both in mobile and desktop.",
+        "autoplay": "autoplay",
+        "controls": "controls",
+        "video_toggle_info": "If autoplay is disabled, controls are always shown."
+      },
+      "media_type": {
+        "label": "Media type",
+        "image": "Image",
+        "video": "Video",
+        "external_video": "External video",
+        "external_video_info_aspect_ratio": "Aspect ratio is set to 'natural' for external videos.",
+        "none": "None"
+      },
+      "image_height": "Image height",
+      "image_link": "Image link",
+      "recommendations": {
+        "landscape": "Landscape aspect ratio recommended",
+        "portrait": "Portrait aspect ratio recommended"
+      },
+      "svg": {
+        "label": "SVG image",
+        "info": "Optional SVG image. [Get support](https://themes.woolman.co/blogs/taiga/videos-and-images-in-sections#using-svgs)"
+      }
+    },
+    "layout": {
+      "grid_gap": "Grid gap",
+      "image_gap": "Image gap",
+      "item_gap": "Item gap",
+      "columns": "Columns",
+      "direction": {
+        "label": "Direction",
+        "ltr": "Left to right",
+        "rtl": "Right to left"
+      },
+      "position": {
+        "content_label": "Content position",
+        "heading_label": "Heading position",
+        "text_label": "Text position",
+        "groups": {
+          "overlay": "Overlay",
+          "by_side": "By side"
+        },
+        "options": {
+          "top": "Top",
+          "middle": "Middle",
+          "bottom": "Bottom",
+          "left": "Left",
+          "center": "Center",
+          "right": "Right",
+          "top_left": "Top left",
+          "top_center": "Top center",
+          "top_right": "Top right",
+          "middle_left": "Middle left",
+          "middle_center": "Middle center",
+          "middle_right": "Middle right",
+          "bottom_left": "Bottom left",
+          "bottom_center": "Bottom center",
+          "bottom_right": "Bottom right",
+          "below_left": "Below left",
+          "below_center": "Below center",
+          "below_right": "Below right",
+          "below_justified": "Below justified",
+          "justify": "Justify",
+          "justify_with_buttons": "Justify (with buttons)",
+          "above_video": "Above video",
+          "below_video": "Below video"
+        }
+      },
+      "x_y_position": {
+        "vertical_label": "Vertical position",
+        "horizontal_label": "Horizontal position",
+        "vertical_info": "0% top, 100% bottom",
+        "horizontal_info": "0% left, 100% right"
+      },
+      "fractions": {
+        "one_half": "One half (1/2)",
+        "one_third": "One third (1/3)",
+        "two_thirds": "Two thirds (2/3)",
+        "one_fourth": "One fourth (1/4)",
+        "two_fourths": "Two fourths (2/4)",
+        "three_fourth": "Three fourths (3/4)"
+      },
+      "sizes": {
+        "natural": "Natural",
+        "adapt": "Adapt",
+        "small": "Small",
+        "medium": "Medium",
+        "large": "Large"
+      },
+      "margin_top": "Margin top",
+      "margin_bottom": "Margin bottom",
+      "padding": "Padding",
+      "section_width": {
+        "label": "Section width",
+        "full_width": "Full width",
+        "contained": "Contained",
+        "wide": "Wide",
+        "narrow": "Narrow",
+        "edge_to_edge": "Edge to edge"
+      },
+      "content_width": {
+        "label": "Text content width",
+        "label_max_width": "Text content max width",
+        "wide": "Wide",
+        "default": "Default",
+        "narrow": "Narrow",
+        "12_columns": "12/12 columns",
+        "10_columns": "10/12 columns",
+        "8_columns": "8/12 columns",
+        "6_columns": "6/12 columns",
+        "4_columns": "4/12 columns",
+        "3_columns": "3/12 columns",
+        "2_columns": "2/12 columns"
+      },
+      "section_height": {
+        "label": "Section height",
+        "pixel_height_label": "Section pixel height",
+        "group": {
+          "by_pixels": "By pixels",
+          "static": "Static",
+          "relative": "Relative",
+          "fixed_ratio": "Fixed ratio"
+        },
+        "auto": "Natural",
+        "100vh": "Full screen",
+        "aspect_ratio_4_1": "Lanscape (4:1)",
+        "aspect_ratio_3_1": "Lanscape (3:1)",
+        "aspect_ratio_16_9": "Lanscape (16:9)",
+        "aspect_ratio_4_3": "Lanscape (4:3)",
+        "aspect_ratio_1_1": "Square (1:1)",
+        "aspect_ratio_3_4": "Portrait (3:4)",
+        "aspect_ratio_2_3": "Portrait (2:3)"
+      },
+      "collections_per_row": "Collections per row",
+      "items_per_row": "Items per row",
+      "columns_per_row": "Columns per row",
+      "products_per_row": "Products per row",
+      "display_type": {
+        "label": "Display type",
+        "grid": "Grid",
+        "slider": "Slideshow",
+        "slider_peek": "Slideshow (Peeking items)",
+        "tablet_paragraph": "Tablet layout uses desktop display type and margin settings."
+      },
+      "media_position": {
+        "label": "Media position",
+        "media_first": "Media first",
+        "media_last": "Media last"
+      },
+      "media_width": {
+        "label": "Media width",
+        "full": "Full",
+        "wide": "Wide",
+        "narrow": "Narrow",
+        "extra_large": "Extra large",
+        "large": "Large",
+        "medium": "Medium",
+        "small": "Small"
+      }
+    },
+    "banners": {
+      "label": "Banner",
+      "banner_width": {
+        "label": "Banner width"
+      },
+      "column_span": {
+        "label": "Banner column width",
+        "info": "Can't exceed the amount of ites per row."
+      },
+      "banner_height": {
+        "label": "Banner height",
+        "full_screen": "Full screen"
+      },
+      "media_content": {
+        "header": "Media content"
+      },
+      "visibility": {
+        "header": "Visibility",
+        "nth_item": "Show banner after n:th item in page",
+        "nth_item__info": "If the grid does not have enough items in the page for banner to be placed in desired position then the banner will be hidden.",
+        "only_on_first_page": "Show only on first page",
+        "only_on_first_page__info": "If disabled, show banner on all pages in defined position."
+      }
+    },
+    "headers": {
+      "content": "Content",
+      "overlay_content": "Overlay content",
+      "layout": "Layout",
+      "text_content": "Text content",
+      "button": "Button",
+      "products": "Products",
+      "section_header": "Section header",
+      "color": "Color settings",
+      "style": "Style settings",
+      "style_and_layout": "Style and layout",
+      "hotspot": "Hotspot",
+      "advanced": "Advanced",
+      "motion": "Motion settings",
+      "mobile_layout": "Mobile layout",
+      "tablet_layout": "Tablet layout",
+      "desktop_layout": "Desktop layout",
+      "mobile_settings": "Mobile settings",
+      "tablet_settings": "Tablet settings",
+      "desktop_settings": "Desktop settings",
+      "custom_settings": "Custom settings",
+      "custom_settings_info": "Mandatory custom settings to overwrite the default appearance.",
+      "slideshow_settings": "Slideshow settings",
+      "banner_text": "Banner text"
+    },
+    "paragraphs": {
+      "tablet_layout_info": "Tablet layout uses the same margin values as the desktop layout."
+    },
+    "sliders": {
+      "slideshow_toggle_info": "Following settings used when \"Display type\" is set to \"Slideshow\".",
+      "enable_autoplay": {
+        "label": "Enable autoplay"
+      },
+      "autoplay_speed": {
+        "label": "Autoplay interval",
+        "info": "Slideshow rotates in given interval"
+      },
+      "sliding_behavior": {
+        "label": "Sliding behavior",
+        "info": "Select how many slides a single sliding motion covers. Used with autoplay and arrows.",
+        "options": {
+          "single": "One by one",
+          "all": "All visible"
+        }
+      },
+      "slider_overflow": {
+        "label": "Overflow visibility",
+        "info": "Select how to display the items outside the slider. Effect visible on large screens.",
+        "options": {
+          "hidden": "Hidden",
+          "visible": "Visible"
+        }
+      }
+    },
+    "on_demand_content": {
+      "header": "On demand content",
+      "info": "On demand content will be opened in a popup dialog."
+    },
+    "inputs": {
+      "required": {
+        "label": "Required",
+        "info": "If enabled, the input field is required."
+      },
+      "width": {
+        "label": "Width",
+        "info": "Set the width of the input field.",
+        "half_width": "Half width (50 %)",
+        "full_width": "Full width (100 %)"
+      },
+      "text": {
+        "title": "Heading",
+        "subtitle": "Subheading",
+        "text": "Text",
+        "content": "Content",
+        "html": "HTML",
+        "button_label": "Button label",
+        "author": "Author",
+        "label": "Label",
+        "label_info": "Used as a label for the input field.",
+        "read_more": "Show 'Read more' button for long text",
+        "read_more_info": "If there is more than 250 characters in the text, only a small part of the text will be shown. The rest of the text can be toggled by clicking the 'Read more' button."
+      },
+      "types": {
+        "type": "Select field type",
+        "text": "Short text",
+        "textarea": "Long text",
+        "email": "Email",
+        "number": "Number",
+        "tel": "Phone number",
+        "date": "Date",
+        "url": "URL",
+        "time": "Time",
+        "week": "Week",
+        "text_group": "Generic inputs",
+        "date_group": "Date inputs"
+      },
+      "image_picker": {
+        "image": "Image",
+        "image_mobile": "Image (mobile)"
+      },
+      "checkbox": {
+        "view_all": "Show 'View all' link",
+        "show_author": "Show article author",
+        "show_date": "Show published date",
+        "show_read_time": "Show read time",
+        "show_excerpt": "Show excerpt",
+        "show_article_tags": "Show article tags",
+        "show_as_thumbnail_cards": "Use thumbnail layout",
+        "show_arrows": "Show arrows",
+        "show_breadcrumb": "Show breadcrumb",
+        "show_breadcrumb_info": "Use metafields to add more levels. [Learn more](https://themes.woolman.co/blogs/taiga/breadcrumb)",
+        "rounded_corners": "Rounded corners"
+      },
+      "url": {
+        "label": "Url",
+        "link": "Link",
+        "button_link": "Button link",
+        "media_link": "Media link",
+        "banner_link": "Banner link",
+        "banner_link_info": "Optional. Used for the full banner when buttons are not in use.",
+        "video_url": "Video URL",
+        "video_url_mobile": "Video URL (mobile)",
+        "video_url__info": "Supports Youtube, Vimeo and MP4 files. [Get Support](https://themes.woolman.co/blogs/taiga/videos-and-images-in-sections)"
+      },
+      "product": {
+        "label": "Product"
+      },
+      "collection_list": {
+        "label": "Collections"
+      },
+      "collection": {
+        "label": "Collection"
+      },
+      "article": {
+        "label": "Article"
+      },
+      "page": {
+        "label": "Page"
+      },
+      "blog": {
+        "label": "Blog"
+      },
+      "range": {
+        "image_width": "Image width",
+        "title_size": "Title size",
+        "image_height": "Image height",
+        "grid_gap": "Grid gap",
+        "grid_gap_info": "Gap between items. Set to -1 to use the Theme settings Gutter value as the gap."
+      }
+    },
+    "blocks": {
+      "margin_info": "Adjust space between this and the element above.",
+      "button": {
+        "name": "Button"
+      },
+      "article": {
+        "author": "Author",
+        "date": "Published date",
+        "excerpt": "Excerpt",
+        "read_time": "Read time"
+      },
+      "before_after":{
+        "name": "Before/after images",
+        "info": "Add images to compare before and after. It's recommended to use images with the same aspect ratio.",
+        "settings": {
+          "before_image": {
+            "label": "Before image",
+            "info": "Image to compare with the after image."
+          },
+          "after_image": {
+            "label": "After image",
+            "info": "Image to compare with the before image."
+          },
+          "header_labels": {
+            "heading": "Label options",
+            "info": "Image labels are optional. If you don't want to use them, leave the labels empty."
+          },
+          "before_label": {
+            "label": "Before label"
+          },
+          "after_label": {
+            "label": "After label"
+          },
+          "label_position": {
+            "label": "Label position",
+            "options": {
+              "top": "Top",
+              "center": "Center",
+              "bottom": "Bottom"
+            }
+          },
+          "label_colors": {
+            "label": "Label colors"
+          }
+        }
+      },
+      "buttons": {
+        "name": "Buttons",
+        "paragraph": "Use up to three dedicated buttons. Note that the image's Banner link will be disabled when you use buttons.",
+        "header_1": "First button",
+        "header_2": "Second button",
+        "header_3": "Third button"
+      },
+      "image": {
+        "name": "Image"
+      },
+      "image_or_video": {
+        "name": "Image (or video)",
+        "info_desktop_settings": "Mandatory settings. Desktop media will is used by default according to the shown media type selection.",
+        "info_mobile_settings": "Optional settings. Mobile settings give you an option to use different content with mobile devices. Desktop settings used when left empty."
+      },
+      "timer_date": {
+        "name": "Timer datetime",
+        "the_date": {
+          "label": "Target datetime",
+          "info": "The timer will hit zero at the target datetime. By default the online store's timezone is used. Format: YYYY-MM-DD HH:MM"
+        },
+        "time_units": {
+          "label": "Time units",
+          "options": {
+            "hide": "Hide",
+            "show_above": "Show above",
+            "show_below": "Show below"
+          }
+        },
+        "units_spacing": {
+          "label": "Unit spacing",
+          "options": {
+            "narrow": "Narrow",
+            "medium": "Medium",
+            "wide": "Wide"
+          }
+        }
+      },
+      "post_timer_message": {
+        "name": "Post timer message",
+        "info": "This message will be shown when the timer hits zero. You can preview this by temporary disabling the \"Timer datetime\" block."
+      },
+      "text": {
+        "name": "Text"
+      },
+      "text_and_image": {
+        "name": "Text and image"
+      },
+      "title": {
+        "name": "Heading"
+      },
+      "subtitle": {
+        "name": "Subheading"
+      },
+      "video": {
+        "name": "Video"
+      },
+      "product": {
+        "name": "Product"
+      },
+      "price": {
+        "name": "Price"
+      },
+      "quantity_selector": {
+        "name": "Quantity Selector",
+        "next_to_add_to_cart": {
+          "label": "Show next to \"Add to cart\""
+        }
+      },
+      "variant_picker": {
+        "name": "Variant Picker",
+        "picker_type": {
+          "label": "Picker style",
+          "options": {
+            "dropdown": "Dropdown",
+            "buttons": "Buttons"
+          }
+        },
+        "cross_out_unavailable": {
+          "label": "Cross out unavailable variants",
+          "info": "Only works with buttons variant picker style. If enabled, unavailable variant buttons will be visually crossed out."
+        },
+        "advanced": {
+          "label": "Advanced",
+          "info": "Advanced settings for the variant picker. Use these to customize the variant picker for specific options."
+        },
+        "dropdown_picker_options": {
+          "label": "Options which use the dropdown picker",
+          "info": "Enter the variant option name(s) which use the dropdown picker (for example: 'Size'). Separate by line break."
+        },
+        "button_picker_options": {
+          "label": "Options which use the button picker",
+          "info": "Enter the variant option name(s) which use the button picker (for example: 'Color'). Separate by line break."
+        }
+      },
+      "size_guide": {
+        "name": "Size guide",
+        "info": "Size guide block adds a button for size guide popup/drawer next to the variant picker label.",
+        "enabled": "Show size guide button",
+        "button_label": "Button label",
+        "show_ruler": "Show button with ruler icon",
+        "image": "Image for size guide",
+        "content": "Content for size guide",
+        "page_handle": "Page handle for size guide",
+        "page_handle_info": "Optional. If used the size guide content will be fetched from the page with the given handle. Case sensitive.",
+        "trigger":{
+          "label": "Option name",
+          "info": "Mandatory. Determines the option name where the size guide button will be shown. Case sensitive."
+        }
+      },
+      "inventory_status": {
+        "name": "Inventory Status",
+        "show_available_quantity": {
+          "label": "Show available quantity"
+        },
+        "inventory_threshold": {
+          "label": "Low inventory threshold"
+        },
+        "inventory_transfers_enable": {
+          "label": "Show inventory transfer notice",
+          "info": "Learn how to create inventory transfers [here](https://help.shopify.com/en/manual/products/inventory/transfers/create-transfer)"
+        },
+        "additional_descriptions": {
+          "header": "Additional descriptions",
+          "info_paragraph": "You can provide additional information related to any inventory status.",
+          "text_inputs": {
+            "additional__in_stock": "In stock",
+            "additional__few_on_stock": "Low inventory",
+            "additional__out_of_stock": "Out of stock",
+            "additional__out_of_stock_continue_selling": "Out of stock (continue selling)"
+          }
+        }
+      },
+      "buy_buttons": {
+        "name": "Buy Buttons",
+        "show_dynamic_checkout": {
+          "label": "Show dynamic checkout buttons",
+          "info": "Using the payment methods available on your store, customers see their preferred option, like PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+        },
+        "add_multipliers": {
+          "label": "Add multipliers",
+          "info": "Integer values separated with comma. Displays dedicated buttons to add multiple items to cart with a single click."
+        },
+        "add_multipliers_layout": {
+          "label": "Add multipliers layout",
+          "options": {
+            "single_line": "Single line",
+            "stacked": "Stacked"
+          }
+        },
+        "show_gift_card_recipient": {
+          "label": "Show recipient information form for gift cards",
+          "info": "Allows buyers to send gift cards on a scheduled date along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)"
+        }
+      },
+      "product_description": {
+        "name": "Product Description",
+        "collapsible_type": {
+          "label": "Collapsible type",
+          "options": {
+            "collapsible": "Collapsible",
+            "read_more": "Read more"
+          }
+        },
+        "enable_collapsible": "Show as a collapsible item",
+        "info": "The collabsible heading can be changed through default theme content"
+      },
+      "badges": {
+        "name": "Badges",
+        "info": "Show product badges on product page.",
+        "position": {
+          "label": "Position",
+          "options": {
+            "over_media": "Over media",
+            "text_column": "Text column"
+          }
+        }
+      },
+      "share": {
+        "name": "Share Buttons",
+        "hide_on_desktop": {
+          "label": "Hide on desktop"
+        }
+      },
+      "similar_collections": {
+        "name": "Similar Collections",
+        "to_exclude": {
+          "label": "Collections to exclude",
+          "info": "Add a comma-separated list of collection handles to exclude from list"
+        }
+      },
+      "custom_liquid": {
+        "name": "Custom Liquid",
+        "custom_liquid": {
+          "label": "Custom liquid"
+        }
+      },
+      "pickup_availability": {
+        "name": "Pickup Availability",
+        "info": "Pickup availability not showing up? [Get Support](https://help.shopify.com/en/manual/shipping/setting-up-and-managing-your-shipping/local-methods/local-pickupy)"
+      },
+      "collapsible_tab": {
+        "name": "Collapsible Item",
+        "open_as_drawer": {
+          "label": "Open as drawer instead of collapsible"
+        },
+        "icon": {
+          "label": "Icon",
+          "options": {
+            "none": "No icon",
+            "icon-caret__right": "Caret",
+            "icon-truck": "Truck",
+            "icon-package": "Package",
+            "icon-feather": "Feather",
+            "icon-gift": "Gift",
+            "icon-map-pin": "Map pin",
+            "icon-zap": "Zap",
+            "icon-ruler": "Ruler"
+          }
+        }
+      },
+      "sku": {
+        "name": "SKU"
+      },
+      "rating": {
+        "name": "Star Rating"
+      },
+      "sibling_products": {
+        "name": "Sibling Products",
+        "info": "In order to use this section you will need to add required metafield definition to your online store as well as populate required product data. [Get Support](https://themes.woolman.co/blogs/taiga/product-pages#sibling-products)"
+      },
+      "icons": {
+        "name": "Image Grid",
+        "info": "Ideal block to display different cetificates and other stamps related products. Or to display shipping or payment provider logos, etc. Supports up to 8 images.",
+        "icons_per_row": "Images per row",
+        "header_for_grid_images": "Grid images"
+      },
+      "section_header": {
+        "name": "Section Header",
+        "info": "Use Section header block for titles and descriptions before the actual content.",
+        "subtitle_tag": "Subheading HTML tag",
+        "title_tag": "Heading HTML tag"
+      },
+      "sticky_buy_bar": {
+        "name": "Sticky Buy Bar",
+        "info": "Sticky buy bar will appear from the bottom of the screen in view when the Buy Buttons block is not visible. Sticky buy bar's Add to cart button will add the currently selected variant into the basket."
+      },
+      "upsell_products": {
+        "name": "Upsell and Complementary Products",
+        "info": "Display desired products so that they can be added to cart with the main product of the page or separately.",
+        "info__2": "To select complementary products, add the Search & Discovery app. [Learn more](https://help.shopify.com/manual/online-store/search-and-discovery/product-recommendations)",
+        "products_label": "Products",
+        "behavior_label": "Behavior",
+        "behavior_options": {
+          "default": "Add products with the main product",
+          "separate": "Add products separately"
+        },
+        "variant_selection_method": {
+          "label": "Variant selection method",
+          "options": {
+            "dropdown": "Dropdown selector",
+            "quick_buy": "Quick view modal"
+          }
+        },
+        "info__3": "When using the first behavior option, \"Buy Buttons\" block needs to be active. With the second option, products have their own add to cart buttons.",
+        "info__4": "Dropdown selector only works with products that have up to 250 variants. For products with more variants, quick view modal is always enforced."
+      }
+    },
+    "announcements-bar": {
+      "name": "Announcements Bar",
+      "blocks": {
+        "announcement": {
+          "name": "Announcement"
+        }
+      }
+    },
+     "gallery": {
+      "name": "Gallery",
+      "info": "Use this section to showcase images and videos in a masonry styled layout."
+    },
+    "banner-grid": {
+      "name": "Banner grid",
+      "info": "Use this section to highlight various content in a grid layout. Content can be managed through the section blocks. [Get Support](https://themes.woolman.co/blogs/taiga/banner-grid)",
+      "settings": {
+        "block_aspect_ratio": {
+          "label": "Banner aspect ratio",
+          "info": "Minimum aspect ratio for all the banners. Text and product banners can stretch the row's banner height beyond this setting."
+        },
+        "block_width" : {
+          "label": "Block width",
+          "info": "Won't exceed the columns value."
+        }
+      },
+      "blocks": {
+        "media_link__info": "The full banner area will work as a link regardless of the overlay content.",
+        "title_style__info": "Buttons will appear as disabled if the banner link is not set.",
+        "product__paragraph": "Use options below to change the appearance of the product banner. Default option refers to theme settings values.",
+        "product_card_content": {
+          "label": "Card text content",
+          "options": {
+            "default": "Default",
+            "group__theme_settings": "Theme settings",
+            "group__overwrite": "Overwrite",
+            "name_and_price": "Show name and price",
+            "name_only": "Show name only",
+            "hide_all": "Hide all"
+          }
+        }
+      }
+    },
+    "collection-list": {
+      "name": "Collection list",
+      "info": "Use this section to showcase product collections in your store. [Get Support](https://themes.woolman.co/blogs/taiga/collection-list)"
+    },
+    "contact-form": {
+      "name": "Contact form",
+      "info": "Use this section to provide a contact form for your customers. [Get Support](https://themes.woolman.co/blogs/taiga/contact-form)",
+      "email": {
+        "input": "Email field",
+        "label": "Email",
+        "info": "Email address where the form submissions will be sent. This is a mandatory block."
+      },
+      "input": {
+        "label": "Custom field",
+        "info": "Add a new custom input field to the form."
+      }
+    },
+    "custom-liquid": {
+      "name": "Custom liquid",
+      "info": "Use this section to add custom solutions which require Liquid logic, such as quick theme changes or app inserts.",
+      "settings": {
+        "custom_liquid": {
+          "label": "Custom liquid"
+        }
+      }
+    },
+    "faq": {
+      "name": "Accordion / FAQ",
+      "info": "Use this section to show answers to frequently asked questions. [Get Support](https://themes.woolman.co/blogs/taiga/collapsible-faq)",
+      "settings": {
+        "hide_image": {
+          "label": "Hide image on mobile"
+        }
+      },
+      "blocks": {
+        "question": {
+          "name": "Question"
+        },
+        "header_position": {
+        "label": "Header position",
+        "options": {
+            "top": "Top",
+            "column_media": "Media column",
+            "column_questions": "Questions column"
+          }
+        }
+      }
+    },
+    "featured-article": {
+      "name": "Featured article",
+      "info": "Sections styling options can be found below. Don't use article that doesn't have featured image. [Get Support](https://themes.woolman.co/blogs/taiga/featured-article)"
+    },
+    "featured-blog": {
+      "name": "Featured blog posts",
+      "info": "Use this section to highlight your blog posts. You can choose to display them as a slider or a grid. [Get Support](https://themes.woolman.co/blogs/taiga/featured-blog-posts)",
+      "settings": {
+        "article_limit": {
+          "label": "Number of articles to show"
+        },
+        "header_for_article_card_settings": {
+          "content": "Article card settings"
+        }
+      }
+    },
+    "featured-collection-or-products": {
+      "name": "Featured collection",
+      "info": "You are able to choose between a collection or manually set product list. [Get Support](https://themes.woolman.co/blogs/taiga/featured-collection)",
+      "settings": {
+        "collection": {
+          "label": "By collection",
+          "info": "Leave empty to use the manual products list below."
+        },
+        "product_list": {
+          "label": "By manual list",
+          "info": "Manually select and arrange the shown products."
+        },
+        "product_limit": {
+          "label": "Maximum products to show"
+        },
+        "view_all": {
+          "info": "Available with collection selection."
+        }
+      }
+    },
+    "featured-look": {
+      "name": "Featured look",
+      "info": "Showcase a featured look with a product image and a list of products. [Get Support](https://themes.woolman.co/blogs/taiga/featured-look)",
+      "settings": {
+        "image": {
+          "label": "The look image"
+        }
+      }
+    },
+    "featured-product": {
+      "name": "Featured product",
+      "info": "Showcase a featured product.",
+      "settings": {
+        "product": {
+          "label": "product"
+        }
+      }
+    },
+    "footer": {
+      "name": "Footer",
+      "settings": {
+        "payment_enable": {
+          "label": "Show payment icons"
+        },
+        "show_copyright": {
+          "label": "Show copyright"
+        },
+        "copyright_text": {
+          "label": "Copyright text"
+        },
+        "header_for_social_media": {
+          "content": "Social media icons",
+          "info": "To display your social media accounts, link them in your theme settings."
+        },
+        "show_social": {
+          "label": "Show social media icons"
+        },
+        "header_for_language_selector": {
+          "content": "Language selector",
+          "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+        },
+        "enable_language_selector": {
+          "label": "Show language selector"
+        },
+        "header_for_country_selector": {
+          "content": "Country/region selector",
+          "info": "To add a country/region, go to your [market settings.](/admin/settings/markets)"
+        },
+        "enable_country_selector": {
+          "label": "Show country/region selector"
+        },
+        "enable_follow_on_shop_header": {
+          "content": "Follow on Shop",
+          "info": "To allow customers to follow your store on the Shop app from your storefront, Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+        },
+        "show_top_border": {
+          "label": "Show top border",
+          "info": "Shown above the Footer Block items."
+        },
+        "show_bottom_border": {
+          "label": "Show bottom border",
+          "info": "Shown below the Footer Block items."
+        },
+        "show_back_to_top": {
+          "label": "Show \"Back to top\" link"
+        },
+        "enable_follow_on_shop": {
+          "label": "Enable Follow on Shop"
+        }
+      },
+      "blocks": {
+        "block_width": {
+          "label": "Desktop column width",
+          "label_tablet": "Tablet column width",
+          "options": {
+            "one_fourth": "1/4 site width",
+            "one_third": "1/3 site width",
+            "one_half": "1/2 site width",
+            "two_thirds": "2/3 site width",
+            "full_width": "Full width"
+          }
+        },
+        "link_list": {
+          "name": "Navigation",
+          "menu": {
+            "label": "Quick links"
+          },
+          "collapsed_on_mobile": {
+            "label": "Collapsed on mobile"
+          }
+        },
+        "newsletter": {
+          "name": "Newsletter"
+        },
+        "image": {
+          "name": "Image",
+          "paragraph": "Add custom image or SVG to the site Footer.",
+          "image": {
+            "label": "Image"
+          },
+          "image_width": {
+            "label": "Image width"
+          }
+        },
+        "custom_payment_icon": {
+          "name": "Custom payment icon",
+          "paragraph": "Only shown when the Show payment icons option is active. Add a image or SVG code.",
+          "image": {
+            "label": "Image",
+            "info": "Recommended size 76x48 pixels. Image displayed at half the pixel size."
+          },
+          "svg": {
+            "label": "SVG",
+            "info": "Recommended size 38x24 pixels."
+          }
+        }
+      }
+    },
+    "header": {
+      "name": "Header",
+      "info": "Manage header functionalities, layout and style. Setup common navigation items. Add and manage in-menu content through the section blocks.",
+      "settings": {
+        "header_for_navigation": {
+          "content": "Navigation",
+          "info": "Navigation includes robust features that allows you to build visually pleasing menus. [Learn features.](https://themes.woolman.co/blogs/taiga/header-and-navigation)"
+        },
+        "drawer_menu": {
+          "label": "Primary menu",
+          "info": "Primary menu shows first level items on desktop as shortcuts"
+        },
+        "drawer_secondary_menu": {
+          "label": "Secondary menu",
+          "info": "Secondary menu items are shown only in the drawer below the primary items."
+        },
+        "color_schemes": {
+          "header": "Header color scheme",
+          "menu_drawer": "Drawer menu color scheme"
+        },
+        "region_menu": {
+          "label": "Country/Region button",
+          "info": "To add a country/region, go to your [market settings.](/admin/settings/markets)",
+          "options": {
+            "hide": "Hide",
+            "globe": "Globe",
+            "neutral_flag": "Neutral flag",
+            "country_flag": "Country flag",
+            "text": "Text"
+          }
+        },
+        "header_for_header": {
+          "content": "Header"
+        },
+        "header_layout": {
+          "label": "Layout",
+          "options": {
+            "logo_left_menu_center": "Logo left, menu center",
+            "logo_left_menu_left": "Logo left, menu left",
+            "logo_center_menu_left": "Logo center, menu left",
+            "logo_center_menu_center": "Logo center, menu center"
+          }
+        },
+        "desktop_submenu_type": {
+          "label": "Desktop submenu type",
+          "options": {
+            "dropdown": "Dropdown",
+            "drawer": "Drawer"
+          }
+        },
+        "header_sticky_behavior": {
+          "label": "Sticky header",
+          "options": {
+            "none": "None",
+            "fixed": "Always",
+            "scroll": "On scroll up"
+          }
+        },
+        "shortcut_limit": {
+          "label": "Amount of shortcut links shown in desktop",
+          "info": "Set to 0 to hide shortcut links in desktop"
+        },
+        "header_shadow": {
+          "label": "Use shadow"
+        },
+        "header_uses_icons": {
+          "label": "Show as icons",
+          "info": "When enabled Cart, Account, and Search buttons are shown as icons instead of text"
+        },
+        "header_for_overlay_settings": {
+          "content": "Overlay settings",
+          "info": "When using overlay option the header will be displayed on top of the first section with a transparent background."
+        },
+        "overlay_index": {
+          "label": "Overlay header over home page"
+        },
+        "overlay_collection": {
+          "label": "Overlay header over collection pages"
+        },
+        "overlay_handles": {
+          "label": "Overlay on pages",
+          "info": "List of page handles. Separated by line change."
+        },
+        "overlay_text_color": {
+          "label": "Overlay text color",
+          "info": "You can choose the text color to be either shceme's background or foreground color to best fit the content under the header.",
+          "options": {
+            "light": "Light",
+            "dark": "Dark",
+            "use_background": "Background",
+            "use_foreground": "Foreground"
+          }
+        },
+        "header_for_logo": {
+          "content": "Logo"
+        },
+        "paragraph_for_logo": {
+          "content": "Site logo related settings."
+        },
+        "logo_default": {
+          "label": "Logo image",
+          "info": ".png or .svg with transparent background recommended."
+        },
+        "logo_with_background_color": {
+          "label": "Overlay alternative logo",
+          "info": "Optional. Used if overlay is active and \"Background\" value is used as the \"Overlay text color\". Use same image dimensions and file format as in the \"Logo image\"."
+        },
+        "logo_dark": {
+          "label": "Dark image logo",
+          "info": ".png with transparent background recommended. Used on light background."
+        },
+        "logo_light": {
+          "label": "Light image logo",
+          "info": ".png with transparent background recommended. Used on dark background."
+        },
+        "logo_max_width_desktop": {
+          "label": "Desktop logo width"
+        },
+        "logo_padding_desktop": {
+          "label": "Desktop padding"
+        },
+        "logo_max_width": {
+          "label": "Mobile logo width"
+        },
+        "logo_padding": {
+          "label": "Mobile padding"
+        },
+        "dropdown_menu_cols": {
+          "label": "Columns in dropdowns",
+          "info": "Amount of columns in dropdown menu. Set to 0 to disable."
+        }
+      },
+      "blocks": {
+        "menu-banner": {
+          "name": "Menu banner",
+          "settings": {
+            "info_paragraph": {
+              "content": "Use menu banners to enhance the naviagation experience. [Get Support](https://themes.woolman.co/blogs/taiga/header-and-navigation#mega-menu)"
+            },
+            "menu_parent": {
+              "label": "Parent menu item title",
+              "info": "Mandatory. Menu banner is shown under the parent menu item. Case sensitive."
+            },
+            "header_for_image": {
+              "content": "Image"
+            },
+            "header_for_drawer_widths": {
+              "content": "Banner width in drawer",
+              "info": "Following settings apply when the menu banner is shown in the menu drawer. Drawer is allways used in mobile. On desktop the display type is controlled by the Desktop submenu type setting in the Header section."
+            },
+            "image_aspect_ratio": {
+              "info": "Note: Using varios aspect ratios in banners may cause irregular layout."
+            },
+            "banner_width": {
+              "label": "Desktop width"
+            },
+            "banner_width_mobile": {
+              "label": "Mobile width"
+            },
+            "title_style": {
+              "info": "Buttons will appear as disabled if the banner link is not set."
+            },
+            "order": {
+              "label": "Order",
+              "options": {
+                "before": "Before menu links",
+                "after": "After menu links"
+              }
+            }
+          }
+        },
+        "menu-collection": {
+          "name": "Menu collection",
+          "settings": {
+            "menu_parent": {
+              "label": "Parent menu item title",
+              "info": "Mandatory. Menu collection is shown under the parent menu item. Case sensitive."
+            },
+            "collection": {
+              "label": "Select collection",
+              "info": "Select a collection from where the products will be shown."
+            },
+            "product_list": {
+              "label": "Select products",
+              "info": "Manually select and arrange the shown products."
+            },
+            "product_limit": {
+              "label": "Number of products to show"
+            },
+            "products_per_drawer_row": {
+              "info": "Note: This setting applies only when the menu type is drawer."
+            }
+          }
+        },
+        "menu-divider": {
+          "name": "Menu divider",
+          "settings": {
+            "info_paragraph": {
+              "content": "Note: Menu divider is shown when the menu type is drawer."
+            },
+            "menu_parent": {
+              "label": "Parent menu item title",
+              "info": "Mandatory. Menu divider is shown under the parent menu item. Case sensitive."
+            },
+            "show_border": {
+              "label": "Show border"
+            }
+          }
+        }
+      }
+    },
+    "hero-countdown": {
+      "name": "Countdown timer",
+      "info": "Use the Countdown timer section to highlight current events like product and collection launches, sale campaigns, etc. Using an image with the timer is optional. [Get Support](https://themes.woolman.co/blogs/taiga/countdown-timer)",
+      "settings": {
+        "end_date": {
+          "label": "Date to go",
+          "info": "Format: YYYY-MM-DD HH:MM (GTM). If empty, post date content will be rendered."
+        },
+        "header_for_pre_date_content": {
+          "content": "Content pre-date"
+        },
+        "header_for_post_date_content": {
+          "content": "Content post-date"
+        }
+      }
+    },
+    "hero-slideshow": {
+      "name": "Slideshow",
+      "info": "Display a slideshow of images with optional text and buttons. [Get Support](https://themes.woolman.co/blogs/taiga/slideshow)",
+      "blocks": {
+        "hero_slide": {
+          "name": "Slide",
+          "header_for_first_button": {
+            "content": "First button"
+          },
+          "header_for_second_button": {
+            "content": "Second button"
+          }
+        }
+      }
+    },
+    "hero-with-overlay-links": {
+      "name": "Hero with overlay links",
+      "info": "Manage the content through section blocks. Use the options below to change the section style and layout. [Get Support](https://themes.woolman.co/blogs/taiga/hero-with-overlay-links)",
+      "blocks": {
+        "text": {
+          "name": "Overlay link"
+        }
+      }
+    },
+    "hero": {
+      "name": "Hero banner",
+      "info": "Manage the content through section blocks. Use the options below to change the section style and layout. [Get Support](https://themes.woolman.co/blogs/taiga/hero-banner)"
+    },
+    "image-duo-with-text": {
+      "name": "Image duo with text",
+      "info": "Manage the content through section blocks. Use the options below to change the overall style and layout. [Get Support](https://themes.woolman.co/blogs/taiga/image-duo-with-text)",
+      "blocks": {
+        "image": {
+          "info": "Use image or video side by side with your text content. Order of image blocks affects on the size of the image."
+        }
+      }
+    },
+    "image-text-overlay": {
+      "name": "Image text overlay",
+      "info": "Manage the content through section blocks. Use the options below to change the section style and layout. [Get Support](https://themes.woolman.co/blogs/taiga/image-with-text-overlay)",
+      "settings": {
+        "color_scheme_bg": {
+          "label": "Color scheme (background)"
+        },
+        "color_scheme_fg": {
+          "label": "Color scheme (content)"
+        }
+      }
+    },
+    "image-with-text": {
+      "name": "Image with text",
+      "info": "Manage the section content through section blocks. And use the options below to change the overall style and layout of this sections. [Get Support](https://themes.woolman.co/blogs/taiga/image-with-text)"
+    },
+    "image-with-hotspots": {
+      "name": "Image with hotspots",
+      "info": "Manage the section content through section blocks. And use the options below to change the overall style and layout of this sections.",
+      "numbered_hotspots": "Numbered hotspots",
+      "blocks": {
+        "hotspot": {
+          "name": "Hotspot",
+          "info": "The hotspot is added on top of the image. Clicking the hotspot will display the on demand info."
+        },
+        "image": {
+          "info": "Selected media will be displayed in it's natural aspect ratio."
+        }
+      }
+    },
+    "on-demand-info": {
+      "name": "Feature popups",
+      "info": "Manage the section content through section blocks. And use the options below to change the overall style and layout of this sections.",
+      "blocks": {
+        "info-block": {
+          "name": "Info block",
+          "info": ""
+        }
+      }
+    },
+    "main-404": {
+      "name": "404 pages"
+    },
+    "main-addresses": {
+      "name": "Addresses"
+    },
+    "main-article": {
+      "name": "Article",
+      "info": "Manage the section content through section blocks.",
+      "content_width_label": "Article content width",
+      "blocks": {
+        "featured_image": {
+          "name": "Featured image",
+          "full_screen_info": "Enabling Full screen will force the Featured image to the top."
+        },
+        "content": {
+          "name": "Content"
+        },
+        "title": {
+          "name": "Title"
+        },
+        "details": {
+          "name":"Details"
+        },
+        "tags": {
+          "name":"Tags"
+        },
+        "blog_nav": {
+          "name": "Blog navigation"
+        },
+        "hr": {
+          "name":"Horizontal line"
+        }
+      }
+    },
+    "main-blog-faq": {
+      "name": "FAQ"
+    },
+    "main-blog": {
+      "name": "Blog",
+      "settings": {
+        "posts_per_page": {
+          "label": "Article per page"
+        },
+        "articles_per_row": {
+          "label":"Articles per row"
+        },
+        "show_blog_title": {
+          "label": "Show blog title"
+        },
+        "enable_filtering": {
+          "label": "Show tag filters",
+          "info": "If blog has no tags set, then the filters will be hidden."
+        },
+        "center_text": {
+          "label": "Center title"
+        },
+        "grid_gap": {
+          "label": "Gap between articles"
+        }
+      }
+    },
+    "article-navigation": {
+      "name": "Article navigation",
+      "settings": {
+        "show_back_to_blog": "Show \"Back to blog\" link",
+        "show_article_images": "Show article images"
+      }
+    },
+    "main-cart": {
+      "name": "Cart"
+    },
+    "main-collection-banner": {
+      "name": "Collection header",
+      "info": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/manual/products/collections/collection-layout)",
+      "settings": {
+        "show_image": {
+          "label": "Show collection image"
+        },
+        "image_layout": {
+          "label": "Image layout",
+          "options": {
+            "hide": "Hide collection image",
+            "show_next_to": "Show next to text",
+            "show_as_background": "Show as background"
+          }
+        },
+        "center_text": {
+          "label": "Center title and description"
+        }
+      }
+    },
+    "main-collection-product-grid": {
+      "name": "Product grid",
+      "info": "Manage product grid settings and add grid banners using section blocks. [Get Support](https://themes.woolman.co/blogs/taiga/collection-pages)",
+      "settings": {
+        "products_per_page": {
+          "label": "Products per page"
+        },
+        "show_count": {
+          "label": "Show product count"
+        },
+        "enable_sorting": {
+          "label": "Show sort options"
+        },
+        "enable_filtering": {
+          "label": "Show filter options"
+        },
+        "enable_swatches": {
+          "label": "Show color swatches in filter options",
+          "info": "Add custom swatch images to the files in Shopify Admin according to the swatch value. [Get Help](https://themes.woolman.co/blogs/taiga/product-card#color-swatches)"
+        },
+        "pagination": {
+          "label": "Pagination",
+          "options": {
+            "default": "Pages",
+            "load_more": "Button",
+            "infinite": "Infinite scroll"
+          }
+        }
+      }
+    },
+    "main-list-collections": {
+      "name": "List all collections",
+      "settings": {
+        "aspect_ratio": {
+          "label": "Collection card aspect ratio"
+        },
+        "sort": {
+          "label": "Sort by",
+          "options": {
+            "alphabetical": "Alphabetical (A-Z)",
+            "alphabetical_reversed": "Alphabetical (Z-A)",
+            "date_reversed": "Date, newest first",
+            "date": "Date, oldest first",
+            "products_high": "Product count, highest first",
+            "products_low": "Product count, lowest first"
+          }
+        },
+        "collections_per_row_desktop": {
+          "label": "Collections per row (desktop)"
+        },
+        "collections_per_row_mobile": {
+          "label": "Collections per row (mobile)"
+        }
+      }
+    },
+    "main-login": {
+      "name": "Log in form"
+    },
+    "main-page": {
+      "name": "Page content",
+      "settings": {
+        "content_width_label": "Page content width",
+        "heading_text_align": {
+          "label": "Heading text alignment"
+        },
+        "heading_size_multiplier": {
+          "label": "Heading size"
+        }
+      }
+    },
+    "main-product": {
+      "name": "Product",
+      "info": "Manage content from blocks and general settings from these settings. [Get Support](https://themes.woolman.co/blogs/taiga/product-pages)",
+      "settings": {
+        "product_image_aspect_ratio": {
+          "label": "Product image aspect ratio"
+        },
+        "image_grid_gap": {
+          "label": "Media items gap"
+        },
+        "style_header": {
+          "content": "Style settings"
+        },
+        "style_paragraph": {
+          "content": "Color scheme selection is used to define the base colors. In addition you can use custom background colors for different parts of the section."
+        },
+        "container_border_radius": {
+          "label": "Border radius"
+        },
+        "media_border_radius": {
+          "label": "Media border radius"
+        },
+        "section_bg": {
+          "label": "Section background",
+          "info": "Overwrites schema color"
+        },
+        "media_col_bg": {
+          "label": "Media column background",
+          "info": "Overwrites schema color"
+        },
+        "content_col_bg": {
+          "label": "Content column background"
+        },
+        "media_col_width": {
+          "label": "Media column width",
+          "options": {
+            "narrow": "Narrow",
+            "medium": "Medium",
+            "wide": "Wide",
+            "extra_wide": "Extra wide"
+          }
+        },
+        "desktop_info": {
+          "content": "Experiment with desktop layout options to find the best fit for your products."
+        },
+        "media_zoom": {
+          "label": "Media zoom",
+          "options": {
+            "disabled": "Disabled",
+            "column":"Column",
+            "slider":"Slider"
+          },
+          "info": "Choose the desired zoom behavior."
+        },
+        "media_layout": {
+          "label": "Media layout",
+          "options": {
+            "one-column": "One column",
+            "two-columns": "Two columns",
+            "two-columns-stacked": "Two column (full first item)",
+            "traditional-below-as-grid": "Thumbnails grid below media",
+            "traditional-below": "Thumbnails slider below media",
+            "traditional-next-to": "Thumbnails slider next to media",
+            "traditional-no-thumbnails": "No thumbnails"
+          },
+          "groups": {
+            "grid": "Grid",
+            "traditional": "Slider"
+          }
+        },
+        "media_gap": {
+          "label": "Product media gap",
+          "info": "Gap between product media"
+        },
+        "show_thumbnails": {
+          "label": "Show thumbnails"
+        },
+        "mobile_info": {
+          "content": "Product media will be presented in a slider on mobile."
+        },
+        "slider_peek": {
+          "label": "Use peeking media items"
+        }
+      }
+    },
+    "main-register": {
+      "name": "Register form"
+    },
+    "main-search": {
+      "name": "Search page",
+      "settings": {
+        "results_per_page": {
+          "label": "Results per page"
+        },
+        "results_per_row_desktop": {
+          "label": "Results per row (desktop)"
+        },
+        "results_per_row_mobile": {
+          "label": "Results per row (mobile)"
+        },
+        "show_count": {
+          "label": "Show results count"
+        },
+        "enable_sorting": {
+          "label": "Show sort options"
+        },
+        "enable_filtering": {
+          "label": "Show filter options"
+        }
+      }
+    },
+    "modal-newsletter": {
+      "name": "Promotional popup",
+      "settings": {
+        "test_mode": {
+          "label": "Enable test mode",
+          "info": "If enabled, the display options be ignored and the popup will be displayed on every page load. WARNING! Only use this for testing and never on a live site."
+        },
+        "header_for_display_options": {
+          "content": "Display options",
+          "info": "If store has cookie banner enabled, the delay starts running after cookie consent was given. Theme only recognizes cookie banner that utilizes Shopify's Customer Privacy API. [Read more.](https://shopify.dev/api/consent-tracking)"
+        },
+        "delay": {
+          "label": "Delay",
+          "info": "If store has cookie banner enabled, the delay starts running after cookie consent was given. Theme only recognizes cookie banner that utilizes Shopify's Customer Privacy API. [Read more.](https://shopify.dev/api/consent-tracking)"
+        },
+        "frequency": {
+          "label": "Frequency",
+          "info": "Delay before the popup is displayed",
+          "options": {
+            "once": "Once per visit",
+            "1_day": "Once per day",
+            "3_days": "Once per 3 days",
+            "7_days": "Once per 7 days",
+            "14_days": "Once per 14 days",
+            "30_days": "Once per 30 days",
+            "60_days": "Once per 60 days",
+            "90_days": "Once per 90 days"
+          }
+        }
+      },
+      "blocks": {
+        "btn_link_info": "If left blank, the button will close the popup.",
+        "newsletter_name": "Newsletter"
+      }
+    },
+    "newsletter": {
+      "name": "Newsletter",
+      "info": "Customers who subscribe will have their email address added to the 'accepts marketing' [customer list](/admin/customers?query=&accepts_marketing=1). [Get Support](https://themes.woolman.co/blogs/taiga/newsletter)",
+      "email_form_name": "Form"
+    },
+    "password-footer": {
+      "name": "Footer"
+    },
+    "password-header": {
+      "name": "Header",
+      "settings": {
+        "header_for_logo": {
+          "content": "Logo",
+          "info": "Add your logo as image or SVG code."
+        },
+        "logo": {
+          "label": "Image logo",
+          "info": ".png with transparent background recommended."
+        },
+        "logo_max_width": {
+          "label": "Logo width"
+        }
+      }
+    },
+    "product-recommendations": {
+      "name": "Product recommendations",
+      "info": "Dynamic recommendations use order and product information to change and improve over time. [Learn more](https://help.shopify.com/themes/development/recommended-products)",
+      "settings": {
+        "product_limit": {
+          "label": "Number of products to show"
+        }
+      }
+    },
+    "recently-viewed": {
+      "name": "Recently viewed products",
+      "info": "This section displays a list of recently viewed products. Up to total 10 products can be seen at a time. If user has no recently viewed products, this section will not be displayed."
+    },
+    "rich-text": {
+      "name": "Rich text",
+      "info": "Simple text only section. Add and modify content in section blocks. [Get Support](https://themes.woolman.co/blogs/taiga/rich-text)",
+      "settings": {
+        "content_width": {
+          "label": "Content width"
+        },
+        "desktop_content_alignment": {
+          "label": "Justify content"
+        }
+      }
+    },
+    "sliding-text": {
+      "name": "Sliding text and image",
+      "info": "Manage content and settings through fields below. [Get Support](https://themes.woolman.co/blogs/taiga/sliding-text)",
+      "settings": {
+        "speed": {
+          "label": "Speed"
+        },
+        "pause_on_hover": {
+          "label": "Pause animation on hover"
+        }
+      }
+    },
+    "testimonials": {
+      "name": "Testimonials",
+      "info": "Testimonials can be managed through the section blocks. [Get Support](https://themes.woolman.co/blogs/taiga/testimonials)",
+      "testimonials_per_row": "Testimonials per row",
+      "settings": {
+        "icon": {
+          "label": "Icon",
+          "options": {
+            "none": "None",
+            "stars": "Star rating",
+            "quotation_mark": "Quotation"
+          }
+        },
+        "stars": {
+          "label": "Star rating count",
+          "info": "Number of stars to show in the rating. Only visible if the icon is set to Star rating."
+        },
+        "autoplay": {
+          "label": "Enable autoplay"
+        },
+        "autoplay_speed": {
+          "label": "Autoplay interval",
+          "info": "Testimonials rotate in given interval"
+        }
+      },
+      "blocks": {
+        "testimonial": {
+          "name": "Testimonial"
+        }
+      }
+    },
+    "video": {
+      "name": "Video",
+      "info": "Video player allows you to add a video to an page. [Get Support](https://themes.woolman.co/blogs/taiga/video)"
+    },
+    "divider": {
+      "name": "Divider",
+      "info": "Divider for added level of visual awesomeness. Choose from pre made dividers or use a custom SVG in your divider.",
+      "settings": {
+        "divider_graphics": {
+          "label": "Divider graphics",
+          "custom_label": "Custom graphics SVG",
+          "custom_info": "Advanced feature. Use custom SVG code to insert desired graphics inside the divider section.",
+          "options": {
+            "bubly": "Bubly",
+            "curve": "Curve",
+            "elliptic": "Elliptic",
+            "jagged": "Jagged",
+            "tiles": "Tiles",
+            "tilted": "Tilted",
+            "triangular": "Triangular",
+            "wave": "Wave",
+            "waves": "Waves (nonsymmetric)"
+          }
+        },
+        "graphics_size": {
+          "header": "Size options",
+          "graphics_width": "Width",
+          "graphics_height": "Height",
+          "graphics_height_info": "When height is set to 0 the default aspect ratio of the graphic is used."
+        },
+        "graphics_colors": {
+          "header": "Color options",
+          "info": "The standard dividers are divided in three parts: Top, middle and bottom. Use different colors in different parts to achieve a fluid visual flow from section to section.",
+          "top_part_color": "Top part",
+          "middle_part_color": "Middle part",
+          "bottom_part_color": "Bottom part"
+        },
+        "graphics_position": {
+          "header": "Position options",
+          "label": "Divider position",
+          "options": {
+            "top_previous": "On top of previous section",
+            "in_between": "Between sections",
+            "top_next": "On top of next section"
+          }
+        },
+        "flip_horizontal": "Flip horizontal",
+        "flip_vertical": "Flip vertical"
+      },
+      "blocks": {
+        "standard": {
+          "name": "Standard"
+        },
+        "custom": {
+          "name": "Custom"
+        }
+      }
+    },
+    "ai-section": {
+      "name": "AI section",
+      "info": "Create your custom section with AI. Choose \"Add block\" and select \"Generate\" to start."
+    },
+ "multicolumn": {
+      "name": "Multicolumn",
+      "info": "Manage content through section blocks. [Learn more.](https://themes.woolman.co/blogs/sampo/multicolumn)",
+      "presets": {
+        "title": "Column heading",
+        "text": "<p>Use block settings to manage media, text and button content for each column. Use the section settings to change display settings for all the columns.</p>"
+      },
+      "headers": {
+        "media": "Media",
+        "text": "Text",
+        "button_1": "First Button",
+        "button_2": "Second Button"
+      },
+      "blocks": {
+        "column": {
+          "name": "Column",
+          "info": "Add desired content to the column. All fields are optional. If both image and video are set the video content will be used."
+        }
+      }
+    },
+    "multirow": {
+      "name": "Multirow",
+      "info": "Manage content through section blocks. [Learn more.](https://themes.woolman.co/blogs/sampo/multicolumn)",
+      "presets": {
+        "title": "Row heading",
+        "text": "<p>Use block settings to manage media, text and button content for each row. Use the section settings to change display settings for all the rows.</p>"
+      },
+      "headers": {
+        "media": "Media",
+        "text": "Text",
+        "button_1": "First Button",
+        "button_2": "Second Button"
+      },
+      "blocks": {
+        "row": {
+          "name": "Row",
+          "info": "Add desired content to the row. It's recommended to use both media and text content for each row. If both image and video are set the video content will be used."
+        }
+      }
+    },
+    "apps": {
+      "name": "Apps"
+    }
+  },
+  "section_groups": {
+    "header": "Header group",
+    "aside": "Aside group",
+    "footer": "Footer group"
+  }
+}

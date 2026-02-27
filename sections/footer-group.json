@@ -1,0 +1,178 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:section_groups.footer",
+  "type": "footer",
+  "sections": {
+    "divider_9rdjyg": {
+      "type": "divider",
+      "blocks": {
+        "standard_MaVr8G": {
+          "type": "standard",
+          "settings": {
+            "divider_graphics": "wave",
+            "top_part_color": "rgba(0,0,0,0)",
+            "middle_part_color": "",
+            "bottom_part_color": "#fde6ea",
+            "position": "in-between",
+            "flip_horizontal": false,
+            "flip_vertical": false,
+            "sm_graphics_height": 0,
+            "sm_graphics_width": 100,
+            "graphics_height": 0,
+            "graphics_width": 100
+          }
+        }
+      },
+      "block_order": [
+        "standard_MaVr8G"
+      ],
+      "settings": {
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "newsletter_pNHPnf": {
+      "type": "newsletter",
+      "blocks": {
+        "title_CPtwHw": {
+          "type": "title",
+          "settings": {
+            "title": "Subscribe and get 20% off your first order",
+            "heading_tag": "h2",
+            "sm_size_multiplier": "sm-size--huge",
+            "sm_margin_top": 0,
+            "size_multiplier": "size--default",
+            "margin_top": 0
+          }
+        },
+        "text_CLGKUC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>",
+            "sm_size_multiplier": "sm-size--default",
+            "sm_margin_top": 16,
+            "size_multiplier": "size--default",
+            "margin_top": 16
+          }
+        },
+        "email_form_fpr8b7": {
+          "type": "email_form",
+          "settings": {
+            "sm_margin_top": 16,
+            "margin_top": 16
+          }
+        }
+      },
+      "block_order": [
+        "title_CPtwHw",
+        "text_CLGKUC",
+        "email_form_fpr8b7"
+      ],
+      "name": "t:sections.newsletter.name",
+      "settings": {
+        "color_scheme": "alternative-2",
+        "md_padding_top": 80,
+        "md_padding_bottom": 80,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-0": {
+          "type": "link_list",
+          "settings": {
+            "title": "Categories",
+            "menu": "",
+            "collapsed_on_mobile": true,
+            "column_width_tablet": "col-sm-6",
+            "column_width": "col-md-3"
+          }
+        },
+        "link_list_zff7M6": {
+          "type": "link_list",
+          "settings": {
+            "title": "Customer Service",
+            "menu": "",
+            "collapsed_on_mobile": true,
+            "column_width_tablet": "col-sm-6",
+            "column_width": "col-md-3"
+          }
+        },
+        "link_list_phcffk": {
+          "type": "link_list",
+          "settings": {
+            "title": "Information",
+            "menu": "",
+            "collapsed_on_mobile": true,
+            "column_width_tablet": "col-sm-6",
+            "column_width": "col-md-3"
+          }
+        },
+        "footer-1": {
+          "type": "text",
+          "settings": {
+            "title": "About Us",
+            "text": "<p>This is a demo store showcasing the theme features. Big thanks for <a href=\"https://smuutiksin.com/\" target=\"_blank\" title=\"https://smuutiksin.com/\">Smuuti Skin</a> for providing outstanding products and content to our demo store. 3D renders by <a href=\"https://baxvisual.fi\" target=\"_blank\" title=\"https://baxvisual.fi\">Bäx Visual</a>.</p>",
+            "column_width_tablet": "col-sm-6",
+            "column_width": "col-md-3"
+          }
+        },
+        "image_nTwXgT": {
+          "type": "image",
+          "settings": {
+            "title": "",
+            "image": "shopify://shop_images/hehku-seasons-logo_1.svg",
+            "image_width": 900,
+            "text": "",
+            "text_alignment": "center",
+            "column_width_tablet": "col-sm-12",
+            "column_width": "col-md-12"
+          }
+        }
+      },
+      "block_order": [
+        "footer-0",
+        "link_list_zff7M6",
+        "link_list_phcffk",
+        "footer-1",
+        "image_nTwXgT"
+      ],
+      "settings": {
+        "color_scheme": "alternative-2",
+        "show_top_border": false,
+        "show_bottom_border": true,
+        "show_back_to_top": true,
+        "payment_enable": true,
+        "show_copyright": false,
+        "copyright_text": "",
+        "show_social": true,
+        "enable_language_selector": true,
+        "enable_country_selector": true,
+        "enable_follow_on_shop": true,
+        "sm_size_multiplier": "sm-size--default",
+        "md_padding_top": 64,
+        "md_padding_bottom": 80,
+        "size_multiplier": "size--default",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "divider_9rdjyg",
+    "newsletter_pNHPnf",
+    "footer"
+  ]
+}

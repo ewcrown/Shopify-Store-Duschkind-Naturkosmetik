@@ -1,0 +1,30 @@
+{%- liquid
+  assign color_str = 'products.product.color_swatch_identifiers' | t | downcase
+
+  capture the_swatches
+    for option in product.options_with_values
+      assign opt_name = option.name | downcase
+      if color_str contains opt_name
+        for color in option.values
+          if color.variant
+            assign variant_url = color.variant.url
+          else
+            assign variant_url = product.url
+          endif
+
+          echo '<a class="swatch" href="' | append: variant_url | append: '">'
+          render 'color-swatches', label: color, swatch: color.swatch
+          echo '</a>'
+        endfor
+        break
+      endif
+    endfor
+  endcapture
+-%}
+
+{%- if the_swatches != empty -%}
+  <div class="mt-12 swatches flex" style="gap: 0.6rem;">
+    <span class="visually-hidden">{{ 'products.product.available_in' | t }}</span>
+    {{ the_swatches }}
+  </div>
+{%- endif -%}

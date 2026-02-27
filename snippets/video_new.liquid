@@ -1,0 +1,50 @@
+{% comment %}
+  Video snippet that used for banner videos.
+  Supports separate video sources for mobile and desktop.
+  Allways disables controls, autoplays, loops and mutes the video.
+
+  Accepts:
+  - video_default: {VideoDrop} Video object (required)
+  - video_mobile: {VideoDrop} Video object for mobile use (optional)
+  - controls: {Boolean} Show controls (optional)
+  - image_size: {String} Poster image size (optional)
+  - aspect_ratio: {String} 'portrait', 'landscape', 'square' (optional)
+  - class: {String} Additional classes for the video element (optional)
+  - controls: {Boolean} Show controls (optional)
+  - autoplay: {Boolean} Autoplay video (optional)
+
+  Notes:
+  - Controls not supported if video_mobile is provided. -> controls: false
+  - Autoplay not supported if video_mobile is provided. -> autoplay: true
+
+{% endcomment %}
+
+{% liquid
+  # Default values
+  if autoplay == null
+    assign autoplay = true
+  endif
+  assign controls = controls | default: false
+  assign image_size = image_size | default: 'x720'
+  assign sizing_rule = sizing_rule | default: 'cover'
+  assign aspect_ratio = aspect_ratio | default: 'natural'
+  assign class = class | append: ' media media--video autoplay-video' | append: ' ' | append: sizing_rule | append: ' ' | append: aspect_ratio | strip
+
+  # Force controls if autoplay is disabled
+  unless autoplay
+    assign controls = true
+  endunless
+%}
+
+{%- if video_default != blank and video_mobile != blank -%}
+  {% assign video_default_tag = video_default | video_tag: image_size: image_size, controls: false, autoplay: true, loop: true, muted: true, class: class, data-responsive-video: '' %}
+  {% assign mobile_video_tag_source = video_mobile | video_tag: controls: false, autoplay: true, loop: true, muted: true | split: '<source ' | last | split: '>' | first | prepend: '<source data-mobile-video ' | append: ' media="(max-width: 767px)"><source data-default-video ' %}
+
+  {{ video_default_tag |  replace: '<source ', mobile_video_tag_source | replace: '<img ', '<img loading="lazy" ' }}
+{%- elsif video_default != blank -%}
+  {{ video_default | video_tag: image_size: image_size, controls: controls, autoplay: autoplay, loop: true, muted: true, class: class, controlslist: 'nodownload noremoteplayback' | replace: '<img ', '<img loading="lazy" ' }}
+{%- else -%}
+  <video class="{{ class }} media--empty" playsinline="playsinline" loop="loop" muted="muted"{% if autoplay %} autoplay{% endif %}{% if controls %} controls controlslist="nodownload noremoteplayback"{% endif %} preload="metadata" poster="{{ 'placeholder_video.png' | asset_img_url: 'x720' }}">
+    <source src="{{ 'placeholder_video.mp4' | asset_url }}" type="video/mp4">
+  </video>
+{%- endif -%}

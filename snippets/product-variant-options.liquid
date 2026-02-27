@@ -1,0 +1,79 @@
+{%- liquid
+  # ** PARAMETERS **
+  # option          =>  REQUIRED | option object
+  # product_form_id =>  REQUIRED | string | used to mach labels and inputs correctly
+  # picker_type     =>  OPTIONAL | string: 'button', 'dropdown' | default: 'dropdown'
+
+  assign picker_type = picker_type | default: 'dropdown'
+
+  assign option_downcase_name = option.name | downcase
+  assign color_str = 'products.product.color_swatch_identifiers' | t | downcase
+
+  if color_str contains option_downcase_name
+    assign color_swatches = true
+  else
+    assign color_swatches = false
+  endif
+-%}
+
+{%- for value in option.values -%}
+  {%- liquid
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+  -%}
+
+  {%- if picker_type == 'button' -%}
+    <input
+      type="radio"
+      id="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}"
+      name="{{ option.name }}"
+      value="{{ value | escape }}"
+      form="{{ product_form_id }}"
+      {% if value.product_url != blank %}
+        data-product-url="{{ value.product_url }}"
+      {% endif %}
+      data-variant-id="{{ value.variant.id }}"
+      data-option-value-id="{{ value.id }}"
+      {% if option.selected_value == value %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+    >
+    <label
+      for="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}"
+      class="{% if color_swatches %}swatch {% endif %}{% if file_url %}has-image{% endif %}"
+    >
+      {%- unless color_swatches -%}
+        {{- value -}}
+      {%- else -%}
+        {% render 'color-swatches', label: value, swatch: value.swatch %}
+      {%- endunless -%}
+      {% if option_disabled %}
+        <span class="visually-hidden">{{ 'accessibility.option_unavailable' | t }}</span>
+      {% endif %}
+    </label>
+
+  {%- elsif picker_type == 'dropdown' -%}
+    <option
+      value="{{ value | escape }}"
+      {% if value.product_url != blank %}
+        data-product-url="{{ value.product_url }}"
+      {% endif %}
+      data-variant-id="{{ value.variant.id }}"
+      data-option-value-id="{{ value.id }}"
+      {% if option.selected_value == value %}
+        selected="selected"
+      {% endif %}
+    >
+      {% if option_disabled -%}
+        {{- 'products.product.value_unavailable' | t: option_value: value -}}
+      {%- else -%}
+        {{- value -}}
+      {%- endif %}
+    </option>
+  {%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,26 @@
+{%- if settings.free_shipping_threshold != blank -%}
+  {%- liquid
+    # Free shipping threshold is multiplied by 100 to match the cart.total_price that is in cents.
+    # Note that the treshold is set in shop.currency and the cart amount is in localized currency
+    # The actual calculation is done in JS for this exact reason.
+
+    assign free_shipping_threshold = settings.free_shipping_threshold | times: 100
+    if free_shipping_threshold < 0 or cart.item_count == 0
+      assign hide_shipping_banner = true
+    endif
+  -%}
+  <div id="cart-shipping-notification">
+    <div
+      data-free-shipping-notification
+      data-cart-total="{{- cart.total_price -}}"
+      data-threshold="{{- free_shipping_threshold -}}"
+      data-shop-currency="{{- shop.currency -}}"
+      data-target-currency="{{- localization.country.currency.iso_code -}}"
+      class="shipping-notification"
+      {% if hide_shipping_banner %}hidden{% endif %}
+    >
+      {% render 'icon-checkmark' %}
+      <span class="free-shipping-message">-</span>
+    </div>
+  </div>
+{%- endif -%}

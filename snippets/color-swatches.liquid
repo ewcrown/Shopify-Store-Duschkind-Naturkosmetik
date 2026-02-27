@@ -1,0 +1,70 @@
+
+{%- comment -%}
+
+  ** Purpose **
+  Show similar color watches everywhere in the theme
+
+  ** Parameters **
+  label         =>  Color label text  - REQUIRED
+  Swatch        =>  Swatch object - OPTIONAL
+  width         =>  as number in pixels - OPTIONAL, default 16
+  height        =>  as number in pixels - OPTIONAL, default 16
+
+{%- endcomment -%}
+
+
+{%- liquid
+
+  assign swatch_width = width | default: 16
+  assign swatch_height = height | default: 16
+  assign image_width = swatch_width | times: 2
+  assign image_height = swatch_height | times: 2
+
+
+  comment
+    Swatch attempt
+  endcomment
+  if swatch.image
+    assign image_object = swatch.image
+  endif
+
+  if swatch.color
+    assign color_value = swatch.color
+  else
+    assign color_value = label | handleize
+  endif
+
+  comment
+    Downcase PNG attempt
+  endcomment
+  if image_object == blank
+    assign url = label | handleize | append: '.png'
+    assign image_object = images[url]
+  endif
+
+  comment
+    Downcase JPG attempt
+  endcomment
+  if image_object == blank
+    assign url = label | handleize | append: '.jpg'
+    assign image_object = images[url]
+  endif
+
+  if image_object == blank
+    assign file_url = false
+  else
+    assign file_url = image_object | image_url: width: image_width, height: image_height
+  endif
+-%}
+
+{%- if file_url -%}
+  {% # theme-check-disable %}
+  <img src='{{ file_url }}' alt='{{ label }}' class="color" style='--color: {{ color_value }};' width='{{ swatch_width }}' height='{{ swatch_height }}' loading='lazy' decoding='async'>
+  {% # theme-check-enable %}
+{%- else -%}
+  <span class="color" style='--color: {{ color_value }};'></span>
+{%- endif -%}
+
+<span class='visually-hidden'>
+  {{- label -}}
+</span>

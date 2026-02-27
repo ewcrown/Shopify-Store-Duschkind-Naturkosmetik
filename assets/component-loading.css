@@ -1,0 +1,60 @@
+.btn.loading > span {
+  opacity: 0;
+}
+.loading-overlay {
+  position: absolute;
+  z-index: 1;
+  width: 1.8rem;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+
+.loading-overlay__spinner {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: grid;
+  place-content: center;
+}
+
+.card--product .loading-overlay {
+  left: 0;
+  top: 0;
+}
+
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+.path {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  stroke: currentColor;
+  animation: dash 1.4s ease-in-out infinite;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(450deg);
+  }
+}

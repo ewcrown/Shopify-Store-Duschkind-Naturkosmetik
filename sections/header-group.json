@@ -1,0 +1,102 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:section_groups.header",
+  "type": "header",
+  "sections": {
+    "sliding_text_eF8nVg": {
+      "type": "sliding-text",
+      "blocks": {
+        "text_wBxAyi": {
+          "type": "text",
+          "settings": {
+            "text": "Free shipping for orders above $75.",
+            "link": ""
+          }
+        },
+        "text_BnKMfz": {
+          "type": "text",
+          "settings": {
+            "text": "Affordable skincare for everyone!",
+            "link": ""
+          }
+        },
+        "text_98LXT7": {
+          "type": "text",
+          "settings": {
+            "text": "Famous Finnish happiness included!",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_wBxAyi",
+        "text_BnKMfz",
+        "text_98LXT7"
+      ],
+      "name": "t:sections.sliding-text.name",
+      "settings": {
+        "color_scheme": "alternative-1",
+        "text_gradient_color": "",
+        "content_order": "horizontal",
+        "font": "base",
+        "direction": "normal",
+        "speed": 10,
+        "pause_on_hover": true,
+        "sm_size_multiplier": "sm-size--tiny",
+        "sm_item_gap": 80,
+        "sm_image_gap": 16,
+        "sm_image_width": 60,
+        "sm_rounded_corners": false,
+        "sm_padding": 4,
+        "md_padding_top": 0,
+        "md_padding_bottom": 0,
+        "size_multiplier": "size--small",
+        "item_gap": 24,
+        "image_gap": 16,
+        "image_width": 60,
+        "rounded_corners": false,
+        "padding": 8,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "color_scheme": "",
+        "drawer_menu": "main-menu",
+        "drawer_secondary_menu": "",
+        "enable_full_width": false,
+        "header_layout": "logo-center__menu-left",
+        "desktop_submenu_type": "drawer",
+        "dropdown_menu_cols": "",
+        "header_sticky_behavior": "scroll",
+        "shortcut_limit": 10,
+        "header_uses_icons": true,
+        "region_menu": "text",
+        "header_shadow": false,
+        "logo_default": "shopify://shop_images/hehku-seasons-logo.svg",
+        "logo_max_width_desktop": 100,
+        "logo_padding_desktop": 30,
+        "logo_max_width": 90,
+        "logo_padding": 5,
+        "overlay_index": true,
+        "overlay_collection": false,
+        "overlay_handles": "",
+        "overlay_text_color": "use-foreground"
+      }
+    }
+  },
+  "order": [
+    "sliding_text_eF8nVg",
+    "header"
+  ]
+}

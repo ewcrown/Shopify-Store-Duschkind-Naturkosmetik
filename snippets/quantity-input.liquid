@@ -1,0 +1,59 @@
+{%- liquid
+
+  # ** PURPOSE **
+  # Used to render the quantity selector input with + and - symbols.
+  # Can be linked to a specific form with the input_form variable
+
+  # ** PARAMETERS **
+  # class             =>  OPTIONAL | string | default: false
+  # input_id          =>  OPTIONAL | string | default: false
+  # input_form        =>  OPTIONAL | string | default: false
+  # input_name        =>  OPTIONAL | string | default: 'quantity'
+  # input_class       =>  OPTIONAL | string | default: false
+  # input_value       =>  OPTIONAL | integer | default: 0
+  # input_min_value   =>  OPTIONAL | integer | default: 0
+  # input_data_index  =>  OPTIONAL | integer | default: false
+  # input_aria_label  =>  OPTIONAL | boolean | default: false
+
+  assign class            = class | default: false
+  assign input_id         = input_id | default: false
+  assign input_form       = input_form | default: false
+  assign input_name       = input_name | default: 'quantity'
+  assign input_class      = input_class | default: false
+  assign input_value      = input_value | default: 0
+  assign input_min_value  = input_min_value | default: 0
+  assign input_data_index = input_data_index | default: false
+  assign input_aria_label = input_aria_label | default: false
+
+  if item
+    assign product_title = item.product.title
+  else
+    assign product_title = product.title
+  endif
+
+-%}
+
+<quantity-input class="quantity js{% if settings.plus_minus_on_mobile %} force-icons{% endif %}{% if class %} {{ class }}{% endif %}">
+  <button class="quantity__button js" name="minus" type="button">
+    <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product_title | escape }}
+    </span>
+    {%- render 'icon-minus' -%}
+  </button>
+
+  <input
+    {% if input_id %}id="{{ input_id }}"{% endif %}
+    {% if input_form %}form="{{ input_form }}"{% endif %}
+    {% if input_data_index %}data-index="{{ input_data_index }}"{% endif %}
+    {% if input_aria_label %}aria-label="{{ 'products.product.quantity.input_label' | t: product: product_title | escape }}"{% endif %}
+    class="quantity__input{% if input_class %} {{ input_class }}{% endif %}"
+    type="number"
+    name="{{ input_name }}"
+    min="{{ input_min_value }}"
+    value="{{ input_value }}">
+
+  <button class="quantity__button js" name="plus" type="button">
+    <span class="visually-hidden">{{ 'products.product.quantity.increase' | t: product: product_title | escape }}
+    </span>
+    {%- render 'icon-plus' -%}
+  </button>
+</quantity-input>

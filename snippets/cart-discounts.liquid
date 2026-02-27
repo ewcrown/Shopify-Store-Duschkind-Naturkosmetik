@@ -1,0 +1,26 @@
+{%- if cart.discount_applications.size > 0 -%}
+  <ul id="cart-discounts" class="cart__discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+    {%- if cart.discount_applications.size > 0 -%}
+      {%- for discount in cart.discount_applications -%}
+        <li class="cart__discount">
+          {%- liquid
+            capture discount_title
+              if discount.value_type == 'percentage'
+                echo discount.title | append: ' (-' | append: discount.value | append: ' %)'
+              else
+                echo discount.title
+              endif
+            endcapture
+          -%}
+
+          <span class="discount-title">{{- discount_title -}}</span>
+          <span class="discount-price">{{- discount.total_allocated_amount | money_with_currency | prepend: '-' -}}</span>
+        </li>
+      {%- endfor -%}
+    {%- endif -%}
+  </ul>
+  <div class="cart__subtotal cart__subtotal-final">
+    <span>{{ 'sections.cart.new_subtotal' | t }}</span>
+    <span>{{ cart.total_price | money_with_currency }}</span>
+  </div>
+{%- endif -%}

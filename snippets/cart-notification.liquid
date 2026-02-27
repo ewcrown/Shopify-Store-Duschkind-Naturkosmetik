@@ -1,0 +1,55 @@
+{%- liquid
+  # Used when drawer type is set to notification
+  # Related JS in component-product-form.js
+  # Note: JS uses classes for querySelector -> Changing classes might cause JS errors
+-%}
+
+{% # theme-check-disable %}
+<template id="cart-notification">
+  <div class="cart-notification br-img card">
+    <button type="button" class="notification-close" aria-label="{{ 'accessibility.close_cart_notification' | t }}" data-close>
+      {% render 'icon-close' %}
+      <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
+    </button>
+
+    <div class="flex vertical-center" style="gap: 12px; flex-wrap:nowrap;">
+      {% render 'icon-checkmark' %}
+      <p class="h6" data-notification-title></p>
+    </div>
+
+    <div class="added-items" data-items></div>
+
+    <div class="cart-notification-buttons flex" style="gap: 12px">
+      <a
+        href="{{ routes.cart_url }}"
+        id="cart-notification-link"
+        class="btn btn--secondary btn--full size--small"
+        style="flex-grow: 1;"
+      >{{ 'general.cart.view_cart_link' | t }} (<span class="cart-total"></span>)</a>
+      <form
+        action="{{ routes.cart_url }}"
+        method="post"
+        id="cart-notification-form"
+        style="flex-grow: 1;">
+        <button class="btn btn--primary btn--full size--small" name="checkout">
+          {{ 'sections.cart.checkout' | t }}
+        </button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<template id="cart-notification-item">
+  <div class="notification-item">
+    <img width="120" height="120" src="" alt="" class="notification-item-image hide" loading="lazy" />
+    <div class="notification-item-text">
+      <p class="notification-item-title h6 size--small"></p>
+      <div class="notification-item-details size--tiny style--subdued mt-4"></div>
+    </div>
+  </div>
+</template>
+{% # theme-check-enable %}
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>
+  {{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}
+</noscript>

@@ -1,0 +1,94 @@
+{{ 'component-product-buy-bar.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign buy_bar_product_form_id = product_form_id | append: '-product-buy-bar'
+  if product.selected_or_first_available_variant.featured_media != blank
+    assign buy_bar_image = product.selected_or_first_available_variant.featured_media
+  else
+    assign buy_bar_image = product.featured_media
+  endif
+-%}
+
+<product-buy-bar data-product="{{ product.id }}" data-url="{{ product.url }}" class="container js product-buy-bar color-{{ color_scheme }}" style="--overlay-opacity: {{ overlay_str | divided_by: 100.00 }};">
+  <div class="grid">
+    <div
+      id="buy-bar-info-{{ section.id }}"
+      class="the-buy-bar col-12 col-sm-10 col-sm-offset-2 col-md-6 col-md-offset-4"
+      style="--border-radius: {{ buy_bar_br | append: 'px;' }}; gap: 2.4rem;">
+
+      <div class="image-and-titles flex vertical-center" style="gap: 1.2rem">
+        {%- if buy_bar_image != blank -%}
+          <figure class="media contain square">
+            {{ buy_bar_image | image_url: width: '160' | image_tag: loading: 'lazy' }}
+          </figure>
+        {%- endif -%}
+        <div class="text size--small">
+          <p class="h6 mb-4">{{ product.title }}</p>
+          <div class="js" role="status">
+            {%- render 'price', product: product, use_variant: true -%}
+          </div>
+        </div>
+      </div>
+      <product-form class="product-form">
+        <div class="product-form__error-message-wrapper flex horizontal vertical-center mb-16 mt-16" role="alert" hidden>
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+            <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+            <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+            <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+            <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+          </svg>
+          <span class="product-form__error-message"></span>
+        </div>
+
+        {%- form 'product', product, id: buy_bar_product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+          {%- if is_preorder -%}
+            <input type="hidden" name="attributes[_preorder]" value="true">
+          {%- endif -%}
+          <div class="product-form__buttons flex col-justify-content-center">
+            <button type="submit" name="add" class="product-form__submit btn btn--full btn--large col-sm-max-10 {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}btn--secondary{% else %}btn--primary{% endif %}" {% if product.selected_or_first_available_variant.available == false or product.selected_or_first_available_variant == nil %}disabled{% endif %}>
+              <span>
+                {%- if product.selected_or_first_available_variant.available -%}
+                  {%- if is_preorder -%}
+                    {{ 'products.product.preorder.preorder' | t }}
+                  {%- else -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {%- endif -%}
+                {%- elsif product.selected_or_first_available_variant == nil -%}
+                  {{ 'products.product.unavailable' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              {% render 'loading' %}
+            </button>
+          </div>
+
+        {%- endform -%}
+      </product-form>
+    </div>
+  </div>
+</product-buy-bar>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+      return(msie > 0 || trident > 0);
+    }
+    if (! isIE())
+      return;
+
+    const hiddenInput = document.querySelector('# {{ buy_bar_product_form_id }}input[name="id"]');
+    const noScriptInputWrapper = document.createElement('div');
+    const variantSwitcher = document.querySelector('variant-radios[data-section=" {{ section.id }}"]') || document.querySelector('variant-selects[data-section=" {{ section.id }}"]');
+    noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper- {{ section.id }}').textContent;
+    variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+    document.querySelector('#Variants- {{ section.id }}').addEventListener('change', function(event) {
+      hiddenInput.value = event.currentTarget.value;
+    });
+  });
+</script>
